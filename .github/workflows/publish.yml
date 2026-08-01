@@ -1,0 +1,51 @@
+name: Publish to npm
+
+# On a published release (tag vX.Y.Z), regenerate the client at that version and
+# publish to npm as `invoicepdfs`.
+# Needs secrets: NPM_TOKEN (npm automation token) and SDK_SYNC_TOKEN.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: v
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch OpenAPI spec
+        run: |
+          curl -fsSL \
+            -H "Authorization: Bearer ${{ secrets.SDK_SYNC_TOKEN }}" \
+            -H "Accept: application/vnd.github.raw+json" \
+            "https://api.github.com/repos/invoicepdfs/invoicepdfs-openapi/contents/openapi.json?ref=main" \
+            -o openapi.json
+
+      - name: Generate client
+        run: |
+          docker run --rm -v "${{ github.workspace }}:/local" \
+            openapitools/openapi-generator-cli:v7.7.0 generate \
+            -i /local/openapi.json -g typescript-fetch -o /local/dist-src \
+            --additional-properties=npmName=invoicepdfs,npmVersion=${{ steps.v.outputs.version }},supportsES6=true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Build & publish
+        working-directory: dist-src
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm install
+          npm run build --if-present
+          npm publish --access public
