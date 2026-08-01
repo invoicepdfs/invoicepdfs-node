@@ -18,11 +18,13 @@ src/apis/ImportsApi.ts
 src/apis/InvoiceAttachmentsApi.ts
 src/apis/InvoicesApi.ts
 src/apis/JobsApi.ts
+src/apis/LogsApi.ts
 src/apis/NumberingSequencesApi.ts
 src/apis/PaymentsApi.ts
 src/apis/RecurringInvoicesApi.ts
 src/apis/ReferenceApi.ts
 src/apis/RendersApi.ts
+src/apis/StatsApi.ts
 src/apis/TaxRatesApi.ts
 src/apis/TemplateVersionsApi.ts
 src/apis/TemplatesApi.ts
@@ -40,6 +42,8 @@ src/models/ApiKeyListResponse.ts
 src/models/ApiKeyPatchRequest.ts
 src/models/ApiKeyRevokeResponse.ts
 src/models/ApiKeyRotateResponse.ts
+src/models/ApiRequestLogOut.ts
+src/models/ApiRequestLogsListResponse.ts
 src/models/AuditEventOut.ts
 src/models/AuditEventResponse.ts
 src/models/AuditEventsListResponse.ts
@@ -172,6 +176,10 @@ src/models/RecurringInvoicePatchRequest.ts
 src/models/RecurringInvoiceResponse.ts
 src/models/RecurringInvoicesListResponse.ts
 src/models/SimpleBoolResponse.ts
+src/models/StatsCounts.ts
+src/models/StatsOverview.ts
+src/models/StatsRecentInvoice.ts
+src/models/StatsResponse.ts
 src/models/TaxRateCreateRequest.ts
 src/models/TaxRateOut.ts
 src/models/TaxRatePatchRequest.ts
