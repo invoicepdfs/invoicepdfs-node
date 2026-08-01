@@ -81,6 +81,10 @@ export interface DeleteDocumentApiV1DocumentsDocumentIdDeleteRequest {
     documentId: string;
 }
 
+export interface DuplicateDocumentApiV1DocumentsDocumentIdDuplicatePostRequest {
+    documentId: string;
+}
+
 export interface FinalizeDocumentApiV1DocumentsDocumentIdFinalizePostRequest {
     documentId: string;
 }
@@ -323,6 +327,47 @@ export class DocumentsApi extends runtime.BaseAPI {
      */
     async deleteDocumentApiV1DocumentsDocumentIdDelete(requestParameters: DeleteDocumentApiV1DocumentsDocumentIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
         const response = await this.deleteDocumentApiV1DocumentsDocumentIdDeleteRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Duplicate Document
+     */
+    async duplicateDocumentApiV1DocumentsDocumentIdDuplicatePostRaw(requestParameters: DuplicateDocumentApiV1DocumentsDocumentIdDuplicatePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
+        if (requestParameters['documentId'] == null) {
+            throw new runtime.RequiredError(
+                'documentId',
+                'Required parameter "documentId" was null or undefined when calling duplicateDocumentApiV1DocumentsDocumentIdDuplicatePost().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/documents/{document_id}/duplicate`.replace(`{${"document_id"}}`, encodeURIComponent(String(requestParameters['documentId']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Duplicate Document
+     */
+    async duplicateDocumentApiV1DocumentsDocumentIdDuplicatePost(requestParameters: DuplicateDocumentApiV1DocumentsDocumentIdDuplicatePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
+        const response = await this.duplicateDocumentApiV1DocumentsDocumentIdDuplicatePostRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
