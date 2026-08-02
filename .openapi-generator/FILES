@@ -73,6 +73,8 @@ src/models/BatchesListResponse.ts
 src/models/BillingCheckoutData.ts
 src/models/BillingCheckoutRequest.ts
 src/models/BillingCheckoutResponse.ts
+src/models/BillingPlan.ts
+src/models/BillingPlansListResponse.ts
 src/models/BillingPortalData.ts
 src/models/BillingPortalResponse.ts
 src/models/BillingSubscriptionData.ts

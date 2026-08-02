@@ -43,6 +43,18 @@ export interface BillingSubscriptionData {
      * @memberof BillingSubscriptionData
      */
     planName: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BillingSubscriptionData
+     */
+    stripeConfigured?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BillingSubscriptionData
+     */
+    hasBillingAccount?: boolean;
 }
 
 /**
@@ -68,6 +80,8 @@ export function BillingSubscriptionDataFromJSONTyped(json: any, ignoreDiscrimina
         'status': json['status'] == null ? undefined : json['status'],
         'planId': json['plan_id'],
         'planName': json['plan_name'],
+        'stripeConfigured': json['stripe_configured'] == null ? undefined : json['stripe_configured'],
+        'hasBillingAccount': json['has_billing_account'] == null ? undefined : json['has_billing_account'],
     };
 }
 
@@ -81,6 +95,8 @@ export function BillingSubscriptionDataToJSON(value?: BillingSubscriptionData | 
         'status': value['status'],
         'plan_id': value['planId'],
         'plan_name': value['planName'],
+        'stripe_configured': value['stripeConfigured'],
+        'has_billing_account': value['hasBillingAccount'],
     };
 }
 

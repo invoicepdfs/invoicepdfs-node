@@ -42,6 +42,8 @@ export * from './BatchesListResponse';
 export * from './BillingCheckoutData';
 export * from './BillingCheckoutRequest';
 export * from './BillingCheckoutResponse';
+export * from './BillingPlan';
+export * from './BillingPlansListResponse';
 export * from './BillingPortalData';
 export * from './BillingPortalResponse';
 export * from './BillingSubscriptionData';
