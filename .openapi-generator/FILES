@@ -6,7 +6,7 @@ src/apis/AuditLogApi.ts
 src/apis/AuthApi.ts
 src/apis/BatchesApi.ts
 src/apis/BillingApi.ts
-src/apis/BrandingApi.ts
+src/apis/BrandingProfilesApi.ts
 src/apis/BusinessProfilesApi.ts
 src/apis/CustomersApi.ts
 src/apis/DeliveriesApi.ts
@@ -77,9 +77,11 @@ src/models/BillingPortalData.ts
 src/models/BillingPortalResponse.ts
 src/models/BillingSubscriptionData.ts
 src/models/BillingSubscriptionResponse.ts
-src/models/BrandingOut.ts
-src/models/BrandingResponse.ts
-src/models/BrandingUpdateRequest.ts
+src/models/BrandingProfileCreateRequest.ts
+src/models/BrandingProfileOut.ts
+src/models/BrandingProfilePatchRequest.ts
+src/models/BrandingProfileResponse.ts
+src/models/BrandingProfilesListResponse.ts
 src/models/BusinessProfileCreate.ts
 src/models/BusinessProfileOut.ts
 src/models/BusinessProfilePatch.ts

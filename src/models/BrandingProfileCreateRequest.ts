@@ -16,85 +16,102 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface InvoiceBrandingInput
+ * @interface BrandingProfileCreateRequest
  */
-export interface InvoiceBrandingInput {
+export interface BrandingProfileCreateRequest {
     /**
      * 
      * @type {string}
-     * @memberof InvoiceBrandingInput
+     * @memberof BrandingProfileCreateRequest
      */
-    logoFileId?: string | null;
+    name: string;
     /**
      * 
      * @type {string}
-     * @memberof InvoiceBrandingInput
+     * @memberof BrandingProfileCreateRequest
      */
     primaryColor?: string;
     /**
      * 
      * @type {string}
-     * @memberof InvoiceBrandingInput
+     * @memberof BrandingProfileCreateRequest
      */
     accentColor?: string;
     /**
      * 
      * @type {string}
-     * @memberof InvoiceBrandingInput
+     * @memberof BrandingProfileCreateRequest
      */
     fontFamily?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof InvoiceBrandingInput
+     * @memberof BrandingProfileCreateRequest
      */
     headerText?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof InvoiceBrandingInput
+     * @memberof BrandingProfileCreateRequest
      */
     footerText?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BrandingProfileCreateRequest
+     */
+    hideInvoicepdfsBranding?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BrandingProfileCreateRequest
+     */
+    isDefault?: boolean;
 }
 
 /**
- * Check if a given object implements the InvoiceBrandingInput interface.
+ * Check if a given object implements the BrandingProfileCreateRequest interface.
  */
-export function instanceOfInvoiceBrandingInput(value: object): value is InvoiceBrandingInput {
+export function instanceOfBrandingProfileCreateRequest(value: object): value is BrandingProfileCreateRequest {
+    if (!('name' in value) || value['name'] === undefined) return false;
     return true;
 }
 
-export function InvoiceBrandingInputFromJSON(json: any): InvoiceBrandingInput {
-    return InvoiceBrandingInputFromJSONTyped(json, false);
+export function BrandingProfileCreateRequestFromJSON(json: any): BrandingProfileCreateRequest {
+    return BrandingProfileCreateRequestFromJSONTyped(json, false);
 }
 
-export function InvoiceBrandingInputFromJSONTyped(json: any, ignoreDiscriminator: boolean): InvoiceBrandingInput {
+export function BrandingProfileCreateRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): BrandingProfileCreateRequest {
     if (json == null) {
         return json;
     }
     return {
         
-        'logoFileId': json['logo_file_id'] == null ? undefined : json['logo_file_id'],
+        'name': json['name'],
         'primaryColor': json['primary_color'] == null ? undefined : json['primary_color'],
         'accentColor': json['accent_color'] == null ? undefined : json['accent_color'],
         'fontFamily': json['font_family'] == null ? undefined : json['font_family'],
         'headerText': json['header_text'] == null ? undefined : json['header_text'],
         'footerText': json['footer_text'] == null ? undefined : json['footer_text'],
+        'hideInvoicepdfsBranding': json['hide_invoicepdfs_branding'] == null ? undefined : json['hide_invoicepdfs_branding'],
+        'isDefault': json['is_default'] == null ? undefined : json['is_default'],
     };
 }
 
-export function InvoiceBrandingInputToJSON(value?: InvoiceBrandingInput | null): any {
+export function BrandingProfileCreateRequestToJSON(value?: BrandingProfileCreateRequest | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'logo_file_id': value['logoFileId'],
+        'name': value['name'],
         'primary_color': value['primaryColor'],
         'accent_color': value['accentColor'],
         'font_family': value['fontFamily'],
         'header_text': value['headerText'],
         'footer_text': value['footerText'],
+        'hide_invoicepdfs_branding': value['hideInvoicepdfsBranding'],
+        'is_default': value['isDefault'],
     };
 }
 

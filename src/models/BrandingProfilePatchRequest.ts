@@ -16,85 +16,101 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface InvoiceBrandingInput
+ * @interface BrandingProfilePatchRequest
  */
-export interface InvoiceBrandingInput {
+export interface BrandingProfilePatchRequest {
     /**
      * 
      * @type {string}
-     * @memberof InvoiceBrandingInput
+     * @memberof BrandingProfilePatchRequest
      */
-    logoFileId?: string | null;
+    name?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof InvoiceBrandingInput
+     * @memberof BrandingProfilePatchRequest
      */
-    primaryColor?: string;
+    primaryColor?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof InvoiceBrandingInput
+     * @memberof BrandingProfilePatchRequest
      */
-    accentColor?: string;
+    accentColor?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof InvoiceBrandingInput
+     * @memberof BrandingProfilePatchRequest
      */
     fontFamily?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof InvoiceBrandingInput
+     * @memberof BrandingProfilePatchRequest
      */
     headerText?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof InvoiceBrandingInput
+     * @memberof BrandingProfilePatchRequest
      */
-    footerText?: string;
+    footerText?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BrandingProfilePatchRequest
+     */
+    hideInvoicepdfsBranding?: boolean | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BrandingProfilePatchRequest
+     */
+    isDefault?: boolean | null;
 }
 
 /**
- * Check if a given object implements the InvoiceBrandingInput interface.
+ * Check if a given object implements the BrandingProfilePatchRequest interface.
  */
-export function instanceOfInvoiceBrandingInput(value: object): value is InvoiceBrandingInput {
+export function instanceOfBrandingProfilePatchRequest(value: object): value is BrandingProfilePatchRequest {
     return true;
 }
 
-export function InvoiceBrandingInputFromJSON(json: any): InvoiceBrandingInput {
-    return InvoiceBrandingInputFromJSONTyped(json, false);
+export function BrandingProfilePatchRequestFromJSON(json: any): BrandingProfilePatchRequest {
+    return BrandingProfilePatchRequestFromJSONTyped(json, false);
 }
 
-export function InvoiceBrandingInputFromJSONTyped(json: any, ignoreDiscriminator: boolean): InvoiceBrandingInput {
+export function BrandingProfilePatchRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): BrandingProfilePatchRequest {
     if (json == null) {
         return json;
     }
     return {
         
-        'logoFileId': json['logo_file_id'] == null ? undefined : json['logo_file_id'],
+        'name': json['name'] == null ? undefined : json['name'],
         'primaryColor': json['primary_color'] == null ? undefined : json['primary_color'],
         'accentColor': json['accent_color'] == null ? undefined : json['accent_color'],
         'fontFamily': json['font_family'] == null ? undefined : json['font_family'],
         'headerText': json['header_text'] == null ? undefined : json['header_text'],
         'footerText': json['footer_text'] == null ? undefined : json['footer_text'],
+        'hideInvoicepdfsBranding': json['hide_invoicepdfs_branding'] == null ? undefined : json['hide_invoicepdfs_branding'],
+        'isDefault': json['is_default'] == null ? undefined : json['is_default'],
     };
 }
 
-export function InvoiceBrandingInputToJSON(value?: InvoiceBrandingInput | null): any {
+export function BrandingProfilePatchRequestToJSON(value?: BrandingProfilePatchRequest | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'logo_file_id': value['logoFileId'],
+        'name': value['name'],
         'primary_color': value['primaryColor'],
         'accent_color': value['accentColor'],
         'font_family': value['fontFamily'],
         'header_text': value['headerText'],
         'footer_text': value['footerText'],
+        'hide_invoicepdfs_branding': value['hideInvoicepdfsBranding'],
+        'is_default': value['isDefault'],
     };
 }
 

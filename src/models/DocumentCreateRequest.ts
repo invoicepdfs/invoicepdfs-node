@@ -188,6 +188,12 @@ export interface DocumentCreateRequest {
      * @memberof DocumentCreateRequest
      */
     branding?: InvoiceBrandingInput | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentCreateRequest
+     */
+    brandingProfileId?: string | null;
 }
 
 
@@ -248,6 +254,7 @@ export function DocumentCreateRequestFromJSONTyped(json: any, ignoreDiscriminato
         'customFields': json['custom_fields'] == null ? undefined : ((json['custom_fields'] as Array<any>).map(InvoiceCustomFieldInputFromJSON)),
         'payment': json['payment'] == null ? undefined : InvoicePaymentInputFromJSON(json['payment']),
         'branding': json['branding'] == null ? undefined : InvoiceBrandingInputFromJSON(json['branding']),
+        'brandingProfileId': json['branding_profile_id'] == null ? undefined : json['branding_profile_id'],
     };
 }
 
@@ -276,6 +283,7 @@ export function DocumentCreateRequestToJSON(value?: DocumentCreateRequest | null
         'custom_fields': value['customFields'] == null ? undefined : ((value['customFields'] as Array<any>).map(InvoiceCustomFieldInputToJSON)),
         'payment': InvoicePaymentInputToJSON(value['payment']),
         'branding': InvoiceBrandingInputToJSON(value['branding']),
+        'branding_profile_id': value['brandingProfileId'],
     };
 }
 

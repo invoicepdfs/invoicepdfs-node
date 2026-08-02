@@ -5,7 +5,7 @@ export * from './AuditLogApi';
 export * from './AuthApi';
 export * from './BatchesApi';
 export * from './BillingApi';
-export * from './BrandingApi';
+export * from './BrandingProfilesApi';
 export * from './BusinessProfilesApi';
 export * from './CustomersApi';
 export * from './DeliveriesApi';
