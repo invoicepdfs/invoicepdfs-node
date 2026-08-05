@@ -73,6 +73,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     }
 
     /**
+     * List every supported document type with the metadata a client needs to build a type-aware create form: the number prefix, whether it is payable / takes a source document / supports a reason, which line-item shape it uses (``standard`` = priced, ``shipped`` = quantities only), and the lifecycle actions available to it.
      * List Document Types
      */
     async listDocumentTypesApiV1ReferenceDocumentTypesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
@@ -91,6 +92,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     }
 
     /**
+     * List every supported document type with the metadata a client needs to build a type-aware create form: the number prefix, whether it is payable / takes a source document / supports a reason, which line-item shape it uses (``standard`` = priced, ``shipped`` = quantities only), and the lifecycle actions available to it.
      * List Document Types
      */
     async listDocumentTypesApiV1ReferenceDocumentTypesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
