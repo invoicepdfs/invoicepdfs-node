@@ -37,41 +37,41 @@ import {
     RecurringInvoicesListResponseToJSON,
 } from '../models/index';
 
-export interface CancelRecurringInvoiceApiV1RecurringInvoicesRecurringIdDeleteRequest {
+export interface CancelRecurringInvoiceRequest {
     recurringId: string;
 }
 
-export interface CreateRecurringInvoiceApiV1RecurringInvoicesPostRequest {
+export interface CreateRecurringInvoiceRequest {
     recurringInvoiceCreateRequest: RecurringInvoiceCreateRequest;
 }
 
-export interface GetRecurringInvoiceApiV1RecurringInvoicesRecurringIdGetRequest {
+export interface GetRecurringInvoiceRequest {
     recurringId: string;
 }
 
-export interface ListGeneratedInvoicesApiV1RecurringInvoicesRecurringIdInvoicesGetRequest {
+export interface ListGeneratedInvoicesRequest {
     recurringId: string;
     limit?: number;
     cursor?: string | null;
 }
 
-export interface ListRecurringInvoicesApiV1RecurringInvoicesGetRequest {
+export interface ListRecurringInvoicesRequest {
     limit?: number;
     cursor?: string | null;
     status?: string | null;
 }
 
-export interface PatchRecurringInvoiceApiV1RecurringInvoicesRecurringIdPatchRequest {
+export interface PauseRecurringInvoiceRequest {
+    recurringId: string;
+}
+
+export interface ResumeRecurringInvoiceRequest {
+    recurringId: string;
+}
+
+export interface UpdateRecurringInvoiceRequest {
     recurringId: string;
     recurringInvoicePatchRequest: RecurringInvoicePatchRequest;
-}
-
-export interface PauseRecurringInvoiceApiV1RecurringInvoicesRecurringIdPausePostRequest {
-    recurringId: string;
-}
-
-export interface ResumeRecurringInvoiceApiV1RecurringInvoicesRecurringIdResumePostRequest {
-    recurringId: string;
 }
 
 /**
@@ -82,11 +82,11 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     /**
      * Cancel Recurring Invoice
      */
-    async cancelRecurringInvoiceApiV1RecurringInvoicesRecurringIdDeleteRaw(requestParameters: CancelRecurringInvoiceApiV1RecurringInvoicesRecurringIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
+    async cancelRecurringInvoiceRaw(requestParameters: CancelRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
         if (requestParameters['recurringId'] == null) {
             throw new runtime.RequiredError(
                 'recurringId',
-                'Required parameter "recurringId" was null or undefined when calling cancelRecurringInvoiceApiV1RecurringInvoicesRecurringIdDelete().'
+                'Required parameter "recurringId" was null or undefined when calling cancelRecurringInvoice().'
             );
         }
 
@@ -115,19 +115,19 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     /**
      * Cancel Recurring Invoice
      */
-    async cancelRecurringInvoiceApiV1RecurringInvoicesRecurringIdDelete(requestParameters: CancelRecurringInvoiceApiV1RecurringInvoicesRecurringIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
-        const response = await this.cancelRecurringInvoiceApiV1RecurringInvoicesRecurringIdDeleteRaw(requestParameters, initOverrides);
+    async cancelRecurringInvoice(requestParameters: CancelRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
+        const response = await this.cancelRecurringInvoiceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Create Recurring Invoice
      */
-    async createRecurringInvoiceApiV1RecurringInvoicesPostRaw(requestParameters: CreateRecurringInvoiceApiV1RecurringInvoicesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
+    async createRecurringInvoiceRaw(requestParameters: CreateRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
         if (requestParameters['recurringInvoiceCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'recurringInvoiceCreateRequest',
-                'Required parameter "recurringInvoiceCreateRequest" was null or undefined when calling createRecurringInvoiceApiV1RecurringInvoicesPost().'
+                'Required parameter "recurringInvoiceCreateRequest" was null or undefined when calling createRecurringInvoice().'
             );
         }
 
@@ -159,19 +159,19 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     /**
      * Create Recurring Invoice
      */
-    async createRecurringInvoiceApiV1RecurringInvoicesPost(requestParameters: CreateRecurringInvoiceApiV1RecurringInvoicesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
-        const response = await this.createRecurringInvoiceApiV1RecurringInvoicesPostRaw(requestParameters, initOverrides);
+    async createRecurringInvoice(requestParameters: CreateRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
+        const response = await this.createRecurringInvoiceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Recurring Invoice
      */
-    async getRecurringInvoiceApiV1RecurringInvoicesRecurringIdGetRaw(requestParameters: GetRecurringInvoiceApiV1RecurringInvoicesRecurringIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
+    async getRecurringInvoiceRaw(requestParameters: GetRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
         if (requestParameters['recurringId'] == null) {
             throw new runtime.RequiredError(
                 'recurringId',
-                'Required parameter "recurringId" was null or undefined when calling getRecurringInvoiceApiV1RecurringInvoicesRecurringIdGet().'
+                'Required parameter "recurringId" was null or undefined when calling getRecurringInvoice().'
             );
         }
 
@@ -200,19 +200,19 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     /**
      * Get Recurring Invoice
      */
-    async getRecurringInvoiceApiV1RecurringInvoicesRecurringIdGet(requestParameters: GetRecurringInvoiceApiV1RecurringInvoicesRecurringIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
-        const response = await this.getRecurringInvoiceApiV1RecurringInvoicesRecurringIdGetRaw(requestParameters, initOverrides);
+    async getRecurringInvoice(requestParameters: GetRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
+        const response = await this.getRecurringInvoiceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Generated Invoices
      */
-    async listGeneratedInvoicesApiV1RecurringInvoicesRecurringIdInvoicesGetRaw(requestParameters: ListGeneratedInvoicesApiV1RecurringInvoicesRecurringIdInvoicesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InvoicesListResponse>> {
+    async listGeneratedInvoicesRaw(requestParameters: ListGeneratedInvoicesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InvoicesListResponse>> {
         if (requestParameters['recurringId'] == null) {
             throw new runtime.RequiredError(
                 'recurringId',
-                'Required parameter "recurringId" was null or undefined when calling listGeneratedInvoicesApiV1RecurringInvoicesRecurringIdInvoicesGet().'
+                'Required parameter "recurringId" was null or undefined when calling listGeneratedInvoices().'
             );
         }
 
@@ -249,15 +249,15 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     /**
      * List Generated Invoices
      */
-    async listGeneratedInvoicesApiV1RecurringInvoicesRecurringIdInvoicesGet(requestParameters: ListGeneratedInvoicesApiV1RecurringInvoicesRecurringIdInvoicesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InvoicesListResponse> {
-        const response = await this.listGeneratedInvoicesApiV1RecurringInvoicesRecurringIdInvoicesGetRaw(requestParameters, initOverrides);
+    async listGeneratedInvoices(requestParameters: ListGeneratedInvoicesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InvoicesListResponse> {
+        const response = await this.listGeneratedInvoicesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Recurring Invoices
      */
-    async listRecurringInvoicesApiV1RecurringInvoicesGetRaw(requestParameters: ListRecurringInvoicesApiV1RecurringInvoicesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoicesListResponse>> {
+    async listRecurringInvoicesRaw(requestParameters: ListRecurringInvoicesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoicesListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -295,26 +295,108 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     /**
      * List Recurring Invoices
      */
-    async listRecurringInvoicesApiV1RecurringInvoicesGet(requestParameters: ListRecurringInvoicesApiV1RecurringInvoicesGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoicesListResponse> {
-        const response = await this.listRecurringInvoicesApiV1RecurringInvoicesGetRaw(requestParameters, initOverrides);
+    async listRecurringInvoices(requestParameters: ListRecurringInvoicesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoicesListResponse> {
+        const response = await this.listRecurringInvoicesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Patch Recurring Invoice
+     * Pause Recurring Invoice
      */
-    async patchRecurringInvoiceApiV1RecurringInvoicesRecurringIdPatchRaw(requestParameters: PatchRecurringInvoiceApiV1RecurringInvoicesRecurringIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
+    async pauseRecurringInvoiceRaw(requestParameters: PauseRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
         if (requestParameters['recurringId'] == null) {
             throw new runtime.RequiredError(
                 'recurringId',
-                'Required parameter "recurringId" was null or undefined when calling patchRecurringInvoiceApiV1RecurringInvoicesRecurringIdPatch().'
+                'Required parameter "recurringId" was null or undefined when calling pauseRecurringInvoice().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/recurring-invoices/{recurring_id}/pause`.replace(`{${"recurring_id"}}`, encodeURIComponent(String(requestParameters['recurringId']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => RecurringInvoiceResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Pause Recurring Invoice
+     */
+    async pauseRecurringInvoice(requestParameters: PauseRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
+        const response = await this.pauseRecurringInvoiceRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Resume Recurring Invoice
+     */
+    async resumeRecurringInvoiceRaw(requestParameters: ResumeRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
+        if (requestParameters['recurringId'] == null) {
+            throw new runtime.RequiredError(
+                'recurringId',
+                'Required parameter "recurringId" was null or undefined when calling resumeRecurringInvoice().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/recurring-invoices/{recurring_id}/resume`.replace(`{${"recurring_id"}}`, encodeURIComponent(String(requestParameters['recurringId']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => RecurringInvoiceResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Resume Recurring Invoice
+     */
+    async resumeRecurringInvoice(requestParameters: ResumeRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
+        const response = await this.resumeRecurringInvoiceRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update Recurring Invoice
+     */
+    async updateRecurringInvoiceRaw(requestParameters: UpdateRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
+        if (requestParameters['recurringId'] == null) {
+            throw new runtime.RequiredError(
+                'recurringId',
+                'Required parameter "recurringId" was null or undefined when calling updateRecurringInvoice().'
             );
         }
 
         if (requestParameters['recurringInvoicePatchRequest'] == null) {
             throw new runtime.RequiredError(
                 'recurringInvoicePatchRequest',
-                'Required parameter "recurringInvoicePatchRequest" was null or undefined when calling patchRecurringInvoiceApiV1RecurringInvoicesRecurringIdPatch().'
+                'Required parameter "recurringInvoicePatchRequest" was null or undefined when calling updateRecurringInvoice().'
             );
         }
 
@@ -344,92 +426,10 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Recurring Invoice
+     * Update Recurring Invoice
      */
-    async patchRecurringInvoiceApiV1RecurringInvoicesRecurringIdPatch(requestParameters: PatchRecurringInvoiceApiV1RecurringInvoicesRecurringIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
-        const response = await this.patchRecurringInvoiceApiV1RecurringInvoicesRecurringIdPatchRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Pause Recurring Invoice
-     */
-    async pauseRecurringInvoiceApiV1RecurringInvoicesRecurringIdPausePostRaw(requestParameters: PauseRecurringInvoiceApiV1RecurringInvoicesRecurringIdPausePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
-        if (requestParameters['recurringId'] == null) {
-            throw new runtime.RequiredError(
-                'recurringId',
-                'Required parameter "recurringId" was null or undefined when calling pauseRecurringInvoiceApiV1RecurringInvoicesRecurringIdPausePost().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("HTTPBearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const response = await this.request({
-            path: `/api/v1/recurring-invoices/{recurring_id}/pause`.replace(`{${"recurring_id"}}`, encodeURIComponent(String(requestParameters['recurringId']))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => RecurringInvoiceResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Pause Recurring Invoice
-     */
-    async pauseRecurringInvoiceApiV1RecurringInvoicesRecurringIdPausePost(requestParameters: PauseRecurringInvoiceApiV1RecurringInvoicesRecurringIdPausePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
-        const response = await this.pauseRecurringInvoiceApiV1RecurringInvoicesRecurringIdPausePostRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Resume Recurring Invoice
-     */
-    async resumeRecurringInvoiceApiV1RecurringInvoicesRecurringIdResumePostRaw(requestParameters: ResumeRecurringInvoiceApiV1RecurringInvoicesRecurringIdResumePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
-        if (requestParameters['recurringId'] == null) {
-            throw new runtime.RequiredError(
-                'recurringId',
-                'Required parameter "recurringId" was null or undefined when calling resumeRecurringInvoiceApiV1RecurringInvoicesRecurringIdResumePost().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("HTTPBearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const response = await this.request({
-            path: `/api/v1/recurring-invoices/{recurring_id}/resume`.replace(`{${"recurring_id"}}`, encodeURIComponent(String(requestParameters['recurringId']))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => RecurringInvoiceResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Resume Recurring Invoice
-     */
-    async resumeRecurringInvoiceApiV1RecurringInvoicesRecurringIdResumePost(requestParameters: ResumeRecurringInvoiceApiV1RecurringInvoicesRecurringIdResumePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
-        const response = await this.resumeRecurringInvoiceApiV1RecurringInvoicesRecurringIdResumePostRaw(requestParameters, initOverrides);
+    async updateRecurringInvoice(requestParameters: UpdateRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
+        const response = await this.updateRecurringInvoiceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

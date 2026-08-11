@@ -34,40 +34,40 @@ import {
     SimpleBoolResponseToJSON,
 } from '../models/index';
 
-export interface CreateAttachmentApiV1DocumentsInvoiceIdAttachmentsPostRequest {
-    invoiceId: string;
+export interface CreateDocumentAttachmentRequest {
+    documentId: string;
     invoiceAttachmentCreateRequest: InvoiceAttachmentCreateRequest;
 }
 
-export interface DeleteAttachmentApiV1DocumentsInvoiceIdAttachmentsAttachmentIdDeleteRequest {
-    invoiceId: string;
+export interface DeleteDocumentAttachmentRequest {
+    documentId: string;
     attachmentId: string;
 }
 
-export interface ListAttachmentsApiV1DocumentsInvoiceIdAttachmentsGetRequest {
-    invoiceId: string;
+export interface ListDocumentAttachmentsRequest {
+    documentId: string;
 }
 
 /**
  * 
  */
-export class InvoiceAttachmentsApi extends runtime.BaseAPI {
+export class DocumentAttachmentsApi extends runtime.BaseAPI {
 
     /**
-     * Create Attachment
+     * Create Document Attachment
      */
-    async createAttachmentApiV1DocumentsInvoiceIdAttachmentsPostRaw(requestParameters: CreateAttachmentApiV1DocumentsInvoiceIdAttachmentsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InvoiceAttachmentResponse>> {
-        if (requestParameters['invoiceId'] == null) {
+    async createDocumentAttachmentRaw(requestParameters: CreateDocumentAttachmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InvoiceAttachmentResponse>> {
+        if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
-                'invoiceId',
-                'Required parameter "invoiceId" was null or undefined when calling createAttachmentApiV1DocumentsInvoiceIdAttachmentsPost().'
+                'documentId',
+                'Required parameter "documentId" was null or undefined when calling createDocumentAttachment().'
             );
         }
 
         if (requestParameters['invoiceAttachmentCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'invoiceAttachmentCreateRequest',
-                'Required parameter "invoiceAttachmentCreateRequest" was null or undefined when calling createAttachmentApiV1DocumentsInvoiceIdAttachmentsPost().'
+                'Required parameter "invoiceAttachmentCreateRequest" was null or undefined when calling createDocumentAttachment().'
             );
         }
 
@@ -86,7 +86,7 @@ export class InvoiceAttachmentsApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/api/v1/documents/{invoice_id}/attachments`.replace(`{${"invoice_id"}}`, encodeURIComponent(String(requestParameters['invoiceId']))),
+            path: `/api/v1/documents/{document_id}/attachments`.replace(`{${"document_id"}}`, encodeURIComponent(String(requestParameters['documentId']))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -97,28 +97,28 @@ export class InvoiceAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create Attachment
+     * Create Document Attachment
      */
-    async createAttachmentApiV1DocumentsInvoiceIdAttachmentsPost(requestParameters: CreateAttachmentApiV1DocumentsInvoiceIdAttachmentsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InvoiceAttachmentResponse> {
-        const response = await this.createAttachmentApiV1DocumentsInvoiceIdAttachmentsPostRaw(requestParameters, initOverrides);
+    async createDocumentAttachment(requestParameters: CreateDocumentAttachmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InvoiceAttachmentResponse> {
+        const response = await this.createDocumentAttachmentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Delete Attachment
+     * Delete Document Attachment
      */
-    async deleteAttachmentApiV1DocumentsInvoiceIdAttachmentsAttachmentIdDeleteRaw(requestParameters: DeleteAttachmentApiV1DocumentsInvoiceIdAttachmentsAttachmentIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
-        if (requestParameters['invoiceId'] == null) {
+    async deleteDocumentAttachmentRaw(requestParameters: DeleteDocumentAttachmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
+        if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
-                'invoiceId',
-                'Required parameter "invoiceId" was null or undefined when calling deleteAttachmentApiV1DocumentsInvoiceIdAttachmentsAttachmentIdDelete().'
+                'documentId',
+                'Required parameter "documentId" was null or undefined when calling deleteDocumentAttachment().'
             );
         }
 
         if (requestParameters['attachmentId'] == null) {
             throw new runtime.RequiredError(
                 'attachmentId',
-                'Required parameter "attachmentId" was null or undefined when calling deleteAttachmentApiV1DocumentsInvoiceIdAttachmentsAttachmentIdDelete().'
+                'Required parameter "attachmentId" was null or undefined when calling deleteDocumentAttachment().'
             );
         }
 
@@ -135,7 +135,7 @@ export class InvoiceAttachmentsApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/api/v1/documents/{invoice_id}/attachments/{attachment_id}`.replace(`{${"invoice_id"}}`, encodeURIComponent(String(requestParameters['invoiceId']))).replace(`{${"attachment_id"}}`, encodeURIComponent(String(requestParameters['attachmentId']))),
+            path: `/api/v1/documents/{document_id}/attachments/{attachment_id}`.replace(`{${"document_id"}}`, encodeURIComponent(String(requestParameters['documentId']))).replace(`{${"attachment_id"}}`, encodeURIComponent(String(requestParameters['attachmentId']))),
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -145,21 +145,21 @@ export class InvoiceAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Attachment
+     * Delete Document Attachment
      */
-    async deleteAttachmentApiV1DocumentsInvoiceIdAttachmentsAttachmentIdDelete(requestParameters: DeleteAttachmentApiV1DocumentsInvoiceIdAttachmentsAttachmentIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deleteAttachmentApiV1DocumentsInvoiceIdAttachmentsAttachmentIdDeleteRaw(requestParameters, initOverrides);
+    async deleteDocumentAttachment(requestParameters: DeleteDocumentAttachmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.deleteDocumentAttachmentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * List Attachments
+     * List Document Attachments
      */
-    async listAttachmentsApiV1DocumentsInvoiceIdAttachmentsGetRaw(requestParameters: ListAttachmentsApiV1DocumentsInvoiceIdAttachmentsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InvoiceAttachmentsListResponse>> {
-        if (requestParameters['invoiceId'] == null) {
+    async listDocumentAttachmentsRaw(requestParameters: ListDocumentAttachmentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InvoiceAttachmentsListResponse>> {
+        if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
-                'invoiceId',
-                'Required parameter "invoiceId" was null or undefined when calling listAttachmentsApiV1DocumentsInvoiceIdAttachmentsGet().'
+                'documentId',
+                'Required parameter "documentId" was null or undefined when calling listDocumentAttachments().'
             );
         }
 
@@ -176,7 +176,7 @@ export class InvoiceAttachmentsApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/api/v1/documents/{invoice_id}/attachments`.replace(`{${"invoice_id"}}`, encodeURIComponent(String(requestParameters['invoiceId']))),
+            path: `/api/v1/documents/{document_id}/attachments`.replace(`{${"document_id"}}`, encodeURIComponent(String(requestParameters['documentId']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -186,10 +186,10 @@ export class InvoiceAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * List Attachments
+     * List Document Attachments
      */
-    async listAttachmentsApiV1DocumentsInvoiceIdAttachmentsGet(requestParameters: ListAttachmentsApiV1DocumentsInvoiceIdAttachmentsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InvoiceAttachmentsListResponse> {
-        const response = await this.listAttachmentsApiV1DocumentsInvoiceIdAttachmentsGetRaw(requestParameters, initOverrides);
+    async listDocumentAttachments(requestParameters: ListDocumentAttachmentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InvoiceAttachmentsListResponse> {
+        const response = await this.listDocumentAttachmentsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

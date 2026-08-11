@@ -22,11 +22,11 @@ import {
     ApiErrorResponseToJSON,
 } from '../models/index';
 
-export interface DownloadRenderApiV1RendersRenderIdDownloadGetRequest {
+export interface DownloadRenderRequest {
     renderId: string;
 }
 
-export interface GetRenderApiV1RendersRenderIdGetRequest {
+export interface GetRenderRequest {
     renderId: string;
 }
 
@@ -38,11 +38,11 @@ export class RendersApi extends runtime.BaseAPI {
     /**
      * Download Render
      */
-    async downloadRenderApiV1RendersRenderIdDownloadGetRaw(requestParameters: DownloadRenderApiV1RendersRenderIdDownloadGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
+    async downloadRenderRaw(requestParameters: DownloadRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
         if (requestParameters['renderId'] == null) {
             throw new runtime.RequiredError(
                 'renderId',
-                'Required parameter "renderId" was null or undefined when calling downloadRenderApiV1RendersRenderIdDownloadGet().'
+                'Required parameter "renderId" was null or undefined when calling downloadRender().'
             );
         }
 
@@ -71,19 +71,19 @@ export class RendersApi extends runtime.BaseAPI {
     /**
      * Download Render
      */
-    async downloadRenderApiV1RendersRenderIdDownloadGet(requestParameters: DownloadRenderApiV1RendersRenderIdDownloadGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
-        const response = await this.downloadRenderApiV1RendersRenderIdDownloadGetRaw(requestParameters, initOverrides);
+    async downloadRender(requestParameters: DownloadRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
+        const response = await this.downloadRenderRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Render
      */
-    async getRenderApiV1RendersRenderIdGetRaw(requestParameters: GetRenderApiV1RendersRenderIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async getRenderRaw(requestParameters: GetRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
         if (requestParameters['renderId'] == null) {
             throw new runtime.RequiredError(
                 'renderId',
-                'Required parameter "renderId" was null or undefined when calling getRenderApiV1RendersRenderIdGet().'
+                'Required parameter "renderId" was null or undefined when calling getRender().'
             );
         }
 
@@ -112,8 +112,8 @@ export class RendersApi extends runtime.BaseAPI {
     /**
      * Get Render
      */
-    async getRenderApiV1RendersRenderIdGet(requestParameters: GetRenderApiV1RendersRenderIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
-        const response = await this.getRenderApiV1RendersRenderIdGetRaw(requestParameters, initOverrides);
+    async getRender(requestParameters: GetRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+        const response = await this.getRenderRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

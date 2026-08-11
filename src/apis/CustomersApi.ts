@@ -37,25 +37,25 @@ import {
     SimpleBoolResponseToJSON,
 } from '../models/index';
 
-export interface CreateCustomerApiV1CustomersPostRequest {
+export interface CreateCustomerRequest {
     customerCreate: CustomerCreate;
     idempotencyKey?: string | null;
 }
 
-export interface DeleteCustomerApiV1CustomersCustomerIdDeleteRequest {
+export interface DeleteCustomerRequest {
     customerId: string;
 }
 
-export interface GetCustomerApiV1CustomersCustomerIdGetRequest {
+export interface GetCustomerRequest {
     customerId: string;
 }
 
-export interface ListCustomersApiV1CustomersGetRequest {
+export interface ListCustomersRequest {
     limit?: number;
     cursor?: string | null;
 }
 
-export interface PatchCustomerApiV1CustomersCustomerIdPatchRequest {
+export interface UpdateCustomerRequest {
     customerId: string;
     customerPatch: CustomerPatch;
     idempotencyKey?: string | null;
@@ -69,11 +69,11 @@ export class CustomersApi extends runtime.BaseAPI {
     /**
      * Create Customer
      */
-    async createCustomerApiV1CustomersPostRaw(requestParameters: CreateCustomerApiV1CustomersPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomerResponse>> {
+    async createCustomerRaw(requestParameters: CreateCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomerResponse>> {
         if (requestParameters['customerCreate'] == null) {
             throw new runtime.RequiredError(
                 'customerCreate',
-                'Required parameter "customerCreate" was null or undefined when calling createCustomerApiV1CustomersPost().'
+                'Required parameter "customerCreate" was null or undefined when calling createCustomer().'
             );
         }
 
@@ -109,19 +109,19 @@ export class CustomersApi extends runtime.BaseAPI {
     /**
      * Create Customer
      */
-    async createCustomerApiV1CustomersPost(requestParameters: CreateCustomerApiV1CustomersPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomerResponse> {
-        const response = await this.createCustomerApiV1CustomersPostRaw(requestParameters, initOverrides);
+    async createCustomer(requestParameters: CreateCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomerResponse> {
+        const response = await this.createCustomerRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Delete Customer
      */
-    async deleteCustomerApiV1CustomersCustomerIdDeleteRaw(requestParameters: DeleteCustomerApiV1CustomersCustomerIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
+    async deleteCustomerRaw(requestParameters: DeleteCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['customerId'] == null) {
             throw new runtime.RequiredError(
                 'customerId',
-                'Required parameter "customerId" was null or undefined when calling deleteCustomerApiV1CustomersCustomerIdDelete().'
+                'Required parameter "customerId" was null or undefined when calling deleteCustomer().'
             );
         }
 
@@ -150,19 +150,19 @@ export class CustomersApi extends runtime.BaseAPI {
     /**
      * Delete Customer
      */
-    async deleteCustomerApiV1CustomersCustomerIdDelete(requestParameters: DeleteCustomerApiV1CustomersCustomerIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deleteCustomerApiV1CustomersCustomerIdDeleteRaw(requestParameters, initOverrides);
+    async deleteCustomer(requestParameters: DeleteCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.deleteCustomerRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Customer
      */
-    async getCustomerApiV1CustomersCustomerIdGetRaw(requestParameters: GetCustomerApiV1CustomersCustomerIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomerResponse>> {
+    async getCustomerRaw(requestParameters: GetCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomerResponse>> {
         if (requestParameters['customerId'] == null) {
             throw new runtime.RequiredError(
                 'customerId',
-                'Required parameter "customerId" was null or undefined when calling getCustomerApiV1CustomersCustomerIdGet().'
+                'Required parameter "customerId" was null or undefined when calling getCustomer().'
             );
         }
 
@@ -191,15 +191,15 @@ export class CustomersApi extends runtime.BaseAPI {
     /**
      * Get Customer
      */
-    async getCustomerApiV1CustomersCustomerIdGet(requestParameters: GetCustomerApiV1CustomersCustomerIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomerResponse> {
-        const response = await this.getCustomerApiV1CustomersCustomerIdGetRaw(requestParameters, initOverrides);
+    async getCustomer(requestParameters: GetCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomerResponse> {
+        const response = await this.getCustomerRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Customers
      */
-    async listCustomersApiV1CustomersGetRaw(requestParameters: ListCustomersApiV1CustomersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomersListResponse>> {
+    async listCustomersRaw(requestParameters: ListCustomersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomersListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -233,26 +233,26 @@ export class CustomersApi extends runtime.BaseAPI {
     /**
      * List Customers
      */
-    async listCustomersApiV1CustomersGet(requestParameters: ListCustomersApiV1CustomersGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomersListResponse> {
-        const response = await this.listCustomersApiV1CustomersGetRaw(requestParameters, initOverrides);
+    async listCustomers(requestParameters: ListCustomersRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomersListResponse> {
+        const response = await this.listCustomersRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Patch Customer
+     * Update Customer
      */
-    async patchCustomerApiV1CustomersCustomerIdPatchRaw(requestParameters: PatchCustomerApiV1CustomersCustomerIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomerResponse>> {
+    async updateCustomerRaw(requestParameters: UpdateCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomerResponse>> {
         if (requestParameters['customerId'] == null) {
             throw new runtime.RequiredError(
                 'customerId',
-                'Required parameter "customerId" was null or undefined when calling patchCustomerApiV1CustomersCustomerIdPatch().'
+                'Required parameter "customerId" was null or undefined when calling updateCustomer().'
             );
         }
 
         if (requestParameters['customerPatch'] == null) {
             throw new runtime.RequiredError(
                 'customerPatch',
-                'Required parameter "customerPatch" was null or undefined when calling patchCustomerApiV1CustomersCustomerIdPatch().'
+                'Required parameter "customerPatch" was null or undefined when calling updateCustomer().'
             );
         }
 
@@ -286,10 +286,10 @@ export class CustomersApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Customer
+     * Update Customer
      */
-    async patchCustomerApiV1CustomersCustomerIdPatch(requestParameters: PatchCustomerApiV1CustomersCustomerIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomerResponse> {
-        const response = await this.patchCustomerApiV1CustomersCustomerIdPatchRaw(requestParameters, initOverrides);
+    async updateCustomer(requestParameters: UpdateCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomerResponse> {
+        const response = await this.updateCustomerRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

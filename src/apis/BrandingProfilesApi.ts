@@ -37,32 +37,32 @@ import {
     SimpleBoolResponseToJSON,
 } from '../models/index';
 
-export interface CreateProfileApiV1BrandingProfilesPostRequest {
+export interface CreateBrandingProfileRequest {
     brandingProfileCreateRequest: BrandingProfileCreateRequest;
 }
 
-export interface DeleteLogoApiV1BrandingProfilesProfileIdLogoDeleteRequest {
+export interface DeleteBrandingLogoRequest {
     profileId: string;
 }
 
-export interface DeleteProfileApiV1BrandingProfilesProfileIdDeleteRequest {
+export interface DeleteBrandingProfileRequest {
     profileId: string;
 }
 
-export interface GetProfileApiV1BrandingProfilesProfileIdGetRequest {
+export interface GetBrandingProfileRequest {
     profileId: string;
 }
 
-export interface SetDefaultApiV1BrandingProfilesProfileIdDefaultPostRequest {
+export interface SetDefaultBrandingProfileRequest {
     profileId: string;
 }
 
-export interface UpdateProfileApiV1BrandingProfilesProfileIdPatchRequest {
+export interface UpdateBrandingProfileRequest {
     profileId: string;
     brandingProfilePatchRequest: BrandingProfilePatchRequest;
 }
 
-export interface UploadLogoApiV1BrandingProfilesProfileIdLogoPostRequest {
+export interface UploadBrandingLogoRequest {
     profileId: string;
     file: Blob;
 }
@@ -73,13 +73,13 @@ export interface UploadLogoApiV1BrandingProfilesProfileIdLogoPostRequest {
 export class BrandingProfilesApi extends runtime.BaseAPI {
 
     /**
-     * Create Profile
+     * Create Branding Profile
      */
-    async createProfileApiV1BrandingProfilesPostRaw(requestParameters: CreateProfileApiV1BrandingProfilesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
+    async createBrandingProfileRaw(requestParameters: CreateBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
         if (requestParameters['brandingProfileCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'brandingProfileCreateRequest',
-                'Required parameter "brandingProfileCreateRequest" was null or undefined when calling createProfileApiV1BrandingProfilesPost().'
+                'Required parameter "brandingProfileCreateRequest" was null or undefined when calling createBrandingProfile().'
             );
         }
 
@@ -109,21 +109,21 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create Profile
+     * Create Branding Profile
      */
-    async createProfileApiV1BrandingProfilesPost(requestParameters: CreateProfileApiV1BrandingProfilesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
-        const response = await this.createProfileApiV1BrandingProfilesPostRaw(requestParameters, initOverrides);
+    async createBrandingProfile(requestParameters: CreateBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
+        const response = await this.createBrandingProfileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Delete Logo
+     * Delete Branding Logo
      */
-    async deleteLogoApiV1BrandingProfilesProfileIdLogoDeleteRaw(requestParameters: DeleteLogoApiV1BrandingProfilesProfileIdLogoDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
+    async deleteBrandingLogoRaw(requestParameters: DeleteBrandingLogoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['profileId'] == null) {
             throw new runtime.RequiredError(
                 'profileId',
-                'Required parameter "profileId" was null or undefined when calling deleteLogoApiV1BrandingProfilesProfileIdLogoDelete().'
+                'Required parameter "profileId" was null or undefined when calling deleteBrandingLogo().'
             );
         }
 
@@ -150,21 +150,21 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Logo
+     * Delete Branding Logo
      */
-    async deleteLogoApiV1BrandingProfilesProfileIdLogoDelete(requestParameters: DeleteLogoApiV1BrandingProfilesProfileIdLogoDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deleteLogoApiV1BrandingProfilesProfileIdLogoDeleteRaw(requestParameters, initOverrides);
+    async deleteBrandingLogo(requestParameters: DeleteBrandingLogoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.deleteBrandingLogoRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Delete Profile
+     * Delete Branding Profile
      */
-    async deleteProfileApiV1BrandingProfilesProfileIdDeleteRaw(requestParameters: DeleteProfileApiV1BrandingProfilesProfileIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
+    async deleteBrandingProfileRaw(requestParameters: DeleteBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['profileId'] == null) {
             throw new runtime.RequiredError(
                 'profileId',
-                'Required parameter "profileId" was null or undefined when calling deleteProfileApiV1BrandingProfilesProfileIdDelete().'
+                'Required parameter "profileId" was null or undefined when calling deleteBrandingProfile().'
             );
         }
 
@@ -191,21 +191,21 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Profile
+     * Delete Branding Profile
      */
-    async deleteProfileApiV1BrandingProfilesProfileIdDelete(requestParameters: DeleteProfileApiV1BrandingProfilesProfileIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deleteProfileApiV1BrandingProfilesProfileIdDeleteRaw(requestParameters, initOverrides);
+    async deleteBrandingProfile(requestParameters: DeleteBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.deleteBrandingProfileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Get Profile
+     * Get Branding Profile
      */
-    async getProfileApiV1BrandingProfilesProfileIdGetRaw(requestParameters: GetProfileApiV1BrandingProfilesProfileIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
+    async getBrandingProfileRaw(requestParameters: GetBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
         if (requestParameters['profileId'] == null) {
             throw new runtime.RequiredError(
                 'profileId',
-                'Required parameter "profileId" was null or undefined when calling getProfileApiV1BrandingProfilesProfileIdGet().'
+                'Required parameter "profileId" was null or undefined when calling getBrandingProfile().'
             );
         }
 
@@ -232,17 +232,17 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get Profile
+     * Get Branding Profile
      */
-    async getProfileApiV1BrandingProfilesProfileIdGet(requestParameters: GetProfileApiV1BrandingProfilesProfileIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
-        const response = await this.getProfileApiV1BrandingProfilesProfileIdGetRaw(requestParameters, initOverrides);
+    async getBrandingProfile(requestParameters: GetBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
+        const response = await this.getBrandingProfileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * List Profiles
+     * List Branding Profiles
      */
-    async listProfilesApiV1BrandingProfilesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfilesListResponse>> {
+    async listBrandingProfilesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfilesListResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -266,21 +266,21 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * List Profiles
+     * List Branding Profiles
      */
-    async listProfilesApiV1BrandingProfilesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfilesListResponse> {
-        const response = await this.listProfilesApiV1BrandingProfilesGetRaw(initOverrides);
+    async listBrandingProfiles(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfilesListResponse> {
+        const response = await this.listBrandingProfilesRaw(initOverrides);
         return await response.value();
     }
 
     /**
-     * Set Default
+     * Set Default Branding Profile
      */
-    async setDefaultApiV1BrandingProfilesProfileIdDefaultPostRaw(requestParameters: SetDefaultApiV1BrandingProfilesProfileIdDefaultPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
+    async setDefaultBrandingProfileRaw(requestParameters: SetDefaultBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
         if (requestParameters['profileId'] == null) {
             throw new runtime.RequiredError(
                 'profileId',
-                'Required parameter "profileId" was null or undefined when calling setDefaultApiV1BrandingProfilesProfileIdDefaultPost().'
+                'Required parameter "profileId" was null or undefined when calling setDefaultBrandingProfile().'
             );
         }
 
@@ -307,28 +307,28 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Set Default
+     * Set Default Branding Profile
      */
-    async setDefaultApiV1BrandingProfilesProfileIdDefaultPost(requestParameters: SetDefaultApiV1BrandingProfilesProfileIdDefaultPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
-        const response = await this.setDefaultApiV1BrandingProfilesProfileIdDefaultPostRaw(requestParameters, initOverrides);
+    async setDefaultBrandingProfile(requestParameters: SetDefaultBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
+        const response = await this.setDefaultBrandingProfileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Update Profile
+     * Update Branding Profile
      */
-    async updateProfileApiV1BrandingProfilesProfileIdPatchRaw(requestParameters: UpdateProfileApiV1BrandingProfilesProfileIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
+    async updateBrandingProfileRaw(requestParameters: UpdateBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
         if (requestParameters['profileId'] == null) {
             throw new runtime.RequiredError(
                 'profileId',
-                'Required parameter "profileId" was null or undefined when calling updateProfileApiV1BrandingProfilesProfileIdPatch().'
+                'Required parameter "profileId" was null or undefined when calling updateBrandingProfile().'
             );
         }
 
         if (requestParameters['brandingProfilePatchRequest'] == null) {
             throw new runtime.RequiredError(
                 'brandingProfilePatchRequest',
-                'Required parameter "brandingProfilePatchRequest" was null or undefined when calling updateProfileApiV1BrandingProfilesProfileIdPatch().'
+                'Required parameter "brandingProfilePatchRequest" was null or undefined when calling updateBrandingProfile().'
             );
         }
 
@@ -358,28 +358,28 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update Profile
+     * Update Branding Profile
      */
-    async updateProfileApiV1BrandingProfilesProfileIdPatch(requestParameters: UpdateProfileApiV1BrandingProfilesProfileIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
-        const response = await this.updateProfileApiV1BrandingProfilesProfileIdPatchRaw(requestParameters, initOverrides);
+    async updateBrandingProfile(requestParameters: UpdateBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
+        const response = await this.updateBrandingProfileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Upload Logo
+     * Upload Branding Logo
      */
-    async uploadLogoApiV1BrandingProfilesProfileIdLogoPostRaw(requestParameters: UploadLogoApiV1BrandingProfilesProfileIdLogoPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
+    async uploadBrandingLogoRaw(requestParameters: UploadBrandingLogoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
         if (requestParameters['profileId'] == null) {
             throw new runtime.RequiredError(
                 'profileId',
-                'Required parameter "profileId" was null or undefined when calling uploadLogoApiV1BrandingProfilesProfileIdLogoPost().'
+                'Required parameter "profileId" was null or undefined when calling uploadBrandingLogo().'
             );
         }
 
         if (requestParameters['file'] == null) {
             throw new runtime.RequiredError(
                 'file',
-                'Required parameter "file" was null or undefined when calling uploadLogoApiV1BrandingProfilesProfileIdLogoPost().'
+                'Required parameter "file" was null or undefined when calling uploadBrandingLogo().'
             );
         }
 
@@ -427,10 +427,10 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Upload Logo
+     * Upload Branding Logo
      */
-    async uploadLogoApiV1BrandingProfilesProfileIdLogoPost(requestParameters: UploadLogoApiV1BrandingProfilesProfileIdLogoPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
-        const response = await this.uploadLogoApiV1BrandingProfilesProfileIdLogoPostRaw(requestParameters, initOverrides);
+    async uploadBrandingLogo(requestParameters: UploadBrandingLogoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
+        const response = await this.uploadBrandingLogoRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

@@ -40,32 +40,32 @@ import {
     SimpleBoolResponseToJSON,
 } from '../models/index';
 
-export interface ConsumeNextApiV1NumberingSequencesSequenceIdNextPostRequest {
+export interface ConsumeSequenceNumberRequest {
     sequenceId: string;
 }
 
-export interface CreateSequenceApiV1NumberingSequencesPostRequest {
+export interface CreateSequenceRequest {
     numberingSequenceCreateRequest: NumberingSequenceCreateRequest;
 }
 
-export interface DeleteSequenceApiV1NumberingSequencesSequenceIdDeleteRequest {
+export interface DeleteSequenceRequest {
     sequenceId: string;
 }
 
-export interface GetSequenceApiV1NumberingSequencesSequenceIdGetRequest {
+export interface GetSequenceRequest {
     sequenceId: string;
 }
 
-export interface ListSequencesApiV1NumberingSequencesGetRequest {
+export interface ListSequencesRequest {
     limit?: number;
     cursor?: string | null;
 }
 
-export interface PreviewSequenceApiV1NumberingSequencesSequenceIdPreviewPostRequest {
+export interface PreviewSequenceRequest {
     sequenceId: string;
 }
 
-export interface UpdateSequenceApiV1NumberingSequencesSequenceIdPatchRequest {
+export interface UpdateSequenceRequest {
     sequenceId: string;
     numberingSequencePatchRequest: NumberingSequencePatchRequest;
 }
@@ -77,13 +77,13 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
 
     /**
      * Consume and return the next number, incrementing the counter.
-     * Consume Next
+     * Consume Sequence Number
      */
-    async consumeNextApiV1NumberingSequencesSequenceIdNextPostRaw(requestParameters: ConsumeNextApiV1NumberingSequencesSequenceIdNextPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
+    async consumeSequenceNumberRaw(requestParameters: ConsumeSequenceNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
         if (requestParameters['sequenceId'] == null) {
             throw new runtime.RequiredError(
                 'sequenceId',
-                'Required parameter "sequenceId" was null or undefined when calling consumeNextApiV1NumberingSequencesSequenceIdNextPost().'
+                'Required parameter "sequenceId" was null or undefined when calling consumeSequenceNumber().'
             );
         }
 
@@ -111,21 +111,21 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
 
     /**
      * Consume and return the next number, incrementing the counter.
-     * Consume Next
+     * Consume Sequence Number
      */
-    async consumeNextApiV1NumberingSequencesSequenceIdNextPost(requestParameters: ConsumeNextApiV1NumberingSequencesSequenceIdNextPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {
-        const response = await this.consumeNextApiV1NumberingSequencesSequenceIdNextPostRaw(requestParameters, initOverrides);
+    async consumeSequenceNumber(requestParameters: ConsumeSequenceNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {
+        const response = await this.consumeSequenceNumberRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Create Sequence
      */
-    async createSequenceApiV1NumberingSequencesPostRaw(requestParameters: CreateSequenceApiV1NumberingSequencesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
+    async createSequenceRaw(requestParameters: CreateSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
         if (requestParameters['numberingSequenceCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'numberingSequenceCreateRequest',
-                'Required parameter "numberingSequenceCreateRequest" was null or undefined when calling createSequenceApiV1NumberingSequencesPost().'
+                'Required parameter "numberingSequenceCreateRequest" was null or undefined when calling createSequence().'
             );
         }
 
@@ -157,19 +157,19 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     /**
      * Create Sequence
      */
-    async createSequenceApiV1NumberingSequencesPost(requestParameters: CreateSequenceApiV1NumberingSequencesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {
-        const response = await this.createSequenceApiV1NumberingSequencesPostRaw(requestParameters, initOverrides);
+    async createSequence(requestParameters: CreateSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {
+        const response = await this.createSequenceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Delete Sequence
      */
-    async deleteSequenceApiV1NumberingSequencesSequenceIdDeleteRaw(requestParameters: DeleteSequenceApiV1NumberingSequencesSequenceIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
+    async deleteSequenceRaw(requestParameters: DeleteSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['sequenceId'] == null) {
             throw new runtime.RequiredError(
                 'sequenceId',
-                'Required parameter "sequenceId" was null or undefined when calling deleteSequenceApiV1NumberingSequencesSequenceIdDelete().'
+                'Required parameter "sequenceId" was null or undefined when calling deleteSequence().'
             );
         }
 
@@ -198,19 +198,19 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     /**
      * Delete Sequence
      */
-    async deleteSequenceApiV1NumberingSequencesSequenceIdDelete(requestParameters: DeleteSequenceApiV1NumberingSequencesSequenceIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deleteSequenceApiV1NumberingSequencesSequenceIdDeleteRaw(requestParameters, initOverrides);
+    async deleteSequence(requestParameters: DeleteSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.deleteSequenceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Sequence
      */
-    async getSequenceApiV1NumberingSequencesSequenceIdGetRaw(requestParameters: GetSequenceApiV1NumberingSequencesSequenceIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
+    async getSequenceRaw(requestParameters: GetSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
         if (requestParameters['sequenceId'] == null) {
             throw new runtime.RequiredError(
                 'sequenceId',
-                'Required parameter "sequenceId" was null or undefined when calling getSequenceApiV1NumberingSequencesSequenceIdGet().'
+                'Required parameter "sequenceId" was null or undefined when calling getSequence().'
             );
         }
 
@@ -239,15 +239,15 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     /**
      * Get Sequence
      */
-    async getSequenceApiV1NumberingSequencesSequenceIdGet(requestParameters: GetSequenceApiV1NumberingSequencesSequenceIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {
-        const response = await this.getSequenceApiV1NumberingSequencesSequenceIdGetRaw(requestParameters, initOverrides);
+    async getSequence(requestParameters: GetSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {
+        const response = await this.getSequenceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Sequences
      */
-    async listSequencesApiV1NumberingSequencesGetRaw(requestParameters: ListSequencesApiV1NumberingSequencesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequencesListResponse>> {
+    async listSequencesRaw(requestParameters: ListSequencesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequencesListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -281,19 +281,19 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     /**
      * List Sequences
      */
-    async listSequencesApiV1NumberingSequencesGet(requestParameters: ListSequencesApiV1NumberingSequencesGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequencesListResponse> {
-        const response = await this.listSequencesApiV1NumberingSequencesGetRaw(requestParameters, initOverrides);
+    async listSequences(requestParameters: ListSequencesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequencesListResponse> {
+        const response = await this.listSequencesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Preview Sequence
      */
-    async previewSequenceApiV1NumberingSequencesSequenceIdPreviewPostRaw(requestParameters: PreviewSequenceApiV1NumberingSequencesSequenceIdPreviewPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequencePreviewResponse>> {
+    async previewSequenceRaw(requestParameters: PreviewSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequencePreviewResponse>> {
         if (requestParameters['sequenceId'] == null) {
             throw new runtime.RequiredError(
                 'sequenceId',
-                'Required parameter "sequenceId" was null or undefined when calling previewSequenceApiV1NumberingSequencesSequenceIdPreviewPost().'
+                'Required parameter "sequenceId" was null or undefined when calling previewSequence().'
             );
         }
 
@@ -322,26 +322,26 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     /**
      * Preview Sequence
      */
-    async previewSequenceApiV1NumberingSequencesSequenceIdPreviewPost(requestParameters: PreviewSequenceApiV1NumberingSequencesSequenceIdPreviewPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequencePreviewResponse> {
-        const response = await this.previewSequenceApiV1NumberingSequencesSequenceIdPreviewPostRaw(requestParameters, initOverrides);
+    async previewSequence(requestParameters: PreviewSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequencePreviewResponse> {
+        const response = await this.previewSequenceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Update Sequence
      */
-    async updateSequenceApiV1NumberingSequencesSequenceIdPatchRaw(requestParameters: UpdateSequenceApiV1NumberingSequencesSequenceIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
+    async updateSequenceRaw(requestParameters: UpdateSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
         if (requestParameters['sequenceId'] == null) {
             throw new runtime.RequiredError(
                 'sequenceId',
-                'Required parameter "sequenceId" was null or undefined when calling updateSequenceApiV1NumberingSequencesSequenceIdPatch().'
+                'Required parameter "sequenceId" was null or undefined when calling updateSequence().'
             );
         }
 
         if (requestParameters['numberingSequencePatchRequest'] == null) {
             throw new runtime.RequiredError(
                 'numberingSequencePatchRequest',
-                'Required parameter "numberingSequencePatchRequest" was null or undefined when calling updateSequenceApiV1NumberingSequencesSequenceIdPatch().'
+                'Required parameter "numberingSequencePatchRequest" was null or undefined when calling updateSequence().'
             );
         }
 
@@ -373,8 +373,8 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     /**
      * Update Sequence
      */
-    async updateSequenceApiV1NumberingSequencesSequenceIdPatch(requestParameters: UpdateSequenceApiV1NumberingSequencesSequenceIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {
-        const response = await this.updateSequenceApiV1NumberingSequencesSequenceIdPatchRaw(requestParameters, initOverrides);
+    async updateSequence(requestParameters: UpdateSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {
+        const response = await this.updateSequenceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

@@ -55,28 +55,28 @@ import {
     AuthTokenResponseToJSON,
 } from '../models/index';
 
-export interface ForgotPasswordApiV1AuthForgotPasswordPostRequest {
-    authForgotPasswordRequest: AuthForgotPasswordRequest;
+export interface ExchangeAuthTokenRequest {
+    authTokenRequest: AuthTokenRequest;
 }
 
-export interface PatchMeApiV1AuthMePatchRequest {
-    authMePatchRequest: AuthMePatchRequest;
-}
-
-export interface RefreshApiV1AuthRefreshPostRequest {
+export interface RefreshAccessTokenRequest {
     authRefreshRequest: AuthRefreshRequest;
 }
 
-export interface RegisterApiV1AuthRegisterPostRequest {
+export interface RegisterRequest {
     authRegisterRequest: AuthRegisterRequest;
 }
 
-export interface ResetPasswordApiV1AuthResetPasswordPostRequest {
+export interface RequestPasswordResetRequest {
+    authForgotPasswordRequest: AuthForgotPasswordRequest;
+}
+
+export interface ResetPasswordRequest {
     authResetPasswordRequest: AuthResetPasswordRequest;
 }
 
-export interface TokenExchangeApiV1AuthTokenPostRequest {
-    authTokenRequest: AuthTokenRequest;
+export interface UpdateCurrentUserRequest {
+    authMePatchRequest: AuthMePatchRequest;
 }
 
 /**
@@ -85,14 +85,14 @@ export interface TokenExchangeApiV1AuthTokenPostRequest {
 export class AuthApi extends runtime.BaseAPI {
 
     /**
-     * Send a password reset email via Firebase.
-     * Forgot Password
+     * Exchange a Firebase ID token for account info.  Use this on login: the client authenticates with Firebase, sends the ID token here, and receives the InvoicePDFs account details. The Firebase token itself is used as the Bearer token for subsequent API calls.
+     * Exchange Auth Token
      */
-    async forgotPasswordApiV1AuthForgotPasswordPostRaw(requestParameters: ForgotPasswordApiV1AuthForgotPasswordPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMessageResponse>> {
-        if (requestParameters['authForgotPasswordRequest'] == null) {
+    async exchangeAuthTokenRaw(requestParameters: ExchangeAuthTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthTokenResponse>> {
+        if (requestParameters['authTokenRequest'] == null) {
             throw new runtime.RequiredError(
-                'authForgotPasswordRequest',
-                'Required parameter "authForgotPasswordRequest" was null or undefined when calling forgotPasswordApiV1AuthForgotPasswordPost().'
+                'authTokenRequest',
+                'Required parameter "authTokenRequest" was null or undefined when calling exchangeAuthToken().'
             );
         }
 
@@ -103,22 +103,56 @@ export class AuthApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         const response = await this.request({
-            path: `/api/v1/auth/forgot-password`,
+            path: `/api/v1/auth/token`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AuthForgotPasswordRequestToJSON(requestParameters['authForgotPasswordRequest']),
+            body: AuthTokenRequestToJSON(requestParameters['authTokenRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AuthMessageResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => AuthTokenResponseFromJSON(jsonValue));
     }
 
     /**
-     * Send a password reset email via Firebase.
-     * Forgot Password
+     * Exchange a Firebase ID token for account info.  Use this on login: the client authenticates with Firebase, sends the ID token here, and receives the InvoicePDFs account details. The Firebase token itself is used as the Bearer token for subsequent API calls.
+     * Exchange Auth Token
      */
-    async forgotPasswordApiV1AuthForgotPasswordPost(requestParameters: ForgotPasswordApiV1AuthForgotPasswordPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMessageResponse> {
-        const response = await this.forgotPasswordApiV1AuthForgotPasswordPostRaw(requestParameters, initOverrides);
+    async exchangeAuthToken(requestParameters: ExchangeAuthTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthTokenResponse> {
+        const response = await this.exchangeAuthTokenRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get Current User
+     */
+    async getCurrentUserRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMeResponse>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/auth/me`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => AuthMeResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Get Current User
+     */
+    async getCurrentUser(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMeResponse> {
+        const response = await this.getCurrentUserRaw(initOverrides);
         return await response.value();
     }
 
@@ -126,7 +160,7 @@ export class AuthApi extends runtime.BaseAPI {
      * Revoke all Firebase refresh tokens for the authenticated user.
      * Logout
      */
-    async logoutApiV1AuthLogoutPostRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMessageResponse>> {
+    async logoutRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMessageResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -153,54 +187,172 @@ export class AuthApi extends runtime.BaseAPI {
      * Revoke all Firebase refresh tokens for the authenticated user.
      * Logout
      */
-    async logoutApiV1AuthLogoutPost(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMessageResponse> {
-        const response = await this.logoutApiV1AuthLogoutPostRaw(initOverrides);
+    async logout(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMessageResponse> {
+        const response = await this.logoutRaw(initOverrides);
         return await response.value();
     }
 
     /**
-     * Me
+     * Exchange a Firebase refresh token for a new ID token.
+     * Refresh Access Token
      */
-    async meApiV1AuthMeGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMeResponse>> {
+    async refreshAccessTokenRaw(requestParameters: RefreshAccessTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthRefreshResponse>> {
+        if (requestParameters['authRefreshRequest'] == null) {
+            throw new runtime.RequiredError(
+                'authRefreshRequest',
+                'Required parameter "authRefreshRequest" was null or undefined when calling refreshAccessToken().'
+            );
+        }
+
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("HTTPBearer", []);
+        headerParameters['Content-Type'] = 'application/json';
 
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
         const response = await this.request({
-            path: `/api/v1/auth/me`,
-            method: 'GET',
+            path: `/api/v1/auth/refresh`,
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: AuthRefreshRequestToJSON(requestParameters['authRefreshRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => AuthMeResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => AuthRefreshResponseFromJSON(jsonValue));
     }
 
     /**
-     * Me
+     * Exchange a Firebase refresh token for a new ID token.
+     * Refresh Access Token
      */
-    async meApiV1AuthMeGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMeResponse> {
-        const response = await this.meApiV1AuthMeGetRaw(initOverrides);
+    async refreshAccessToken(requestParameters: RefreshAccessTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthRefreshResponse> {
+        const response = await this.refreshAccessTokenRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Register a new account using a Firebase ID token.  The client authenticates with Firebase (email/password, Google, etc.) and sends the resulting ID token here to create an InvoicePDFs account.
+     * Register
+     */
+    async registerRaw(requestParameters: RegisterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthRegisterResponse>> {
+        if (requestParameters['authRegisterRequest'] == null) {
+            throw new runtime.RequiredError(
+                'authRegisterRequest',
+                'Required parameter "authRegisterRequest" was null or undefined when calling register().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/v1/auth/register`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: AuthRegisterRequestToJSON(requestParameters['authRegisterRequest']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => AuthRegisterResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Register a new account using a Firebase ID token.  The client authenticates with Firebase (email/password, Google, etc.) and sends the resulting ID token here to create an InvoicePDFs account.
+     * Register
+     */
+    async register(requestParameters: RegisterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthRegisterResponse> {
+        const response = await this.registerRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Send a password reset email via Firebase.
+     * Request Password Reset
+     */
+    async requestPasswordResetRaw(requestParameters: RequestPasswordResetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMessageResponse>> {
+        if (requestParameters['authForgotPasswordRequest'] == null) {
+            throw new runtime.RequiredError(
+                'authForgotPasswordRequest',
+                'Required parameter "authForgotPasswordRequest" was null or undefined when calling requestPasswordReset().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/v1/auth/forgot-password`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: AuthForgotPasswordRequestToJSON(requestParameters['authForgotPasswordRequest']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => AuthMessageResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Send a password reset email via Firebase.
+     * Request Password Reset
+     */
+    async requestPasswordReset(requestParameters: RequestPasswordResetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMessageResponse> {
+        const response = await this.requestPasswordResetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Confirm a password reset using the code from the reset email.
+     * Reset Password
+     */
+    async resetPasswordRaw(requestParameters: ResetPasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMessageResponse>> {
+        if (requestParameters['authResetPasswordRequest'] == null) {
+            throw new runtime.RequiredError(
+                'authResetPasswordRequest',
+                'Required parameter "authResetPasswordRequest" was null or undefined when calling resetPassword().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/api/v1/auth/reset-password`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: AuthResetPasswordRequestToJSON(requestParameters['authResetPasswordRequest']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => AuthMessageResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Confirm a password reset using the code from the reset email.
+     * Reset Password
+     */
+    async resetPassword(requestParameters: ResetPasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMessageResponse> {
+        const response = await this.resetPasswordRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Update the authenticated account\'s name or email.
-     * Patch Me
+     * Update Current User
      */
-    async patchMeApiV1AuthMePatchRaw(requestParameters: PatchMeApiV1AuthMePatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMeResponse>> {
+    async updateCurrentUserRaw(requestParameters: UpdateCurrentUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMeResponse>> {
         if (requestParameters['authMePatchRequest'] == null) {
             throw new runtime.RequiredError(
                 'authMePatchRequest',
-                'Required parameter "authMePatchRequest" was null or undefined when calling patchMeApiV1AuthMePatch().'
+                'Required parameter "authMePatchRequest" was null or undefined when calling updateCurrentUser().'
             );
         }
 
@@ -231,162 +383,10 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      * Update the authenticated account\'s name or email.
-     * Patch Me
+     * Update Current User
      */
-    async patchMeApiV1AuthMePatch(requestParameters: PatchMeApiV1AuthMePatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMeResponse> {
-        const response = await this.patchMeApiV1AuthMePatchRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Exchange a Firebase refresh token for a new ID token.
-     * Refresh
-     */
-    async refreshApiV1AuthRefreshPostRaw(requestParameters: RefreshApiV1AuthRefreshPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthRefreshResponse>> {
-        if (requestParameters['authRefreshRequest'] == null) {
-            throw new runtime.RequiredError(
-                'authRefreshRequest',
-                'Required parameter "authRefreshRequest" was null or undefined when calling refreshApiV1AuthRefreshPost().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        const response = await this.request({
-            path: `/api/v1/auth/refresh`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: AuthRefreshRequestToJSON(requestParameters['authRefreshRequest']),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => AuthRefreshResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Exchange a Firebase refresh token for a new ID token.
-     * Refresh
-     */
-    async refreshApiV1AuthRefreshPost(requestParameters: RefreshApiV1AuthRefreshPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthRefreshResponse> {
-        const response = await this.refreshApiV1AuthRefreshPostRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Register a new account using a Firebase ID token.  The client authenticates with Firebase (email/password, Google, etc.) and sends the resulting ID token here to create an InvoicePDFs account.
-     * Register
-     */
-    async registerApiV1AuthRegisterPostRaw(requestParameters: RegisterApiV1AuthRegisterPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthRegisterResponse>> {
-        if (requestParameters['authRegisterRequest'] == null) {
-            throw new runtime.RequiredError(
-                'authRegisterRequest',
-                'Required parameter "authRegisterRequest" was null or undefined when calling registerApiV1AuthRegisterPost().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        const response = await this.request({
-            path: `/api/v1/auth/register`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: AuthRegisterRequestToJSON(requestParameters['authRegisterRequest']),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => AuthRegisterResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Register a new account using a Firebase ID token.  The client authenticates with Firebase (email/password, Google, etc.) and sends the resulting ID token here to create an InvoicePDFs account.
-     * Register
-     */
-    async registerApiV1AuthRegisterPost(requestParameters: RegisterApiV1AuthRegisterPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthRegisterResponse> {
-        const response = await this.registerApiV1AuthRegisterPostRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Confirm a password reset using the code from the reset email.
-     * Reset Password
-     */
-    async resetPasswordApiV1AuthResetPasswordPostRaw(requestParameters: ResetPasswordApiV1AuthResetPasswordPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMessageResponse>> {
-        if (requestParameters['authResetPasswordRequest'] == null) {
-            throw new runtime.RequiredError(
-                'authResetPasswordRequest',
-                'Required parameter "authResetPasswordRequest" was null or undefined when calling resetPasswordApiV1AuthResetPasswordPost().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        const response = await this.request({
-            path: `/api/v1/auth/reset-password`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: AuthResetPasswordRequestToJSON(requestParameters['authResetPasswordRequest']),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => AuthMessageResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Confirm a password reset using the code from the reset email.
-     * Reset Password
-     */
-    async resetPasswordApiV1AuthResetPasswordPost(requestParameters: ResetPasswordApiV1AuthResetPasswordPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMessageResponse> {
-        const response = await this.resetPasswordApiV1AuthResetPasswordPostRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Exchange a Firebase ID token for account info.  Use this on login: the client authenticates with Firebase, sends the ID token here, and receives the InvoicePDFs account details. The Firebase token itself is used as the Bearer token for subsequent API calls.
-     * Token Exchange
-     */
-    async tokenExchangeApiV1AuthTokenPostRaw(requestParameters: TokenExchangeApiV1AuthTokenPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthTokenResponse>> {
-        if (requestParameters['authTokenRequest'] == null) {
-            throw new runtime.RequiredError(
-                'authTokenRequest',
-                'Required parameter "authTokenRequest" was null or undefined when calling tokenExchangeApiV1AuthTokenPost().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        const response = await this.request({
-            path: `/api/v1/auth/token`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: AuthTokenRequestToJSON(requestParameters['authTokenRequest']),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => AuthTokenResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Exchange a Firebase ID token for account info.  Use this on login: the client authenticates with Firebase, sends the ID token here, and receives the InvoicePDFs account details. The Firebase token itself is used as the Bearer token for subsequent API calls.
-     * Token Exchange
-     */
-    async tokenExchangeApiV1AuthTokenPost(requestParameters: TokenExchangeApiV1AuthTokenPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthTokenResponse> {
-        const response = await this.tokenExchangeApiV1AuthTokenPostRaw(requestParameters, initOverrides);
+    async updateCurrentUser(requestParameters: UpdateCurrentUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMeResponse> {
+        const response = await this.updateCurrentUserRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

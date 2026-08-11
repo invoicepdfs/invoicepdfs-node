@@ -37,24 +37,24 @@ import {
     TaxRatesListResponseToJSON,
 } from '../models/index';
 
-export interface CreateTaxRateApiV1TaxRatesPostRequest {
+export interface CreateTaxRateRequest {
     taxRateCreateRequest: TaxRateCreateRequest;
 }
 
-export interface DeleteTaxRateApiV1TaxRatesTaxRateIdDeleteRequest {
+export interface DeleteTaxRateRequest {
     taxRateId: string;
 }
 
-export interface GetTaxRateApiV1TaxRatesTaxRateIdGetRequest {
+export interface GetTaxRateRequest {
     taxRateId: string;
 }
 
-export interface ListTaxRatesApiV1TaxRatesGetRequest {
+export interface ListTaxRatesRequest {
     limit?: number;
     cursor?: string | null;
 }
 
-export interface UpdateTaxRateApiV1TaxRatesTaxRateIdPatchRequest {
+export interface UpdateTaxRateRequest {
     taxRateId: string;
     taxRatePatchRequest: TaxRatePatchRequest;
 }
@@ -67,11 +67,11 @@ export class TaxRatesApi extends runtime.BaseAPI {
     /**
      * Create Tax Rate
      */
-    async createTaxRateApiV1TaxRatesPostRaw(requestParameters: CreateTaxRateApiV1TaxRatesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TaxRateResponse>> {
+    async createTaxRateRaw(requestParameters: CreateTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TaxRateResponse>> {
         if (requestParameters['taxRateCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'taxRateCreateRequest',
-                'Required parameter "taxRateCreateRequest" was null or undefined when calling createTaxRateApiV1TaxRatesPost().'
+                'Required parameter "taxRateCreateRequest" was null or undefined when calling createTaxRate().'
             );
         }
 
@@ -103,19 +103,19 @@ export class TaxRatesApi extends runtime.BaseAPI {
     /**
      * Create Tax Rate
      */
-    async createTaxRateApiV1TaxRatesPost(requestParameters: CreateTaxRateApiV1TaxRatesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TaxRateResponse> {
-        const response = await this.createTaxRateApiV1TaxRatesPostRaw(requestParameters, initOverrides);
+    async createTaxRate(requestParameters: CreateTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TaxRateResponse> {
+        const response = await this.createTaxRateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Delete Tax Rate
      */
-    async deleteTaxRateApiV1TaxRatesTaxRateIdDeleteRaw(requestParameters: DeleteTaxRateApiV1TaxRatesTaxRateIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
+    async deleteTaxRateRaw(requestParameters: DeleteTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['taxRateId'] == null) {
             throw new runtime.RequiredError(
                 'taxRateId',
-                'Required parameter "taxRateId" was null or undefined when calling deleteTaxRateApiV1TaxRatesTaxRateIdDelete().'
+                'Required parameter "taxRateId" was null or undefined when calling deleteTaxRate().'
             );
         }
 
@@ -144,19 +144,19 @@ export class TaxRatesApi extends runtime.BaseAPI {
     /**
      * Delete Tax Rate
      */
-    async deleteTaxRateApiV1TaxRatesTaxRateIdDelete(requestParameters: DeleteTaxRateApiV1TaxRatesTaxRateIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deleteTaxRateApiV1TaxRatesTaxRateIdDeleteRaw(requestParameters, initOverrides);
+    async deleteTaxRate(requestParameters: DeleteTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.deleteTaxRateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Tax Rate
      */
-    async getTaxRateApiV1TaxRatesTaxRateIdGetRaw(requestParameters: GetTaxRateApiV1TaxRatesTaxRateIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TaxRateResponse>> {
+    async getTaxRateRaw(requestParameters: GetTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TaxRateResponse>> {
         if (requestParameters['taxRateId'] == null) {
             throw new runtime.RequiredError(
                 'taxRateId',
-                'Required parameter "taxRateId" was null or undefined when calling getTaxRateApiV1TaxRatesTaxRateIdGet().'
+                'Required parameter "taxRateId" was null or undefined when calling getTaxRate().'
             );
         }
 
@@ -185,15 +185,15 @@ export class TaxRatesApi extends runtime.BaseAPI {
     /**
      * Get Tax Rate
      */
-    async getTaxRateApiV1TaxRatesTaxRateIdGet(requestParameters: GetTaxRateApiV1TaxRatesTaxRateIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TaxRateResponse> {
-        const response = await this.getTaxRateApiV1TaxRatesTaxRateIdGetRaw(requestParameters, initOverrides);
+    async getTaxRate(requestParameters: GetTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TaxRateResponse> {
+        const response = await this.getTaxRateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Tax Rates
      */
-    async listTaxRatesApiV1TaxRatesGetRaw(requestParameters: ListTaxRatesApiV1TaxRatesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TaxRatesListResponse>> {
+    async listTaxRatesRaw(requestParameters: ListTaxRatesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TaxRatesListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -227,26 +227,26 @@ export class TaxRatesApi extends runtime.BaseAPI {
     /**
      * List Tax Rates
      */
-    async listTaxRatesApiV1TaxRatesGet(requestParameters: ListTaxRatesApiV1TaxRatesGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TaxRatesListResponse> {
-        const response = await this.listTaxRatesApiV1TaxRatesGetRaw(requestParameters, initOverrides);
+    async listTaxRates(requestParameters: ListTaxRatesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TaxRatesListResponse> {
+        const response = await this.listTaxRatesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Update Tax Rate
      */
-    async updateTaxRateApiV1TaxRatesTaxRateIdPatchRaw(requestParameters: UpdateTaxRateApiV1TaxRatesTaxRateIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TaxRateResponse>> {
+    async updateTaxRateRaw(requestParameters: UpdateTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TaxRateResponse>> {
         if (requestParameters['taxRateId'] == null) {
             throw new runtime.RequiredError(
                 'taxRateId',
-                'Required parameter "taxRateId" was null or undefined when calling updateTaxRateApiV1TaxRatesTaxRateIdPatch().'
+                'Required parameter "taxRateId" was null or undefined when calling updateTaxRate().'
             );
         }
 
         if (requestParameters['taxRatePatchRequest'] == null) {
             throw new runtime.RequiredError(
                 'taxRatePatchRequest',
-                'Required parameter "taxRatePatchRequest" was null or undefined when calling updateTaxRateApiV1TaxRatesTaxRateIdPatch().'
+                'Required parameter "taxRatePatchRequest" was null or undefined when calling updateTaxRate().'
             );
         }
 
@@ -278,8 +278,8 @@ export class TaxRatesApi extends runtime.BaseAPI {
     /**
      * Update Tax Rate
      */
-    async updateTaxRateApiV1TaxRatesTaxRateIdPatch(requestParameters: UpdateTaxRateApiV1TaxRatesTaxRateIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TaxRateResponse> {
-        const response = await this.updateTaxRateApiV1TaxRatesTaxRateIdPatchRaw(requestParameters, initOverrides);
+    async updateTaxRate(requestParameters: UpdateTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TaxRateResponse> {
+        const response = await this.updateTaxRateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

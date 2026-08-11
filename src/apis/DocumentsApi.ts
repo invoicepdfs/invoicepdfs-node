@@ -16,8 +16,6 @@
 import * as runtime from '../runtime';
 import type {
   ApiErrorResponse,
-  AppDocumentsSchemasDocumentRenderRequest,
-  AppSchemasV1DocumentRenderRequest,
   DeliveriesListResponse,
   DeliveryResponse,
   DeliverySendRequest,
@@ -25,6 +23,8 @@ import type {
   DocumentCalculateResponse,
   DocumentCreateRequest,
   DocumentPatchRequest,
+  DocumentRenderOptions,
+  DocumentRenderRequest,
   DocumentResponse,
   DocumentValidateRequest,
   DocumentValidateResponse,
@@ -34,10 +34,6 @@ import type {
 import {
     ApiErrorResponseFromJSON,
     ApiErrorResponseToJSON,
-    AppDocumentsSchemasDocumentRenderRequestFromJSON,
-    AppDocumentsSchemasDocumentRenderRequestToJSON,
-    AppSchemasV1DocumentRenderRequestFromJSON,
-    AppSchemasV1DocumentRenderRequestToJSON,
     DeliveriesListResponseFromJSON,
     DeliveriesListResponseToJSON,
     DeliveryResponseFromJSON,
@@ -52,6 +48,10 @@ import {
     DocumentCreateRequestToJSON,
     DocumentPatchRequestFromJSON,
     DocumentPatchRequestToJSON,
+    DocumentRenderOptionsFromJSON,
+    DocumentRenderOptionsToJSON,
+    DocumentRenderRequestFromJSON,
+    DocumentRenderRequestToJSON,
     DocumentResponseFromJSON,
     DocumentResponseToJSON,
     DocumentValidateRequestFromJSON,
@@ -64,90 +64,90 @@ import {
     SimpleBoolResponseToJSON,
 } from '../models/index';
 
-export interface ArchiveDocumentApiV1DocumentsDocumentIdArchivePostRequest {
+export interface ArchiveDocumentRequest {
     documentId: string;
 }
 
-export interface CalculateDocumentApiV1DocumentsCalculatePostRequest {
+export interface CalculateDocumentRequest {
     documentCalculateRequest: DocumentCalculateRequest;
 }
 
-export interface CreateDocumentApiV1DocumentsPostRequest {
+export interface CreateDocumentRequest {
     documentCreateRequest: DocumentCreateRequest;
     idempotencyKey?: string | null;
 }
 
-export interface DeleteDocumentApiV1DocumentsDocumentIdDeleteRequest {
+export interface CreateDocumentRenderRequest {
+    documentId: string;
+    documentRenderOptions: DocumentRenderOptions;
+    idempotencyKey?: string | null;
+}
+
+export interface DeleteDocumentRequest {
     documentId: string;
 }
 
-export interface DuplicateDocumentApiV1DocumentsDocumentIdDuplicatePostRequest {
+export interface DuplicateDocumentRequest {
     documentId: string;
 }
 
-export interface FinalizeDocumentApiV1DocumentsDocumentIdFinalizePostRequest {
+export interface FinalizeDocumentRequest {
     documentId: string;
 }
 
-export interface GetDocumentApiV1DocumentsDocumentIdGetRequest {
+export interface GetDocumentRequest {
     documentId: string;
 }
 
-export interface ListDocumentDeliveriesApiV1DocumentsDocumentIdDeliveriesGetRequest {
+export interface ListDocumentDeliveriesRequest {
     documentId: string;
     limit?: number;
     cursor?: string | null;
 }
 
-export interface ListDocumentsApiV1DocumentsGetRequest {
+export interface ListDocumentsRequest {
     limit?: number;
     cursor?: string | null;
     documentType?: string | null;
     status?: string | null;
 }
 
-export interface MarkPaidApiV1DocumentsDocumentIdMarkPaidPostRequest {
+export interface MarkPaidRequest {
     documentId: string;
 }
 
-export interface MarkSentApiV1DocumentsDocumentIdMarkSentPostRequest {
+export interface MarkSentRequest {
     documentId: string;
 }
 
-export interface MarkUnpaidApiV1DocumentsDocumentIdMarkUnpaidPostRequest {
+export interface MarkUnpaidRequest {
     documentId: string;
 }
 
-export interface PatchDocumentApiV1DocumentsDocumentIdPatchRequest {
-    documentId: string;
-    documentPatchRequest: DocumentPatchRequest;
-}
-
-export interface RenderDocumentApiV1DocumentsDocumentIdRendersPostRequest {
-    documentId: string;
-    appDocumentsSchemasDocumentRenderRequest: AppDocumentsSchemasDocumentRenderRequest;
+export interface RenderDocumentRequest {
+    documentRenderRequest: DocumentRenderRequest;
     idempotencyKey?: string | null;
 }
 
-export interface RenderDocumentApiV1DocumentsRenderPostRequest {
-    appSchemasV1DocumentRenderRequest: AppSchemasV1DocumentRenderRequest;
-    idempotencyKey?: string | null;
-}
-
-export interface RestoreDocumentApiV1DocumentsDocumentIdRestorePostRequest {
+export interface RestoreDocumentRequest {
     documentId: string;
 }
 
-export interface SendDocumentApiV1DocumentsDocumentIdSendPostRequest {
+export interface SendDocumentRequest {
     documentId: string;
     deliverySendRequest: DeliverySendRequest;
 }
 
-export interface ValidateDocumentApiV1DocumentsValidatePostRequest {
+export interface UpdateDocumentRequest {
+    documentId: string;
+    documentPatchRequest: DocumentPatchRequest;
+}
+
+export interface ValidateDocumentRequest {
     documentValidateRequest: DocumentValidateRequest;
 }
 
-export interface VoidDocumentApiV1DocumentsDocumentIdVoidPostRequest {
+export interface VoidDocumentRequest {
     documentId: string;
 }
 
@@ -159,11 +159,11 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Archive Document
      */
-    async archiveDocumentApiV1DocumentsDocumentIdArchivePostRaw(requestParameters: ArchiveDocumentApiV1DocumentsDocumentIdArchivePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
+    async archiveDocumentRaw(requestParameters: ArchiveDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
-                'Required parameter "documentId" was null or undefined when calling archiveDocumentApiV1DocumentsDocumentIdArchivePost().'
+                'Required parameter "documentId" was null or undefined when calling archiveDocument().'
             );
         }
 
@@ -192,19 +192,19 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Archive Document
      */
-    async archiveDocumentApiV1DocumentsDocumentIdArchivePost(requestParameters: ArchiveDocumentApiV1DocumentsDocumentIdArchivePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
-        const response = await this.archiveDocumentApiV1DocumentsDocumentIdArchivePostRaw(requestParameters, initOverrides);
+    async archiveDocument(requestParameters: ArchiveDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
+        const response = await this.archiveDocumentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Calculate Document
      */
-    async calculateDocumentApiV1DocumentsCalculatePostRaw(requestParameters: CalculateDocumentApiV1DocumentsCalculatePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentCalculateResponse>> {
+    async calculateDocumentRaw(requestParameters: CalculateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentCalculateResponse>> {
         if (requestParameters['documentCalculateRequest'] == null) {
             throw new runtime.RequiredError(
                 'documentCalculateRequest',
-                'Required parameter "documentCalculateRequest" was null or undefined when calling calculateDocumentApiV1DocumentsCalculatePost().'
+                'Required parameter "documentCalculateRequest" was null or undefined when calling calculateDocument().'
             );
         }
 
@@ -236,19 +236,19 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Calculate Document
      */
-    async calculateDocumentApiV1DocumentsCalculatePost(requestParameters: CalculateDocumentApiV1DocumentsCalculatePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentCalculateResponse> {
-        const response = await this.calculateDocumentApiV1DocumentsCalculatePostRaw(requestParameters, initOverrides);
+    async calculateDocument(requestParameters: CalculateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentCalculateResponse> {
+        const response = await this.calculateDocumentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Create Document
      */
-    async createDocumentApiV1DocumentsPostRaw(requestParameters: CreateDocumentApiV1DocumentsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
+    async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
         if (requestParameters['documentCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'documentCreateRequest',
-                'Required parameter "documentCreateRequest" was null or undefined when calling createDocumentApiV1DocumentsPost().'
+                'Required parameter "documentCreateRequest" was null or undefined when calling createDocument().'
             );
         }
 
@@ -284,19 +284,78 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Create Document
      */
-    async createDocumentApiV1DocumentsPost(requestParameters: CreateDocumentApiV1DocumentsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
-        const response = await this.createDocumentApiV1DocumentsPostRaw(requestParameters, initOverrides);
+    async createDocument(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
+        const response = await this.createDocumentRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Create Document Render
+     */
+    async createDocumentRenderRaw(requestParameters: CreateDocumentRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+        if (requestParameters['documentId'] == null) {
+            throw new runtime.RequiredError(
+                'documentId',
+                'Required parameter "documentId" was null or undefined when calling createDocumentRender().'
+            );
+        }
+
+        if (requestParameters['documentRenderOptions'] == null) {
+            throw new runtime.RequiredError(
+                'documentRenderOptions',
+                'Required parameter "documentRenderOptions" was null or undefined when calling createDocumentRender().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['idempotencyKey'] != null) {
+            headerParameters['Idempotency-Key'] = String(requestParameters['idempotencyKey']);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/documents/{document_id}/renders`.replace(`{${"document_id"}}`, encodeURIComponent(String(requestParameters['documentId']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: DocumentRenderOptionsToJSON(requestParameters['documentRenderOptions']),
+        }, initOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<any>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
+    }
+
+    /**
+     * Create Document Render
+     */
+    async createDocumentRender(requestParameters: CreateDocumentRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+        const response = await this.createDocumentRenderRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Delete Document
      */
-    async deleteDocumentApiV1DocumentsDocumentIdDeleteRaw(requestParameters: DeleteDocumentApiV1DocumentsDocumentIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
+    async deleteDocumentRaw(requestParameters: DeleteDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
-                'Required parameter "documentId" was null or undefined when calling deleteDocumentApiV1DocumentsDocumentIdDelete().'
+                'Required parameter "documentId" was null or undefined when calling deleteDocument().'
             );
         }
 
@@ -325,19 +384,19 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Delete Document
      */
-    async deleteDocumentApiV1DocumentsDocumentIdDelete(requestParameters: DeleteDocumentApiV1DocumentsDocumentIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deleteDocumentApiV1DocumentsDocumentIdDeleteRaw(requestParameters, initOverrides);
+    async deleteDocument(requestParameters: DeleteDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.deleteDocumentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Duplicate Document
      */
-    async duplicateDocumentApiV1DocumentsDocumentIdDuplicatePostRaw(requestParameters: DuplicateDocumentApiV1DocumentsDocumentIdDuplicatePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
+    async duplicateDocumentRaw(requestParameters: DuplicateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
-                'Required parameter "documentId" was null or undefined when calling duplicateDocumentApiV1DocumentsDocumentIdDuplicatePost().'
+                'Required parameter "documentId" was null or undefined when calling duplicateDocument().'
             );
         }
 
@@ -366,19 +425,19 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Duplicate Document
      */
-    async duplicateDocumentApiV1DocumentsDocumentIdDuplicatePost(requestParameters: DuplicateDocumentApiV1DocumentsDocumentIdDuplicatePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
-        const response = await this.duplicateDocumentApiV1DocumentsDocumentIdDuplicatePostRaw(requestParameters, initOverrides);
+    async duplicateDocument(requestParameters: DuplicateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
+        const response = await this.duplicateDocumentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Finalize Document
      */
-    async finalizeDocumentApiV1DocumentsDocumentIdFinalizePostRaw(requestParameters: FinalizeDocumentApiV1DocumentsDocumentIdFinalizePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
+    async finalizeDocumentRaw(requestParameters: FinalizeDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
-                'Required parameter "documentId" was null or undefined when calling finalizeDocumentApiV1DocumentsDocumentIdFinalizePost().'
+                'Required parameter "documentId" was null or undefined when calling finalizeDocument().'
             );
         }
 
@@ -407,19 +466,19 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Finalize Document
      */
-    async finalizeDocumentApiV1DocumentsDocumentIdFinalizePost(requestParameters: FinalizeDocumentApiV1DocumentsDocumentIdFinalizePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
-        const response = await this.finalizeDocumentApiV1DocumentsDocumentIdFinalizePostRaw(requestParameters, initOverrides);
+    async finalizeDocument(requestParameters: FinalizeDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
+        const response = await this.finalizeDocumentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Document
      */
-    async getDocumentApiV1DocumentsDocumentIdGetRaw(requestParameters: GetDocumentApiV1DocumentsDocumentIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
+    async getDocumentRaw(requestParameters: GetDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
-                'Required parameter "documentId" was null or undefined when calling getDocumentApiV1DocumentsDocumentIdGet().'
+                'Required parameter "documentId" was null or undefined when calling getDocument().'
             );
         }
 
@@ -448,19 +507,19 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Get Document
      */
-    async getDocumentApiV1DocumentsDocumentIdGet(requestParameters: GetDocumentApiV1DocumentsDocumentIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
-        const response = await this.getDocumentApiV1DocumentsDocumentIdGetRaw(requestParameters, initOverrides);
+    async getDocument(requestParameters: GetDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
+        const response = await this.getDocumentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Document Deliveries
      */
-    async listDocumentDeliveriesApiV1DocumentsDocumentIdDeliveriesGetRaw(requestParameters: ListDocumentDeliveriesApiV1DocumentsDocumentIdDeliveriesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeliveriesListResponse>> {
+    async listDocumentDeliveriesRaw(requestParameters: ListDocumentDeliveriesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeliveriesListResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
-                'Required parameter "documentId" was null or undefined when calling listDocumentDeliveriesApiV1DocumentsDocumentIdDeliveriesGet().'
+                'Required parameter "documentId" was null or undefined when calling listDocumentDeliveries().'
             );
         }
 
@@ -497,15 +556,15 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * List Document Deliveries
      */
-    async listDocumentDeliveriesApiV1DocumentsDocumentIdDeliveriesGet(requestParameters: ListDocumentDeliveriesApiV1DocumentsDocumentIdDeliveriesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeliveriesListResponse> {
-        const response = await this.listDocumentDeliveriesApiV1DocumentsDocumentIdDeliveriesGetRaw(requestParameters, initOverrides);
+    async listDocumentDeliveries(requestParameters: ListDocumentDeliveriesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeliveriesListResponse> {
+        const response = await this.listDocumentDeliveriesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Documents
      */
-    async listDocumentsApiV1DocumentsGetRaw(requestParameters: ListDocumentsApiV1DocumentsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentsListResponse>> {
+    async listDocumentsRaw(requestParameters: ListDocumentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentsListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -547,19 +606,19 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * List Documents
      */
-    async listDocumentsApiV1DocumentsGet(requestParameters: ListDocumentsApiV1DocumentsGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentsListResponse> {
-        const response = await this.listDocumentsApiV1DocumentsGetRaw(requestParameters, initOverrides);
+    async listDocuments(requestParameters: ListDocumentsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentsListResponse> {
+        const response = await this.listDocumentsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Mark Paid
      */
-    async markPaidApiV1DocumentsDocumentIdMarkPaidPostRaw(requestParameters: MarkPaidApiV1DocumentsDocumentIdMarkPaidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
+    async markPaidRaw(requestParameters: MarkPaidRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
-                'Required parameter "documentId" was null or undefined when calling markPaidApiV1DocumentsDocumentIdMarkPaidPost().'
+                'Required parameter "documentId" was null or undefined when calling markPaid().'
             );
         }
 
@@ -588,19 +647,19 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Mark Paid
      */
-    async markPaidApiV1DocumentsDocumentIdMarkPaidPost(requestParameters: MarkPaidApiV1DocumentsDocumentIdMarkPaidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
-        const response = await this.markPaidApiV1DocumentsDocumentIdMarkPaidPostRaw(requestParameters, initOverrides);
+    async markPaid(requestParameters: MarkPaidRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
+        const response = await this.markPaidRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Mark Sent
      */
-    async markSentApiV1DocumentsDocumentIdMarkSentPostRaw(requestParameters: MarkSentApiV1DocumentsDocumentIdMarkSentPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
+    async markSentRaw(requestParameters: MarkSentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
-                'Required parameter "documentId" was null or undefined when calling markSentApiV1DocumentsDocumentIdMarkSentPost().'
+                'Required parameter "documentId" was null or undefined when calling markSent().'
             );
         }
 
@@ -629,19 +688,19 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Mark Sent
      */
-    async markSentApiV1DocumentsDocumentIdMarkSentPost(requestParameters: MarkSentApiV1DocumentsDocumentIdMarkSentPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
-        const response = await this.markSentApiV1DocumentsDocumentIdMarkSentPostRaw(requestParameters, initOverrides);
+    async markSent(requestParameters: MarkSentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
+        const response = await this.markSentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Mark Unpaid
      */
-    async markUnpaidApiV1DocumentsDocumentIdMarkUnpaidPostRaw(requestParameters: MarkUnpaidApiV1DocumentsDocumentIdMarkUnpaidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
+    async markUnpaidRaw(requestParameters: MarkUnpaidRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
-                'Required parameter "documentId" was null or undefined when calling markUnpaidApiV1DocumentsDocumentIdMarkUnpaidPost().'
+                'Required parameter "documentId" was null or undefined when calling markUnpaid().'
             );
         }
 
@@ -670,129 +729,19 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Mark Unpaid
      */
-    async markUnpaidApiV1DocumentsDocumentIdMarkUnpaidPost(requestParameters: MarkUnpaidApiV1DocumentsDocumentIdMarkUnpaidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
-        const response = await this.markUnpaidApiV1DocumentsDocumentIdMarkUnpaidPostRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Patch Document
-     */
-    async patchDocumentApiV1DocumentsDocumentIdPatchRaw(requestParameters: PatchDocumentApiV1DocumentsDocumentIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
-        if (requestParameters['documentId'] == null) {
-            throw new runtime.RequiredError(
-                'documentId',
-                'Required parameter "documentId" was null or undefined when calling patchDocumentApiV1DocumentsDocumentIdPatch().'
-            );
-        }
-
-        if (requestParameters['documentPatchRequest'] == null) {
-            throw new runtime.RequiredError(
-                'documentPatchRequest',
-                'Required parameter "documentPatchRequest" was null or undefined when calling patchDocumentApiV1DocumentsDocumentIdPatch().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("HTTPBearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const response = await this.request({
-            path: `/api/v1/documents/{document_id}`.replace(`{${"document_id"}}`, encodeURIComponent(String(requestParameters['documentId']))),
-            method: 'PATCH',
-            headers: headerParameters,
-            query: queryParameters,
-            body: DocumentPatchRequestToJSON(requestParameters['documentPatchRequest']),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Patch Document
-     */
-    async patchDocumentApiV1DocumentsDocumentIdPatch(requestParameters: PatchDocumentApiV1DocumentsDocumentIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
-        const response = await this.patchDocumentApiV1DocumentsDocumentIdPatchRaw(requestParameters, initOverrides);
+    async markUnpaid(requestParameters: MarkUnpaidRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
+        const response = await this.markUnpaidRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Render Document
      */
-    async renderDocumentApiV1DocumentsDocumentIdRendersPostRaw(requestParameters: RenderDocumentApiV1DocumentsDocumentIdRendersPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
-        if (requestParameters['documentId'] == null) {
+    async renderDocumentRaw(requestParameters: RenderDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+        if (requestParameters['documentRenderRequest'] == null) {
             throw new runtime.RequiredError(
-                'documentId',
-                'Required parameter "documentId" was null or undefined when calling renderDocumentApiV1DocumentsDocumentIdRendersPost().'
-            );
-        }
-
-        if (requestParameters['appDocumentsSchemasDocumentRenderRequest'] == null) {
-            throw new runtime.RequiredError(
-                'appDocumentsSchemasDocumentRenderRequest',
-                'Required parameter "appDocumentsSchemasDocumentRenderRequest" was null or undefined when calling renderDocumentApiV1DocumentsDocumentIdRendersPost().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (requestParameters['idempotencyKey'] != null) {
-            headerParameters['Idempotency-Key'] = String(requestParameters['idempotencyKey']);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("HTTPBearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const response = await this.request({
-            path: `/api/v1/documents/{document_id}/renders`.replace(`{${"document_id"}}`, encodeURIComponent(String(requestParameters['documentId']))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: AppDocumentsSchemasDocumentRenderRequestToJSON(requestParameters['appDocumentsSchemasDocumentRenderRequest']),
-        }, initOverrides);
-
-        if (this.isJsonMime(response.headers.get('content-type'))) {
-            return new runtime.JSONApiResponse<any>(response);
-        } else {
-            return new runtime.TextApiResponse(response) as any;
-        }
-    }
-
-    /**
-     * Render Document
-     */
-    async renderDocumentApiV1DocumentsDocumentIdRendersPost(requestParameters: RenderDocumentApiV1DocumentsDocumentIdRendersPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
-        const response = await this.renderDocumentApiV1DocumentsDocumentIdRendersPostRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Render Document
-     */
-    async renderDocumentApiV1DocumentsRenderPostRaw(requestParameters: RenderDocumentApiV1DocumentsRenderPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
-        if (requestParameters['appSchemasV1DocumentRenderRequest'] == null) {
-            throw new runtime.RequiredError(
-                'appSchemasV1DocumentRenderRequest',
-                'Required parameter "appSchemasV1DocumentRenderRequest" was null or undefined when calling renderDocumentApiV1DocumentsRenderPost().'
+                'documentRenderRequest',
+                'Required parameter "documentRenderRequest" was null or undefined when calling renderDocument().'
             );
         }
 
@@ -819,7 +768,7 @@ export class DocumentsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AppSchemasV1DocumentRenderRequestToJSON(requestParameters['appSchemasV1DocumentRenderRequest']),
+            body: DocumentRenderRequestToJSON(requestParameters['documentRenderRequest']),
         }, initOverrides);
 
         if (this.isJsonMime(response.headers.get('content-type'))) {
@@ -832,19 +781,19 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Render Document
      */
-    async renderDocumentApiV1DocumentsRenderPost(requestParameters: RenderDocumentApiV1DocumentsRenderPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
-        const response = await this.renderDocumentApiV1DocumentsRenderPostRaw(requestParameters, initOverrides);
+    async renderDocument(requestParameters: RenderDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+        const response = await this.renderDocumentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Restore Document
      */
-    async restoreDocumentApiV1DocumentsDocumentIdRestorePostRaw(requestParameters: RestoreDocumentApiV1DocumentsDocumentIdRestorePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
+    async restoreDocumentRaw(requestParameters: RestoreDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
-                'Required parameter "documentId" was null or undefined when calling restoreDocumentApiV1DocumentsDocumentIdRestorePost().'
+                'Required parameter "documentId" was null or undefined when calling restoreDocument().'
             );
         }
 
@@ -873,26 +822,26 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Restore Document
      */
-    async restoreDocumentApiV1DocumentsDocumentIdRestorePost(requestParameters: RestoreDocumentApiV1DocumentsDocumentIdRestorePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
-        const response = await this.restoreDocumentApiV1DocumentsDocumentIdRestorePostRaw(requestParameters, initOverrides);
+    async restoreDocument(requestParameters: RestoreDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
+        const response = await this.restoreDocumentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Send Document
      */
-    async sendDocumentApiV1DocumentsDocumentIdSendPostRaw(requestParameters: SendDocumentApiV1DocumentsDocumentIdSendPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeliveryResponse>> {
+    async sendDocumentRaw(requestParameters: SendDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeliveryResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
-                'Required parameter "documentId" was null or undefined when calling sendDocumentApiV1DocumentsDocumentIdSendPost().'
+                'Required parameter "documentId" was null or undefined when calling sendDocument().'
             );
         }
 
         if (requestParameters['deliverySendRequest'] == null) {
             throw new runtime.RequiredError(
                 'deliverySendRequest',
-                'Required parameter "deliverySendRequest" was null or undefined when calling sendDocumentApiV1DocumentsDocumentIdSendPost().'
+                'Required parameter "deliverySendRequest" was null or undefined when calling sendDocument().'
             );
         }
 
@@ -924,19 +873,70 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Send Document
      */
-    async sendDocumentApiV1DocumentsDocumentIdSendPost(requestParameters: SendDocumentApiV1DocumentsDocumentIdSendPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeliveryResponse> {
-        const response = await this.sendDocumentApiV1DocumentsDocumentIdSendPostRaw(requestParameters, initOverrides);
+    async sendDocument(requestParameters: SendDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeliveryResponse> {
+        const response = await this.sendDocumentRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update Document
+     */
+    async updateDocumentRaw(requestParameters: UpdateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
+        if (requestParameters['documentId'] == null) {
+            throw new runtime.RequiredError(
+                'documentId',
+                'Required parameter "documentId" was null or undefined when calling updateDocument().'
+            );
+        }
+
+        if (requestParameters['documentPatchRequest'] == null) {
+            throw new runtime.RequiredError(
+                'documentPatchRequest',
+                'Required parameter "documentPatchRequest" was null or undefined when calling updateDocument().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/documents/{document_id}`.replace(`{${"document_id"}}`, encodeURIComponent(String(requestParameters['documentId']))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: DocumentPatchRequestToJSON(requestParameters['documentPatchRequest']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Update Document
+     */
+    async updateDocument(requestParameters: UpdateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
+        const response = await this.updateDocumentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Validate Document
      */
-    async validateDocumentApiV1DocumentsValidatePostRaw(requestParameters: ValidateDocumentApiV1DocumentsValidatePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentValidateResponse>> {
+    async validateDocumentRaw(requestParameters: ValidateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentValidateResponse>> {
         if (requestParameters['documentValidateRequest'] == null) {
             throw new runtime.RequiredError(
                 'documentValidateRequest',
-                'Required parameter "documentValidateRequest" was null or undefined when calling validateDocumentApiV1DocumentsValidatePost().'
+                'Required parameter "documentValidateRequest" was null or undefined when calling validateDocument().'
             );
         }
 
@@ -968,19 +968,19 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Validate Document
      */
-    async validateDocumentApiV1DocumentsValidatePost(requestParameters: ValidateDocumentApiV1DocumentsValidatePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentValidateResponse> {
-        const response = await this.validateDocumentApiV1DocumentsValidatePostRaw(requestParameters, initOverrides);
+    async validateDocument(requestParameters: ValidateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentValidateResponse> {
+        const response = await this.validateDocumentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Void Document
      */
-    async voidDocumentApiV1DocumentsDocumentIdVoidPostRaw(requestParameters: VoidDocumentApiV1DocumentsDocumentIdVoidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
+    async voidDocumentRaw(requestParameters: VoidDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
-                'Required parameter "documentId" was null or undefined when calling voidDocumentApiV1DocumentsDocumentIdVoidPost().'
+                'Required parameter "documentId" was null or undefined when calling voidDocument().'
             );
         }
 
@@ -1009,8 +1009,8 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Void Document
      */
-    async voidDocumentApiV1DocumentsDocumentIdVoidPost(requestParameters: VoidDocumentApiV1DocumentsDocumentIdVoidPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
-        const response = await this.voidDocumentApiV1DocumentsDocumentIdVoidPostRaw(requestParameters, initOverrides);
+    async voidDocument(requestParameters: VoidDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
+        const response = await this.voidDocumentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

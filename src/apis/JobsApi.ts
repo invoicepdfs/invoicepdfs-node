@@ -25,15 +25,15 @@ import {
     JobResponseToJSON,
 } from '../models/index';
 
-export interface CancelJobApiV1JobsJobIdCancelPostRequest {
+export interface CancelJobRequest {
     jobId: string;
 }
 
-export interface GetJobApiV1JobsJobIdGetRequest {
+export interface GetJobRequest {
     jobId: string;
 }
 
-export interface RetryJobApiV1JobsJobIdRetryPostRequest {
+export interface RetryJobRequest {
     jobId: string;
 }
 
@@ -45,11 +45,11 @@ export class JobsApi extends runtime.BaseAPI {
     /**
      * Cancel Job
      */
-    async cancelJobApiV1JobsJobIdCancelPostRaw(requestParameters: CancelJobApiV1JobsJobIdCancelPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobResponse>> {
+    async cancelJobRaw(requestParameters: CancelJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobResponse>> {
         if (requestParameters['jobId'] == null) {
             throw new runtime.RequiredError(
                 'jobId',
-                'Required parameter "jobId" was null or undefined when calling cancelJobApiV1JobsJobIdCancelPost().'
+                'Required parameter "jobId" was null or undefined when calling cancelJob().'
             );
         }
 
@@ -78,19 +78,19 @@ export class JobsApi extends runtime.BaseAPI {
     /**
      * Cancel Job
      */
-    async cancelJobApiV1JobsJobIdCancelPost(requestParameters: CancelJobApiV1JobsJobIdCancelPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<JobResponse> {
-        const response = await this.cancelJobApiV1JobsJobIdCancelPostRaw(requestParameters, initOverrides);
+    async cancelJob(requestParameters: CancelJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<JobResponse> {
+        const response = await this.cancelJobRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Job
      */
-    async getJobApiV1JobsJobIdGetRaw(requestParameters: GetJobApiV1JobsJobIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobResponse>> {
+    async getJobRaw(requestParameters: GetJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobResponse>> {
         if (requestParameters['jobId'] == null) {
             throw new runtime.RequiredError(
                 'jobId',
-                'Required parameter "jobId" was null or undefined when calling getJobApiV1JobsJobIdGet().'
+                'Required parameter "jobId" was null or undefined when calling getJob().'
             );
         }
 
@@ -119,19 +119,19 @@ export class JobsApi extends runtime.BaseAPI {
     /**
      * Get Job
      */
-    async getJobApiV1JobsJobIdGet(requestParameters: GetJobApiV1JobsJobIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<JobResponse> {
-        const response = await this.getJobApiV1JobsJobIdGetRaw(requestParameters, initOverrides);
+    async getJob(requestParameters: GetJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<JobResponse> {
+        const response = await this.getJobRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Retry Job
      */
-    async retryJobApiV1JobsJobIdRetryPostRaw(requestParameters: RetryJobApiV1JobsJobIdRetryPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobResponse>> {
+    async retryJobRaw(requestParameters: RetryJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobResponse>> {
         if (requestParameters['jobId'] == null) {
             throw new runtime.RequiredError(
                 'jobId',
-                'Required parameter "jobId" was null or undefined when calling retryJobApiV1JobsJobIdRetryPost().'
+                'Required parameter "jobId" was null or undefined when calling retryJob().'
             );
         }
 
@@ -160,8 +160,8 @@ export class JobsApi extends runtime.BaseAPI {
     /**
      * Retry Job
      */
-    async retryJobApiV1JobsJobIdRetryPost(requestParameters: RetryJobApiV1JobsJobIdRetryPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<JobResponse> {
-        const response = await this.retryJobApiV1JobsJobIdRetryPostRaw(requestParameters, initOverrides);
+    async retryJob(requestParameters: RetryJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<JobResponse> {
+        const response = await this.retryJobRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

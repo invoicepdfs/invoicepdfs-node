@@ -37,25 +37,25 @@ import {
     SimpleBoolResponseToJSON,
 } from '../models/index';
 
-export interface CreateBusinessProfileApiV1BusinessProfilesPostRequest {
+export interface CreateBusinessProfileRequest {
     businessProfileCreate: BusinessProfileCreate;
     idempotencyKey?: string | null;
 }
 
-export interface DeleteBusinessProfileApiV1BusinessProfilesBusinessProfileIdDeleteRequest {
+export interface DeleteBusinessProfileRequest {
     businessProfileId: string;
 }
 
-export interface GetBusinessProfileApiV1BusinessProfilesBusinessProfileIdGetRequest {
+export interface GetBusinessProfileRequest {
     businessProfileId: string;
 }
 
-export interface ListBusinessProfilesApiV1BusinessProfilesGetRequest {
+export interface ListBusinessProfilesRequest {
     limit?: number;
     cursor?: string | null;
 }
 
-export interface PatchBusinessProfileApiV1BusinessProfilesBusinessProfileIdPatchRequest {
+export interface UpdateBusinessProfileRequest {
     businessProfileId: string;
     businessProfilePatch: BusinessProfilePatch;
     idempotencyKey?: string | null;
@@ -69,11 +69,11 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     /**
      * Create Business Profile
      */
-    async createBusinessProfileApiV1BusinessProfilesPostRaw(requestParameters: CreateBusinessProfileApiV1BusinessProfilesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfileResponse>> {
+    async createBusinessProfileRaw(requestParameters: CreateBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfileResponse>> {
         if (requestParameters['businessProfileCreate'] == null) {
             throw new runtime.RequiredError(
                 'businessProfileCreate',
-                'Required parameter "businessProfileCreate" was null or undefined when calling createBusinessProfileApiV1BusinessProfilesPost().'
+                'Required parameter "businessProfileCreate" was null or undefined when calling createBusinessProfile().'
             );
         }
 
@@ -109,19 +109,19 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     /**
      * Create Business Profile
      */
-    async createBusinessProfileApiV1BusinessProfilesPost(requestParameters: CreateBusinessProfileApiV1BusinessProfilesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfileResponse> {
-        const response = await this.createBusinessProfileApiV1BusinessProfilesPostRaw(requestParameters, initOverrides);
+    async createBusinessProfile(requestParameters: CreateBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfileResponse> {
+        const response = await this.createBusinessProfileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Delete Business Profile
      */
-    async deleteBusinessProfileApiV1BusinessProfilesBusinessProfileIdDeleteRaw(requestParameters: DeleteBusinessProfileApiV1BusinessProfilesBusinessProfileIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
+    async deleteBusinessProfileRaw(requestParameters: DeleteBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['businessProfileId'] == null) {
             throw new runtime.RequiredError(
                 'businessProfileId',
-                'Required parameter "businessProfileId" was null or undefined when calling deleteBusinessProfileApiV1BusinessProfilesBusinessProfileIdDelete().'
+                'Required parameter "businessProfileId" was null or undefined when calling deleteBusinessProfile().'
             );
         }
 
@@ -150,19 +150,19 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     /**
      * Delete Business Profile
      */
-    async deleteBusinessProfileApiV1BusinessProfilesBusinessProfileIdDelete(requestParameters: DeleteBusinessProfileApiV1BusinessProfilesBusinessProfileIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deleteBusinessProfileApiV1BusinessProfilesBusinessProfileIdDeleteRaw(requestParameters, initOverrides);
+    async deleteBusinessProfile(requestParameters: DeleteBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.deleteBusinessProfileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Business Profile
      */
-    async getBusinessProfileApiV1BusinessProfilesBusinessProfileIdGetRaw(requestParameters: GetBusinessProfileApiV1BusinessProfilesBusinessProfileIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfileResponse>> {
+    async getBusinessProfileRaw(requestParameters: GetBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfileResponse>> {
         if (requestParameters['businessProfileId'] == null) {
             throw new runtime.RequiredError(
                 'businessProfileId',
-                'Required parameter "businessProfileId" was null or undefined when calling getBusinessProfileApiV1BusinessProfilesBusinessProfileIdGet().'
+                'Required parameter "businessProfileId" was null or undefined when calling getBusinessProfile().'
             );
         }
 
@@ -191,15 +191,15 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     /**
      * Get Business Profile
      */
-    async getBusinessProfileApiV1BusinessProfilesBusinessProfileIdGet(requestParameters: GetBusinessProfileApiV1BusinessProfilesBusinessProfileIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfileResponse> {
-        const response = await this.getBusinessProfileApiV1BusinessProfilesBusinessProfileIdGetRaw(requestParameters, initOverrides);
+    async getBusinessProfile(requestParameters: GetBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfileResponse> {
+        const response = await this.getBusinessProfileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Business Profiles
      */
-    async listBusinessProfilesApiV1BusinessProfilesGetRaw(requestParameters: ListBusinessProfilesApiV1BusinessProfilesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfilesListResponse>> {
+    async listBusinessProfilesRaw(requestParameters: ListBusinessProfilesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfilesListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -233,26 +233,26 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     /**
      * List Business Profiles
      */
-    async listBusinessProfilesApiV1BusinessProfilesGet(requestParameters: ListBusinessProfilesApiV1BusinessProfilesGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfilesListResponse> {
-        const response = await this.listBusinessProfilesApiV1BusinessProfilesGetRaw(requestParameters, initOverrides);
+    async listBusinessProfiles(requestParameters: ListBusinessProfilesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfilesListResponse> {
+        const response = await this.listBusinessProfilesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Patch Business Profile
+     * Update Business Profile
      */
-    async patchBusinessProfileApiV1BusinessProfilesBusinessProfileIdPatchRaw(requestParameters: PatchBusinessProfileApiV1BusinessProfilesBusinessProfileIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfileResponse>> {
+    async updateBusinessProfileRaw(requestParameters: UpdateBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfileResponse>> {
         if (requestParameters['businessProfileId'] == null) {
             throw new runtime.RequiredError(
                 'businessProfileId',
-                'Required parameter "businessProfileId" was null or undefined when calling patchBusinessProfileApiV1BusinessProfilesBusinessProfileIdPatch().'
+                'Required parameter "businessProfileId" was null or undefined when calling updateBusinessProfile().'
             );
         }
 
         if (requestParameters['businessProfilePatch'] == null) {
             throw new runtime.RequiredError(
                 'businessProfilePatch',
-                'Required parameter "businessProfilePatch" was null or undefined when calling patchBusinessProfileApiV1BusinessProfilesBusinessProfileIdPatch().'
+                'Required parameter "businessProfilePatch" was null or undefined when calling updateBusinessProfile().'
             );
         }
 
@@ -286,10 +286,10 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Business Profile
+     * Update Business Profile
      */
-    async patchBusinessProfileApiV1BusinessProfilesBusinessProfileIdPatch(requestParameters: PatchBusinessProfileApiV1BusinessProfilesBusinessProfileIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfileResponse> {
-        const response = await this.patchBusinessProfileApiV1BusinessProfilesBusinessProfileIdPatchRaw(requestParameters, initOverrides);
+    async updateBusinessProfile(requestParameters: UpdateBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfileResponse> {
+        const response = await this.updateBusinessProfileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

@@ -10,11 +10,11 @@ src/apis/BrandingProfilesApi.ts
 src/apis/BusinessProfilesApi.ts
 src/apis/CustomersApi.ts
 src/apis/DeliveriesApi.ts
+src/apis/DocumentAttachmentsApi.ts
 src/apis/DocumentsApi.ts
 src/apis/FilesApi.ts
 src/apis/HealthApi.ts
 src/apis/ImportsApi.ts
-src/apis/InvoiceAttachmentsApi.ts
 src/apis/JobsApi.ts
 src/apis/LogsApi.ts
 src/apis/NumberingSequencesApi.ts
@@ -44,8 +44,6 @@ src/models/ApiKeyRevokeResponse.ts
 src/models/ApiKeyRotateResponse.ts
 src/models/ApiRequestLogOut.ts
 src/models/ApiRequestLogsListResponse.ts
-src/models/AppDocumentsSchemasDocumentRenderRequest.ts
-src/models/AppSchemasV1DocumentRenderRequest.ts
 src/models/AuditEventOut.ts
 src/models/AuditEventResponse.ts
 src/models/AuditEventsListResponse.ts
@@ -119,6 +117,8 @@ src/models/DocumentOutputOptions.ts
 src/models/DocumentPartyInput.ts
 src/models/DocumentPatchRequest.ts
 src/models/DocumentPaymentInput.ts
+src/models/DocumentRenderOptions.ts
+src/models/DocumentRenderRequest.ts
 src/models/DocumentResponse.ts
 src/models/DocumentShippingInput.ts
 src/models/DocumentTemplateRef.ts

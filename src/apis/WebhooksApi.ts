@@ -46,45 +46,45 @@ import {
     WebhookSecretResponseToJSON,
 } from '../models/index';
 
-export interface CreateWebhookEndpointApiV1WebhookEndpointsPostRequest {
+export interface CreateWebhookEndpointRequest {
     webhookEndpointCreateRequest: WebhookEndpointCreateRequest;
 }
 
-export interface DeleteWebhookEndpointApiV1WebhookEndpointsEndpointIdDeleteRequest {
+export interface DeleteWebhookEndpointRequest {
     endpointId: string;
 }
 
-export interface GetWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdGetRequest {
+export interface GetWebhookDeliveryRequest {
     deliveryId: string;
 }
 
-export interface GetWebhookEndpointApiV1WebhookEndpointsEndpointIdGetRequest {
+export interface GetWebhookEndpointRequest {
     endpointId: string;
 }
 
-export interface ListWebhookDeliveriesApiV1WebhookDeliveriesGetRequest {
+export interface ListWebhookDeliveriesRequest {
     limit?: number;
     cursor?: string | null;
 }
 
-export interface ListWebhookEndpointsApiV1WebhookEndpointsGetRequest {
+export interface ListWebhookEndpointsRequest {
     limit?: number;
     cursor?: string | null;
 }
 
-export interface RetryWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdRetryPostRequest {
+export interface RetryWebhookDeliveryRequest {
     deliveryId: string;
 }
 
-export interface RotateWebhookSecretApiV1WebhookEndpointsEndpointIdRotateSecretPostRequest {
+export interface RotateWebhookSecretRequest {
     endpointId: string;
 }
 
-export interface TestWebhookEndpointApiV1WebhookEndpointsEndpointIdTestPostRequest {
+export interface TestWebhookEndpointRequest {
     endpointId: string;
 }
 
-export interface UpdateWebhookEndpointApiV1WebhookEndpointsEndpointIdPatchRequest {
+export interface UpdateWebhookEndpointRequest {
     endpointId: string;
     webhookEndpointPatchRequest: WebhookEndpointPatchRequest;
 }
@@ -97,11 +97,11 @@ export class WebhooksApi extends runtime.BaseAPI {
     /**
      * Create Webhook Endpoint
      */
-    async createWebhookEndpointApiV1WebhookEndpointsPostRaw(requestParameters: CreateWebhookEndpointApiV1WebhookEndpointsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointResponse>> {
+    async createWebhookEndpointRaw(requestParameters: CreateWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointResponse>> {
         if (requestParameters['webhookEndpointCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'webhookEndpointCreateRequest',
-                'Required parameter "webhookEndpointCreateRequest" was null or undefined when calling createWebhookEndpointApiV1WebhookEndpointsPost().'
+                'Required parameter "webhookEndpointCreateRequest" was null or undefined when calling createWebhookEndpoint().'
             );
         }
 
@@ -133,19 +133,19 @@ export class WebhooksApi extends runtime.BaseAPI {
     /**
      * Create Webhook Endpoint
      */
-    async createWebhookEndpointApiV1WebhookEndpointsPost(requestParameters: CreateWebhookEndpointApiV1WebhookEndpointsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointResponse> {
-        const response = await this.createWebhookEndpointApiV1WebhookEndpointsPostRaw(requestParameters, initOverrides);
+    async createWebhookEndpoint(requestParameters: CreateWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointResponse> {
+        const response = await this.createWebhookEndpointRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Delete Webhook Endpoint
      */
-    async deleteWebhookEndpointApiV1WebhookEndpointsEndpointIdDeleteRaw(requestParameters: DeleteWebhookEndpointApiV1WebhookEndpointsEndpointIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
+    async deleteWebhookEndpointRaw(requestParameters: DeleteWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['endpointId'] == null) {
             throw new runtime.RequiredError(
                 'endpointId',
-                'Required parameter "endpointId" was null or undefined when calling deleteWebhookEndpointApiV1WebhookEndpointsEndpointIdDelete().'
+                'Required parameter "endpointId" was null or undefined when calling deleteWebhookEndpoint().'
             );
         }
 
@@ -174,19 +174,19 @@ export class WebhooksApi extends runtime.BaseAPI {
     /**
      * Delete Webhook Endpoint
      */
-    async deleteWebhookEndpointApiV1WebhookEndpointsEndpointIdDelete(requestParameters: DeleteWebhookEndpointApiV1WebhookEndpointsEndpointIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deleteWebhookEndpointApiV1WebhookEndpointsEndpointIdDeleteRaw(requestParameters, initOverrides);
+    async deleteWebhookEndpoint(requestParameters: DeleteWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.deleteWebhookEndpointRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Webhook Delivery
      */
-    async getWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdGetRaw(requestParameters: GetWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveryResponse>> {
+    async getWebhookDeliveryRaw(requestParameters: GetWebhookDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveryResponse>> {
         if (requestParameters['deliveryId'] == null) {
             throw new runtime.RequiredError(
                 'deliveryId',
-                'Required parameter "deliveryId" was null or undefined when calling getWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdGet().'
+                'Required parameter "deliveryId" was null or undefined when calling getWebhookDelivery().'
             );
         }
 
@@ -215,19 +215,19 @@ export class WebhooksApi extends runtime.BaseAPI {
     /**
      * Get Webhook Delivery
      */
-    async getWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdGet(requestParameters: GetWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveryResponse> {
-        const response = await this.getWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdGetRaw(requestParameters, initOverrides);
+    async getWebhookDelivery(requestParameters: GetWebhookDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveryResponse> {
+        const response = await this.getWebhookDeliveryRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Webhook Endpoint
      */
-    async getWebhookEndpointApiV1WebhookEndpointsEndpointIdGetRaw(requestParameters: GetWebhookEndpointApiV1WebhookEndpointsEndpointIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointResponse>> {
+    async getWebhookEndpointRaw(requestParameters: GetWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointResponse>> {
         if (requestParameters['endpointId'] == null) {
             throw new runtime.RequiredError(
                 'endpointId',
-                'Required parameter "endpointId" was null or undefined when calling getWebhookEndpointApiV1WebhookEndpointsEndpointIdGet().'
+                'Required parameter "endpointId" was null or undefined when calling getWebhookEndpoint().'
             );
         }
 
@@ -256,15 +256,15 @@ export class WebhooksApi extends runtime.BaseAPI {
     /**
      * Get Webhook Endpoint
      */
-    async getWebhookEndpointApiV1WebhookEndpointsEndpointIdGet(requestParameters: GetWebhookEndpointApiV1WebhookEndpointsEndpointIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointResponse> {
-        const response = await this.getWebhookEndpointApiV1WebhookEndpointsEndpointIdGetRaw(requestParameters, initOverrides);
+    async getWebhookEndpoint(requestParameters: GetWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointResponse> {
+        const response = await this.getWebhookEndpointRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Webhook Deliveries
      */
-    async listWebhookDeliveriesApiV1WebhookDeliveriesGetRaw(requestParameters: ListWebhookDeliveriesApiV1WebhookDeliveriesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveriesListResponse>> {
+    async listWebhookDeliveriesRaw(requestParameters: ListWebhookDeliveriesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveriesListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -298,15 +298,15 @@ export class WebhooksApi extends runtime.BaseAPI {
     /**
      * List Webhook Deliveries
      */
-    async listWebhookDeliveriesApiV1WebhookDeliveriesGet(requestParameters: ListWebhookDeliveriesApiV1WebhookDeliveriesGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveriesListResponse> {
-        const response = await this.listWebhookDeliveriesApiV1WebhookDeliveriesGetRaw(requestParameters, initOverrides);
+    async listWebhookDeliveries(requestParameters: ListWebhookDeliveriesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveriesListResponse> {
+        const response = await this.listWebhookDeliveriesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Webhook Endpoints
      */
-    async listWebhookEndpointsApiV1WebhookEndpointsGetRaw(requestParameters: ListWebhookEndpointsApiV1WebhookEndpointsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointsListResponse>> {
+    async listWebhookEndpointsRaw(requestParameters: ListWebhookEndpointsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointsListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -340,19 +340,19 @@ export class WebhooksApi extends runtime.BaseAPI {
     /**
      * List Webhook Endpoints
      */
-    async listWebhookEndpointsApiV1WebhookEndpointsGet(requestParameters: ListWebhookEndpointsApiV1WebhookEndpointsGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointsListResponse> {
-        const response = await this.listWebhookEndpointsApiV1WebhookEndpointsGetRaw(requestParameters, initOverrides);
+    async listWebhookEndpoints(requestParameters: ListWebhookEndpointsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointsListResponse> {
+        const response = await this.listWebhookEndpointsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Retry Webhook Delivery
      */
-    async retryWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdRetryPostRaw(requestParameters: RetryWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdRetryPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveryResponse>> {
+    async retryWebhookDeliveryRaw(requestParameters: RetryWebhookDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveryResponse>> {
         if (requestParameters['deliveryId'] == null) {
             throw new runtime.RequiredError(
                 'deliveryId',
-                'Required parameter "deliveryId" was null or undefined when calling retryWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdRetryPost().'
+                'Required parameter "deliveryId" was null or undefined when calling retryWebhookDelivery().'
             );
         }
 
@@ -381,19 +381,19 @@ export class WebhooksApi extends runtime.BaseAPI {
     /**
      * Retry Webhook Delivery
      */
-    async retryWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdRetryPost(requestParameters: RetryWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdRetryPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveryResponse> {
-        const response = await this.retryWebhookDeliveryApiV1WebhookDeliveriesDeliveryIdRetryPostRaw(requestParameters, initOverrides);
+    async retryWebhookDelivery(requestParameters: RetryWebhookDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveryResponse> {
+        const response = await this.retryWebhookDeliveryRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Rotate Webhook Secret
      */
-    async rotateWebhookSecretApiV1WebhookEndpointsEndpointIdRotateSecretPostRaw(requestParameters: RotateWebhookSecretApiV1WebhookEndpointsEndpointIdRotateSecretPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookSecretResponse>> {
+    async rotateWebhookSecretRaw(requestParameters: RotateWebhookSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookSecretResponse>> {
         if (requestParameters['endpointId'] == null) {
             throw new runtime.RequiredError(
                 'endpointId',
-                'Required parameter "endpointId" was null or undefined when calling rotateWebhookSecretApiV1WebhookEndpointsEndpointIdRotateSecretPost().'
+                'Required parameter "endpointId" was null or undefined when calling rotateWebhookSecret().'
             );
         }
 
@@ -422,19 +422,19 @@ export class WebhooksApi extends runtime.BaseAPI {
     /**
      * Rotate Webhook Secret
      */
-    async rotateWebhookSecretApiV1WebhookEndpointsEndpointIdRotateSecretPost(requestParameters: RotateWebhookSecretApiV1WebhookEndpointsEndpointIdRotateSecretPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookSecretResponse> {
-        const response = await this.rotateWebhookSecretApiV1WebhookEndpointsEndpointIdRotateSecretPostRaw(requestParameters, initOverrides);
+    async rotateWebhookSecret(requestParameters: RotateWebhookSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookSecretResponse> {
+        const response = await this.rotateWebhookSecretRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Test Webhook Endpoint
      */
-    async testWebhookEndpointApiV1WebhookEndpointsEndpointIdTestPostRaw(requestParameters: TestWebhookEndpointApiV1WebhookEndpointsEndpointIdTestPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveryResponse>> {
+    async testWebhookEndpointRaw(requestParameters: TestWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveryResponse>> {
         if (requestParameters['endpointId'] == null) {
             throw new runtime.RequiredError(
                 'endpointId',
-                'Required parameter "endpointId" was null or undefined when calling testWebhookEndpointApiV1WebhookEndpointsEndpointIdTestPost().'
+                'Required parameter "endpointId" was null or undefined when calling testWebhookEndpoint().'
             );
         }
 
@@ -463,26 +463,26 @@ export class WebhooksApi extends runtime.BaseAPI {
     /**
      * Test Webhook Endpoint
      */
-    async testWebhookEndpointApiV1WebhookEndpointsEndpointIdTestPost(requestParameters: TestWebhookEndpointApiV1WebhookEndpointsEndpointIdTestPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveryResponse> {
-        const response = await this.testWebhookEndpointApiV1WebhookEndpointsEndpointIdTestPostRaw(requestParameters, initOverrides);
+    async testWebhookEndpoint(requestParameters: TestWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveryResponse> {
+        const response = await this.testWebhookEndpointRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Update Webhook Endpoint
      */
-    async updateWebhookEndpointApiV1WebhookEndpointsEndpointIdPatchRaw(requestParameters: UpdateWebhookEndpointApiV1WebhookEndpointsEndpointIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointResponse>> {
+    async updateWebhookEndpointRaw(requestParameters: UpdateWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointResponse>> {
         if (requestParameters['endpointId'] == null) {
             throw new runtime.RequiredError(
                 'endpointId',
-                'Required parameter "endpointId" was null or undefined when calling updateWebhookEndpointApiV1WebhookEndpointsEndpointIdPatch().'
+                'Required parameter "endpointId" was null or undefined when calling updateWebhookEndpoint().'
             );
         }
 
         if (requestParameters['webhookEndpointPatchRequest'] == null) {
             throw new runtime.RequiredError(
                 'webhookEndpointPatchRequest',
-                'Required parameter "webhookEndpointPatchRequest" was null or undefined when calling updateWebhookEndpointApiV1WebhookEndpointsEndpointIdPatch().'
+                'Required parameter "webhookEndpointPatchRequest" was null or undefined when calling updateWebhookEndpoint().'
             );
         }
 
@@ -514,8 +514,8 @@ export class WebhooksApi extends runtime.BaseAPI {
     /**
      * Update Webhook Endpoint
      */
-    async updateWebhookEndpointApiV1WebhookEndpointsEndpointIdPatch(requestParameters: UpdateWebhookEndpointApiV1WebhookEndpointsEndpointIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointResponse> {
-        const response = await this.updateWebhookEndpointApiV1WebhookEndpointsEndpointIdPatchRaw(requestParameters, initOverrides);
+    async updateWebhookEndpoint(requestParameters: UpdateWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointResponse> {
+        const response = await this.updateWebhookEndpointRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

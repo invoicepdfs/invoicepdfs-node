@@ -31,17 +31,17 @@ import {
     TemplateVersionsListResponseToJSON,
 } from '../models/index';
 
-export interface CreateTemplateVersionApiV1TemplatesTemplateIdVersionsPostRequest {
+export interface CreateTemplateVersionRequest {
     templateId: string;
     templateVersionCreateRequest: TemplateVersionCreateRequest;
 }
 
-export interface GetTemplateVersionApiV1TemplatesTemplateIdVersionsVersionGetRequest {
+export interface GetTemplateVersionRequest {
     templateId: string;
     version: number;
 }
 
-export interface ListTemplateVersionsApiV1TemplatesTemplateIdVersionsGetRequest {
+export interface ListTemplateVersionsRequest {
     templateId: string;
 }
 
@@ -53,18 +53,18 @@ export class TemplateVersionsApi extends runtime.BaseAPI {
     /**
      * Create Template Version
      */
-    async createTemplateVersionApiV1TemplatesTemplateIdVersionsPostRaw(requestParameters: CreateTemplateVersionApiV1TemplatesTemplateIdVersionsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateVersionResponse>> {
+    async createTemplateVersionRaw(requestParameters: CreateTemplateVersionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateVersionResponse>> {
         if (requestParameters['templateId'] == null) {
             throw new runtime.RequiredError(
                 'templateId',
-                'Required parameter "templateId" was null or undefined when calling createTemplateVersionApiV1TemplatesTemplateIdVersionsPost().'
+                'Required parameter "templateId" was null or undefined when calling createTemplateVersion().'
             );
         }
 
         if (requestParameters['templateVersionCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'templateVersionCreateRequest',
-                'Required parameter "templateVersionCreateRequest" was null or undefined when calling createTemplateVersionApiV1TemplatesTemplateIdVersionsPost().'
+                'Required parameter "templateVersionCreateRequest" was null or undefined when calling createTemplateVersion().'
             );
         }
 
@@ -96,26 +96,26 @@ export class TemplateVersionsApi extends runtime.BaseAPI {
     /**
      * Create Template Version
      */
-    async createTemplateVersionApiV1TemplatesTemplateIdVersionsPost(requestParameters: CreateTemplateVersionApiV1TemplatesTemplateIdVersionsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateVersionResponse> {
-        const response = await this.createTemplateVersionApiV1TemplatesTemplateIdVersionsPostRaw(requestParameters, initOverrides);
+    async createTemplateVersion(requestParameters: CreateTemplateVersionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateVersionResponse> {
+        const response = await this.createTemplateVersionRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Template Version
      */
-    async getTemplateVersionApiV1TemplatesTemplateIdVersionsVersionGetRaw(requestParameters: GetTemplateVersionApiV1TemplatesTemplateIdVersionsVersionGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateVersionResponse>> {
+    async getTemplateVersionRaw(requestParameters: GetTemplateVersionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateVersionResponse>> {
         if (requestParameters['templateId'] == null) {
             throw new runtime.RequiredError(
                 'templateId',
-                'Required parameter "templateId" was null or undefined when calling getTemplateVersionApiV1TemplatesTemplateIdVersionsVersionGet().'
+                'Required parameter "templateId" was null or undefined when calling getTemplateVersion().'
             );
         }
 
         if (requestParameters['version'] == null) {
             throw new runtime.RequiredError(
                 'version',
-                'Required parameter "version" was null or undefined when calling getTemplateVersionApiV1TemplatesTemplateIdVersionsVersionGet().'
+                'Required parameter "version" was null or undefined when calling getTemplateVersion().'
             );
         }
 
@@ -144,19 +144,19 @@ export class TemplateVersionsApi extends runtime.BaseAPI {
     /**
      * Get Template Version
      */
-    async getTemplateVersionApiV1TemplatesTemplateIdVersionsVersionGet(requestParameters: GetTemplateVersionApiV1TemplatesTemplateIdVersionsVersionGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateVersionResponse> {
-        const response = await this.getTemplateVersionApiV1TemplatesTemplateIdVersionsVersionGetRaw(requestParameters, initOverrides);
+    async getTemplateVersion(requestParameters: GetTemplateVersionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateVersionResponse> {
+        const response = await this.getTemplateVersionRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Template Versions
      */
-    async listTemplateVersionsApiV1TemplatesTemplateIdVersionsGetRaw(requestParameters: ListTemplateVersionsApiV1TemplatesTemplateIdVersionsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateVersionsListResponse>> {
+    async listTemplateVersionsRaw(requestParameters: ListTemplateVersionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateVersionsListResponse>> {
         if (requestParameters['templateId'] == null) {
             throw new runtime.RequiredError(
                 'templateId',
-                'Required parameter "templateId" was null or undefined when calling listTemplateVersionsApiV1TemplatesTemplateIdVersionsGet().'
+                'Required parameter "templateId" was null or undefined when calling listTemplateVersions().'
             );
         }
 
@@ -185,8 +185,8 @@ export class TemplateVersionsApi extends runtime.BaseAPI {
     /**
      * List Template Versions
      */
-    async listTemplateVersionsApiV1TemplatesTemplateIdVersionsGet(requestParameters: ListTemplateVersionsApiV1TemplatesTemplateIdVersionsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateVersionsListResponse> {
-        const response = await this.listTemplateVersionsApiV1TemplatesTemplateIdVersionsGetRaw(requestParameters, initOverrides);
+    async listTemplateVersions(requestParameters: ListTemplateVersionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateVersionsListResponse> {
+        const response = await this.listTemplateVersionsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
