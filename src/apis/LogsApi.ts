@@ -25,7 +25,7 @@ import {
     ApiRequestLogsListResponseToJSON,
 } from '../models/index';
 
-export interface ListLogsApiV1LogsGetRequest {
+export interface ListLogsRequest {
     status?: string;
     limit?: number;
 }
@@ -38,7 +38,7 @@ export class LogsApi extends runtime.BaseAPI {
     /**
      * List Logs
      */
-    async listLogsApiV1LogsGetRaw(requestParameters: ListLogsApiV1LogsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiRequestLogsListResponse>> {
+    async listLogsRaw(requestParameters: ListLogsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiRequestLogsListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['status'] != null) {
@@ -72,8 +72,8 @@ export class LogsApi extends runtime.BaseAPI {
     /**
      * List Logs
      */
-    async listLogsApiV1LogsGet(requestParameters: ListLogsApiV1LogsGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiRequestLogsListResponse> {
-        const response = await this.listLogsApiV1LogsGetRaw(requestParameters, initOverrides);
+    async listLogs(requestParameters: ListLogsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiRequestLogsListResponse> {
+        const response = await this.listLogsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

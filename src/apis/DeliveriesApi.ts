@@ -25,11 +25,11 @@ import {
     DeliveryResponseToJSON,
 } from '../models/index';
 
-export interface GetDeliveryApiV1DeliveriesDeliveryIdGetRequest {
+export interface GetDeliveryRequest {
     deliveryId: string;
 }
 
-export interface RetryDeliveryApiV1DeliveriesDeliveryIdRetryPostRequest {
+export interface RetryDeliveryRequest {
     deliveryId: string;
 }
 
@@ -41,11 +41,11 @@ export class DeliveriesApi extends runtime.BaseAPI {
     /**
      * Get Delivery
      */
-    async getDeliveryApiV1DeliveriesDeliveryIdGetRaw(requestParameters: GetDeliveryApiV1DeliveriesDeliveryIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeliveryResponse>> {
+    async getDeliveryRaw(requestParameters: GetDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeliveryResponse>> {
         if (requestParameters['deliveryId'] == null) {
             throw new runtime.RequiredError(
                 'deliveryId',
-                'Required parameter "deliveryId" was null or undefined when calling getDeliveryApiV1DeliveriesDeliveryIdGet().'
+                'Required parameter "deliveryId" was null or undefined when calling getDelivery().'
             );
         }
 
@@ -74,19 +74,19 @@ export class DeliveriesApi extends runtime.BaseAPI {
     /**
      * Get Delivery
      */
-    async getDeliveryApiV1DeliveriesDeliveryIdGet(requestParameters: GetDeliveryApiV1DeliveriesDeliveryIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeliveryResponse> {
-        const response = await this.getDeliveryApiV1DeliveriesDeliveryIdGetRaw(requestParameters, initOverrides);
+    async getDelivery(requestParameters: GetDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeliveryResponse> {
+        const response = await this.getDeliveryRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Retry Delivery
      */
-    async retryDeliveryApiV1DeliveriesDeliveryIdRetryPostRaw(requestParameters: RetryDeliveryApiV1DeliveriesDeliveryIdRetryPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeliveryResponse>> {
+    async retryDeliveryRaw(requestParameters: RetryDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeliveryResponse>> {
         if (requestParameters['deliveryId'] == null) {
             throw new runtime.RequiredError(
                 'deliveryId',
-                'Required parameter "deliveryId" was null or undefined when calling retryDeliveryApiV1DeliveriesDeliveryIdRetryPost().'
+                'Required parameter "deliveryId" was null or undefined when calling retryDelivery().'
             );
         }
 
@@ -115,8 +115,8 @@ export class DeliveriesApi extends runtime.BaseAPI {
     /**
      * Retry Delivery
      */
-    async retryDeliveryApiV1DeliveriesDeliveryIdRetryPost(requestParameters: RetryDeliveryApiV1DeliveriesDeliveryIdRetryPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeliveryResponse> {
-        const response = await this.retryDeliveryApiV1DeliveriesDeliveryIdRetryPostRaw(requestParameters, initOverrides);
+    async retryDelivery(requestParameters: RetryDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeliveryResponse> {
+        const response = await this.retryDeliveryRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

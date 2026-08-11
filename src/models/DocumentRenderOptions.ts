@@ -14,43 +14,49 @@
 
 import { mapValues } from '../runtime';
 /**
+ * Render options for an already-stored document (``POST /documents/{id}/renders``).
  * 
+ * Distinct from ``app.schemas.v1.DocumentRenderRequest``, which carries a full inline
+ * document for the stateless ``POST /documents/render``. Two classes sharing one name
+ * made FastAPI fall back to module-qualified schema names in the spec
+ * (``app__documents__schemas__DocumentRenderRequest``), which the SDK generators turned
+ * into ``AppDocumentsSchemasDocumentRenderRequest``.
  * @export
- * @interface AppDocumentsSchemasDocumentRenderRequest
+ * @interface DocumentRenderOptions
  */
-export interface AppDocumentsSchemasDocumentRenderRequest {
+export interface DocumentRenderOptions {
     /**
      * 
      * @type {string}
-     * @memberof AppDocumentsSchemasDocumentRenderRequest
+     * @memberof DocumentRenderOptions
      */
     templateId?: string;
     /**
      * 
      * @type {string}
-     * @memberof AppDocumentsSchemasDocumentRenderRequest
+     * @memberof DocumentRenderOptions
      */
     pageSize?: string;
     /**
      * 
      * @type {number}
-     * @memberof AppDocumentsSchemasDocumentRenderRequest
+     * @memberof DocumentRenderOptions
      */
     expiresIn?: number;
 }
 
 /**
- * Check if a given object implements the AppDocumentsSchemasDocumentRenderRequest interface.
+ * Check if a given object implements the DocumentRenderOptions interface.
  */
-export function instanceOfAppDocumentsSchemasDocumentRenderRequest(value: object): value is AppDocumentsSchemasDocumentRenderRequest {
+export function instanceOfDocumentRenderOptions(value: object): value is DocumentRenderOptions {
     return true;
 }
 
-export function AppDocumentsSchemasDocumentRenderRequestFromJSON(json: any): AppDocumentsSchemasDocumentRenderRequest {
-    return AppDocumentsSchemasDocumentRenderRequestFromJSONTyped(json, false);
+export function DocumentRenderOptionsFromJSON(json: any): DocumentRenderOptions {
+    return DocumentRenderOptionsFromJSONTyped(json, false);
 }
 
-export function AppDocumentsSchemasDocumentRenderRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): AppDocumentsSchemasDocumentRenderRequest {
+export function DocumentRenderOptionsFromJSONTyped(json: any, ignoreDiscriminator: boolean): DocumentRenderOptions {
     if (json == null) {
         return json;
     }
@@ -62,7 +68,7 @@ export function AppDocumentsSchemasDocumentRenderRequestFromJSONTyped(json: any,
     };
 }
 
-export function AppDocumentsSchemasDocumentRenderRequestToJSON(value?: AppDocumentsSchemasDocumentRenderRequest | null): any {
+export function DocumentRenderOptionsToJSON(value?: DocumentRenderOptions | null): any {
     if (value == null) {
         return value;
     }

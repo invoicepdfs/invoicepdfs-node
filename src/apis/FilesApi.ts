@@ -28,15 +28,15 @@ import {
     SimpleBoolResponseToJSON,
 } from '../models/index';
 
-export interface DeleteFileApiV1FilesFileIdDeleteRequest {
+export interface DeleteFileRequest {
     fileId: string;
 }
 
-export interface GetFileApiV1FilesFileIdGetRequest {
+export interface GetFileRequest {
     fileId: string;
 }
 
-export interface UploadFileApiV1FilesPostRequest {
+export interface UploadFileRequest {
     file: Blob;
     idempotencyKey?: string | null;
 }
@@ -49,11 +49,11 @@ export class FilesApi extends runtime.BaseAPI {
     /**
      * Delete File
      */
-    async deleteFileApiV1FilesFileIdDeleteRaw(requestParameters: DeleteFileApiV1FilesFileIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
+    async deleteFileRaw(requestParameters: DeleteFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['fileId'] == null) {
             throw new runtime.RequiredError(
                 'fileId',
-                'Required parameter "fileId" was null or undefined when calling deleteFileApiV1FilesFileIdDelete().'
+                'Required parameter "fileId" was null or undefined when calling deleteFile().'
             );
         }
 
@@ -82,19 +82,19 @@ export class FilesApi extends runtime.BaseAPI {
     /**
      * Delete File
      */
-    async deleteFileApiV1FilesFileIdDelete(requestParameters: DeleteFileApiV1FilesFileIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deleteFileApiV1FilesFileIdDeleteRaw(requestParameters, initOverrides);
+    async deleteFile(requestParameters: DeleteFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.deleteFileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get File
      */
-    async getFileApiV1FilesFileIdGetRaw(requestParameters: GetFileApiV1FilesFileIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileResponse>> {
+    async getFileRaw(requestParameters: GetFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileResponse>> {
         if (requestParameters['fileId'] == null) {
             throw new runtime.RequiredError(
                 'fileId',
-                'Required parameter "fileId" was null or undefined when calling getFileApiV1FilesFileIdGet().'
+                'Required parameter "fileId" was null or undefined when calling getFile().'
             );
         }
 
@@ -123,19 +123,19 @@ export class FilesApi extends runtime.BaseAPI {
     /**
      * Get File
      */
-    async getFileApiV1FilesFileIdGet(requestParameters: GetFileApiV1FilesFileIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileResponse> {
-        const response = await this.getFileApiV1FilesFileIdGetRaw(requestParameters, initOverrides);
+    async getFile(requestParameters: GetFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileResponse> {
+        const response = await this.getFileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Upload File
      */
-    async uploadFileApiV1FilesPostRaw(requestParameters: UploadFileApiV1FilesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileResponse>> {
+    async uploadFileRaw(requestParameters: UploadFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileResponse>> {
         if (requestParameters['file'] == null) {
             throw new runtime.RequiredError(
                 'file',
-                'Required parameter "file" was null or undefined when calling uploadFileApiV1FilesPost().'
+                'Required parameter "file" was null or undefined when calling uploadFile().'
             );
         }
 
@@ -189,8 +189,8 @@ export class FilesApi extends runtime.BaseAPI {
     /**
      * Upload File
      */
-    async uploadFileApiV1FilesPost(requestParameters: UploadFileApiV1FilesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileResponse> {
-        const response = await this.uploadFileApiV1FilesPostRaw(requestParameters, initOverrides);
+    async uploadFile(requestParameters: UploadFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileResponse> {
+        const response = await this.uploadFileRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

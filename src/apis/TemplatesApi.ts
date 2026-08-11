@@ -16,9 +16,9 @@
 import * as runtime from '../runtime';
 import type {
   ApiErrorResponse,
-  AppSchemasV1DocumentRenderRequest,
   CustomTemplateResponse,
   CustomTemplatesListResponse,
+  DocumentRenderRequest,
   TemplateCreateRequest,
   TemplateDetailResponse,
   TemplatePatchRequest,
@@ -27,12 +27,12 @@ import type {
 import {
     ApiErrorResponseFromJSON,
     ApiErrorResponseToJSON,
-    AppSchemasV1DocumentRenderRequestFromJSON,
-    AppSchemasV1DocumentRenderRequestToJSON,
     CustomTemplateResponseFromJSON,
     CustomTemplateResponseToJSON,
     CustomTemplatesListResponseFromJSON,
     CustomTemplatesListResponseToJSON,
+    DocumentRenderRequestFromJSON,
+    DocumentRenderRequestToJSON,
     TemplateCreateRequestFromJSON,
     TemplateCreateRequestToJSON,
     TemplateDetailResponseFromJSON,
@@ -43,48 +43,48 @@ import {
     TemplatesListResponseToJSON,
 } from '../models/index';
 
-export interface CreateTemplateApiV1TemplatesCustomPostRequest {
+export interface CreateTemplateRequest {
     templateCreateRequest: TemplateCreateRequest;
 }
 
-export interface DeleteTemplateApiV1TemplatesCustomTemplateIdDeleteRequest {
+export interface DeleteTemplateRequest {
     templateId: string;
 }
 
-export interface DuplicateTemplateApiV1TemplatesCustomTemplateIdDuplicatePostRequest {
+export interface DuplicateTemplateRequest {
     templateId: string;
 }
 
-export interface GetBuiltinTemplateApiV1TemplatesBuiltinTemplateIdGetRequest {
+export interface GetBuiltinTemplateRequest {
     templateId: string;
 }
 
-export interface GetCustomTemplateApiV1TemplatesCustomTemplateIdGetRequest {
+export interface GetCustomTemplateRequest {
     templateId: string;
 }
 
-export interface GetTemplateApiV1TemplatesTemplateIdGetRequest {
+export interface GetTemplateRequest {
     templateId: string;
 }
 
-export interface ListCustomTemplatesApiV1TemplatesCustomGetRequest {
+export interface ListCustomTemplatesRequest {
     limit?: number;
     cursor?: string | null;
 }
 
-export interface PatchTemplateApiV1TemplatesCustomTemplateIdPatchRequest {
+export interface PreviewTemplateRequest {
     templateId: string;
-    templatePatchRequest: TemplatePatchRequest;
-}
-
-export interface PreviewTemplateApiV1TemplatesTemplateIdPreviewPostRequest {
-    templateId: string;
-    appSchemasV1DocumentRenderRequest: AppSchemasV1DocumentRenderRequest;
+    documentRenderRequest: DocumentRenderRequest;
     idempotencyKey?: string | null;
 }
 
-export interface PublishTemplateApiV1TemplatesCustomTemplateIdPublishPostRequest {
+export interface PublishTemplateRequest {
     templateId: string;
+}
+
+export interface UpdateTemplateRequest {
+    templateId: string;
+    templatePatchRequest: TemplatePatchRequest;
 }
 
 /**
@@ -95,11 +95,11 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Create Template
      */
-    async createTemplateApiV1TemplatesCustomPostRaw(requestParameters: CreateTemplateApiV1TemplatesCustomPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
+    async createTemplateRaw(requestParameters: CreateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
         if (requestParameters['templateCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'templateCreateRequest',
-                'Required parameter "templateCreateRequest" was null or undefined when calling createTemplateApiV1TemplatesCustomPost().'
+                'Required parameter "templateCreateRequest" was null or undefined when calling createTemplate().'
             );
         }
 
@@ -131,19 +131,19 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Create Template
      */
-    async createTemplateApiV1TemplatesCustomPost(requestParameters: CreateTemplateApiV1TemplatesCustomPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
-        const response = await this.createTemplateApiV1TemplatesCustomPostRaw(requestParameters, initOverrides);
+    async createTemplate(requestParameters: CreateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
+        const response = await this.createTemplateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Delete Template
      */
-    async deleteTemplateApiV1TemplatesCustomTemplateIdDeleteRaw(requestParameters: DeleteTemplateApiV1TemplatesCustomTemplateIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+    async deleteTemplateRaw(requestParameters: DeleteTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         if (requestParameters['templateId'] == null) {
             throw new runtime.RequiredError(
                 'templateId',
-                'Required parameter "templateId" was null or undefined when calling deleteTemplateApiV1TemplatesCustomTemplateIdDelete().'
+                'Required parameter "templateId" was null or undefined when calling deleteTemplate().'
             );
         }
 
@@ -172,18 +172,18 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Delete Template
      */
-    async deleteTemplateApiV1TemplatesCustomTemplateIdDelete(requestParameters: DeleteTemplateApiV1TemplatesCustomTemplateIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.deleteTemplateApiV1TemplatesCustomTemplateIdDeleteRaw(requestParameters, initOverrides);
+    async deleteTemplate(requestParameters: DeleteTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteTemplateRaw(requestParameters, initOverrides);
     }
 
     /**
      * Duplicate Template
      */
-    async duplicateTemplateApiV1TemplatesCustomTemplateIdDuplicatePostRaw(requestParameters: DuplicateTemplateApiV1TemplatesCustomTemplateIdDuplicatePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
+    async duplicateTemplateRaw(requestParameters: DuplicateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
         if (requestParameters['templateId'] == null) {
             throw new runtime.RequiredError(
                 'templateId',
-                'Required parameter "templateId" was null or undefined when calling duplicateTemplateApiV1TemplatesCustomTemplateIdDuplicatePost().'
+                'Required parameter "templateId" was null or undefined when calling duplicateTemplate().'
             );
         }
 
@@ -212,19 +212,19 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Duplicate Template
      */
-    async duplicateTemplateApiV1TemplatesCustomTemplateIdDuplicatePost(requestParameters: DuplicateTemplateApiV1TemplatesCustomTemplateIdDuplicatePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
-        const response = await this.duplicateTemplateApiV1TemplatesCustomTemplateIdDuplicatePostRaw(requestParameters, initOverrides);
+    async duplicateTemplate(requestParameters: DuplicateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
+        const response = await this.duplicateTemplateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Builtin Template
      */
-    async getBuiltinTemplateApiV1TemplatesBuiltinTemplateIdGetRaw(requestParameters: GetBuiltinTemplateApiV1TemplatesBuiltinTemplateIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateDetailResponse>> {
+    async getBuiltinTemplateRaw(requestParameters: GetBuiltinTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateDetailResponse>> {
         if (requestParameters['templateId'] == null) {
             throw new runtime.RequiredError(
                 'templateId',
-                'Required parameter "templateId" was null or undefined when calling getBuiltinTemplateApiV1TemplatesBuiltinTemplateIdGet().'
+                'Required parameter "templateId" was null or undefined when calling getBuiltinTemplate().'
             );
         }
 
@@ -253,19 +253,19 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Get Builtin Template
      */
-    async getBuiltinTemplateApiV1TemplatesBuiltinTemplateIdGet(requestParameters: GetBuiltinTemplateApiV1TemplatesBuiltinTemplateIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateDetailResponse> {
-        const response = await this.getBuiltinTemplateApiV1TemplatesBuiltinTemplateIdGetRaw(requestParameters, initOverrides);
+    async getBuiltinTemplate(requestParameters: GetBuiltinTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateDetailResponse> {
+        const response = await this.getBuiltinTemplateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Custom Template
      */
-    async getCustomTemplateApiV1TemplatesCustomTemplateIdGetRaw(requestParameters: GetCustomTemplateApiV1TemplatesCustomTemplateIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
+    async getCustomTemplateRaw(requestParameters: GetCustomTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
         if (requestParameters['templateId'] == null) {
             throw new runtime.RequiredError(
                 'templateId',
-                'Required parameter "templateId" was null or undefined when calling getCustomTemplateApiV1TemplatesCustomTemplateIdGet().'
+                'Required parameter "templateId" was null or undefined when calling getCustomTemplate().'
             );
         }
 
@@ -294,19 +294,19 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Get Custom Template
      */
-    async getCustomTemplateApiV1TemplatesCustomTemplateIdGet(requestParameters: GetCustomTemplateApiV1TemplatesCustomTemplateIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
-        const response = await this.getCustomTemplateApiV1TemplatesCustomTemplateIdGetRaw(requestParameters, initOverrides);
+    async getCustomTemplate(requestParameters: GetCustomTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
+        const response = await this.getCustomTemplateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Template
      */
-    async getTemplateApiV1TemplatesTemplateIdGetRaw(requestParameters: GetTemplateApiV1TemplatesTemplateIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateDetailResponse>> {
+    async getTemplateRaw(requestParameters: GetTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateDetailResponse>> {
         if (requestParameters['templateId'] == null) {
             throw new runtime.RequiredError(
                 'templateId',
-                'Required parameter "templateId" was null or undefined when calling getTemplateApiV1TemplatesTemplateIdGet().'
+                'Required parameter "templateId" was null or undefined when calling getTemplate().'
             );
         }
 
@@ -335,15 +335,15 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Get Template
      */
-    async getTemplateApiV1TemplatesTemplateIdGet(requestParameters: GetTemplateApiV1TemplatesTemplateIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateDetailResponse> {
-        const response = await this.getTemplateApiV1TemplatesTemplateIdGetRaw(requestParameters, initOverrides);
+    async getTemplate(requestParameters: GetTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateDetailResponse> {
+        const response = await this.getTemplateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Custom Templates
      */
-    async listCustomTemplatesApiV1TemplatesCustomGetRaw(requestParameters: ListCustomTemplatesApiV1TemplatesCustomGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplatesListResponse>> {
+    async listCustomTemplatesRaw(requestParameters: ListCustomTemplatesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplatesListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -377,26 +377,160 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * List Custom Templates
      */
-    async listCustomTemplatesApiV1TemplatesCustomGet(requestParameters: ListCustomTemplatesApiV1TemplatesCustomGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplatesListResponse> {
-        const response = await this.listCustomTemplatesApiV1TemplatesCustomGetRaw(requestParameters, initOverrides);
+    async listCustomTemplates(requestParameters: ListCustomTemplatesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplatesListResponse> {
+        const response = await this.listCustomTemplatesRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Templates
+     */
+    async listTemplatesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplatesListResponse>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/templates`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TemplatesListResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Templates
+     */
+    async listTemplates(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplatesListResponse> {
+        const response = await this.listTemplatesRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Preview Template
+     */
+    async previewTemplateRaw(requestParameters: PreviewTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+        if (requestParameters['templateId'] == null) {
+            throw new runtime.RequiredError(
+                'templateId',
+                'Required parameter "templateId" was null or undefined when calling previewTemplate().'
+            );
+        }
+
+        if (requestParameters['documentRenderRequest'] == null) {
+            throw new runtime.RequiredError(
+                'documentRenderRequest',
+                'Required parameter "documentRenderRequest" was null or undefined when calling previewTemplate().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['idempotencyKey'] != null) {
+            headerParameters['Idempotency-Key'] = String(requestParameters['idempotencyKey']);
+        }
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/templates/{template_id}/preview`.replace(`{${"template_id"}}`, encodeURIComponent(String(requestParameters['templateId']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: DocumentRenderRequestToJSON(requestParameters['documentRenderRequest']),
+        }, initOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<any>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
+    }
+
+    /**
+     * Preview Template
+     */
+    async previewTemplate(requestParameters: PreviewTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+        const response = await this.previewTemplateRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Publish Template
+     */
+    async publishTemplateRaw(requestParameters: PublishTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
+        if (requestParameters['templateId'] == null) {
+            throw new runtime.RequiredError(
+                'templateId',
+                'Required parameter "templateId" was null or undefined when calling publishTemplate().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/templates/custom/{template_id}/publish`.replace(`{${"template_id"}}`, encodeURIComponent(String(requestParameters['templateId']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CustomTemplateResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Publish Template
+     */
+    async publishTemplate(requestParameters: PublishTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
+        const response = await this.publishTemplateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Patch Template
      */
-    async patchTemplateApiV1TemplatesCustomTemplateIdPatchRaw(requestParameters: PatchTemplateApiV1TemplatesCustomTemplateIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
+    async updateTemplateRaw(requestParameters: UpdateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
         if (requestParameters['templateId'] == null) {
             throw new runtime.RequiredError(
                 'templateId',
-                'Required parameter "templateId" was null or undefined when calling patchTemplateApiV1TemplatesCustomTemplateIdPatch().'
+                'Required parameter "templateId" was null or undefined when calling updateTemplate().'
             );
         }
 
         if (requestParameters['templatePatchRequest'] == null) {
             throw new runtime.RequiredError(
                 'templatePatchRequest',
-                'Required parameter "templatePatchRequest" was null or undefined when calling patchTemplateApiV1TemplatesCustomTemplateIdPatch().'
+                'Required parameter "templatePatchRequest" was null or undefined when calling updateTemplate().'
             );
         }
 
@@ -428,142 +562,8 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Patch Template
      */
-    async patchTemplateApiV1TemplatesCustomTemplateIdPatch(requestParameters: PatchTemplateApiV1TemplatesCustomTemplateIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
-        const response = await this.patchTemplateApiV1TemplatesCustomTemplateIdPatchRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Preview Template
-     */
-    async previewTemplateApiV1TemplatesTemplateIdPreviewPostRaw(requestParameters: PreviewTemplateApiV1TemplatesTemplateIdPreviewPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
-        if (requestParameters['templateId'] == null) {
-            throw new runtime.RequiredError(
-                'templateId',
-                'Required parameter "templateId" was null or undefined when calling previewTemplateApiV1TemplatesTemplateIdPreviewPost().'
-            );
-        }
-
-        if (requestParameters['appSchemasV1DocumentRenderRequest'] == null) {
-            throw new runtime.RequiredError(
-                'appSchemasV1DocumentRenderRequest',
-                'Required parameter "appSchemasV1DocumentRenderRequest" was null or undefined when calling previewTemplateApiV1TemplatesTemplateIdPreviewPost().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (requestParameters['idempotencyKey'] != null) {
-            headerParameters['Idempotency-Key'] = String(requestParameters['idempotencyKey']);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("HTTPBearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const response = await this.request({
-            path: `/api/v1/templates/{template_id}/preview`.replace(`{${"template_id"}}`, encodeURIComponent(String(requestParameters['templateId']))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: AppSchemasV1DocumentRenderRequestToJSON(requestParameters['appSchemasV1DocumentRenderRequest']),
-        }, initOverrides);
-
-        if (this.isJsonMime(response.headers.get('content-type'))) {
-            return new runtime.JSONApiResponse<any>(response);
-        } else {
-            return new runtime.TextApiResponse(response) as any;
-        }
-    }
-
-    /**
-     * Preview Template
-     */
-    async previewTemplateApiV1TemplatesTemplateIdPreviewPost(requestParameters: PreviewTemplateApiV1TemplatesTemplateIdPreviewPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
-        const response = await this.previewTemplateApiV1TemplatesTemplateIdPreviewPostRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Publish Template
-     */
-    async publishTemplateApiV1TemplatesCustomTemplateIdPublishPostRaw(requestParameters: PublishTemplateApiV1TemplatesCustomTemplateIdPublishPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
-        if (requestParameters['templateId'] == null) {
-            throw new runtime.RequiredError(
-                'templateId',
-                'Required parameter "templateId" was null or undefined when calling publishTemplateApiV1TemplatesCustomTemplateIdPublishPost().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("HTTPBearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const response = await this.request({
-            path: `/api/v1/templates/custom/{template_id}/publish`.replace(`{${"template_id"}}`, encodeURIComponent(String(requestParameters['templateId']))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => CustomTemplateResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Publish Template
-     */
-    async publishTemplateApiV1TemplatesCustomTemplateIdPublishPost(requestParameters: PublishTemplateApiV1TemplatesCustomTemplateIdPublishPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
-        const response = await this.publishTemplateApiV1TemplatesCustomTemplateIdPublishPostRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Templates
-     */
-    async templatesApiV1TemplatesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplatesListResponse>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("HTTPBearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const response = await this.request({
-            path: `/api/v1/templates`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => TemplatesListResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Templates
-     */
-    async templatesApiV1TemplatesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplatesListResponse> {
-        const response = await this.templatesApiV1TemplatesGetRaw(initOverrides);
+    async updateTemplate(requestParameters: UpdateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
+        const response = await this.updateTemplateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

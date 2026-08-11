@@ -25,7 +25,7 @@ import {
     UsageResponseToJSON,
 } from '../models/index';
 
-export interface ListUsageEventsApiV1UsageEventsGetRequest {
+export interface ListUsageEventsRequest {
     limit?: number;
     cursor?: string | null;
 }
@@ -36,9 +36,43 @@ export interface ListUsageEventsApiV1UsageEventsGetRequest {
 export class UsageApi extends runtime.BaseAPI {
 
     /**
+     * Usage
+     */
+    async getUsageRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UsageResponse>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/usage`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UsageResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Usage
+     */
+    async getUsage(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UsageResponse> {
+        const response = await this.getUsageRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Get Limits
      */
-    async getLimitsApiV1UsageLimitsGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async getUsageLimitsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -64,15 +98,15 @@ export class UsageApi extends runtime.BaseAPI {
     /**
      * Get Limits
      */
-    async getLimitsApiV1UsageLimitsGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
-        const response = await this.getLimitsApiV1UsageLimitsGetRaw(initOverrides);
+    async getUsageLimits(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+        const response = await this.getUsageLimitsRaw(initOverrides);
         return await response.value();
     }
 
     /**
      * List Usage Events
      */
-    async listUsageEventsApiV1UsageEventsGetRaw(requestParameters: ListUsageEventsApiV1UsageEventsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listUsageEventsRaw(requestParameters: ListUsageEventsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -106,42 +140,8 @@ export class UsageApi extends runtime.BaseAPI {
     /**
      * List Usage Events
      */
-    async listUsageEventsApiV1UsageEventsGet(requestParameters: ListUsageEventsApiV1UsageEventsGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
-        const response = await this.listUsageEventsApiV1UsageEventsGetRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Usage
-     */
-    async usageApiV1UsageGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UsageResponse>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("HTTPBearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const response = await this.request({
-            path: `/api/v1/usage`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => UsageResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Usage
-     */
-    async usageApiV1UsageGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UsageResponse> {
-        const response = await this.usageApiV1UsageGetRaw(initOverrides);
+    async listUsageEvents(requestParameters: ListUsageEventsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+        const response = await this.listUsageEventsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

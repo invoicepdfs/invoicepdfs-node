@@ -28,19 +28,19 @@ import {
     ImportResponseToJSON,
 } from '../models/index';
 
-export interface CancelImportApiV1ImportsImportIdCancelPostRequest {
+export interface CancelImportRequest {
     importId: string;
 }
 
-export interface ConfirmImportApiV1ImportsImportIdConfirmPostRequest {
+export interface ConfirmImportRequest {
     importId: string;
 }
 
-export interface CreateImportApiV1ImportsPostRequest {
+export interface CreateImportRequest {
     importCreateRequest: ImportCreateRequest;
 }
 
-export interface GetImportApiV1ImportsImportIdGetRequest {
+export interface GetImportRequest {
     importId: string;
 }
 
@@ -52,11 +52,11 @@ export class ImportsApi extends runtime.BaseAPI {
     /**
      * Cancel Import
      */
-    async cancelImportApiV1ImportsImportIdCancelPostRaw(requestParameters: CancelImportApiV1ImportsImportIdCancelPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportResponse>> {
+    async cancelImportRaw(requestParameters: CancelImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportResponse>> {
         if (requestParameters['importId'] == null) {
             throw new runtime.RequiredError(
                 'importId',
-                'Required parameter "importId" was null or undefined when calling cancelImportApiV1ImportsImportIdCancelPost().'
+                'Required parameter "importId" was null or undefined when calling cancelImport().'
             );
         }
 
@@ -85,19 +85,19 @@ export class ImportsApi extends runtime.BaseAPI {
     /**
      * Cancel Import
      */
-    async cancelImportApiV1ImportsImportIdCancelPost(requestParameters: CancelImportApiV1ImportsImportIdCancelPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportResponse> {
-        const response = await this.cancelImportApiV1ImportsImportIdCancelPostRaw(requestParameters, initOverrides);
+    async cancelImport(requestParameters: CancelImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportResponse> {
+        const response = await this.cancelImportRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Confirm Import
      */
-    async confirmImportApiV1ImportsImportIdConfirmPostRaw(requestParameters: ConfirmImportApiV1ImportsImportIdConfirmPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportResponse>> {
+    async confirmImportRaw(requestParameters: ConfirmImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportResponse>> {
         if (requestParameters['importId'] == null) {
             throw new runtime.RequiredError(
                 'importId',
-                'Required parameter "importId" was null or undefined when calling confirmImportApiV1ImportsImportIdConfirmPost().'
+                'Required parameter "importId" was null or undefined when calling confirmImport().'
             );
         }
 
@@ -126,19 +126,19 @@ export class ImportsApi extends runtime.BaseAPI {
     /**
      * Confirm Import
      */
-    async confirmImportApiV1ImportsImportIdConfirmPost(requestParameters: ConfirmImportApiV1ImportsImportIdConfirmPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportResponse> {
-        const response = await this.confirmImportApiV1ImportsImportIdConfirmPostRaw(requestParameters, initOverrides);
+    async confirmImport(requestParameters: ConfirmImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportResponse> {
+        const response = await this.confirmImportRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Create Import
      */
-    async createImportApiV1ImportsPostRaw(requestParameters: CreateImportApiV1ImportsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportResponse>> {
+    async createImportRaw(requestParameters: CreateImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportResponse>> {
         if (requestParameters['importCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'importCreateRequest',
-                'Required parameter "importCreateRequest" was null or undefined when calling createImportApiV1ImportsPost().'
+                'Required parameter "importCreateRequest" was null or undefined when calling createImport().'
             );
         }
 
@@ -170,19 +170,19 @@ export class ImportsApi extends runtime.BaseAPI {
     /**
      * Create Import
      */
-    async createImportApiV1ImportsPost(requestParameters: CreateImportApiV1ImportsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportResponse> {
-        const response = await this.createImportApiV1ImportsPostRaw(requestParameters, initOverrides);
+    async createImport(requestParameters: CreateImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportResponse> {
+        const response = await this.createImportRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Import
      */
-    async getImportApiV1ImportsImportIdGetRaw(requestParameters: GetImportApiV1ImportsImportIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportResponse>> {
+    async getImportRaw(requestParameters: GetImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportResponse>> {
         if (requestParameters['importId'] == null) {
             throw new runtime.RequiredError(
                 'importId',
-                'Required parameter "importId" was null or undefined when calling getImportApiV1ImportsImportIdGet().'
+                'Required parameter "importId" was null or undefined when calling getImport().'
             );
         }
 
@@ -211,8 +211,8 @@ export class ImportsApi extends runtime.BaseAPI {
     /**
      * Get Import
      */
-    async getImportApiV1ImportsImportIdGet(requestParameters: GetImportApiV1ImportsImportIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportResponse> {
-        const response = await this.getImportApiV1ImportsImportIdGetRaw(requestParameters, initOverrides);
+    async getImport(requestParameters: GetImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportResponse> {
+        const response = await this.getImportRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

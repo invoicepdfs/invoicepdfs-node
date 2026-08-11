@@ -49,49 +49,49 @@ import {
     WorkspacesListResponseToJSON,
 } from '../models/index';
 
-export interface CreateMemberApiV1WorkspacesWorkspaceIdMembersPostRequest {
+export interface AddWorkspaceMemberRequest {
     workspaceId: string;
     workspaceMemberCreateRequest: WorkspaceMemberCreateRequest;
     idempotencyKey?: string | null;
 }
 
-export interface CreateWorkspaceApiV1WorkspacesPostRequest {
+export interface CreateWorkspaceRequest {
     workspaceCreateRequest: WorkspaceCreateRequest;
     idempotencyKey?: string | null;
 }
 
-export interface DeleteMemberApiV1WorkspacesWorkspaceIdMembersMemberIdDeleteRequest {
-    workspaceId: string;
-    memberId: string;
-}
-
-export interface DeleteWorkspaceApiV1WorkspacesWorkspaceIdDeleteRequest {
+export interface DeleteWorkspaceRequest {
     workspaceId: string;
 }
 
-export interface GetWorkspaceApiV1WorkspacesWorkspaceIdGetRequest {
+export interface GetWorkspaceRequest {
     workspaceId: string;
 }
 
-export interface ListMembersApiV1WorkspacesWorkspaceIdMembersGetRequest {
+export interface ListWorkspaceMembersRequest {
     workspaceId: string;
 }
 
-export interface ListWorkspacesApiV1WorkspacesGetRequest {
+export interface ListWorkspacesRequest {
     limit?: number;
     cursor?: string | null;
 }
 
-export interface PatchMemberApiV1WorkspacesWorkspaceIdMembersMemberIdPatchRequest {
+export interface RemoveWorkspaceMemberRequest {
     workspaceId: string;
     memberId: string;
-    workspaceMemberPatchRequest: WorkspaceMemberPatchRequest;
 }
 
-export interface PatchWorkspaceApiV1WorkspacesWorkspaceIdPatchRequest {
+export interface UpdateWorkspaceRequest {
     workspaceId: string;
     workspacePatchRequest: WorkspacePatchRequest;
     idempotencyKey?: string | null;
+}
+
+export interface UpdateWorkspaceMemberRequest {
+    workspaceId: string;
+    memberId: string;
+    workspaceMemberPatchRequest: WorkspaceMemberPatchRequest;
 }
 
 /**
@@ -102,18 +102,18 @@ export class WorkspacesApi extends runtime.BaseAPI {
     /**
      * Create Member
      */
-    async createMemberApiV1WorkspacesWorkspaceIdMembersPostRaw(requestParameters: CreateMemberApiV1WorkspacesWorkspaceIdMembersPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceMembersListResponse>> {
+    async addWorkspaceMemberRaw(requestParameters: AddWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceMembersListResponse>> {
         if (requestParameters['workspaceId'] == null) {
             throw new runtime.RequiredError(
                 'workspaceId',
-                'Required parameter "workspaceId" was null or undefined when calling createMemberApiV1WorkspacesWorkspaceIdMembersPost().'
+                'Required parameter "workspaceId" was null or undefined when calling addWorkspaceMember().'
             );
         }
 
         if (requestParameters['workspaceMemberCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'workspaceMemberCreateRequest',
-                'Required parameter "workspaceMemberCreateRequest" was null or undefined when calling createMemberApiV1WorkspacesWorkspaceIdMembersPost().'
+                'Required parameter "workspaceMemberCreateRequest" was null or undefined when calling addWorkspaceMember().'
             );
         }
 
@@ -149,19 +149,19 @@ export class WorkspacesApi extends runtime.BaseAPI {
     /**
      * Create Member
      */
-    async createMemberApiV1WorkspacesWorkspaceIdMembersPost(requestParameters: CreateMemberApiV1WorkspacesWorkspaceIdMembersPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceMembersListResponse> {
-        const response = await this.createMemberApiV1WorkspacesWorkspaceIdMembersPostRaw(requestParameters, initOverrides);
+    async addWorkspaceMember(requestParameters: AddWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceMembersListResponse> {
+        const response = await this.addWorkspaceMemberRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Create Workspace
      */
-    async createWorkspaceApiV1WorkspacesPostRaw(requestParameters: CreateWorkspaceApiV1WorkspacesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceResponse>> {
+    async createWorkspaceRaw(requestParameters: CreateWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceResponse>> {
         if (requestParameters['workspaceCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'workspaceCreateRequest',
-                'Required parameter "workspaceCreateRequest" was null or undefined when calling createWorkspaceApiV1WorkspacesPost().'
+                'Required parameter "workspaceCreateRequest" was null or undefined when calling createWorkspace().'
             );
         }
 
@@ -197,67 +197,19 @@ export class WorkspacesApi extends runtime.BaseAPI {
     /**
      * Create Workspace
      */
-    async createWorkspaceApiV1WorkspacesPost(requestParameters: CreateWorkspaceApiV1WorkspacesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceResponse> {
-        const response = await this.createWorkspaceApiV1WorkspacesPostRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Delete Member
-     */
-    async deleteMemberApiV1WorkspacesWorkspaceIdMembersMemberIdDeleteRaw(requestParameters: DeleteMemberApiV1WorkspacesWorkspaceIdMembersMemberIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
-        if (requestParameters['workspaceId'] == null) {
-            throw new runtime.RequiredError(
-                'workspaceId',
-                'Required parameter "workspaceId" was null or undefined when calling deleteMemberApiV1WorkspacesWorkspaceIdMembersMemberIdDelete().'
-            );
-        }
-
-        if (requestParameters['memberId'] == null) {
-            throw new runtime.RequiredError(
-                'memberId',
-                'Required parameter "memberId" was null or undefined when calling deleteMemberApiV1WorkspacesWorkspaceIdMembersMemberIdDelete().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("HTTPBearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const response = await this.request({
-            path: `/api/v1/workspaces/{workspace_id}/members/{member_id}`.replace(`{${"workspace_id"}}`, encodeURIComponent(String(requestParameters['workspaceId']))).replace(`{${"member_id"}}`, encodeURIComponent(String(requestParameters['memberId']))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => SimpleBoolResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Delete Member
-     */
-    async deleteMemberApiV1WorkspacesWorkspaceIdMembersMemberIdDelete(requestParameters: DeleteMemberApiV1WorkspacesWorkspaceIdMembersMemberIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deleteMemberApiV1WorkspacesWorkspaceIdMembersMemberIdDeleteRaw(requestParameters, initOverrides);
+    async createWorkspace(requestParameters: CreateWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceResponse> {
+        const response = await this.createWorkspaceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Delete Workspace
      */
-    async deleteWorkspaceApiV1WorkspacesWorkspaceIdDeleteRaw(requestParameters: DeleteWorkspaceApiV1WorkspacesWorkspaceIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
+    async deleteWorkspaceRaw(requestParameters: DeleteWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['workspaceId'] == null) {
             throw new runtime.RequiredError(
                 'workspaceId',
-                'Required parameter "workspaceId" was null or undefined when calling deleteWorkspaceApiV1WorkspacesWorkspaceIdDelete().'
+                'Required parameter "workspaceId" was null or undefined when calling deleteWorkspace().'
             );
         }
 
@@ -286,19 +238,19 @@ export class WorkspacesApi extends runtime.BaseAPI {
     /**
      * Delete Workspace
      */
-    async deleteWorkspaceApiV1WorkspacesWorkspaceIdDelete(requestParameters: DeleteWorkspaceApiV1WorkspacesWorkspaceIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deleteWorkspaceApiV1WorkspacesWorkspaceIdDeleteRaw(requestParameters, initOverrides);
+    async deleteWorkspace(requestParameters: DeleteWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.deleteWorkspaceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Workspace
      */
-    async getWorkspaceApiV1WorkspacesWorkspaceIdGetRaw(requestParameters: GetWorkspaceApiV1WorkspacesWorkspaceIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceResponse>> {
+    async getWorkspaceRaw(requestParameters: GetWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceResponse>> {
         if (requestParameters['workspaceId'] == null) {
             throw new runtime.RequiredError(
                 'workspaceId',
-                'Required parameter "workspaceId" was null or undefined when calling getWorkspaceApiV1WorkspacesWorkspaceIdGet().'
+                'Required parameter "workspaceId" was null or undefined when calling getWorkspace().'
             );
         }
 
@@ -327,19 +279,19 @@ export class WorkspacesApi extends runtime.BaseAPI {
     /**
      * Get Workspace
      */
-    async getWorkspaceApiV1WorkspacesWorkspaceIdGet(requestParameters: GetWorkspaceApiV1WorkspacesWorkspaceIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceResponse> {
-        const response = await this.getWorkspaceApiV1WorkspacesWorkspaceIdGetRaw(requestParameters, initOverrides);
+    async getWorkspace(requestParameters: GetWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceResponse> {
+        const response = await this.getWorkspaceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Members
      */
-    async listMembersApiV1WorkspacesWorkspaceIdMembersGetRaw(requestParameters: ListMembersApiV1WorkspacesWorkspaceIdMembersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceMembersListResponse>> {
+    async listWorkspaceMembersRaw(requestParameters: ListWorkspaceMembersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceMembersListResponse>> {
         if (requestParameters['workspaceId'] == null) {
             throw new runtime.RequiredError(
                 'workspaceId',
-                'Required parameter "workspaceId" was null or undefined when calling listMembersApiV1WorkspacesWorkspaceIdMembersGet().'
+                'Required parameter "workspaceId" was null or undefined when calling listWorkspaceMembers().'
             );
         }
 
@@ -368,15 +320,15 @@ export class WorkspacesApi extends runtime.BaseAPI {
     /**
      * List Members
      */
-    async listMembersApiV1WorkspacesWorkspaceIdMembersGet(requestParameters: ListMembersApiV1WorkspacesWorkspaceIdMembersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceMembersListResponse> {
-        const response = await this.listMembersApiV1WorkspacesWorkspaceIdMembersGetRaw(requestParameters, initOverrides);
+    async listWorkspaceMembers(requestParameters: ListWorkspaceMembersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceMembersListResponse> {
+        const response = await this.listWorkspaceMembersRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Workspaces
      */
-    async listWorkspacesApiV1WorkspacesGetRaw(requestParameters: ListWorkspacesApiV1WorkspacesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspacesListResponse>> {
+    async listWorkspacesRaw(requestParameters: ListWorkspacesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspacesListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -410,41 +362,32 @@ export class WorkspacesApi extends runtime.BaseAPI {
     /**
      * List Workspaces
      */
-    async listWorkspacesApiV1WorkspacesGet(requestParameters: ListWorkspacesApiV1WorkspacesGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspacesListResponse> {
-        const response = await this.listWorkspacesApiV1WorkspacesGetRaw(requestParameters, initOverrides);
+    async listWorkspaces(requestParameters: ListWorkspacesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspacesListResponse> {
+        const response = await this.listWorkspacesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Patch Member
+     * Delete Member
      */
-    async patchMemberApiV1WorkspacesWorkspaceIdMembersMemberIdPatchRaw(requestParameters: PatchMemberApiV1WorkspacesWorkspaceIdMembersMemberIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceMemberOut>> {
+    async removeWorkspaceMemberRaw(requestParameters: RemoveWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['workspaceId'] == null) {
             throw new runtime.RequiredError(
                 'workspaceId',
-                'Required parameter "workspaceId" was null or undefined when calling patchMemberApiV1WorkspacesWorkspaceIdMembersMemberIdPatch().'
+                'Required parameter "workspaceId" was null or undefined when calling removeWorkspaceMember().'
             );
         }
 
         if (requestParameters['memberId'] == null) {
             throw new runtime.RequiredError(
                 'memberId',
-                'Required parameter "memberId" was null or undefined when calling patchMemberApiV1WorkspacesWorkspaceIdMembersMemberIdPatch().'
-            );
-        }
-
-        if (requestParameters['workspaceMemberPatchRequest'] == null) {
-            throw new runtime.RequiredError(
-                'workspaceMemberPatchRequest',
-                'Required parameter "workspaceMemberPatchRequest" was null or undefined when calling patchMemberApiV1WorkspacesWorkspaceIdMembersMemberIdPatch().'
+                'Required parameter "memberId" was null or undefined when calling removeWorkspaceMember().'
             );
         }
 
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
             const token = this.configuration.accessToken;
@@ -456,38 +399,37 @@ export class WorkspacesApi extends runtime.BaseAPI {
         }
         const response = await this.request({
             path: `/api/v1/workspaces/{workspace_id}/members/{member_id}`.replace(`{${"workspace_id"}}`, encodeURIComponent(String(requestParameters['workspaceId']))).replace(`{${"member_id"}}`, encodeURIComponent(String(requestParameters['memberId']))),
-            method: 'PATCH',
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
-            body: WorkspaceMemberPatchRequestToJSON(requestParameters['workspaceMemberPatchRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => WorkspaceMemberOutFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => SimpleBoolResponseFromJSON(jsonValue));
     }
 
     /**
-     * Patch Member
+     * Delete Member
      */
-    async patchMemberApiV1WorkspacesWorkspaceIdMembersMemberIdPatch(requestParameters: PatchMemberApiV1WorkspacesWorkspaceIdMembersMemberIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceMemberOut> {
-        const response = await this.patchMemberApiV1WorkspacesWorkspaceIdMembersMemberIdPatchRaw(requestParameters, initOverrides);
+    async removeWorkspaceMember(requestParameters: RemoveWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.removeWorkspaceMemberRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Patch Workspace
      */
-    async patchWorkspaceApiV1WorkspacesWorkspaceIdPatchRaw(requestParameters: PatchWorkspaceApiV1WorkspacesWorkspaceIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceResponse>> {
+    async updateWorkspaceRaw(requestParameters: UpdateWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceResponse>> {
         if (requestParameters['workspaceId'] == null) {
             throw new runtime.RequiredError(
                 'workspaceId',
-                'Required parameter "workspaceId" was null or undefined when calling patchWorkspaceApiV1WorkspacesWorkspaceIdPatch().'
+                'Required parameter "workspaceId" was null or undefined when calling updateWorkspace().'
             );
         }
 
         if (requestParameters['workspacePatchRequest'] == null) {
             throw new runtime.RequiredError(
                 'workspacePatchRequest',
-                'Required parameter "workspacePatchRequest" was null or undefined when calling patchWorkspaceApiV1WorkspacesWorkspaceIdPatch().'
+                'Required parameter "workspacePatchRequest" was null or undefined when calling updateWorkspace().'
             );
         }
 
@@ -523,8 +465,66 @@ export class WorkspacesApi extends runtime.BaseAPI {
     /**
      * Patch Workspace
      */
-    async patchWorkspaceApiV1WorkspacesWorkspaceIdPatch(requestParameters: PatchWorkspaceApiV1WorkspacesWorkspaceIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceResponse> {
-        const response = await this.patchWorkspaceApiV1WorkspacesWorkspaceIdPatchRaw(requestParameters, initOverrides);
+    async updateWorkspace(requestParameters: UpdateWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceResponse> {
+        const response = await this.updateWorkspaceRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Patch Member
+     */
+    async updateWorkspaceMemberRaw(requestParameters: UpdateWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceMemberOut>> {
+        if (requestParameters['workspaceId'] == null) {
+            throw new runtime.RequiredError(
+                'workspaceId',
+                'Required parameter "workspaceId" was null or undefined when calling updateWorkspaceMember().'
+            );
+        }
+
+        if (requestParameters['memberId'] == null) {
+            throw new runtime.RequiredError(
+                'memberId',
+                'Required parameter "memberId" was null or undefined when calling updateWorkspaceMember().'
+            );
+        }
+
+        if (requestParameters['workspaceMemberPatchRequest'] == null) {
+            throw new runtime.RequiredError(
+                'workspaceMemberPatchRequest',
+                'Required parameter "workspaceMemberPatchRequest" was null or undefined when calling updateWorkspaceMember().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/workspaces/{workspace_id}/members/{member_id}`.replace(`{${"workspace_id"}}`, encodeURIComponent(String(requestParameters['workspaceId']))).replace(`{${"member_id"}}`, encodeURIComponent(String(requestParameters['memberId']))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: WorkspaceMemberPatchRequestToJSON(requestParameters['workspaceMemberPatchRequest']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => WorkspaceMemberOutFromJSON(jsonValue));
+    }
+
+    /**
+     * Patch Member
+     */
+    async updateWorkspaceMember(requestParameters: UpdateWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceMemberOut> {
+        const response = await this.updateWorkspaceMemberRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

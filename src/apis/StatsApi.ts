@@ -30,7 +30,7 @@ export class StatsApi extends runtime.BaseAPI {
     /**
      * Get Stats
      */
-    async getStatsApiV1StatsGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StatsResponse>> {
+    async getStatsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StatsResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -56,8 +56,8 @@ export class StatsApi extends runtime.BaseAPI {
     /**
      * Get Stats
      */
-    async getStatsApiV1StatsGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StatsResponse> {
-        const response = await this.getStatsApiV1StatsGetRaw(initOverrides);
+    async getStats(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StatsResponse> {
+        const response = await this.getStatsRaw(initOverrides);
         return await response.value();
     }
 

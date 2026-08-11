@@ -43,25 +43,25 @@ import {
     ApiKeyRotateResponseToJSON,
 } from '../models/index';
 
-export interface CreateApiKeyApiV1ApiKeysPostRequest {
+export interface CreateApiKeyRequest {
     apiKeyCreateRequest: ApiKeyCreateRequest;
 }
 
-export interface GetApiKeyApiV1ApiKeysApiKeyIdGetRequest {
+export interface GetApiKeyRequest {
     apiKeyId: string;
 }
 
-export interface PatchApiKeyApiV1ApiKeysApiKeyIdPatchRequest {
+export interface RevokeApiKeyRequest {
+    apiKeyId: string;
+}
+
+export interface RotateApiKeyRequest {
+    apiKeyId: string;
+}
+
+export interface UpdateApiKeyRequest {
     apiKeyId: string;
     apiKeyPatchRequest: ApiKeyPatchRequest;
-}
-
-export interface RevokeApiKeyApiV1ApiKeysApiKeyIdDeleteRequest {
-    apiKeyId: string;
-}
-
-export interface RotateApiKeyApiV1ApiKeysApiKeyIdRotatePostRequest {
-    apiKeyId: string;
 }
 
 /**
@@ -72,11 +72,11 @@ export class ApiKeysApi extends runtime.BaseAPI {
     /**
      * Create Api Key
      */
-    async createApiKeyApiV1ApiKeysPostRaw(requestParameters: CreateApiKeyApiV1ApiKeysPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyCreateResponse>> {
+    async createApiKeyRaw(requestParameters: CreateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyCreateResponse>> {
         if (requestParameters['apiKeyCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'apiKeyCreateRequest',
-                'Required parameter "apiKeyCreateRequest" was null or undefined when calling createApiKeyApiV1ApiKeysPost().'
+                'Required parameter "apiKeyCreateRequest" was null or undefined when calling createApiKey().'
             );
         }
 
@@ -108,19 +108,19 @@ export class ApiKeysApi extends runtime.BaseAPI {
     /**
      * Create Api Key
      */
-    async createApiKeyApiV1ApiKeysPost(requestParameters: CreateApiKeyApiV1ApiKeysPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyCreateResponse> {
-        const response = await this.createApiKeyApiV1ApiKeysPostRaw(requestParameters, initOverrides);
+    async createApiKey(requestParameters: CreateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyCreateResponse> {
+        const response = await this.createApiKeyRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Api Key
      */
-    async getApiKeyApiV1ApiKeysApiKeyIdGetRaw(requestParameters: GetApiKeyApiV1ApiKeysApiKeyIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyDetailResponse>> {
+    async getApiKeyRaw(requestParameters: GetApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyDetailResponse>> {
         if (requestParameters['apiKeyId'] == null) {
             throw new runtime.RequiredError(
                 'apiKeyId',
-                'Required parameter "apiKeyId" was null or undefined when calling getApiKeyApiV1ApiKeysApiKeyIdGet().'
+                'Required parameter "apiKeyId" was null or undefined when calling getApiKey().'
             );
         }
 
@@ -149,15 +149,15 @@ export class ApiKeysApi extends runtime.BaseAPI {
     /**
      * Get Api Key
      */
-    async getApiKeyApiV1ApiKeysApiKeyIdGet(requestParameters: GetApiKeyApiV1ApiKeysApiKeyIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyDetailResponse> {
-        const response = await this.getApiKeyApiV1ApiKeysApiKeyIdGetRaw(requestParameters, initOverrides);
+    async getApiKey(requestParameters: GetApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyDetailResponse> {
+        const response = await this.getApiKeyRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Api Keys
      */
-    async listApiKeysApiV1ApiKeysGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyListResponse>> {
+    async listApiKeysRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyListResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -183,26 +183,110 @@ export class ApiKeysApi extends runtime.BaseAPI {
     /**
      * List Api Keys
      */
-    async listApiKeysApiV1ApiKeysGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyListResponse> {
-        const response = await this.listApiKeysApiV1ApiKeysGetRaw(initOverrides);
+    async listApiKeys(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyListResponse> {
+        const response = await this.listApiKeysRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Revoke Api Key
+     */
+    async revokeApiKeyRaw(requestParameters: RevokeApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyRevokeResponse>> {
+        if (requestParameters['apiKeyId'] == null) {
+            throw new runtime.RequiredError(
+                'apiKeyId',
+                'Required parameter "apiKeyId" was null or undefined when calling revokeApiKey().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/api-keys/{api_key_id}`.replace(`{${"api_key_id"}}`, encodeURIComponent(String(requestParameters['apiKeyId']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ApiKeyRevokeResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Revoke Api Key
+     */
+    async revokeApiKey(requestParameters: RevokeApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyRevokeResponse> {
+        const response = await this.revokeApiKeyRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Revoke the existing key and create a new one with the same name.
+     * Rotate Api Key
+     */
+    async rotateApiKeyRaw(requestParameters: RotateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyRotateResponse>> {
+        if (requestParameters['apiKeyId'] == null) {
+            throw new runtime.RequiredError(
+                'apiKeyId',
+                'Required parameter "apiKeyId" was null or undefined when calling rotateApiKey().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/api-keys/{api_key_id}/rotate`.replace(`{${"api_key_id"}}`, encodeURIComponent(String(requestParameters['apiKeyId']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ApiKeyRotateResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Revoke the existing key and create a new one with the same name.
+     * Rotate Api Key
+     */
+    async rotateApiKey(requestParameters: RotateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyRotateResponse> {
+        const response = await this.rotateApiKeyRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Patch Api Key
      */
-    async patchApiKeyApiV1ApiKeysApiKeyIdPatchRaw(requestParameters: PatchApiKeyApiV1ApiKeysApiKeyIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyDetailResponse>> {
+    async updateApiKeyRaw(requestParameters: UpdateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyDetailResponse>> {
         if (requestParameters['apiKeyId'] == null) {
             throw new runtime.RequiredError(
                 'apiKeyId',
-                'Required parameter "apiKeyId" was null or undefined when calling patchApiKeyApiV1ApiKeysApiKeyIdPatch().'
+                'Required parameter "apiKeyId" was null or undefined when calling updateApiKey().'
             );
         }
 
         if (requestParameters['apiKeyPatchRequest'] == null) {
             throw new runtime.RequiredError(
                 'apiKeyPatchRequest',
-                'Required parameter "apiKeyPatchRequest" was null or undefined when calling patchApiKeyApiV1ApiKeysApiKeyIdPatch().'
+                'Required parameter "apiKeyPatchRequest" was null or undefined when calling updateApiKey().'
             );
         }
 
@@ -234,92 +318,8 @@ export class ApiKeysApi extends runtime.BaseAPI {
     /**
      * Patch Api Key
      */
-    async patchApiKeyApiV1ApiKeysApiKeyIdPatch(requestParameters: PatchApiKeyApiV1ApiKeysApiKeyIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyDetailResponse> {
-        const response = await this.patchApiKeyApiV1ApiKeysApiKeyIdPatchRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Revoke Api Key
-     */
-    async revokeApiKeyApiV1ApiKeysApiKeyIdDeleteRaw(requestParameters: RevokeApiKeyApiV1ApiKeysApiKeyIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyRevokeResponse>> {
-        if (requestParameters['apiKeyId'] == null) {
-            throw new runtime.RequiredError(
-                'apiKeyId',
-                'Required parameter "apiKeyId" was null or undefined when calling revokeApiKeyApiV1ApiKeysApiKeyIdDelete().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("HTTPBearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const response = await this.request({
-            path: `/api/v1/api-keys/{api_key_id}`.replace(`{${"api_key_id"}}`, encodeURIComponent(String(requestParameters['apiKeyId']))),
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => ApiKeyRevokeResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Revoke Api Key
-     */
-    async revokeApiKeyApiV1ApiKeysApiKeyIdDelete(requestParameters: RevokeApiKeyApiV1ApiKeysApiKeyIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyRevokeResponse> {
-        const response = await this.revokeApiKeyApiV1ApiKeysApiKeyIdDeleteRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Revoke the existing key and create a new one with the same name.
-     * Rotate Api Key
-     */
-    async rotateApiKeyApiV1ApiKeysApiKeyIdRotatePostRaw(requestParameters: RotateApiKeyApiV1ApiKeysApiKeyIdRotatePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyRotateResponse>> {
-        if (requestParameters['apiKeyId'] == null) {
-            throw new runtime.RequiredError(
-                'apiKeyId',
-                'Required parameter "apiKeyId" was null or undefined when calling rotateApiKeyApiV1ApiKeysApiKeyIdRotatePost().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            const token = this.configuration.accessToken;
-            const tokenString = await token("HTTPBearer", []);
-
-            if (tokenString) {
-                headerParameters["Authorization"] = `Bearer ${tokenString}`;
-            }
-        }
-        const response = await this.request({
-            path: `/api/v1/api-keys/{api_key_id}/rotate`.replace(`{${"api_key_id"}}`, encodeURIComponent(String(requestParameters['apiKeyId']))),
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => ApiKeyRotateResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Revoke the existing key and create a new one with the same name.
-     * Rotate Api Key
-     */
-    async rotateApiKeyApiV1ApiKeysApiKeyIdRotatePost(requestParameters: RotateApiKeyApiV1ApiKeysApiKeyIdRotatePostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyRotateResponse> {
-        const response = await this.rotateApiKeyApiV1ApiKeysApiKeyIdRotatePostRaw(requestParameters, initOverrides);
+    async updateApiKey(requestParameters: UpdateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyDetailResponse> {
+        const response = await this.updateApiKeyRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

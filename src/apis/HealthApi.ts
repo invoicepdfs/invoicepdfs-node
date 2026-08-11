@@ -36,7 +36,7 @@ export class HealthApi extends runtime.BaseAPI {
     /**
      * Health
      */
-    async healthHealthGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HealthResponse>> {
+    async getHealthRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HealthResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -54,15 +54,15 @@ export class HealthApi extends runtime.BaseAPI {
     /**
      * Health
      */
-    async healthHealthGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<HealthResponse> {
-        const response = await this.healthHealthGetRaw(initOverrides);
+    async getHealth(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<HealthResponse> {
+        const response = await this.getHealthRaw(initOverrides);
         return await response.value();
     }
 
     /**
      * Ready
      */
-    async readyReadyGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReadyResponse>> {
+    async getReadinessRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReadyResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -80,15 +80,15 @@ export class HealthApi extends runtime.BaseAPI {
     /**
      * Ready
      */
-    async readyReadyGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReadyResponse> {
-        const response = await this.readyReadyGetRaw(initOverrides);
+    async getReadiness(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReadyResponse> {
+        const response = await this.getReadinessRaw(initOverrides);
         return await response.value();
     }
 
     /**
      * Version
      */
-    async versionVersionGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<VersionResponse>> {
+    async getVersionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<VersionResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -106,8 +106,8 @@ export class HealthApi extends runtime.BaseAPI {
     /**
      * Version
      */
-    async versionVersionGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<VersionResponse> {
-        const response = await this.versionVersionGetRaw(initOverrides);
+    async getVersion(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<VersionResponse> {
+        const response = await this.getVersionRaw(initOverrides);
         return await response.value();
     }
 

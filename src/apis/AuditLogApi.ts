@@ -28,11 +28,11 @@ import {
     AuditEventsListResponseToJSON,
 } from '../models/index';
 
-export interface GetAuditEventApiV1AuditEventsAuditEventIdGetRequest {
+export interface GetAuditEventRequest {
     auditEventId: string;
 }
 
-export interface ListAuditEventsApiV1AuditEventsGetRequest {
+export interface ListAuditEventsRequest {
     limit?: number;
     cursor?: string | null;
     action?: string | null;
@@ -48,11 +48,11 @@ export class AuditLogApi extends runtime.BaseAPI {
     /**
      * Get Audit Event
      */
-    async getAuditEventApiV1AuditEventsAuditEventIdGetRaw(requestParameters: GetAuditEventApiV1AuditEventsAuditEventIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuditEventResponse>> {
+    async getAuditEventRaw(requestParameters: GetAuditEventRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuditEventResponse>> {
         if (requestParameters['auditEventId'] == null) {
             throw new runtime.RequiredError(
                 'auditEventId',
-                'Required parameter "auditEventId" was null or undefined when calling getAuditEventApiV1AuditEventsAuditEventIdGet().'
+                'Required parameter "auditEventId" was null or undefined when calling getAuditEvent().'
             );
         }
 
@@ -81,15 +81,15 @@ export class AuditLogApi extends runtime.BaseAPI {
     /**
      * Get Audit Event
      */
-    async getAuditEventApiV1AuditEventsAuditEventIdGet(requestParameters: GetAuditEventApiV1AuditEventsAuditEventIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuditEventResponse> {
-        const response = await this.getAuditEventApiV1AuditEventsAuditEventIdGetRaw(requestParameters, initOverrides);
+    async getAuditEvent(requestParameters: GetAuditEventRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuditEventResponse> {
+        const response = await this.getAuditEventRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Audit Events
      */
-    async listAuditEventsApiV1AuditEventsGetRaw(requestParameters: ListAuditEventsApiV1AuditEventsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuditEventsListResponse>> {
+    async listAuditEventsRaw(requestParameters: ListAuditEventsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuditEventsListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -135,8 +135,8 @@ export class AuditLogApi extends runtime.BaseAPI {
     /**
      * List Audit Events
      */
-    async listAuditEventsApiV1AuditEventsGet(requestParameters: ListAuditEventsApiV1AuditEventsGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuditEventsListResponse> {
-        const response = await this.listAuditEventsApiV1AuditEventsGetRaw(requestParameters, initOverrides);
+    async listAuditEvents(requestParameters: ListAuditEventsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuditEventsListResponse> {
+        const response = await this.listAuditEventsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

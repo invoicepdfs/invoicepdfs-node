@@ -37,26 +37,26 @@ import {
     SimpleBoolResponseToJSON,
 } from '../models/index';
 
-export interface CreatePaymentApiV1DocumentsInvoiceIdPaymentsPostRequest {
-    invoiceId: string;
+export interface CreateDocumentPaymentRequest {
+    documentId: string;
     paymentCreateRequest: PaymentCreateRequest;
 }
 
-export interface DeletePaymentApiV1PaymentsPaymentIdDeleteRequest {
+export interface DeletePaymentRequest {
     paymentId: string;
 }
 
-export interface GetPaymentApiV1PaymentsPaymentIdGetRequest {
+export interface GetPaymentRequest {
     paymentId: string;
 }
 
-export interface ListInvoicePaymentsApiV1DocumentsInvoiceIdPaymentsGetRequest {
-    invoiceId: string;
+export interface ListDocumentPaymentsRequest {
+    documentId: string;
     limit?: number;
     cursor?: string | null;
 }
 
-export interface UpdatePaymentApiV1PaymentsPaymentIdPatchRequest {
+export interface UpdatePaymentRequest {
     paymentId: string;
     paymentPatchRequest: PaymentPatchRequest;
 }
@@ -69,18 +69,18 @@ export class PaymentsApi extends runtime.BaseAPI {
     /**
      * Create Payment
      */
-    async createPaymentApiV1DocumentsInvoiceIdPaymentsPostRaw(requestParameters: CreatePaymentApiV1DocumentsInvoiceIdPaymentsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentResponse>> {
-        if (requestParameters['invoiceId'] == null) {
+    async createDocumentPaymentRaw(requestParameters: CreateDocumentPaymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentResponse>> {
+        if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
-                'invoiceId',
-                'Required parameter "invoiceId" was null or undefined when calling createPaymentApiV1DocumentsInvoiceIdPaymentsPost().'
+                'documentId',
+                'Required parameter "documentId" was null or undefined when calling createDocumentPayment().'
             );
         }
 
         if (requestParameters['paymentCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'paymentCreateRequest',
-                'Required parameter "paymentCreateRequest" was null or undefined when calling createPaymentApiV1DocumentsInvoiceIdPaymentsPost().'
+                'Required parameter "paymentCreateRequest" was null or undefined when calling createDocumentPayment().'
             );
         }
 
@@ -99,7 +99,7 @@ export class PaymentsApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/api/v1/documents/{invoice_id}/payments`.replace(`{${"invoice_id"}}`, encodeURIComponent(String(requestParameters['invoiceId']))),
+            path: `/api/v1/documents/{document_id}/payments`.replace(`{${"document_id"}}`, encodeURIComponent(String(requestParameters['documentId']))),
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -112,19 +112,19 @@ export class PaymentsApi extends runtime.BaseAPI {
     /**
      * Create Payment
      */
-    async createPaymentApiV1DocumentsInvoiceIdPaymentsPost(requestParameters: CreatePaymentApiV1DocumentsInvoiceIdPaymentsPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentResponse> {
-        const response = await this.createPaymentApiV1DocumentsInvoiceIdPaymentsPostRaw(requestParameters, initOverrides);
+    async createDocumentPayment(requestParameters: CreateDocumentPaymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentResponse> {
+        const response = await this.createDocumentPaymentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Delete Payment
      */
-    async deletePaymentApiV1PaymentsPaymentIdDeleteRaw(requestParameters: DeletePaymentApiV1PaymentsPaymentIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
+    async deletePaymentRaw(requestParameters: DeletePaymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['paymentId'] == null) {
             throw new runtime.RequiredError(
                 'paymentId',
-                'Required parameter "paymentId" was null or undefined when calling deletePaymentApiV1PaymentsPaymentIdDelete().'
+                'Required parameter "paymentId" was null or undefined when calling deletePayment().'
             );
         }
 
@@ -153,19 +153,19 @@ export class PaymentsApi extends runtime.BaseAPI {
     /**
      * Delete Payment
      */
-    async deletePaymentApiV1PaymentsPaymentIdDelete(requestParameters: DeletePaymentApiV1PaymentsPaymentIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
-        const response = await this.deletePaymentApiV1PaymentsPaymentIdDeleteRaw(requestParameters, initOverrides);
+    async deletePayment(requestParameters: DeletePaymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
+        const response = await this.deletePaymentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Payment
      */
-    async getPaymentApiV1PaymentsPaymentIdGetRaw(requestParameters: GetPaymentApiV1PaymentsPaymentIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentResponse>> {
+    async getPaymentRaw(requestParameters: GetPaymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentResponse>> {
         if (requestParameters['paymentId'] == null) {
             throw new runtime.RequiredError(
                 'paymentId',
-                'Required parameter "paymentId" was null or undefined when calling getPaymentApiV1PaymentsPaymentIdGet().'
+                'Required parameter "paymentId" was null or undefined when calling getPayment().'
             );
         }
 
@@ -194,19 +194,19 @@ export class PaymentsApi extends runtime.BaseAPI {
     /**
      * Get Payment
      */
-    async getPaymentApiV1PaymentsPaymentIdGet(requestParameters: GetPaymentApiV1PaymentsPaymentIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentResponse> {
-        const response = await this.getPaymentApiV1PaymentsPaymentIdGetRaw(requestParameters, initOverrides);
+    async getPayment(requestParameters: GetPaymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentResponse> {
+        const response = await this.getPaymentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Invoice Payments
      */
-    async listInvoicePaymentsApiV1DocumentsInvoiceIdPaymentsGetRaw(requestParameters: ListInvoicePaymentsApiV1DocumentsInvoiceIdPaymentsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentsListResponse>> {
-        if (requestParameters['invoiceId'] == null) {
+    async listDocumentPaymentsRaw(requestParameters: ListDocumentPaymentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentsListResponse>> {
+        if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
-                'invoiceId',
-                'Required parameter "invoiceId" was null or undefined when calling listInvoicePaymentsApiV1DocumentsInvoiceIdPaymentsGet().'
+                'documentId',
+                'Required parameter "documentId" was null or undefined when calling listDocumentPayments().'
             );
         }
 
@@ -231,7 +231,7 @@ export class PaymentsApi extends runtime.BaseAPI {
             }
         }
         const response = await this.request({
-            path: `/api/v1/documents/{invoice_id}/payments`.replace(`{${"invoice_id"}}`, encodeURIComponent(String(requestParameters['invoiceId']))),
+            path: `/api/v1/documents/{document_id}/payments`.replace(`{${"document_id"}}`, encodeURIComponent(String(requestParameters['documentId']))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -243,26 +243,26 @@ export class PaymentsApi extends runtime.BaseAPI {
     /**
      * List Invoice Payments
      */
-    async listInvoicePaymentsApiV1DocumentsInvoiceIdPaymentsGet(requestParameters: ListInvoicePaymentsApiV1DocumentsInvoiceIdPaymentsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentsListResponse> {
-        const response = await this.listInvoicePaymentsApiV1DocumentsInvoiceIdPaymentsGetRaw(requestParameters, initOverrides);
+    async listDocumentPayments(requestParameters: ListDocumentPaymentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentsListResponse> {
+        const response = await this.listDocumentPaymentsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Update Payment
      */
-    async updatePaymentApiV1PaymentsPaymentIdPatchRaw(requestParameters: UpdatePaymentApiV1PaymentsPaymentIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentResponse>> {
+    async updatePaymentRaw(requestParameters: UpdatePaymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentResponse>> {
         if (requestParameters['paymentId'] == null) {
             throw new runtime.RequiredError(
                 'paymentId',
-                'Required parameter "paymentId" was null or undefined when calling updatePaymentApiV1PaymentsPaymentIdPatch().'
+                'Required parameter "paymentId" was null or undefined when calling updatePayment().'
             );
         }
 
         if (requestParameters['paymentPatchRequest'] == null) {
             throw new runtime.RequiredError(
                 'paymentPatchRequest',
-                'Required parameter "paymentPatchRequest" was null or undefined when calling updatePaymentApiV1PaymentsPaymentIdPatch().'
+                'Required parameter "paymentPatchRequest" was null or undefined when calling updatePayment().'
             );
         }
 
@@ -294,8 +294,8 @@ export class PaymentsApi extends runtime.BaseAPI {
     /**
      * Update Payment
      */
-    async updatePaymentApiV1PaymentsPaymentIdPatch(requestParameters: UpdatePaymentApiV1PaymentsPaymentIdPatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentResponse> {
-        const response = await this.updatePaymentApiV1PaymentsPaymentIdPatchRaw(requestParameters, initOverrides);
+    async updatePayment(requestParameters: UpdatePaymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentResponse> {
+        const response = await this.updatePaymentRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

@@ -23,7 +23,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     /**
      * List Countries
      */
-    async listCountriesApiV1ReferenceCountriesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listCountriesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -41,15 +41,15 @@ export class ReferenceApi extends runtime.BaseAPI {
     /**
      * List Countries
      */
-    async listCountriesApiV1ReferenceCountriesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
-        const response = await this.listCountriesApiV1ReferenceCountriesGetRaw(initOverrides);
+    async listCountries(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+        const response = await this.listCountriesRaw(initOverrides);
         return await response.value();
     }
 
     /**
      * List Currencies
      */
-    async listCurrenciesApiV1ReferenceCurrenciesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listCurrenciesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -67,8 +67,8 @@ export class ReferenceApi extends runtime.BaseAPI {
     /**
      * List Currencies
      */
-    async listCurrenciesApiV1ReferenceCurrenciesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
-        const response = await this.listCurrenciesApiV1ReferenceCurrenciesGetRaw(initOverrides);
+    async listCurrencies(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+        const response = await this.listCurrenciesRaw(initOverrides);
         return await response.value();
     }
 
@@ -76,7 +76,7 @@ export class ReferenceApi extends runtime.BaseAPI {
      * List every supported document type with the metadata a client needs to build a type-aware create form: the number prefix, whether it is payable / takes a source document / supports a reason, which line-item shape it uses (``standard`` = priced, ``shipped`` = quantities only), and the lifecycle actions available to it.
      * List Document Types
      */
-    async listDocumentTypesApiV1ReferenceDocumentTypesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listDocumentTypesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -95,15 +95,15 @@ export class ReferenceApi extends runtime.BaseAPI {
      * List every supported document type with the metadata a client needs to build a type-aware create form: the number prefix, whether it is payable / takes a source document / supports a reason, which line-item shape it uses (``standard`` = priced, ``shipped`` = quantities only), and the lifecycle actions available to it.
      * List Document Types
      */
-    async listDocumentTypesApiV1ReferenceDocumentTypesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
-        const response = await this.listDocumentTypesApiV1ReferenceDocumentTypesGetRaw(initOverrides);
+    async listDocumentTypes(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+        const response = await this.listDocumentTypesRaw(initOverrides);
         return await response.value();
     }
 
     /**
      * List Locales
      */
-    async listLocalesApiV1ReferenceLocalesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listLocalesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -121,15 +121,15 @@ export class ReferenceApi extends runtime.BaseAPI {
     /**
      * List Locales
      */
-    async listLocalesApiV1ReferenceLocalesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
-        const response = await this.listLocalesApiV1ReferenceLocalesGetRaw(initOverrides);
+    async listLocales(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+        const response = await this.listLocalesRaw(initOverrides);
         return await response.value();
     }
 
     /**
      * List Page Sizes
      */
-    async listPageSizesApiV1ReferencePageSizesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listPageSizesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -147,15 +147,15 @@ export class ReferenceApi extends runtime.BaseAPI {
     /**
      * List Page Sizes
      */
-    async listPageSizesApiV1ReferencePageSizesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
-        const response = await this.listPageSizesApiV1ReferencePageSizesGetRaw(initOverrides);
+    async listPageSizes(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+        const response = await this.listPageSizesRaw(initOverrides);
         return await response.value();
     }
 
     /**
      * List Timezones
      */
-    async listTimezonesApiV1ReferenceTimezonesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listTimezonesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -173,8 +173,8 @@ export class ReferenceApi extends runtime.BaseAPI {
     /**
      * List Timezones
      */
-    async listTimezonesApiV1ReferenceTimezonesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
-        const response = await this.listTimezonesApiV1ReferenceTimezonesGetRaw(initOverrides);
+    async listTimezones(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+        const response = await this.listTimezonesRaw(initOverrides);
         return await response.value();
     }
 

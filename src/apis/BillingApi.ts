@@ -37,7 +37,7 @@ import {
     BillingSubscriptionResponseToJSON,
 } from '../models/index';
 
-export interface CreateCheckoutApiV1BillingCheckoutSessionPostRequest {
+export interface CreateCheckoutSessionRequest {
     billingCheckoutRequest: BillingCheckoutRequest;
 }
 
@@ -50,11 +50,11 @@ export class BillingApi extends runtime.BaseAPI {
      * Create a Stripe Checkout session for a subscription.
      * Create Checkout
      */
-    async createCheckoutApiV1BillingCheckoutSessionPostRaw(requestParameters: CreateCheckoutApiV1BillingCheckoutSessionPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BillingCheckoutResponse>> {
+    async createCheckoutSessionRaw(requestParameters: CreateCheckoutSessionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BillingCheckoutResponse>> {
         if (requestParameters['billingCheckoutRequest'] == null) {
             throw new runtime.RequiredError(
                 'billingCheckoutRequest',
-                'Required parameter "billingCheckoutRequest" was null or undefined when calling createCheckoutApiV1BillingCheckoutSessionPost().'
+                'Required parameter "billingCheckoutRequest" was null or undefined when calling createCheckoutSession().'
             );
         }
 
@@ -87,8 +87,8 @@ export class BillingApi extends runtime.BaseAPI {
      * Create a Stripe Checkout session for a subscription.
      * Create Checkout
      */
-    async createCheckoutApiV1BillingCheckoutSessionPost(requestParameters: CreateCheckoutApiV1BillingCheckoutSessionPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BillingCheckoutResponse> {
-        const response = await this.createCheckoutApiV1BillingCheckoutSessionPostRaw(requestParameters, initOverrides);
+    async createCheckoutSession(requestParameters: CreateCheckoutSessionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BillingCheckoutResponse> {
+        const response = await this.createCheckoutSessionRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -96,7 +96,7 @@ export class BillingApi extends runtime.BaseAPI {
      * Create a Stripe Customer Portal session for self-service management.
      * Create Portal
      */
-    async createPortalApiV1BillingPortalSessionPostRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BillingPortalResponse>> {
+    async createPortalSessionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BillingPortalResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -123,8 +123,8 @@ export class BillingApi extends runtime.BaseAPI {
      * Create a Stripe Customer Portal session for self-service management.
      * Create Portal
      */
-    async createPortalApiV1BillingPortalSessionPost(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BillingPortalResponse> {
-        const response = await this.createPortalApiV1BillingPortalSessionPostRaw(initOverrides);
+    async createPortalSession(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BillingPortalResponse> {
+        const response = await this.createPortalSessionRaw(initOverrides);
         return await response.value();
     }
 
@@ -132,7 +132,7 @@ export class BillingApi extends runtime.BaseAPI {
      * Get current subscription status (from DB, no Stripe API call).
      * Get Subscription
      */
-    async getSubscriptionApiV1BillingSubscriptionGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BillingSubscriptionResponse>> {
+    async getSubscriptionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BillingSubscriptionResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -159,8 +159,8 @@ export class BillingApi extends runtime.BaseAPI {
      * Get current subscription status (from DB, no Stripe API call).
      * Get Subscription
      */
-    async getSubscriptionApiV1BillingSubscriptionGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BillingSubscriptionResponse> {
-        const response = await this.getSubscriptionApiV1BillingSubscriptionGetRaw(initOverrides);
+    async getSubscription(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BillingSubscriptionResponse> {
+        const response = await this.getSubscriptionRaw(initOverrides);
         return await response.value();
     }
 
@@ -168,7 +168,7 @@ export class BillingApi extends runtime.BaseAPI {
      * Purchasable plans — the ones wired to a Stripe price.
      * List Plans
      */
-    async listPlansApiV1BillingPlansGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BillingPlansListResponse>> {
+    async listPlansRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BillingPlansListResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -195,8 +195,8 @@ export class BillingApi extends runtime.BaseAPI {
      * Purchasable plans — the ones wired to a Stripe price.
      * List Plans
      */
-    async listPlansApiV1BillingPlansGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BillingPlansListResponse> {
-        const response = await this.listPlansApiV1BillingPlansGetRaw(initOverrides);
+    async listPlans(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BillingPlansListResponse> {
+        const response = await this.listPlansRaw(initOverrides);
         return await response.value();
     }
 

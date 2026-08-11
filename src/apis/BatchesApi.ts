@@ -34,29 +34,29 @@ import {
     BatchesListResponseToJSON,
 } from '../models/index';
 
-export interface CancelBatchApiV1BatchesBatchIdCancelPostRequest {
+export interface CancelBatchRequest {
     batchId: string;
 }
 
-export interface CreateBatchApiV1BatchesPostRequest {
+export interface CreateBatchRequest {
     batchCreateRequest: BatchCreateRequest;
 }
 
-export interface DownloadBatchApiV1BatchesBatchIdDownloadGetRequest {
+export interface DownloadBatchRequest {
     batchId: string;
 }
 
-export interface GetBatchApiV1BatchesBatchIdGetRequest {
+export interface GetBatchRequest {
     batchId: string;
 }
 
-export interface ListBatchItemsApiV1BatchesBatchIdItemsGetRequest {
+export interface ListBatchItemsRequest {
     batchId: string;
     limit?: number;
     cursor?: string | null;
 }
 
-export interface ListBatchesApiV1BatchesGetRequest {
+export interface ListBatchesRequest {
     limit?: number;
     cursor?: string | null;
 }
@@ -69,11 +69,11 @@ export class BatchesApi extends runtime.BaseAPI {
     /**
      * Cancel Batch
      */
-    async cancelBatchApiV1BatchesBatchIdCancelPostRaw(requestParameters: CancelBatchApiV1BatchesBatchIdCancelPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchResponse>> {
+    async cancelBatchRaw(requestParameters: CancelBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchResponse>> {
         if (requestParameters['batchId'] == null) {
             throw new runtime.RequiredError(
                 'batchId',
-                'Required parameter "batchId" was null or undefined when calling cancelBatchApiV1BatchesBatchIdCancelPost().'
+                'Required parameter "batchId" was null or undefined when calling cancelBatch().'
             );
         }
 
@@ -102,19 +102,19 @@ export class BatchesApi extends runtime.BaseAPI {
     /**
      * Cancel Batch
      */
-    async cancelBatchApiV1BatchesBatchIdCancelPost(requestParameters: CancelBatchApiV1BatchesBatchIdCancelPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchResponse> {
-        const response = await this.cancelBatchApiV1BatchesBatchIdCancelPostRaw(requestParameters, initOverrides);
+    async cancelBatch(requestParameters: CancelBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchResponse> {
+        const response = await this.cancelBatchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Create Batch
      */
-    async createBatchApiV1BatchesPostRaw(requestParameters: CreateBatchApiV1BatchesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchResponse>> {
+    async createBatchRaw(requestParameters: CreateBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchResponse>> {
         if (requestParameters['batchCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'batchCreateRequest',
-                'Required parameter "batchCreateRequest" was null or undefined when calling createBatchApiV1BatchesPost().'
+                'Required parameter "batchCreateRequest" was null or undefined when calling createBatch().'
             );
         }
 
@@ -146,19 +146,19 @@ export class BatchesApi extends runtime.BaseAPI {
     /**
      * Create Batch
      */
-    async createBatchApiV1BatchesPost(requestParameters: CreateBatchApiV1BatchesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchResponse> {
-        const response = await this.createBatchApiV1BatchesPostRaw(requestParameters, initOverrides);
+    async createBatch(requestParameters: CreateBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchResponse> {
+        const response = await this.createBatchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Download Batch
      */
-    async downloadBatchApiV1BatchesBatchIdDownloadGetRaw(requestParameters: DownloadBatchApiV1BatchesBatchIdDownloadGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+    async downloadBatchRaw(requestParameters: DownloadBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
         if (requestParameters['batchId'] == null) {
             throw new runtime.RequiredError(
                 'batchId',
-                'Required parameter "batchId" was null or undefined when calling downloadBatchApiV1BatchesBatchIdDownloadGet().'
+                'Required parameter "batchId" was null or undefined when calling downloadBatch().'
             );
         }
 
@@ -191,19 +191,19 @@ export class BatchesApi extends runtime.BaseAPI {
     /**
      * Download Batch
      */
-    async downloadBatchApiV1BatchesBatchIdDownloadGet(requestParameters: DownloadBatchApiV1BatchesBatchIdDownloadGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
-        const response = await this.downloadBatchApiV1BatchesBatchIdDownloadGetRaw(requestParameters, initOverrides);
+    async downloadBatch(requestParameters: DownloadBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+        const response = await this.downloadBatchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Get Batch
      */
-    async getBatchApiV1BatchesBatchIdGetRaw(requestParameters: GetBatchApiV1BatchesBatchIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchResponse>> {
+    async getBatchRaw(requestParameters: GetBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchResponse>> {
         if (requestParameters['batchId'] == null) {
             throw new runtime.RequiredError(
                 'batchId',
-                'Required parameter "batchId" was null or undefined when calling getBatchApiV1BatchesBatchIdGet().'
+                'Required parameter "batchId" was null or undefined when calling getBatch().'
             );
         }
 
@@ -232,19 +232,19 @@ export class BatchesApi extends runtime.BaseAPI {
     /**
      * Get Batch
      */
-    async getBatchApiV1BatchesBatchIdGet(requestParameters: GetBatchApiV1BatchesBatchIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchResponse> {
-        const response = await this.getBatchApiV1BatchesBatchIdGetRaw(requestParameters, initOverrides);
+    async getBatch(requestParameters: GetBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchResponse> {
+        const response = await this.getBatchRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Batch Items
      */
-    async listBatchItemsApiV1BatchesBatchIdItemsGetRaw(requestParameters: ListBatchItemsApiV1BatchesBatchIdItemsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchItemsListResponse>> {
+    async listBatchItemsRaw(requestParameters: ListBatchItemsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchItemsListResponse>> {
         if (requestParameters['batchId'] == null) {
             throw new runtime.RequiredError(
                 'batchId',
-                'Required parameter "batchId" was null or undefined when calling listBatchItemsApiV1BatchesBatchIdItemsGet().'
+                'Required parameter "batchId" was null or undefined when calling listBatchItems().'
             );
         }
 
@@ -281,15 +281,15 @@ export class BatchesApi extends runtime.BaseAPI {
     /**
      * List Batch Items
      */
-    async listBatchItemsApiV1BatchesBatchIdItemsGet(requestParameters: ListBatchItemsApiV1BatchesBatchIdItemsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchItemsListResponse> {
-        const response = await this.listBatchItemsApiV1BatchesBatchIdItemsGetRaw(requestParameters, initOverrides);
+    async listBatchItems(requestParameters: ListBatchItemsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchItemsListResponse> {
+        const response = await this.listBatchItemsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * List Batches
      */
-    async listBatchesApiV1BatchesGetRaw(requestParameters: ListBatchesApiV1BatchesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchesListResponse>> {
+    async listBatchesRaw(requestParameters: ListBatchesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchesListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -323,8 +323,8 @@ export class BatchesApi extends runtime.BaseAPI {
     /**
      * List Batches
      */
-    async listBatchesApiV1BatchesGet(requestParameters: ListBatchesApiV1BatchesGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchesListResponse> {
-        const response = await this.listBatchesApiV1BatchesGetRaw(requestParameters, initOverrides);
+    async listBatches(requestParameters: ListBatchesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchesListResponse> {
+        const response = await this.listBatchesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
