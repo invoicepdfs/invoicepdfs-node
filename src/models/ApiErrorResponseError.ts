@@ -20,6 +20,12 @@ import { mapValues } from '../runtime';
  */
 export interface ApiErrorResponseError {
     /**
+     * HTTP status, mirroring the response status line.
+     * @type {number}
+     * @memberof ApiErrorResponseError
+     */
+    status: number;
+    /**
      * 
      * @type {string}
      * @memberof ApiErrorResponseError
@@ -49,6 +55,7 @@ export interface ApiErrorResponseError {
  * Check if a given object implements the ApiErrorResponseError interface.
  */
 export function instanceOfApiErrorResponseError(value: object): value is ApiErrorResponseError {
+    if (!('status' in value) || value['status'] === undefined) return false;
     if (!('code' in value) || value['code'] === undefined) return false;
     if (!('message' in value) || value['message'] === undefined) return false;
     return true;
@@ -64,6 +71,7 @@ export function ApiErrorResponseErrorFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
+        'status': json['status'],
         'code': json['code'],
         'message': json['message'],
         'requestId': json['request_id'] == null ? undefined : json['request_id'],
@@ -77,6 +85,7 @@ export function ApiErrorResponseErrorToJSON(value?: ApiErrorResponseError | null
     }
     return {
         
+        'status': value['status'],
         'code': value['code'],
         'message': value['message'],
         'request_id': value['requestId'],
