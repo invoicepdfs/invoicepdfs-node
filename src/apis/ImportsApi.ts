@@ -15,13 +15,13 @@
 
 import * as runtime from '../runtime';
 import type {
-  HTTPValidationError,
+  ApiErrorResponse,
   ImportCreateRequest,
   ImportResponse,
 } from '../models/index';
 import {
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     ImportCreateRequestFromJSON,
     ImportCreateRequestToJSON,
     ImportResponseFromJSON,

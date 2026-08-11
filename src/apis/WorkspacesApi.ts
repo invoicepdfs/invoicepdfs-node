@@ -15,7 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
-  HTTPValidationError,
+  ApiErrorResponse,
   SimpleBoolResponse,
   WorkspaceCreateRequest,
   WorkspaceMemberCreateRequest,
@@ -27,8 +27,8 @@ import type {
   WorkspacesListResponse,
 } from '../models/index';
 import {
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     SimpleBoolResponseFromJSON,
     SimpleBoolResponseToJSON,
     WorkspaceCreateRequestFromJSON,

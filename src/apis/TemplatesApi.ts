@@ -15,24 +15,24 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   AppSchemasV1DocumentRenderRequest,
   CustomTemplateResponse,
   CustomTemplatesListResponse,
-  HTTPValidationError,
   TemplateCreateRequest,
   TemplateDetailResponse,
   TemplatePatchRequest,
   TemplatesListResponse,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     AppSchemasV1DocumentRenderRequestFromJSON,
     AppSchemasV1DocumentRenderRequestToJSON,
     CustomTemplateResponseFromJSON,
     CustomTemplateResponseToJSON,
     CustomTemplatesListResponseFromJSON,
     CustomTemplatesListResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
     TemplateCreateRequestFromJSON,
     TemplateCreateRequestToJSON,
     TemplateDetailResponseFromJSON,

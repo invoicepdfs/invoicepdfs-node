@@ -15,14 +15,16 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   BillingCheckoutRequest,
   BillingCheckoutResponse,
   BillingPlansListResponse,
   BillingPortalResponse,
   BillingSubscriptionResponse,
-  HTTPValidationError,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     BillingCheckoutRequestFromJSON,
     BillingCheckoutRequestToJSON,
     BillingCheckoutResponseFromJSON,
@@ -33,8 +35,6 @@ import {
     BillingPortalResponseToJSON,
     BillingSubscriptionResponseFromJSON,
     BillingSubscriptionResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
 } from '../models/index';
 
 export interface CreateCheckoutApiV1BillingCheckoutSessionPostRequest {

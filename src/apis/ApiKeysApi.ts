@@ -15,6 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   ApiKeyCreateRequest,
   ApiKeyCreateResponse,
   ApiKeyDetailResponse,
@@ -22,9 +23,10 @@ import type {
   ApiKeyPatchRequest,
   ApiKeyRevokeResponse,
   ApiKeyRotateResponse,
-  HTTPValidationError,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     ApiKeyCreateRequestFromJSON,
     ApiKeyCreateRequestToJSON,
     ApiKeyCreateResponseFromJSON,
@@ -39,8 +41,6 @@ import {
     ApiKeyRevokeResponseToJSON,
     ApiKeyRotateResponseFromJSON,
     ApiKeyRotateResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
 } from '../models/index';
 
 export interface CreateApiKeyApiV1ApiKeysPostRequest {

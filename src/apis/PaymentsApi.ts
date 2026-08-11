@@ -15,7 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
-  HTTPValidationError,
+  ApiErrorResponse,
   PaymentCreateRequest,
   PaymentPatchRequest,
   PaymentResponse,
@@ -23,8 +23,8 @@ import type {
   SimpleBoolResponse,
 } from '../models/index';
 import {
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     PaymentCreateRequestFromJSON,
     PaymentCreateRequestToJSON,
     PaymentPatchRequestFromJSON,

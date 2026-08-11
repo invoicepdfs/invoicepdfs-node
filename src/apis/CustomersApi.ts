@@ -15,14 +15,16 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   CustomerCreate,
   CustomerPatch,
   CustomerResponse,
   CustomersListResponse,
-  HTTPValidationError,
   SimpleBoolResponse,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     CustomerCreateFromJSON,
     CustomerCreateToJSON,
     CustomerPatchFromJSON,
@@ -31,8 +33,6 @@ import {
     CustomerResponseToJSON,
     CustomersListResponseFromJSON,
     CustomersListResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
     SimpleBoolResponseFromJSON,
     SimpleBoolResponseToJSON,
 } from '../models/index';

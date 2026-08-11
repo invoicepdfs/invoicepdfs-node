@@ -15,13 +15,15 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   BatchCreateRequest,
   BatchItemsListResponse,
   BatchResponse,
   BatchesListResponse,
-  HTTPValidationError,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     BatchCreateRequestFromJSON,
     BatchCreateRequestToJSON,
     BatchItemsListResponseFromJSON,
@@ -30,8 +32,6 @@ import {
     BatchResponseToJSON,
     BatchesListResponseFromJSON,
     BatchesListResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
 } from '../models/index';
 
 export interface CancelBatchApiV1BatchesBatchIdCancelPostRequest {

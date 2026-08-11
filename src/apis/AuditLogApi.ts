@@ -15,17 +15,17 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   AuditEventResponse,
   AuditEventsListResponse,
-  HTTPValidationError,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     AuditEventResponseFromJSON,
     AuditEventResponseToJSON,
     AuditEventsListResponseFromJSON,
     AuditEventsListResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
 } from '../models/index';
 
 export interface GetAuditEventApiV1AuditEventsAuditEventIdGetRequest {

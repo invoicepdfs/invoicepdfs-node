@@ -15,7 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
-  HTTPValidationError,
+  ApiErrorResponse,
   SimpleBoolResponse,
   WebhookDeliveriesListResponse,
   WebhookDeliveryResponse,
@@ -26,8 +26,8 @@ import type {
   WebhookSecretResponse,
 } from '../models/index';
 import {
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     SimpleBoolResponseFromJSON,
     SimpleBoolResponseToJSON,
     WebhookDeliveriesListResponseFromJSON,

@@ -31,6 +31,8 @@ src/apis/WebhooksApi.ts
 src/apis/WorkspacesApi.ts
 src/apis/index.ts
 src/index.ts
+src/models/ApiErrorResponse.ts
+src/models/ApiErrorResponseError.ts
 src/models/ApiKeyCreateRequest.ts
 src/models/ApiKeyCreateResponse.ts
 src/models/ApiKeyCreated.ts
@@ -125,7 +127,6 @@ src/models/DocumentValidateResponse.ts
 src/models/DocumentsListResponse.ts
 src/models/FileOut.ts
 src/models/FileResponse.ts
-src/models/HTTPValidationError.ts
 src/models/HealthResponse.ts
 src/models/ImportCreateRequest.ts
 src/models/ImportOut.ts
@@ -153,7 +154,6 @@ src/models/JobProgressOut.ts
 src/models/JobResponse.ts
 src/models/LineItemDiscountInput.ts
 src/models/LineItemTaxInput.ts
-src/models/LocationInner.ts
 src/models/Money.ts
 src/models/MoneyOut.ts
 src/models/NumberingSequenceCreateRequest.ts
@@ -199,7 +199,6 @@ src/models/UsageData.ts
 src/models/UsagePeriod.ts
 src/models/UsageRenders.ts
 src/models/UsageResponse.ts
-src/models/ValidationError.ts
 src/models/VersionResponse.ts
 src/models/WebhookDeliveriesListResponse.ts
 src/models/WebhookDeliveryOut.ts

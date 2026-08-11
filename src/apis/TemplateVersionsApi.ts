@@ -15,14 +15,14 @@
 
 import * as runtime from '../runtime';
 import type {
-  HTTPValidationError,
+  ApiErrorResponse,
   TemplateVersionCreateRequest,
   TemplateVersionResponse,
   TemplateVersionsListResponse,
 } from '../models/index';
 import {
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     TemplateVersionCreateRequestFromJSON,
     TemplateVersionCreateRequestToJSON,
     TemplateVersionResponseFromJSON,

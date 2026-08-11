@@ -15,6 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   AppDocumentsSchemasDocumentRenderRequest,
   AppSchemasV1DocumentRenderRequest,
   DeliveriesListResponse,
@@ -28,10 +29,11 @@ import type {
   DocumentValidateRequest,
   DocumentValidateResponse,
   DocumentsListResponse,
-  HTTPValidationError,
   SimpleBoolResponse,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     AppDocumentsSchemasDocumentRenderRequestFromJSON,
     AppDocumentsSchemasDocumentRenderRequestToJSON,
     AppSchemasV1DocumentRenderRequestFromJSON,
@@ -58,8 +60,6 @@ import {
     DocumentValidateResponseToJSON,
     DocumentsListResponseFromJSON,
     DocumentsListResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
     SimpleBoolResponseFromJSON,
     SimpleBoolResponseToJSON,
 } from '../models/index';

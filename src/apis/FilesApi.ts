@@ -15,15 +15,15 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   FileResponse,
-  HTTPValidationError,
   SimpleBoolResponse,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     FileResponseFromJSON,
     FileResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
     SimpleBoolResponseFromJSON,
     SimpleBoolResponseToJSON,
 } from '../models/index';

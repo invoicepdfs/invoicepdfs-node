@@ -15,11 +15,11 @@
 
 import * as runtime from '../runtime';
 import type {
-  HTTPValidationError,
+  ApiErrorResponse,
 } from '../models/index';
 import {
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
 } from '../models/index';
 
 export interface DownloadRenderApiV1RendersRenderIdDownloadGetRequest {

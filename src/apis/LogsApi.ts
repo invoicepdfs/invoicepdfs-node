@@ -15,14 +15,14 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   ApiRequestLogsListResponse,
-  HTTPValidationError,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     ApiRequestLogsListResponseFromJSON,
     ApiRequestLogsListResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
 } from '../models/index';
 
 export interface ListLogsApiV1LogsGetRequest {

@@ -15,7 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
-  HTTPValidationError,
+  ApiErrorResponse,
   SimpleBoolResponse,
   TaxRateCreateRequest,
   TaxRatePatchRequest,
@@ -23,8 +23,8 @@ import type {
   TaxRatesListResponse,
 } from '../models/index';
 import {
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     SimpleBoolResponseFromJSON,
     SimpleBoolResponseToJSON,
     TaxRateCreateRequestFromJSON,

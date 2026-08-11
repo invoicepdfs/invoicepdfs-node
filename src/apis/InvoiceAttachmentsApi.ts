@@ -15,15 +15,15 @@
 
 import * as runtime from '../runtime';
 import type {
-  HTTPValidationError,
+  ApiErrorResponse,
   InvoiceAttachmentCreateRequest,
   InvoiceAttachmentResponse,
   InvoiceAttachmentsListResponse,
   SimpleBoolResponse,
 } from '../models/index';
 import {
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     InvoiceAttachmentCreateRequestFromJSON,
     InvoiceAttachmentCreateRequestToJSON,
     InvoiceAttachmentResponseFromJSON,

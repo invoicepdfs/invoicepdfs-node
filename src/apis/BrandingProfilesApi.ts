@@ -15,14 +15,16 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   BrandingProfileCreateRequest,
   BrandingProfilePatchRequest,
   BrandingProfileResponse,
   BrandingProfilesListResponse,
-  HTTPValidationError,
   SimpleBoolResponse,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     BrandingProfileCreateRequestFromJSON,
     BrandingProfileCreateRequestToJSON,
     BrandingProfilePatchRequestFromJSON,
@@ -31,8 +33,6 @@ import {
     BrandingProfileResponseToJSON,
     BrandingProfilesListResponseFromJSON,
     BrandingProfilesListResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
     SimpleBoolResponseFromJSON,
     SimpleBoolResponseToJSON,
 } from '../models/index';

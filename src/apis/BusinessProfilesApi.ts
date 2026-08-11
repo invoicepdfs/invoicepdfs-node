@@ -15,14 +15,16 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   BusinessProfileCreate,
   BusinessProfilePatch,
   BusinessProfileResponse,
   BusinessProfilesListResponse,
-  HTTPValidationError,
   SimpleBoolResponse,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     BusinessProfileCreateFromJSON,
     BusinessProfileCreateToJSON,
     BusinessProfilePatchFromJSON,
@@ -31,8 +33,6 @@ import {
     BusinessProfileResponseToJSON,
     BusinessProfilesListResponseFromJSON,
     BusinessProfilesListResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
     SimpleBoolResponseFromJSON,
     SimpleBoolResponseToJSON,
 } from '../models/index';

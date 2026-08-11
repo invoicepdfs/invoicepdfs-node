@@ -15,7 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
-  HTTPValidationError,
+  ApiErrorResponse,
   NumberingSequenceCreateRequest,
   NumberingSequencePatchRequest,
   NumberingSequencePreviewResponse,
@@ -24,8 +24,8 @@ import type {
   SimpleBoolResponse,
 } from '../models/index';
 import {
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     NumberingSequenceCreateRequestFromJSON,
     NumberingSequenceCreateRequestToJSON,
     NumberingSequencePatchRequestFromJSON,

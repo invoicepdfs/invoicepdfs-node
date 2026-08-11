@@ -15,6 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   AuthForgotPasswordRequest,
   AuthMePatchRequest,
   AuthMeResponse,
@@ -26,9 +27,10 @@ import type {
   AuthResetPasswordRequest,
   AuthTokenRequest,
   AuthTokenResponse,
-  HTTPValidationError,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     AuthForgotPasswordRequestFromJSON,
     AuthForgotPasswordRequestToJSON,
     AuthMePatchRequestFromJSON,
@@ -51,8 +53,6 @@ import {
     AuthTokenRequestToJSON,
     AuthTokenResponseFromJSON,
     AuthTokenResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
 } from '../models/index';
 
 export interface ForgotPasswordApiV1AuthForgotPasswordPostRequest {

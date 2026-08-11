@@ -15,14 +15,14 @@
 
 import * as runtime from '../runtime';
 import type {
+  ApiErrorResponse,
   DeliveryResponse,
-  HTTPValidationError,
 } from '../models/index';
 import {
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     DeliveryResponseFromJSON,
     DeliveryResponseToJSON,
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
 } from '../models/index';
 
 export interface GetDeliveryApiV1DeliveriesDeliveryIdGetRequest {

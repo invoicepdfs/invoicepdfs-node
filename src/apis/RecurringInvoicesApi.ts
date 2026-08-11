@@ -15,7 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
-  HTTPValidationError,
+  ApiErrorResponse,
   InvoicesListResponse,
   RecurringInvoiceCreateRequest,
   RecurringInvoicePatchRequest,
@@ -23,8 +23,8 @@ import type {
   RecurringInvoicesListResponse,
 } from '../models/index';
 import {
-    HTTPValidationErrorFromJSON,
-    HTTPValidationErrorToJSON,
+    ApiErrorResponseFromJSON,
+    ApiErrorResponseToJSON,
     InvoicesListResponseFromJSON,
     InvoicesListResponseToJSON,
     RecurringInvoiceCreateRequestFromJSON,
