@@ -273,7 +273,7 @@ export class ApiKeysApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Api Key
+     * Update Api Key
      */
     async updateApiKeyRaw(requestParameters: UpdateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKeyDetailResponse>> {
         if (requestParameters['apiKeyId'] == null) {
@@ -316,7 +316,7 @@ export class ApiKeysApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Api Key
+     * Update Api Key
      */
     async updateApiKey(requestParameters: UpdateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKeyDetailResponse> {
         const response = await this.updateApiKeyRaw(requestParameters, initOverrides);

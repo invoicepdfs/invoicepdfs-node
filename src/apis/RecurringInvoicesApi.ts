@@ -383,7 +383,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Recurring Invoice
+     * Update Recurring Invoice
      */
     async updateRecurringInvoiceRaw(requestParameters: UpdateRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
         if (requestParameters['recurringId'] == null) {
@@ -426,7 +426,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Recurring Invoice
+     * Update Recurring Invoice
      */
     async updateRecurringInvoice(requestParameters: UpdateRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
         const response = await this.updateRecurringInvoiceRaw(requestParameters, initOverrides);

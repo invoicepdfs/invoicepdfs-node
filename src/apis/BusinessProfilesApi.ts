@@ -239,7 +239,7 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Business Profile
+     * Update Business Profile
      */
     async updateBusinessProfileRaw(requestParameters: UpdateBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfileResponse>> {
         if (requestParameters['businessProfileId'] == null) {
@@ -286,7 +286,7 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Business Profile
+     * Update Business Profile
      */
     async updateBusinessProfile(requestParameters: UpdateBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfileResponse> {
         const response = await this.updateBusinessProfileRaw(requestParameters, initOverrides);

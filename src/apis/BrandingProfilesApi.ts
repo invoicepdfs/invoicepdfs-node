@@ -73,7 +73,7 @@ export interface UploadBrandingLogoRequest {
 export class BrandingProfilesApi extends runtime.BaseAPI {
 
     /**
-     * Create Profile
+     * Create Branding Profile
      */
     async createBrandingProfileRaw(requestParameters: CreateBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
         if (requestParameters['brandingProfileCreateRequest'] == null) {
@@ -109,7 +109,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create Profile
+     * Create Branding Profile
      */
     async createBrandingProfile(requestParameters: CreateBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
         const response = await this.createBrandingProfileRaw(requestParameters, initOverrides);
@@ -117,7 +117,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Logo
+     * Delete Branding Logo
      */
     async deleteBrandingLogoRaw(requestParameters: DeleteBrandingLogoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['profileId'] == null) {
@@ -150,7 +150,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Logo
+     * Delete Branding Logo
      */
     async deleteBrandingLogo(requestParameters: DeleteBrandingLogoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
         const response = await this.deleteBrandingLogoRaw(requestParameters, initOverrides);
@@ -158,7 +158,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Profile
+     * Delete Branding Profile
      */
     async deleteBrandingProfileRaw(requestParameters: DeleteBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['profileId'] == null) {
@@ -191,7 +191,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Profile
+     * Delete Branding Profile
      */
     async deleteBrandingProfile(requestParameters: DeleteBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
         const response = await this.deleteBrandingProfileRaw(requestParameters, initOverrides);
@@ -199,7 +199,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get Profile
+     * Get Branding Profile
      */
     async getBrandingProfileRaw(requestParameters: GetBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
         if (requestParameters['profileId'] == null) {
@@ -232,7 +232,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get Profile
+     * Get Branding Profile
      */
     async getBrandingProfile(requestParameters: GetBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
         const response = await this.getBrandingProfileRaw(requestParameters, initOverrides);
@@ -240,7 +240,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * List Profiles
+     * List Branding Profiles
      */
     async listBrandingProfilesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfilesListResponse>> {
         const queryParameters: any = {};
@@ -266,7 +266,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * List Profiles
+     * List Branding Profiles
      */
     async listBrandingProfiles(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfilesListResponse> {
         const response = await this.listBrandingProfilesRaw(initOverrides);
@@ -274,7 +274,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Set Default
+     * Set Default Branding Profile
      */
     async setDefaultBrandingProfileRaw(requestParameters: SetDefaultBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
         if (requestParameters['profileId'] == null) {
@@ -307,7 +307,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Set Default
+     * Set Default Branding Profile
      */
     async setDefaultBrandingProfile(requestParameters: SetDefaultBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
         const response = await this.setDefaultBrandingProfileRaw(requestParameters, initOverrides);
@@ -315,7 +315,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update Profile
+     * Update Branding Profile
      */
     async updateBrandingProfileRaw(requestParameters: UpdateBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
         if (requestParameters['profileId'] == null) {
@@ -358,7 +358,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Update Profile
+     * Update Branding Profile
      */
     async updateBrandingProfile(requestParameters: UpdateBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
         const response = await this.updateBrandingProfileRaw(requestParameters, initOverrides);
@@ -366,7 +366,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Upload Logo
+     * Upload Branding Logo
      */
     async uploadBrandingLogoRaw(requestParameters: UploadBrandingLogoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
         if (requestParameters['profileId'] == null) {
@@ -427,7 +427,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Upload Logo
+     * Upload Branding Logo
      */
     async uploadBrandingLogo(requestParameters: UploadBrandingLogoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
         const response = await this.uploadBrandingLogoRaw(requestParameters, initOverrides);

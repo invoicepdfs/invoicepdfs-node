@@ -36,7 +36,7 @@ export interface ListUsageEventsRequest {
 export class UsageApi extends runtime.BaseAPI {
 
     /**
-     * Usage
+     * Get Usage
      */
     async getUsageRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UsageResponse>> {
         const queryParameters: any = {};
@@ -62,7 +62,7 @@ export class UsageApi extends runtime.BaseAPI {
     }
 
     /**
-     * Usage
+     * Get Usage
      */
     async getUsage(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UsageResponse> {
         const response = await this.getUsageRaw(initOverrides);
@@ -70,7 +70,7 @@ export class UsageApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get Limits
+     * Get Usage Limits
      */
     async getUsageLimitsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
         const queryParameters: any = {};
@@ -96,7 +96,7 @@ export class UsageApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get Limits
+     * Get Usage Limits
      */
     async getUsageLimits(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
         const response = await this.getUsageLimitsRaw(initOverrides);

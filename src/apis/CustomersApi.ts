@@ -239,7 +239,7 @@ export class CustomersApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Customer
+     * Update Customer
      */
     async updateCustomerRaw(requestParameters: UpdateCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomerResponse>> {
         if (requestParameters['customerId'] == null) {
@@ -286,7 +286,7 @@ export class CustomersApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Customer
+     * Update Customer
      */
     async updateCustomer(requestParameters: UpdateCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomerResponse> {
         const response = await this.updateCustomerRaw(requestParameters, initOverrides);

@@ -100,7 +100,7 @@ export interface UpdateWorkspaceMemberRequest {
 export class WorkspacesApi extends runtime.BaseAPI {
 
     /**
-     * Create Member
+     * Add Workspace Member
      */
     async addWorkspaceMemberRaw(requestParameters: AddWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceMembersListResponse>> {
         if (requestParameters['workspaceId'] == null) {
@@ -147,7 +147,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create Member
+     * Add Workspace Member
      */
     async addWorkspaceMember(requestParameters: AddWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceMembersListResponse> {
         const response = await this.addWorkspaceMemberRaw(requestParameters, initOverrides);
@@ -285,7 +285,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
-     * List Members
+     * List Workspace Members
      */
     async listWorkspaceMembersRaw(requestParameters: ListWorkspaceMembersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceMembersListResponse>> {
         if (requestParameters['workspaceId'] == null) {
@@ -318,7 +318,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
-     * List Members
+     * List Workspace Members
      */
     async listWorkspaceMembers(requestParameters: ListWorkspaceMembersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceMembersListResponse> {
         const response = await this.listWorkspaceMembersRaw(requestParameters, initOverrides);
@@ -368,7 +368,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Member
+     * Remove Workspace Member
      */
     async removeWorkspaceMemberRaw(requestParameters: RemoveWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['workspaceId'] == null) {
@@ -408,7 +408,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Member
+     * Remove Workspace Member
      */
     async removeWorkspaceMember(requestParameters: RemoveWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
         const response = await this.removeWorkspaceMemberRaw(requestParameters, initOverrides);
@@ -416,7 +416,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Workspace
+     * Update Workspace
      */
     async updateWorkspaceRaw(requestParameters: UpdateWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceResponse>> {
         if (requestParameters['workspaceId'] == null) {
@@ -463,7 +463,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Workspace
+     * Update Workspace
      */
     async updateWorkspace(requestParameters: UpdateWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceResponse> {
         const response = await this.updateWorkspaceRaw(requestParameters, initOverrides);
@@ -471,7 +471,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Member
+     * Update Workspace Member
      */
     async updateWorkspaceMemberRaw(requestParameters: UpdateWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceMemberOut>> {
         if (requestParameters['workspaceId'] == null) {
@@ -521,7 +521,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Member
+     * Update Workspace Member
      */
     async updateWorkspaceMember(requestParameters: UpdateWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceMemberOut> {
         const response = await this.updateWorkspaceMemberRaw(requestParameters, initOverrides);

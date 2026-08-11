@@ -54,7 +54,7 @@ export interface ListDocumentAttachmentsRequest {
 export class DocumentAttachmentsApi extends runtime.BaseAPI {
 
     /**
-     * Create Attachment
+     * Create Document Attachment
      */
     async createDocumentAttachmentRaw(requestParameters: CreateDocumentAttachmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InvoiceAttachmentResponse>> {
         if (requestParameters['documentId'] == null) {
@@ -97,7 +97,7 @@ export class DocumentAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create Attachment
+     * Create Document Attachment
      */
     async createDocumentAttachment(requestParameters: CreateDocumentAttachmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InvoiceAttachmentResponse> {
         const response = await this.createDocumentAttachmentRaw(requestParameters, initOverrides);
@@ -105,7 +105,7 @@ export class DocumentAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Attachment
+     * Delete Document Attachment
      */
     async deleteDocumentAttachmentRaw(requestParameters: DeleteDocumentAttachmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
         if (requestParameters['documentId'] == null) {
@@ -145,7 +145,7 @@ export class DocumentAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Delete Attachment
+     * Delete Document Attachment
      */
     async deleteDocumentAttachment(requestParameters: DeleteDocumentAttachmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
         const response = await this.deleteDocumentAttachmentRaw(requestParameters, initOverrides);
@@ -153,7 +153,7 @@ export class DocumentAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * List Attachments
+     * List Document Attachments
      */
     async listDocumentAttachmentsRaw(requestParameters: ListDocumentAttachmentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InvoiceAttachmentsListResponse>> {
         if (requestParameters['documentId'] == null) {
@@ -186,7 +186,7 @@ export class DocumentAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * List Attachments
+     * List Document Attachments
      */
     async listDocumentAttachments(requestParameters: ListDocumentAttachmentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InvoiceAttachmentsListResponse> {
         const response = await this.listDocumentAttachmentsRaw(requestParameters, initOverrides);

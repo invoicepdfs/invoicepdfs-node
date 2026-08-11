@@ -383,7 +383,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Templates
+     * List Templates
      */
     async listTemplatesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplatesListResponse>> {
         const queryParameters: any = {};
@@ -409,7 +409,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Templates
+     * List Templates
      */
     async listTemplates(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplatesListResponse> {
         const response = await this.listTemplatesRaw(initOverrides);
@@ -517,7 +517,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Template
+     * Update Template
      */
     async updateTemplateRaw(requestParameters: UpdateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
         if (requestParameters['templateId'] == null) {
@@ -560,7 +560,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Template
+     * Update Template
      */
     async updateTemplate(requestParameters: UpdateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
         const response = await this.updateTemplateRaw(requestParameters, initOverrides);

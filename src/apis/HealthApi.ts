@@ -34,7 +34,7 @@ import {
 export class HealthApi extends runtime.BaseAPI {
 
     /**
-     * Health
+     * Get Health
      */
     async getHealthRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HealthResponse>> {
         const queryParameters: any = {};
@@ -52,7 +52,7 @@ export class HealthApi extends runtime.BaseAPI {
     }
 
     /**
-     * Health
+     * Get Health
      */
     async getHealth(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<HealthResponse> {
         const response = await this.getHealthRaw(initOverrides);
@@ -60,7 +60,7 @@ export class HealthApi extends runtime.BaseAPI {
     }
 
     /**
-     * Ready
+     * Get Readiness
      */
     async getReadinessRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReadyResponse>> {
         const queryParameters: any = {};
@@ -78,7 +78,7 @@ export class HealthApi extends runtime.BaseAPI {
     }
 
     /**
-     * Ready
+     * Get Readiness
      */
     async getReadiness(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReadyResponse> {
         const response = await this.getReadinessRaw(initOverrides);
@@ -86,7 +86,7 @@ export class HealthApi extends runtime.BaseAPI {
     }
 
     /**
-     * Version
+     * Get Version
      */
     async getVersionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<VersionResponse>> {
         const queryParameters: any = {};
@@ -104,7 +104,7 @@ export class HealthApi extends runtime.BaseAPI {
     }
 
     /**
-     * Version
+     * Get Version
      */
     async getVersion(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<VersionResponse> {
         const response = await this.getVersionRaw(initOverrides);

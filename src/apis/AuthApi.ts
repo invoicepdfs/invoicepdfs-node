@@ -86,7 +86,7 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      * Exchange a Firebase ID token for account info.  Use this on login: the client authenticates with Firebase, sends the ID token here, and receives the InvoicePDFs account details. The Firebase token itself is used as the Bearer token for subsequent API calls.
-     * Token Exchange
+     * Exchange Auth Token
      */
     async exchangeAuthTokenRaw(requestParameters: ExchangeAuthTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthTokenResponse>> {
         if (requestParameters['authTokenRequest'] == null) {
@@ -115,7 +115,7 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      * Exchange a Firebase ID token for account info.  Use this on login: the client authenticates with Firebase, sends the ID token here, and receives the InvoicePDFs account details. The Firebase token itself is used as the Bearer token for subsequent API calls.
-     * Token Exchange
+     * Exchange Auth Token
      */
     async exchangeAuthToken(requestParameters: ExchangeAuthTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthTokenResponse> {
         const response = await this.exchangeAuthTokenRaw(requestParameters, initOverrides);
@@ -123,7 +123,7 @@ export class AuthApi extends runtime.BaseAPI {
     }
 
     /**
-     * Me
+     * Get Current User
      */
     async getCurrentUserRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMeResponse>> {
         const queryParameters: any = {};
@@ -149,7 +149,7 @@ export class AuthApi extends runtime.BaseAPI {
     }
 
     /**
-     * Me
+     * Get Current User
      */
     async getCurrentUser(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMeResponse> {
         const response = await this.getCurrentUserRaw(initOverrides);
@@ -194,7 +194,7 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      * Exchange a Firebase refresh token for a new ID token.
-     * Refresh
+     * Refresh Access Token
      */
     async refreshAccessTokenRaw(requestParameters: RefreshAccessTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthRefreshResponse>> {
         if (requestParameters['authRefreshRequest'] == null) {
@@ -223,7 +223,7 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      * Exchange a Firebase refresh token for a new ID token.
-     * Refresh
+     * Refresh Access Token
      */
     async refreshAccessToken(requestParameters: RefreshAccessTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthRefreshResponse> {
         const response = await this.refreshAccessTokenRaw(requestParameters, initOverrides);
@@ -270,7 +270,7 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      * Send a password reset email via Firebase.
-     * Forgot Password
+     * Request Password Reset
      */
     async requestPasswordResetRaw(requestParameters: RequestPasswordResetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMessageResponse>> {
         if (requestParameters['authForgotPasswordRequest'] == null) {
@@ -299,7 +299,7 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      * Send a password reset email via Firebase.
-     * Forgot Password
+     * Request Password Reset
      */
     async requestPasswordReset(requestParameters: RequestPasswordResetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMessageResponse> {
         const response = await this.requestPasswordResetRaw(requestParameters, initOverrides);
@@ -346,7 +346,7 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      * Update the authenticated account\'s name or email.
-     * Patch Me
+     * Update Current User
      */
     async updateCurrentUserRaw(requestParameters: UpdateCurrentUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMeResponse>> {
         if (requestParameters['authMePatchRequest'] == null) {
@@ -383,7 +383,7 @@ export class AuthApi extends runtime.BaseAPI {
 
     /**
      * Update the authenticated account\'s name or email.
-     * Patch Me
+     * Update Current User
      */
     async updateCurrentUser(requestParameters: UpdateCurrentUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMeResponse> {
         const response = await this.updateCurrentUserRaw(requestParameters, initOverrides);

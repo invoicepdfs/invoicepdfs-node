@@ -48,7 +48,7 @@ export class BillingApi extends runtime.BaseAPI {
 
     /**
      * Create a Stripe Checkout session for a subscription.
-     * Create Checkout
+     * Create Checkout Session
      */
     async createCheckoutSessionRaw(requestParameters: CreateCheckoutSessionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BillingCheckoutResponse>> {
         if (requestParameters['billingCheckoutRequest'] == null) {
@@ -85,7 +85,7 @@ export class BillingApi extends runtime.BaseAPI {
 
     /**
      * Create a Stripe Checkout session for a subscription.
-     * Create Checkout
+     * Create Checkout Session
      */
     async createCheckoutSession(requestParameters: CreateCheckoutSessionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BillingCheckoutResponse> {
         const response = await this.createCheckoutSessionRaw(requestParameters, initOverrides);
@@ -94,7 +94,7 @@ export class BillingApi extends runtime.BaseAPI {
 
     /**
      * Create a Stripe Customer Portal session for self-service management.
-     * Create Portal
+     * Create Portal Session
      */
     async createPortalSessionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BillingPortalResponse>> {
         const queryParameters: any = {};
@@ -121,7 +121,7 @@ export class BillingApi extends runtime.BaseAPI {
 
     /**
      * Create a Stripe Customer Portal session for self-service management.
-     * Create Portal
+     * Create Portal Session
      */
     async createPortalSession(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BillingPortalResponse> {
         const response = await this.createPortalSessionRaw(initOverrides);

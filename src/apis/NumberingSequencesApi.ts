@@ -77,7 +77,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
 
     /**
      * Consume and return the next number, incrementing the counter.
-     * Consume Next
+     * Consume Sequence Number
      */
     async consumeSequenceNumberRaw(requestParameters: ConsumeSequenceNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
         if (requestParameters['sequenceId'] == null) {
@@ -111,7 +111,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
 
     /**
      * Consume and return the next number, incrementing the counter.
-     * Consume Next
+     * Consume Sequence Number
      */
     async consumeSequenceNumber(requestParameters: ConsumeSequenceNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {
         const response = await this.consumeSequenceNumberRaw(requestParameters, initOverrides);

@@ -290,7 +290,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Render Document
+     * Create Document Render
      */
     async createDocumentRenderRaw(requestParameters: CreateDocumentRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
         if (requestParameters['documentId'] == null) {
@@ -341,7 +341,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Render Document
+     * Create Document Render
      */
     async createDocumentRender(requestParameters: CreateDocumentRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
         const response = await this.createDocumentRenderRaw(requestParameters, initOverrides);
@@ -879,7 +879,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Document
+     * Update Document
      */
     async updateDocumentRaw(requestParameters: UpdateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
         if (requestParameters['documentId'] == null) {
@@ -922,7 +922,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Patch Document
+     * Update Document
      */
     async updateDocument(requestParameters: UpdateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
         const response = await this.updateDocumentRaw(requestParameters, initOverrides);

@@ -67,7 +67,7 @@ export interface UpdatePaymentRequest {
 export class PaymentsApi extends runtime.BaseAPI {
 
     /**
-     * Create Payment
+     * Create Document Payment
      */
     async createDocumentPaymentRaw(requestParameters: CreateDocumentPaymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentResponse>> {
         if (requestParameters['documentId'] == null) {
@@ -110,7 +110,7 @@ export class PaymentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create Payment
+     * Create Document Payment
      */
     async createDocumentPayment(requestParameters: CreateDocumentPaymentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentResponse> {
         const response = await this.createDocumentPaymentRaw(requestParameters, initOverrides);
@@ -200,7 +200,7 @@ export class PaymentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * List Invoice Payments
+     * List Document Payments
      */
     async listDocumentPaymentsRaw(requestParameters: ListDocumentPaymentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentsListResponse>> {
         if (requestParameters['documentId'] == null) {
@@ -241,7 +241,7 @@ export class PaymentsApi extends runtime.BaseAPI {
     }
 
     /**
-     * List Invoice Payments
+     * List Document Payments
      */
     async listDocumentPayments(requestParameters: ListDocumentPaymentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentsListResponse> {
         const response = await this.listDocumentPaymentsRaw(requestParameters, initOverrides);
