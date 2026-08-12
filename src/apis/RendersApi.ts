@@ -16,10 +16,13 @@
 import * as runtime from '../runtime';
 import type {
   ApiErrorResponse,
+  RenderResponse,
 } from '../models/index';
 import {
     ApiErrorResponseFromJSON,
     ApiErrorResponseToJSON,
+    RenderResponseFromJSON,
+    RenderResponseToJSON,
 } from '../models/index';
 
 export interface DownloadRenderRequest {
@@ -79,7 +82,7 @@ export class RendersApi extends runtime.BaseAPI {
     /**
      * Get Render
      */
-    async getRenderRaw(requestParameters: GetRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async getRenderRaw(requestParameters: GetRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RenderResponse>> {
         if (requestParameters['renderId'] == null) {
             throw new runtime.RequiredError(
                 'renderId',
@@ -106,13 +109,13 @@ export class RendersApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => RenderResponseFromJSON(jsonValue));
     }
 
     /**
      * Get Render
      */
-    async getRender(requestParameters: GetRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+    async getRender(requestParameters: GetRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RenderResponse> {
         const response = await this.getRenderRaw(requestParameters, initOverrides);
         return await response.value();
     }

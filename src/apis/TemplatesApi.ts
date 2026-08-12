@@ -19,6 +19,7 @@ import type {
   CustomTemplateResponse,
   CustomTemplatesListResponse,
   DocumentRenderRequest,
+  RenderResponse,
   TemplateCreateRequest,
   TemplateDetailResponse,
   TemplatePatchRequest,
@@ -33,6 +34,8 @@ import {
     CustomTemplatesListResponseToJSON,
     DocumentRenderRequestFromJSON,
     DocumentRenderRequestToJSON,
+    RenderResponseFromJSON,
+    RenderResponseToJSON,
     TemplateCreateRequestFromJSON,
     TemplateCreateRequestToJSON,
     TemplateDetailResponseFromJSON,
@@ -419,7 +422,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     /**
      * Preview Template
      */
-    async previewTemplateRaw(requestParameters: PreviewTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+    async previewTemplateRaw(requestParameters: PreviewTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RenderResponse>> {
         if (requestParameters['templateId'] == null) {
             throw new runtime.RequiredError(
                 'templateId',
@@ -460,17 +463,13 @@ export class TemplatesApi extends runtime.BaseAPI {
             body: DocumentRenderRequestToJSON(requestParameters['documentRenderRequest']),
         }, initOverrides);
 
-        if (this.isJsonMime(response.headers.get('content-type'))) {
-            return new runtime.JSONApiResponse<any>(response);
-        } else {
-            return new runtime.TextApiResponse(response) as any;
-        }
+        return new runtime.JSONApiResponse(response, (jsonValue) => RenderResponseFromJSON(jsonValue));
     }
 
     /**
      * Preview Template
      */
-    async previewTemplate(requestParameters: PreviewTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+    async previewTemplate(requestParameters: PreviewTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RenderResponse> {
         const response = await this.previewTemplateRaw(requestParameters, initOverrides);
         return await response.value();
     }

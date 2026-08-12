@@ -16,11 +16,17 @@
 import * as runtime from '../runtime';
 import type {
   ApiErrorResponse,
+  UsageEventsListResponse,
+  UsageLimitsResponse,
   UsageResponse,
 } from '../models/index';
 import {
     ApiErrorResponseFromJSON,
     ApiErrorResponseToJSON,
+    UsageEventsListResponseFromJSON,
+    UsageEventsListResponseToJSON,
+    UsageLimitsResponseFromJSON,
+    UsageLimitsResponseToJSON,
     UsageResponseFromJSON,
     UsageResponseToJSON,
 } from '../models/index';
@@ -72,7 +78,7 @@ export class UsageApi extends runtime.BaseAPI {
     /**
      * Get Usage Limits
      */
-    async getUsageLimitsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async getUsageLimitsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UsageLimitsResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -92,13 +98,13 @@ export class UsageApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => UsageLimitsResponseFromJSON(jsonValue));
     }
 
     /**
      * Get Usage Limits
      */
-    async getUsageLimits(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+    async getUsageLimits(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UsageLimitsResponse> {
         const response = await this.getUsageLimitsRaw(initOverrides);
         return await response.value();
     }
@@ -106,7 +112,7 @@ export class UsageApi extends runtime.BaseAPI {
     /**
      * List Usage Events
      */
-    async listUsageEventsRaw(requestParameters: ListUsageEventsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listUsageEventsRaw(requestParameters: ListUsageEventsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UsageEventsListResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -134,13 +140,13 @@ export class UsageApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => UsageEventsListResponseFromJSON(jsonValue));
     }
 
     /**
      * List Usage Events
      */
-    async listUsageEvents(requestParameters: ListUsageEventsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+    async listUsageEvents(requestParameters: ListUsageEventsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UsageEventsListResponse> {
         const response = await this.listUsageEventsRaw(requestParameters, initOverrides);
         return await response.value();
     }

@@ -14,6 +14,28 @@
 
 
 import * as runtime from '../runtime';
+import type {
+  CountriesListResponse,
+  CurrenciesListResponse,
+  DocumentTypesListResponse,
+  LocalesListResponse,
+  PageSizesListResponse,
+  TimezonesListResponse,
+} from '../models/index';
+import {
+    CountriesListResponseFromJSON,
+    CountriesListResponseToJSON,
+    CurrenciesListResponseFromJSON,
+    CurrenciesListResponseToJSON,
+    DocumentTypesListResponseFromJSON,
+    DocumentTypesListResponseToJSON,
+    LocalesListResponseFromJSON,
+    LocalesListResponseToJSON,
+    PageSizesListResponseFromJSON,
+    PageSizesListResponseToJSON,
+    TimezonesListResponseFromJSON,
+    TimezonesListResponseToJSON,
+} from '../models/index';
 
 /**
  * 
@@ -23,7 +45,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     /**
      * List Countries
      */
-    async listCountriesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listCountriesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CountriesListResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -35,13 +57,13 @@ export class ReferenceApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => CountriesListResponseFromJSON(jsonValue));
     }
 
     /**
      * List Countries
      */
-    async listCountries(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+    async listCountries(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CountriesListResponse> {
         const response = await this.listCountriesRaw(initOverrides);
         return await response.value();
     }
@@ -49,7 +71,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     /**
      * List Currencies
      */
-    async listCurrenciesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listCurrenciesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CurrenciesListResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -61,13 +83,13 @@ export class ReferenceApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => CurrenciesListResponseFromJSON(jsonValue));
     }
 
     /**
      * List Currencies
      */
-    async listCurrencies(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+    async listCurrencies(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CurrenciesListResponse> {
         const response = await this.listCurrenciesRaw(initOverrides);
         return await response.value();
     }
@@ -76,7 +98,7 @@ export class ReferenceApi extends runtime.BaseAPI {
      * List every supported document type with the metadata a client needs to build a type-aware create form: the number prefix, whether it is payable / takes a source document / supports a reason, which line-item shape it uses (``standard`` = priced, ``shipped`` = quantities only), and the lifecycle actions available to it.
      * List Document Types
      */
-    async listDocumentTypesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listDocumentTypesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentTypesListResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -88,14 +110,14 @@ export class ReferenceApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentTypesListResponseFromJSON(jsonValue));
     }
 
     /**
      * List every supported document type with the metadata a client needs to build a type-aware create form: the number prefix, whether it is payable / takes a source document / supports a reason, which line-item shape it uses (``standard`` = priced, ``shipped`` = quantities only), and the lifecycle actions available to it.
      * List Document Types
      */
-    async listDocumentTypes(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+    async listDocumentTypes(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentTypesListResponse> {
         const response = await this.listDocumentTypesRaw(initOverrides);
         return await response.value();
     }
@@ -103,7 +125,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     /**
      * List Locales
      */
-    async listLocalesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listLocalesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LocalesListResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -115,13 +137,13 @@ export class ReferenceApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => LocalesListResponseFromJSON(jsonValue));
     }
 
     /**
      * List Locales
      */
-    async listLocales(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+    async listLocales(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LocalesListResponse> {
         const response = await this.listLocalesRaw(initOverrides);
         return await response.value();
     }
@@ -129,7 +151,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     /**
      * List Page Sizes
      */
-    async listPageSizesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listPageSizesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PageSizesListResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -141,13 +163,13 @@ export class ReferenceApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => PageSizesListResponseFromJSON(jsonValue));
     }
 
     /**
      * List Page Sizes
      */
-    async listPageSizes(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+    async listPageSizes(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PageSizesListResponse> {
         const response = await this.listPageSizesRaw(initOverrides);
         return await response.value();
     }
@@ -155,7 +177,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     /**
      * List Timezones
      */
-    async listTimezonesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: any; }>> {
+    async listTimezonesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TimezonesListResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -167,13 +189,13 @@ export class ReferenceApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => TimezonesListResponseFromJSON(jsonValue));
     }
 
     /**
      * List Timezones
      */
-    async listTimezones(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: any; }> {
+    async listTimezones(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TimezonesListResponse> {
         const response = await this.listTimezonesRaw(initOverrides);
         return await response.value();
     }

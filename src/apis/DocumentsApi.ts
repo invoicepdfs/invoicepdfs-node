@@ -29,6 +29,7 @@ import type {
   DocumentValidateRequest,
   DocumentValidateResponse,
   DocumentsListResponse,
+  RenderResponse,
   SimpleBoolResponse,
 } from '../models/index';
 import {
@@ -60,6 +61,8 @@ import {
     DocumentValidateResponseToJSON,
     DocumentsListResponseFromJSON,
     DocumentsListResponseToJSON,
+    RenderResponseFromJSON,
+    RenderResponseToJSON,
     SimpleBoolResponseFromJSON,
     SimpleBoolResponseToJSON,
 } from '../models/index';
@@ -292,7 +295,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Create Document Render
      */
-    async createDocumentRenderRaw(requestParameters: CreateDocumentRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+    async createDocumentRenderRaw(requestParameters: CreateDocumentRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RenderResponse>> {
         if (requestParameters['documentId'] == null) {
             throw new runtime.RequiredError(
                 'documentId',
@@ -333,17 +336,13 @@ export class DocumentsApi extends runtime.BaseAPI {
             body: DocumentRenderOptionsToJSON(requestParameters['documentRenderOptions']),
         }, initOverrides);
 
-        if (this.isJsonMime(response.headers.get('content-type'))) {
-            return new runtime.JSONApiResponse<any>(response);
-        } else {
-            return new runtime.TextApiResponse(response) as any;
-        }
+        return new runtime.JSONApiResponse(response, (jsonValue) => RenderResponseFromJSON(jsonValue));
     }
 
     /**
      * Create Document Render
      */
-    async createDocumentRender(requestParameters: CreateDocumentRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+    async createDocumentRender(requestParameters: CreateDocumentRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RenderResponse> {
         const response = await this.createDocumentRenderRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -737,7 +736,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     /**
      * Render Document
      */
-    async renderDocumentRaw(requestParameters: RenderDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+    async renderDocumentRaw(requestParameters: RenderDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RenderResponse>> {
         if (requestParameters['documentRenderRequest'] == null) {
             throw new runtime.RequiredError(
                 'documentRenderRequest',
@@ -771,17 +770,13 @@ export class DocumentsApi extends runtime.BaseAPI {
             body: DocumentRenderRequestToJSON(requestParameters['documentRenderRequest']),
         }, initOverrides);
 
-        if (this.isJsonMime(response.headers.get('content-type'))) {
-            return new runtime.JSONApiResponse<any>(response);
-        } else {
-            return new runtime.TextApiResponse(response) as any;
-        }
+        return new runtime.JSONApiResponse(response, (jsonValue) => RenderResponseFromJSON(jsonValue));
     }
 
     /**
      * Render Document
      */
-    async renderDocument(requestParameters: RenderDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+    async renderDocument(requestParameters: RenderDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RenderResponse> {
         const response = await this.renderDocumentRaw(requestParameters, initOverrides);
         return await response.value();
     }

@@ -154,7 +154,7 @@ export class BatchesApi extends runtime.BaseAPI {
     /**
      * Download Batch
      */
-    async downloadBatchRaw(requestParameters: DownloadBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<any>> {
+    async downloadBatchRaw(requestParameters: DownloadBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
         if (requestParameters['batchId'] == null) {
             throw new runtime.RequiredError(
                 'batchId',
@@ -181,17 +181,13 @@ export class BatchesApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        if (this.isJsonMime(response.headers.get('content-type'))) {
-            return new runtime.JSONApiResponse<any>(response);
-        } else {
-            return new runtime.TextApiResponse(response) as any;
-        }
+        return new runtime.BlobApiResponse(response);
     }
 
     /**
      * Download Batch
      */
-    async downloadBatch(requestParameters: DownloadBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<any> {
+    async downloadBatch(requestParameters: DownloadBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
         const response = await this.downloadBatchRaw(requestParameters, initOverrides);
         return await response.value();
     }

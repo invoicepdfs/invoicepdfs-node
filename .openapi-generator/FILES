@@ -90,6 +90,10 @@ src/models/BusinessProfilePatch.ts
 src/models/BusinessProfileResponse.ts
 src/models/BusinessProfilesListResponse.ts
 src/models/CalculationBreakdown.ts
+src/models/CountriesListResponse.ts
+src/models/CountryOut.ts
+src/models/CurrenciesListResponse.ts
+src/models/CurrencyOut.ts
 src/models/CursorPagination.ts
 src/models/CustomTemplateOut.ts
 src/models/CustomTemplateResponse.ts
@@ -122,6 +126,8 @@ src/models/DocumentRenderRequest.ts
 src/models/DocumentResponse.ts
 src/models/DocumentShippingInput.ts
 src/models/DocumentTemplateRef.ts
+src/models/DocumentTypeOut.ts
+src/models/DocumentTypesListResponse.ts
 src/models/DocumentValidateRequest.ts
 src/models/DocumentValidateResponse.ts
 src/models/DocumentsListResponse.ts
@@ -154,6 +160,8 @@ src/models/JobProgressOut.ts
 src/models/JobResponse.ts
 src/models/LineItemDiscountInput.ts
 src/models/LineItemTaxInput.ts
+src/models/LocaleOut.ts
+src/models/LocalesListResponse.ts
 src/models/Money.ts
 src/models/MoneyOut.ts
 src/models/NumberingSequenceCreateRequest.ts
@@ -162,6 +170,8 @@ src/models/NumberingSequencePatchRequest.ts
 src/models/NumberingSequencePreviewResponse.ts
 src/models/NumberingSequenceResponse.ts
 src/models/NumberingSequencesListResponse.ts
+src/models/PageSizeOut.ts
+src/models/PageSizesListResponse.ts
 src/models/PaymentCreateRequest.ts
 src/models/PaymentOut.ts
 src/models/PaymentPatchRequest.ts
@@ -174,6 +184,8 @@ src/models/RecurringInvoiceOut.ts
 src/models/RecurringInvoicePatchRequest.ts
 src/models/RecurringInvoiceResponse.ts
 src/models/RecurringInvoicesListResponse.ts
+src/models/RenderOut.ts
+src/models/RenderResponse.ts
 src/models/SimpleBoolResponse.ts
 src/models/StandardLineItemInput.ts
 src/models/StatsCounts.ts
@@ -195,8 +207,16 @@ src/models/TemplateVersionOut.ts
 src/models/TemplateVersionResponse.ts
 src/models/TemplateVersionsListResponse.ts
 src/models/TemplatesListResponse.ts
+src/models/TimezoneOut.ts
+src/models/TimezonesListResponse.ts
 src/models/UsageData.ts
+src/models/UsageEventOut.ts
+src/models/UsageEventsListResponse.ts
+src/models/UsageLimitsData.ts
+src/models/UsageLimitsResponse.ts
 src/models/UsagePeriod.ts
+src/models/UsageRateLimit.ts
+src/models/UsageRenderLimits.ts
 src/models/UsageRenders.ts
 src/models/UsageResponse.ts
 src/models/VersionResponse.ts
