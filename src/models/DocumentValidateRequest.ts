@@ -45,7 +45,13 @@ export interface DocumentValidateRequest {
  * @export
  */
 export const DocumentValidateRequestDocumentTypeEnum = {
-    Invoice: 'invoice'
+    Invoice: 'invoice',
+    CreditNote: 'credit_note',
+    Quote: 'quote',
+    Receipt: 'receipt',
+    Proforma: 'proforma',
+    PurchaseOrder: 'purchase_order',
+    DeliveryNote: 'delivery_note'
 } as const;
 export type DocumentValidateRequestDocumentTypeEnum = typeof DocumentValidateRequestDocumentTypeEnum[keyof typeof DocumentValidateRequestDocumentTypeEnum];
 

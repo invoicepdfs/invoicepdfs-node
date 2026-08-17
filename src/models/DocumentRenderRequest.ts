@@ -69,7 +69,13 @@ export interface DocumentRenderRequest {
  * @export
  */
 export const DocumentRenderRequestDocumentTypeEnum = {
-    Invoice: 'invoice'
+    Invoice: 'invoice',
+    CreditNote: 'credit_note',
+    Quote: 'quote',
+    Receipt: 'receipt',
+    Proforma: 'proforma',
+    PurchaseOrder: 'purchase_order',
+    DeliveryNote: 'delivery_note'
 } as const;
 export type DocumentRenderRequestDocumentTypeEnum = typeof DocumentRenderRequestDocumentTypeEnum[keyof typeof DocumentRenderRequestDocumentTypeEnum];
 

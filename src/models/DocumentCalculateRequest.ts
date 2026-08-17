@@ -45,7 +45,13 @@ export interface DocumentCalculateRequest {
  * @export
  */
 export const DocumentCalculateRequestDocumentTypeEnum = {
-    Invoice: 'invoice'
+    Invoice: 'invoice',
+    CreditNote: 'credit_note',
+    Quote: 'quote',
+    Receipt: 'receipt',
+    Proforma: 'proforma',
+    PurchaseOrder: 'purchase_order',
+    DeliveryNote: 'delivery_note'
 } as const;
 export type DocumentCalculateRequestDocumentTypeEnum = typeof DocumentCalculateRequestDocumentTypeEnum[keyof typeof DocumentCalculateRequestDocumentTypeEnum];
 
