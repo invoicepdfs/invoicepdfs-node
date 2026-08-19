@@ -164,6 +164,8 @@ src/models/LocaleOut.ts
 src/models/LocalesListResponse.ts
 src/models/Money.ts
 src/models/MoneyOut.ts
+src/models/NumberingNextOut.ts
+src/models/NumberingNextResponse.ts
 src/models/NumberingSequenceCreateRequest.ts
 src/models/NumberingSequenceOut.ts
 src/models/NumberingSequencePatchRequest.ts

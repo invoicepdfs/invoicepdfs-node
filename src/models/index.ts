@@ -133,6 +133,8 @@ export * from './LocaleOut';
 export * from './LocalesListResponse';
 export * from './Money';
 export * from './MoneyOut';
+export * from './NumberingNextOut';
+export * from './NumberingNextResponse';
 export * from './NumberingSequenceCreateRequest';
 export * from './NumberingSequenceOut';
 export * from './NumberingSequencePatchRequest';

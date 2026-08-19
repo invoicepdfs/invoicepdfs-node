@@ -16,6 +16,7 @@
 import * as runtime from '../runtime';
 import type {
   ApiErrorResponse,
+  NumberingNextResponse,
   NumberingSequenceCreateRequest,
   NumberingSequencePatchRequest,
   NumberingSequencePreviewResponse,
@@ -26,6 +27,8 @@ import type {
 import {
     ApiErrorResponseFromJSON,
     ApiErrorResponseToJSON,
+    NumberingNextResponseFromJSON,
+    NumberingNextResponseToJSON,
     NumberingSequenceCreateRequestFromJSON,
     NumberingSequenceCreateRequestToJSON,
     NumberingSequencePatchRequestFromJSON,
@@ -79,7 +82,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
      * Consume and return the next number, incrementing the counter.
      * Consume Sequence Number
      */
-    async consumeSequenceNumberRaw(requestParameters: ConsumeSequenceNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
+    async consumeSequenceNumberRaw(requestParameters: ConsumeSequenceNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingNextResponse>> {
         if (requestParameters['sequenceId'] == null) {
             throw new runtime.RequiredError(
                 'sequenceId',
@@ -106,14 +109,14 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => NumberingSequenceResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => NumberingNextResponseFromJSON(jsonValue));
     }
 
     /**
      * Consume and return the next number, incrementing the counter.
      * Consume Sequence Number
      */
-    async consumeSequenceNumber(requestParameters: ConsumeSequenceNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {
+    async consumeSequenceNumber(requestParameters: ConsumeSequenceNumberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingNextResponse> {
         const response = await this.consumeSequenceNumberRaw(requestParameters, initOverrides);
         return await response.value();
     }

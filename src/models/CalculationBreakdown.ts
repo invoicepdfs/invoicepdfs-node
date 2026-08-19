@@ -43,6 +43,12 @@ export interface CalculationBreakdown {
      * @type {Money}
      * @memberof CalculationBreakdown
      */
+    documentDiscountTotal?: Money;
+    /**
+     * 
+     * @type {Money}
+     * @memberof CalculationBreakdown
+     */
     taxTotal: Money;
     /**
      * 
@@ -82,6 +88,7 @@ export function CalculationBreakdownFromJSONTyped(json: any, ignoreDiscriminator
         
         'subtotal': MoneyFromJSON(json['subtotal']),
         'discountTotal': MoneyFromJSON(json['discount_total']),
+        'documentDiscountTotal': json['document_discount_total'] == null ? undefined : MoneyFromJSON(json['document_discount_total']),
         'taxTotal': MoneyFromJSON(json['tax_total']),
         'shippingTotal': MoneyFromJSON(json['shipping_total']),
         'total': MoneyFromJSON(json['total']),
@@ -96,6 +103,7 @@ export function CalculationBreakdownToJSON(value?: CalculationBreakdown | null):
         
         'subtotal': MoneyToJSON(value['subtotal']),
         'discount_total': MoneyToJSON(value['discountTotal']),
+        'document_discount_total': MoneyToJSON(value['documentDiscountTotal']),
         'tax_total': MoneyToJSON(value['taxTotal']),
         'shipping_total': MoneyToJSON(value['shippingTotal']),
         'total': MoneyToJSON(value['total']),
