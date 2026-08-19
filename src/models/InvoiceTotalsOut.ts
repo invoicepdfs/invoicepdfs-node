@@ -31,6 +31,12 @@ export interface InvoiceTotalsOut {
      * @type {MoneyOut}
      * @memberof InvoiceTotalsOut
      */
+    grossSubtotal?: MoneyOut;
+    /**
+     * 
+     * @type {MoneyOut}
+     * @memberof InvoiceTotalsOut
+     */
     subtotal: MoneyOut;
     /**
      * 
@@ -38,6 +44,12 @@ export interface InvoiceTotalsOut {
      * @memberof InvoiceTotalsOut
      */
     discountTotal: MoneyOut;
+    /**
+     * 
+     * @type {MoneyOut}
+     * @memberof InvoiceTotalsOut
+     */
+    documentDiscountTotal?: MoneyOut;
     /**
      * 
      * @type {MoneyOut}
@@ -80,8 +92,10 @@ export function InvoiceTotalsOutFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
+        'grossSubtotal': json['gross_subtotal'] == null ? undefined : MoneyOutFromJSON(json['gross_subtotal']),
         'subtotal': MoneyOutFromJSON(json['subtotal']),
         'discountTotal': MoneyOutFromJSON(json['discount_total']),
+        'documentDiscountTotal': json['document_discount_total'] == null ? undefined : MoneyOutFromJSON(json['document_discount_total']),
         'taxTotal': MoneyOutFromJSON(json['tax_total']),
         'shippingTotal': MoneyOutFromJSON(json['shipping_total']),
         'total': MoneyOutFromJSON(json['total']),
@@ -94,8 +108,10 @@ export function InvoiceTotalsOutToJSON(value?: InvoiceTotalsOut | null): any {
     }
     return {
         
+        'gross_subtotal': MoneyOutToJSON(value['grossSubtotal']),
         'subtotal': MoneyOutToJSON(value['subtotal']),
         'discount_total': MoneyOutToJSON(value['discountTotal']),
+        'document_discount_total': MoneyOutToJSON(value['documentDiscountTotal']),
         'tax_total': MoneyOutToJSON(value['taxTotal']),
         'shipping_total': MoneyOutToJSON(value['shippingTotal']),
         'total': MoneyOutToJSON(value['total']),
