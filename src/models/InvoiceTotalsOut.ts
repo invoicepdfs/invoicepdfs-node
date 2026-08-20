@@ -68,6 +68,18 @@ export interface InvoiceTotalsOut {
      * @memberof InvoiceTotalsOut
      */
     total: MoneyOut;
+    /**
+     * 
+     * @type {MoneyOut}
+     * @memberof InvoiceTotalsOut
+     */
+    recomputedTotal?: MoneyOut | null;
+    /**
+     * 
+     * @type {MoneyOut}
+     * @memberof InvoiceTotalsOut
+     */
+    totalsDrift?: MoneyOut | null;
 }
 
 /**
@@ -99,6 +111,8 @@ export function InvoiceTotalsOutFromJSONTyped(json: any, ignoreDiscriminator: bo
         'taxTotal': MoneyOutFromJSON(json['tax_total']),
         'shippingTotal': MoneyOutFromJSON(json['shipping_total']),
         'total': MoneyOutFromJSON(json['total']),
+        'recomputedTotal': json['recomputed_total'] == null ? undefined : MoneyOutFromJSON(json['recomputed_total']),
+        'totalsDrift': json['totals_drift'] == null ? undefined : MoneyOutFromJSON(json['totals_drift']),
     };
 }
 
@@ -115,6 +129,8 @@ export function InvoiceTotalsOutToJSON(value?: InvoiceTotalsOut | null): any {
         'tax_total': MoneyOutToJSON(value['taxTotal']),
         'shipping_total': MoneyOutToJSON(value['shippingTotal']),
         'total': MoneyOutToJSON(value['total']),
+        'recomputed_total': MoneyOutToJSON(value['recomputedTotal']),
+        'totals_drift': MoneyOutToJSON(value['totalsDrift']),
     };
 }
 
