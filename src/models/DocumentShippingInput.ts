@@ -31,6 +31,12 @@ export interface DocumentShippingInput {
      * @memberof DocumentShippingInput
      */
     amount: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DocumentShippingInput
+     */
+    taxable?: boolean;
 }
 
 /**
@@ -53,6 +59,7 @@ export function DocumentShippingInputFromJSONTyped(json: any, ignoreDiscriminato
         
         'description': json['description'] == null ? undefined : json['description'],
         'amount': json['amount'],
+        'taxable': json['taxable'] == null ? undefined : json['taxable'],
     };
 }
 
@@ -64,6 +71,7 @@ export function DocumentShippingInputToJSON(value?: DocumentShippingInput | null
         
         'description': value['description'],
         'amount': value['amount'],
+        'taxable': value['taxable'],
     };
 }
 
