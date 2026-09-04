@@ -24,37 +24,37 @@ export interface NumberingSequencePatchRequest {
      * @type {string}
      * @memberof NumberingSequencePatchRequest
      */
-    name?: string | null;
+    name?: string;
     /**
      * 
      * @type {string}
      * @memberof NumberingSequencePatchRequest
      */
-    prefix?: string | null;
+    prefix?: string;
     /**
      * 
      * @type {string}
      * @memberof NumberingSequencePatchRequest
      */
-    datePattern?: string | null;
+    datePattern?: string;
     /**
      * 
      * @type {number}
      * @memberof NumberingSequencePatchRequest
      */
-    padding?: number | null;
+    padding?: number;
     /**
      * 
      * @type {number}
      * @memberof NumberingSequencePatchRequest
      */
-    nextNumber?: number | null;
+    nextNumber?: number;
     /**
      * 
      * @type {string}
      * @memberof NumberingSequencePatchRequest
      */
-    reset?: NumberingSequencePatchRequestResetEnum | null;
+    reset?: NumberingSequencePatchRequestResetEnum;
 }
 
 

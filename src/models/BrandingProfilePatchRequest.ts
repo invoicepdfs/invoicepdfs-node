@@ -24,19 +24,19 @@ export interface BrandingProfilePatchRequest {
      * @type {string}
      * @memberof BrandingProfilePatchRequest
      */
-    name?: string | null;
+    name?: string;
     /**
      * 
      * @type {string}
      * @memberof BrandingProfilePatchRequest
      */
-    primaryColor?: string | null;
+    primaryColor?: string;
     /**
      * 
      * @type {string}
      * @memberof BrandingProfilePatchRequest
      */
-    accentColor?: string | null;
+    accentColor?: string;
     /**
      * 
      * @type {string}
@@ -54,19 +54,19 @@ export interface BrandingProfilePatchRequest {
      * @type {string}
      * @memberof BrandingProfilePatchRequest
      */
-    footerText?: string | null;
+    footerText?: string;
     /**
      * 
      * @type {boolean}
      * @memberof BrandingProfilePatchRequest
      */
-    hideInvoicepdfsBranding?: boolean | null;
+    hideInvoicepdfsBranding?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof BrandingProfilePatchRequest
      */
-    isDefault?: boolean | null;
+    isDefault?: boolean;
 }
 
 /**

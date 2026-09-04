@@ -31,13 +31,13 @@ export interface RecurringInvoicePatchRequest {
      * @type {string}
      * @memberof RecurringInvoicePatchRequest
      */
-    frequency?: string | null;
+    frequency?: string;
     /**
      * 
      * @type {number}
      * @memberof RecurringInvoicePatchRequest
      */
-    interval?: number | null;
+    interval?: number;
     /**
      * 
      * @type {Date}
@@ -61,13 +61,13 @@ export interface RecurringInvoicePatchRequest {
      * @type {boolean}
      * @memberof RecurringInvoicePatchRequest
      */
-    autoFinalize?: boolean | null;
+    autoFinalize?: boolean;
     /**
      * 
      * @type {InvoiceDraftRequest}
      * @memberof RecurringInvoicePatchRequest
      */
-    invoiceTemplate?: InvoiceDraftRequest | null;
+    invoiceTemplate?: InvoiceDraftRequest;
 }
 
 /**

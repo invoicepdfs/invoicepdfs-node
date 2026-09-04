@@ -24,7 +24,7 @@ export interface WebhookEndpointPatchRequest {
      * @type {string}
      * @memberof WebhookEndpointPatchRequest
      */
-    url?: string | null;
+    url?: string;
     /**
      * 
      * @type {string}
@@ -36,13 +36,13 @@ export interface WebhookEndpointPatchRequest {
      * @type {Array<string>}
      * @memberof WebhookEndpointPatchRequest
      */
-    events?: Array<string> | null;
+    events?: Array<string>;
     /**
      * 
      * @type {boolean}
      * @memberof WebhookEndpointPatchRequest
      */
-    isActive?: boolean | null;
+    isActive?: boolean;
 }
 
 /**

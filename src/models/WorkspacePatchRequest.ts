@@ -24,7 +24,7 @@ export interface WorkspacePatchRequest {
      * @type {string}
      * @memberof WorkspacePatchRequest
      */
-    name?: string | null;
+    name?: string;
 }
 
 /**

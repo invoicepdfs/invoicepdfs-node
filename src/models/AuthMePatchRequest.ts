@@ -24,7 +24,7 @@ export interface AuthMePatchRequest {
      * @type {string}
      * @memberof AuthMePatchRequest
      */
-    name?: string | null;
+    name?: string;
     /**
      * 
      * @type {string}

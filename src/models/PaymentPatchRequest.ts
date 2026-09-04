@@ -24,13 +24,13 @@ export interface PaymentPatchRequest {
      * @type {string}
      * @memberof PaymentPatchRequest
      */
-    amount?: string | null;
+    amount?: string;
     /**
      * 
      * @type {Date}
      * @memberof PaymentPatchRequest
      */
-    paidAt?: Date | null;
+    paidAt?: Date;
     /**
      * 
      * @type {string}
@@ -83,7 +83,7 @@ export function PaymentPatchRequestToJSON(value?: PaymentPatchRequest | null): a
     return {
         
         'amount': value['amount'],
-        'paid_at': value['paidAt'] == null ? undefined : ((value['paidAt'] as any).toISOString()),
+        'paid_at': value['paidAt'] == null ? undefined : ((value['paidAt']).toISOString()),
         'method': value['method'],
         'reference': value['reference'],
         'notes': value['notes'],

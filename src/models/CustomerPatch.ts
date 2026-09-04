@@ -31,7 +31,7 @@ export interface CustomerPatch {
      * @type {string}
      * @memberof CustomerPatch
      */
-    name?: string | null;
+    name?: string;
     /**
      * 
      * @type {string}

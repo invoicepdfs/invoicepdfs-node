@@ -24,19 +24,19 @@ export interface TaxRatePatchRequest {
      * @type {string}
      * @memberof TaxRatePatchRequest
      */
-    name?: string | null;
+    name?: string;
     /**
      * 
      * @type {string}
      * @memberof TaxRatePatchRequest
      */
-    rate?: string | null;
+    rate?: string;
     /**
      * 
      * @type {boolean}
      * @memberof TaxRatePatchRequest
      */
-    inclusive?: boolean | null;
+    inclusive?: boolean;
     /**
      * 
      * @type {string}
@@ -48,7 +48,7 @@ export interface TaxRatePatchRequest {
      * @type {boolean}
      * @memberof TaxRatePatchRequest
      */
-    isActive?: boolean | null;
+    isActive?: boolean;
 }
 
 /**

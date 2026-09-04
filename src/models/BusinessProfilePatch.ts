@@ -31,7 +31,7 @@ export interface BusinessProfilePatch {
      * @type {string}
      * @memberof BusinessProfilePatch
      */
-    legalName?: string | null;
+    legalName?: string;
     /**
      * 
      * @type {string}

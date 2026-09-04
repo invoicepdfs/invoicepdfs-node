@@ -24,7 +24,7 @@ export interface WorkspaceMemberPatchRequest {
      * @type {string}
      * @memberof WorkspaceMemberPatchRequest
      */
-    role?: WorkspaceMemberPatchRequestRoleEnum | null;
+    role?: WorkspaceMemberPatchRequestRoleEnum;
 }
 
 

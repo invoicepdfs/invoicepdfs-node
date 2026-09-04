@@ -24,7 +24,7 @@ export interface TemplatePatchRequest {
      * @type {string}
      * @memberof TemplatePatchRequest
      */
-    name?: string | null;
+    name?: string;
     /**
      * 
      * @type {string}
@@ -36,7 +36,7 @@ export interface TemplatePatchRequest {
      * @type {{ [key: string]: any; }}
      * @memberof TemplatePatchRequest
      */
-    config?: { [key: string]: any; } | null;
+    config?: { [key: string]: any; };
 }
 
 /**
