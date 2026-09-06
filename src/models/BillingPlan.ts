@@ -48,6 +48,18 @@ export interface BillingPlan {
      * @type {number}
      * @memberof BillingPlan
      */
+    priceCents?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof BillingPlan
+     */
+    priceCentsAnnual?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof BillingPlan
+     */
     monthlyRenderQuota: number;
     /**
      * 
@@ -88,6 +100,8 @@ export function BillingPlanFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'name': json['name'],
         'priceId': json['price_id'],
         'priceIdAnnual': json['price_id_annual'] == null ? undefined : json['price_id_annual'],
+        'priceCents': json['price_cents'] == null ? undefined : json['price_cents'],
+        'priceCentsAnnual': json['price_cents_annual'] == null ? undefined : json['price_cents_annual'],
         'monthlyRenderQuota': json['monthly_render_quota'],
         'allowBrandingRemoval': json['allow_branding_removal'] == null ? undefined : json['allow_branding_removal'],
         'overagePriceMillicents': json['overage_price_millicents'] == null ? undefined : json['overage_price_millicents'],
@@ -104,6 +118,8 @@ export function BillingPlanToJSON(value?: BillingPlan | null): any {
         'name': value['name'],
         'price_id': value['priceId'],
         'price_id_annual': value['priceIdAnnual'],
+        'price_cents': value['priceCents'],
+        'price_cents_annual': value['priceCentsAnnual'],
         'monthly_render_quota': value['monthlyRenderQuota'],
         'allow_branding_removal': value['allowBrandingRemoval'],
         'overage_price_millicents': value['overagePriceMillicents'],
