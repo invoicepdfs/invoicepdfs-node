@@ -73,6 +73,9 @@ src/models/BatchesListResponse.ts
 src/models/BillingCheckoutData.ts
 src/models/BillingCheckoutRequest.ts
 src/models/BillingCheckoutResponse.ts
+src/models/BillingOverageData.ts
+src/models/BillingOverageRequest.ts
+src/models/BillingOverageResponse.ts
 src/models/BillingPlan.ts
 src/models/BillingPlansListResponse.ts
 src/models/BillingPortalData.ts
@@ -216,6 +219,7 @@ src/models/UsageEventOut.ts
 src/models/UsageEventsListResponse.ts
 src/models/UsageLimitsData.ts
 src/models/UsageLimitsResponse.ts
+src/models/UsageOverage.ts
 src/models/UsagePeriod.ts
 src/models/UsageRateLimit.ts
 src/models/UsageRenderLimits.ts

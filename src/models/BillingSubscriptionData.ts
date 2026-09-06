@@ -55,6 +55,24 @@ export interface BillingSubscriptionData {
      * @memberof BillingSubscriptionData
      */
     hasBillingAccount?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BillingSubscriptionData
+     */
+    overageEnabled?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BillingSubscriptionData
+     */
+    overageAvailable?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof BillingSubscriptionData
+     */
+    overagePriceMillicents?: number | null;
 }
 
 /**
@@ -82,6 +100,9 @@ export function BillingSubscriptionDataFromJSONTyped(json: any, ignoreDiscrimina
         'planName': json['plan_name'],
         'stripeConfigured': json['stripe_configured'] == null ? undefined : json['stripe_configured'],
         'hasBillingAccount': json['has_billing_account'] == null ? undefined : json['has_billing_account'],
+        'overageEnabled': json['overage_enabled'] == null ? undefined : json['overage_enabled'],
+        'overageAvailable': json['overage_available'] == null ? undefined : json['overage_available'],
+        'overagePriceMillicents': json['overage_price_millicents'] == null ? undefined : json['overage_price_millicents'],
     };
 }
 
@@ -97,6 +118,9 @@ export function BillingSubscriptionDataToJSON(value?: BillingSubscriptionData | 
         'plan_name': value['planName'],
         'stripe_configured': value['stripeConfigured'],
         'has_billing_account': value['hasBillingAccount'],
+        'overage_enabled': value['overageEnabled'],
+        'overage_available': value['overageAvailable'],
+        'overage_price_millicents': value['overagePriceMillicents'],
     };
 }
 

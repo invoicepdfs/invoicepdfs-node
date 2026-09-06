@@ -49,6 +49,12 @@ export interface DocumentBrandingInput {
      * @memberof DocumentBrandingInput
      */
     footerText?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DocumentBrandingInput
+     */
+    hideInvoicepdfsBranding?: boolean;
 }
 
 /**
@@ -73,6 +79,7 @@ export function DocumentBrandingInputFromJSONTyped(json: any, ignoreDiscriminato
         'accentColor': json['accent_color'] == null ? undefined : json['accent_color'],
         'fontFamily': json['font_family'] == null ? undefined : json['font_family'],
         'footerText': json['footer_text'] == null ? undefined : json['footer_text'],
+        'hideInvoicepdfsBranding': json['hide_invoicepdfs_branding'] == null ? undefined : json['hide_invoicepdfs_branding'],
     };
 }
 
@@ -87,6 +94,7 @@ export function DocumentBrandingInputToJSON(value?: DocumentBrandingInput | null
         'accent_color': value['accentColor'],
         'font_family': value['fontFamily'],
         'footer_text': value['footerText'],
+        'hide_invoicepdfs_branding': value['hideInvoicepdfsBranding'],
     };
 }
 

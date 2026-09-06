@@ -39,10 +39,28 @@ export interface BillingPlan {
     priceId: string;
     /**
      * 
+     * @type {string}
+     * @memberof BillingPlan
+     */
+    priceIdAnnual?: string | null;
+    /**
+     * 
      * @type {number}
      * @memberof BillingPlan
      */
     monthlyRenderQuota: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BillingPlan
+     */
+    allowBrandingRemoval?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof BillingPlan
+     */
+    overagePriceMillicents?: number | null;
 }
 
 /**
@@ -69,7 +87,10 @@ export function BillingPlanFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'id': json['id'],
         'name': json['name'],
         'priceId': json['price_id'],
+        'priceIdAnnual': json['price_id_annual'] == null ? undefined : json['price_id_annual'],
         'monthlyRenderQuota': json['monthly_render_quota'],
+        'allowBrandingRemoval': json['allow_branding_removal'] == null ? undefined : json['allow_branding_removal'],
+        'overagePriceMillicents': json['overage_price_millicents'] == null ? undefined : json['overage_price_millicents'],
     };
 }
 
@@ -82,7 +103,10 @@ export function BillingPlanToJSON(value?: BillingPlan | null): any {
         'id': value['id'],
         'name': value['name'],
         'price_id': value['priceId'],
+        'price_id_annual': value['priceIdAnnual'],
         'monthly_render_quota': value['monthlyRenderQuota'],
+        'allow_branding_removal': value['allowBrandingRemoval'],
+        'overage_price_millicents': value['overagePriceMillicents'],
     };
 }
 

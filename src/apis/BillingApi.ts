@@ -18,6 +18,8 @@ import type {
   ApiErrorResponse,
   BillingCheckoutRequest,
   BillingCheckoutResponse,
+  BillingOverageRequest,
+  BillingOverageResponse,
   BillingPlansListResponse,
   BillingPortalResponse,
   BillingSubscriptionResponse,
@@ -29,6 +31,10 @@ import {
     BillingCheckoutRequestToJSON,
     BillingCheckoutResponseFromJSON,
     BillingCheckoutResponseToJSON,
+    BillingOverageRequestFromJSON,
+    BillingOverageRequestToJSON,
+    BillingOverageResponseFromJSON,
+    BillingOverageResponseToJSON,
     BillingPlansListResponseFromJSON,
     BillingPlansListResponseToJSON,
     BillingPortalResponseFromJSON,
@@ -39,6 +45,10 @@ import {
 
 export interface CreateCheckoutSessionRequest {
     billingCheckoutRequest: BillingCheckoutRequest;
+}
+
+export interface UpdateOverageSettingsRequest {
+    billingOverageRequest: BillingOverageRequest;
 }
 
 /**
@@ -197,6 +207,52 @@ export class BillingApi extends runtime.BaseAPI {
      */
     async listPlans(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BillingPlansListResponse> {
         const response = await this.listPlansRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Turn overage billing on or off for this account.  Off by default and stays off until asked: past the quota the API returns 429, which is a limit the customer can see coming. Overage replaces that limit with a charge, and nobody should meet that decision on an invoice.
+     * Update Overage Settings
+     */
+    async updateOverageSettingsRaw(requestParameters: UpdateOverageSettingsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BillingOverageResponse>> {
+        if (requestParameters['billingOverageRequest'] == null) {
+            throw new runtime.RequiredError(
+                'billingOverageRequest',
+                'Required parameter "billingOverageRequest" was null or undefined when calling updateOverageSettings().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/billing/overage`,
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: BillingOverageRequestToJSON(requestParameters['billingOverageRequest']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => BillingOverageResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Turn overage billing on or off for this account.  Off by default and stays off until asked: past the quota the API returns 429, which is a limit the customer can see coming. Overage replaces that limit with a charge, and nobody should meet that decision on an invoice.
+     * Update Overage Settings
+     */
+    async updateOverageSettings(requestParameters: UpdateOverageSettingsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BillingOverageResponse> {
+        const response = await this.updateOverageSettingsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

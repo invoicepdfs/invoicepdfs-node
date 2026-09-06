@@ -55,6 +55,12 @@ export interface InvoiceBrandingInput {
      * @memberof InvoiceBrandingInput
      */
     footerText?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InvoiceBrandingInput
+     */
+    hideInvoicepdfsBranding?: boolean;
 }
 
 /**
@@ -80,6 +86,7 @@ export function InvoiceBrandingInputFromJSONTyped(json: any, ignoreDiscriminator
         'fontFamily': json['font_family'] == null ? undefined : json['font_family'],
         'headerText': json['header_text'] == null ? undefined : json['header_text'],
         'footerText': json['footer_text'] == null ? undefined : json['footer_text'],
+        'hideInvoicepdfsBranding': json['hide_invoicepdfs_branding'] == null ? undefined : json['hide_invoicepdfs_branding'],
     };
 }
 
@@ -95,6 +102,7 @@ export function InvoiceBrandingInputToJSON(value?: InvoiceBrandingInput | null):
         'font_family': value['fontFamily'],
         'header_text': value['headerText'],
         'footer_text': value['footerText'],
+        'hide_invoicepdfs_branding': value['hideInvoicepdfsBranding'],
     };
 }
 

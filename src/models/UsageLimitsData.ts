@@ -13,6 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
+import type { UsageOverage } from './UsageOverage';
+import {
+    UsageOverageFromJSON,
+    UsageOverageFromJSONTyped,
+    UsageOverageToJSON,
+} from './UsageOverage';
 import type { UsageRateLimit } from './UsageRateLimit';
 import {
     UsageRateLimitFromJSON,
@@ -44,6 +50,12 @@ export interface UsageLimitsData {
      * @memberof UsageLimitsData
      */
     rateLimit: UsageRateLimit;
+    /**
+     * 
+     * @type {UsageOverage}
+     * @memberof UsageLimitsData
+     */
+    overage?: UsageOverage;
 }
 
 /**
@@ -67,6 +79,7 @@ export function UsageLimitsDataFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'renders': UsageRenderLimitsFromJSON(json['renders']),
         'rateLimit': UsageRateLimitFromJSON(json['rate_limit']),
+        'overage': json['overage'] == null ? undefined : UsageOverageFromJSON(json['overage']),
     };
 }
 
@@ -78,6 +91,7 @@ export function UsageLimitsDataToJSON(value?: UsageLimitsData | null): any {
         
         'renders': UsageRenderLimitsToJSON(value['renders']),
         'rate_limit': UsageRateLimitToJSON(value['rateLimit']),
+        'overage': UsageOverageToJSON(value['overage']),
     };
 }
 
