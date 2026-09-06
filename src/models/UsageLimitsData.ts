@@ -52,6 +52,12 @@ export interface UsageLimitsData {
     rateLimit: UsageRateLimit;
     /**
      * 
+     * @type {number}
+     * @memberof UsageLimitsData
+     */
+    apiLogRetention?: number;
+    /**
+     * 
      * @type {UsageOverage}
      * @memberof UsageLimitsData
      */
@@ -79,6 +85,7 @@ export function UsageLimitsDataFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'renders': UsageRenderLimitsFromJSON(json['renders']),
         'rateLimit': UsageRateLimitFromJSON(json['rate_limit']),
+        'apiLogRetention': json['api_log_retention'] == null ? undefined : json['api_log_retention'],
         'overage': json['overage'] == null ? undefined : UsageOverageFromJSON(json['overage']),
     };
 }
@@ -91,6 +98,7 @@ export function UsageLimitsDataToJSON(value?: UsageLimitsData | null): any {
         
         'renders': UsageRenderLimitsToJSON(value['renders']),
         'rate_limit': UsageRateLimitToJSON(value['rateLimit']),
+        'api_log_retention': value['apiLogRetention'],
         'overage': UsageOverageToJSON(value['overage']),
     };
 }

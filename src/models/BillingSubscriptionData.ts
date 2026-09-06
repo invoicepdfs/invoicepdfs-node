@@ -73,6 +73,12 @@ export interface BillingSubscriptionData {
      * @memberof BillingSubscriptionData
      */
     overagePriceMillicents?: number | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BillingSubscriptionData
+     */
+    allowBrandingRemoval?: boolean;
 }
 
 /**
@@ -103,6 +109,7 @@ export function BillingSubscriptionDataFromJSONTyped(json: any, ignoreDiscrimina
         'overageEnabled': json['overage_enabled'] == null ? undefined : json['overage_enabled'],
         'overageAvailable': json['overage_available'] == null ? undefined : json['overage_available'],
         'overagePriceMillicents': json['overage_price_millicents'] == null ? undefined : json['overage_price_millicents'],
+        'allowBrandingRemoval': json['allow_branding_removal'] == null ? undefined : json['allow_branding_removal'],
     };
 }
 
@@ -121,6 +128,7 @@ export function BillingSubscriptionDataToJSON(value?: BillingSubscriptionData | 
         'overage_enabled': value['overageEnabled'],
         'overage_available': value['overageAvailable'],
         'overage_price_millicents': value['overagePriceMillicents'],
+        'allow_branding_removal': value['allowBrandingRemoval'],
     };
 }
 
