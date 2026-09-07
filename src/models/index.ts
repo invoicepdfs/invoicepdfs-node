@@ -166,6 +166,7 @@ export * from './StatsCounts';
 export * from './StatsOverview';
 export * from './StatsRecentInvoice';
 export * from './StatsResponse';
+export * from './TaxCategory';
 export * from './TaxRateCreateRequest';
 export * from './TaxRateOut';
 export * from './TaxRatePatchRequest';

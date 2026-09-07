@@ -197,6 +197,7 @@ src/models/StatsCounts.ts
 src/models/StatsOverview.ts
 src/models/StatsRecentInvoice.ts
 src/models/StatsResponse.ts
+src/models/TaxCategory.ts
 src/models/TaxRateCreateRequest.ts
 src/models/TaxRateOut.ts
 src/models/TaxRatePatchRequest.ts

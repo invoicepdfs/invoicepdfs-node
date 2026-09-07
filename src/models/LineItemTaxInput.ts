@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { TaxCategory } from './TaxCategory';
+import {
+    TaxCategoryFromJSON,
+    TaxCategoryFromJSONTyped,
+    TaxCategoryToJSON,
+} from './TaxCategory';
+
 /**
  * 
  * @export
@@ -43,6 +50,12 @@ export interface LineItemTaxInput {
      * @memberof LineItemTaxInput
      */
     inclusive?: boolean;
+    /**
+     * 
+     * @type {TaxCategory}
+     * @memberof LineItemTaxInput
+     */
+    category?: TaxCategory | null;
 }
 
 /**
@@ -66,6 +79,7 @@ export function LineItemTaxInputFromJSONTyped(json: any, ignoreDiscriminator: bo
         'name': json['name'] == null ? undefined : json['name'],
         'rate': json['rate'] == null ? undefined : json['rate'],
         'inclusive': json['inclusive'] == null ? undefined : json['inclusive'],
+        'category': json['category'] == null ? undefined : TaxCategoryFromJSON(json['category']),
     };
 }
 
@@ -79,6 +93,7 @@ export function LineItemTaxInputToJSON(value?: LineItemTaxInput | null): any {
         'name': value['name'],
         'rate': value['rate'],
         'inclusive': value['inclusive'],
+        'category': TaxCategoryToJSON(value['category']),
     };
 }
 
