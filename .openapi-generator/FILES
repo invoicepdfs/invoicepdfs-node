@@ -93,6 +93,8 @@ src/models/BusinessProfilePatch.ts
 src/models/BusinessProfileResponse.ts
 src/models/BusinessProfilesListResponse.ts
 src/models/CalculationBreakdown.ts
+src/models/ComplianceCheckOut.ts
+src/models/ComplianceViolationOut.ts
 src/models/CountriesListResponse.ts
 src/models/CountryOut.ts
 src/models/CurrenciesListResponse.ts
@@ -113,6 +115,8 @@ src/models/DeliverySendRequest.ts
 src/models/DocumentBrandingInput.ts
 src/models/DocumentCalculateRequest.ts
 src/models/DocumentCalculateResponse.ts
+src/models/DocumentComplianceRequest.ts
+src/models/DocumentComplianceResponse.ts
 src/models/DocumentCreateRequest.ts
 src/models/DocumentCustomFieldInput.ts
 src/models/DocumentDiscountInput.ts

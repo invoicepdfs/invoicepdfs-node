@@ -130,6 +130,18 @@ export interface InvoiceDraftRequest {
     shipTo?: PostalAddress | null;
     /**
      * 
+     * @type {string}
+     * @memberof InvoiceDraftRequest
+     */
+    buyerReference?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof InvoiceDraftRequest
+     */
+    precedingInvoiceNumber?: string | null;
+    /**
+     * 
      * @type {Array<InvoiceLineItemInput>}
      * @memberof InvoiceDraftRequest
      */
@@ -226,6 +238,8 @@ export function InvoiceDraftRequestFromJSONTyped(json: any, ignoreDiscriminator:
         'businessProfileId': json['business_profile_id'],
         'customerId': json['customer_id'],
         'shipTo': json['ship_to'] == null ? undefined : PostalAddressFromJSON(json['ship_to']),
+        'buyerReference': json['buyer_reference'] == null ? undefined : json['buyer_reference'],
+        'precedingInvoiceNumber': json['preceding_invoice_number'] == null ? undefined : json['preceding_invoice_number'],
         'lineItems': ((json['line_items'] as Array<any>).map(InvoiceLineItemInputFromJSON)),
         'discounts': json['discounts'] == null ? undefined : ((json['discounts'] as Array<any>).map(InvoiceDiscountInputFromJSON)),
         'shipping': json['shipping'] == null ? undefined : InvoiceShippingInputFromJSON(json['shipping']),
@@ -252,6 +266,8 @@ export function InvoiceDraftRequestToJSON(value?: InvoiceDraftRequest | null): a
         'business_profile_id': value['businessProfileId'],
         'customer_id': value['customerId'],
         'ship_to': PostalAddressToJSON(value['shipTo']),
+        'buyer_reference': value['buyerReference'],
+        'preceding_invoice_number': value['precedingInvoiceNumber'],
         'line_items': ((value['lineItems'] as Array<any>).map(InvoiceLineItemInputToJSON)),
         'discounts': value['discounts'] == null ? undefined : ((value['discounts'] as Array<any>).map(InvoiceDiscountInputToJSON)),
         'shipping': InvoiceShippingInputToJSON(value['shipping']),

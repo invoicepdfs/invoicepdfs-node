@@ -21,6 +21,8 @@ import type {
   DeliverySendRequest,
   DocumentCalculateRequest,
   DocumentCalculateResponse,
+  DocumentComplianceRequest,
+  DocumentComplianceResponse,
   DocumentCreateRequest,
   DocumentPatchRequest,
   DocumentRenderOptions,
@@ -45,6 +47,10 @@ import {
     DocumentCalculateRequestToJSON,
     DocumentCalculateResponseFromJSON,
     DocumentCalculateResponseToJSON,
+    DocumentComplianceRequestFromJSON,
+    DocumentComplianceRequestToJSON,
+    DocumentComplianceResponseFromJSON,
+    DocumentComplianceResponseToJSON,
     DocumentCreateRequestFromJSON,
     DocumentCreateRequestToJSON,
     DocumentPatchRequestFromJSON,
@@ -144,6 +150,10 @@ export interface SendDocumentRequest {
 export interface UpdateDocumentRequest {
     documentId: string;
     documentPatchRequest: DocumentPatchRequest;
+}
+
+export interface ValidateComplianceRequest {
+    documentComplianceRequest: DocumentComplianceRequest;
 }
 
 export interface ValidateDocumentRequest {
@@ -921,6 +931,52 @@ export class DocumentsApi extends runtime.BaseAPI {
      */
     async updateDocument(requestParameters: UpdateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
         const response = await this.updateDocumentRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Check a document against an e-invoicing ruleset without rendering it.  Costs no renders: nothing is stored and no PDF is produced, so a caller can check every invoice they are about to send rather than discovering the problem from a rejection weeks later.  This is the semantic half — mandatory fields and conditional requirements. Schematron is the authoritative check and is not wired up yet, so a document that passes here is not thereby proven conformant. It says what it can prove is wrong, which is the useful half early.
+     * Validate Compliance
+     */
+    async validateComplianceRaw(requestParameters: ValidateComplianceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentComplianceResponse>> {
+        if (requestParameters['documentComplianceRequest'] == null) {
+            throw new runtime.RequiredError(
+                'documentComplianceRequest',
+                'Required parameter "documentComplianceRequest" was null or undefined when calling validateCompliance().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/documents/validate-compliance`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: DocumentComplianceRequestToJSON(requestParameters['documentComplianceRequest']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => DocumentComplianceResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Check a document against an e-invoicing ruleset without rendering it.  Costs no renders: nothing is stored and no PDF is produced, so a caller can check every invoice they are about to send rather than discovering the problem from a rejection weeks later.  This is the semantic half — mandatory fields and conditional requirements. Schematron is the authoritative check and is not wired up yet, so a document that passes here is not thereby proven conformant. It says what it can prove is wrong, which is the useful half early.
+     * Validate Compliance
+     */
+    async validateCompliance(requestParameters: ValidateComplianceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentComplianceResponse> {
+        const response = await this.validateComplianceRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
