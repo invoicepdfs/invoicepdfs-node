@@ -142,6 +142,12 @@ export interface DocumentPatchRequest {
     shipTo?: PostalAddress | null;
     /**
      * 
+     * @type {string}
+     * @memberof DocumentPatchRequest
+     */
+    buyerReference?: string | null;
+    /**
+     * 
      * @type {Array<StandardLineItemInput>}
      * @memberof DocumentPatchRequest
      */
@@ -234,6 +240,7 @@ export function DocumentPatchRequestFromJSONTyped(json: any, ignoreDiscriminator
         'sourceDocumentId': json['source_document_id'] == null ? undefined : json['source_document_id'],
         'reason': json['reason'] == null ? undefined : json['reason'],
         'shipTo': json['ship_to'] == null ? undefined : PostalAddressFromJSON(json['ship_to']),
+        'buyerReference': json['buyer_reference'] == null ? undefined : json['buyer_reference'],
         'lineItems': json['line_items'] == null ? undefined : ((json['line_items'] as Array<any>).map(StandardLineItemInputFromJSON)),
         'discounts': json['discounts'] == null ? undefined : ((json['discounts'] as Array<any>).map(LineItemDiscountInputFromJSON)),
         'shipping': json['shipping'] == null ? undefined : InvoiceShippingInputFromJSON(json['shipping']),
@@ -262,6 +269,7 @@ export function DocumentPatchRequestToJSON(value?: DocumentPatchRequest | null):
         'source_document_id': value['sourceDocumentId'],
         'reason': value['reason'],
         'ship_to': PostalAddressToJSON(value['shipTo']),
+        'buyer_reference': value['buyerReference'],
         'line_items': value['lineItems'] == null ? undefined : ((value['lineItems'] as Array<any>).map(StandardLineItemInputToJSON)),
         'discounts': value['discounts'] == null ? undefined : ((value['discounts'] as Array<any>).map(LineItemDiscountInputToJSON)),
         'shipping': InvoiceShippingInputToJSON(value['shipping']),

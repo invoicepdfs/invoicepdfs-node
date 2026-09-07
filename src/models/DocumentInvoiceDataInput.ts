@@ -106,6 +106,12 @@ export interface DocumentInvoiceDataInput {
     shipTo?: DocumentPartyInput | null;
     /**
      * 
+     * @type {string}
+     * @memberof DocumentInvoiceDataInput
+     */
+    buyerReference?: string | null;
+    /**
+     * 
      * @type {Array<DocumentLineItemInput>}
      * @memberof DocumentInvoiceDataInput
      */
@@ -172,6 +178,7 @@ export function DocumentInvoiceDataInputFromJSONTyped(json: any, ignoreDiscrimin
         'seller': DocumentPartyInputFromJSON(json['seller']),
         'buyer': DocumentPartyInputFromJSON(json['buyer']),
         'shipTo': json['ship_to'] == null ? undefined : DocumentPartyInputFromJSON(json['ship_to']),
+        'buyerReference': json['buyer_reference'] == null ? undefined : json['buyer_reference'],
         'lineItems': ((json['line_items'] as Array<any>).map(DocumentLineItemInputFromJSON)),
         'discounts': json['discounts'] == null ? undefined : ((json['discounts'] as Array<any>).map(DocumentDiscountInputFromJSON)),
         'shipping': json['shipping'] == null ? undefined : DocumentShippingInputFromJSON(json['shipping']),
@@ -194,6 +201,7 @@ export function DocumentInvoiceDataInputToJSON(value?: DocumentInvoiceDataInput 
         'seller': DocumentPartyInputToJSON(value['seller']),
         'buyer': DocumentPartyInputToJSON(value['buyer']),
         'ship_to': DocumentPartyInputToJSON(value['shipTo']),
+        'buyer_reference': value['buyerReference'],
         'line_items': ((value['lineItems'] as Array<any>).map(DocumentLineItemInputToJSON)),
         'discounts': value['discounts'] == null ? undefined : ((value['discounts'] as Array<any>).map(DocumentDiscountInputToJSON)),
         'shipping': DocumentShippingInputToJSON(value['shipping']),

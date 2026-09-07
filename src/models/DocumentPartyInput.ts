@@ -19,6 +19,12 @@ import {
     PostalAddressFromJSONTyped,
     PostalAddressToJSON,
 } from './PostalAddress';
+import type { ElectronicAddress } from './ElectronicAddress';
+import {
+    ElectronicAddressFromJSON,
+    ElectronicAddressFromJSONTyped,
+    ElectronicAddressToJSON,
+} from './ElectronicAddress';
 import type { InvoiceBankAccountInput } from './InvoiceBankAccountInput';
 import {
     InvoiceBankAccountInputFromJSON,
@@ -86,6 +92,12 @@ export interface DocumentPartyInput {
      * @memberof DocumentPartyInput
      */
     bankAccount?: InvoiceBankAccountInput | null;
+    /**
+     * 
+     * @type {ElectronicAddress}
+     * @memberof DocumentPartyInput
+     */
+    electronicAddress?: ElectronicAddress | null;
 }
 
 /**
@@ -115,6 +127,7 @@ export function DocumentPartyInputFromJSONTyped(json: any, ignoreDiscriminator: 
         'registrationNumber': json['registration_number'] == null ? undefined : json['registration_number'],
         'address': json['address'] == null ? undefined : PostalAddressFromJSON(json['address']),
         'bankAccount': json['bank_account'] == null ? undefined : InvoiceBankAccountInputFromJSON(json['bank_account']),
+        'electronicAddress': json['electronic_address'] == null ? undefined : ElectronicAddressFromJSON(json['electronic_address']),
     };
 }
 
@@ -133,6 +146,7 @@ export function DocumentPartyInputToJSON(value?: DocumentPartyInput | null): any
         'registration_number': value['registrationNumber'],
         'address': PostalAddressToJSON(value['address']),
         'bank_account': InvoiceBankAccountInputToJSON(value['bankAccount']),
+        'electronic_address': ElectronicAddressToJSON(value['electronicAddress']),
     };
 }
 

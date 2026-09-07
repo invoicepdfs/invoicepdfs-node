@@ -19,6 +19,12 @@ import {
     PostalAddressFromJSONTyped,
     PostalAddressToJSON,
 } from './PostalAddress';
+import type { ElectronicAddress } from './ElectronicAddress';
+import {
+    ElectronicAddressFromJSON,
+    ElectronicAddressFromJSONTyped,
+    ElectronicAddressToJSON,
+} from './ElectronicAddress';
 
 /**
  * 
@@ -70,6 +76,12 @@ export interface BusinessProfileCreate {
     address?: PostalAddress | null;
     /**
      * 
+     * @type {ElectronicAddress}
+     * @memberof BusinessProfileCreate
+     */
+    electronicAddress?: ElectronicAddress | null;
+    /**
+     * 
      * @type {string}
      * @memberof BusinessProfileCreate
      */
@@ -119,6 +131,7 @@ export function BusinessProfileCreateFromJSONTyped(json: any, ignoreDiscriminato
         'website': json['website'] == null ? undefined : json['website'],
         'taxId': json['tax_id'] == null ? undefined : json['tax_id'],
         'address': json['address'] == null ? undefined : PostalAddressFromJSON(json['address']),
+        'electronicAddress': json['electronic_address'] == null ? undefined : ElectronicAddressFromJSON(json['electronic_address']),
         'defaultCurrency': json['default_currency'] == null ? undefined : json['default_currency'],
         'defaultLocale': json['default_locale'] == null ? undefined : json['default_locale'],
         'defaultTimezone': json['default_timezone'] == null ? undefined : json['default_timezone'],
@@ -139,6 +152,7 @@ export function BusinessProfileCreateToJSON(value?: BusinessProfileCreate | null
         'website': value['website'],
         'tax_id': value['taxId'],
         'address': PostalAddressToJSON(value['address']),
+        'electronic_address': ElectronicAddressToJSON(value['electronicAddress']),
         'default_currency': value['defaultCurrency'],
         'default_locale': value['defaultLocale'],
         'default_timezone': value['defaultTimezone'],

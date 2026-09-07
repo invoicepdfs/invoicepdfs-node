@@ -103,6 +103,7 @@ export * from './DocumentTypesListResponse';
 export * from './DocumentValidateRequest';
 export * from './DocumentValidateResponse';
 export * from './DocumentsListResponse';
+export * from './ElectronicAddress';
 export * from './FileOut';
 export * from './FileResponse';
 export * from './HealthResponse';

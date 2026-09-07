@@ -134,6 +134,7 @@ src/models/DocumentTypesListResponse.ts
 src/models/DocumentValidateRequest.ts
 src/models/DocumentValidateResponse.ts
 src/models/DocumentsListResponse.ts
+src/models/ElectronicAddress.ts
 src/models/FileOut.ts
 src/models/FileResponse.ts
 src/models/HealthResponse.ts

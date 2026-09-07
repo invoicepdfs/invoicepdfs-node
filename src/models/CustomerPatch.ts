@@ -19,6 +19,12 @@ import {
     PostalAddressFromJSONTyped,
     PostalAddressToJSON,
 } from './PostalAddress';
+import type { ElectronicAddress } from './ElectronicAddress';
+import {
+    ElectronicAddressFromJSON,
+    ElectronicAddressFromJSONTyped,
+    ElectronicAddressToJSON,
+} from './ElectronicAddress';
 
 /**
  * 
@@ -64,6 +70,12 @@ export interface CustomerPatch {
     shippingAddress?: PostalAddress | null;
     /**
      * 
+     * @type {ElectronicAddress}
+     * @memberof CustomerPatch
+     */
+    electronicAddress?: ElectronicAddress | null;
+    /**
+     * 
      * @type {{ [key: string]: any; }}
      * @memberof CustomerPatch
      */
@@ -93,6 +105,7 @@ export function CustomerPatchFromJSONTyped(json: any, ignoreDiscriminator: boole
         'taxId': json['tax_id'] == null ? undefined : json['tax_id'],
         'billingAddress': json['billing_address'] == null ? undefined : PostalAddressFromJSON(json['billing_address']),
         'shippingAddress': json['shipping_address'] == null ? undefined : PostalAddressFromJSON(json['shipping_address']),
+        'electronicAddress': json['electronic_address'] == null ? undefined : ElectronicAddressFromJSON(json['electronic_address']),
         'metadata': json['metadata'] == null ? undefined : json['metadata'],
     };
 }
@@ -109,6 +122,7 @@ export function CustomerPatchToJSON(value?: CustomerPatch | null): any {
         'tax_id': value['taxId'],
         'billing_address': PostalAddressToJSON(value['billingAddress']),
         'shipping_address': PostalAddressToJSON(value['shippingAddress']),
+        'electronic_address': ElectronicAddressToJSON(value['electronicAddress']),
         'metadata': value['metadata'],
     };
 }

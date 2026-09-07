@@ -19,6 +19,12 @@ import {
     PostalAddressFromJSONTyped,
     PostalAddressToJSON,
 } from './PostalAddress';
+import type { ElectronicAddress } from './ElectronicAddress';
+import {
+    ElectronicAddressFromJSON,
+    ElectronicAddressFromJSONTyped,
+    ElectronicAddressToJSON,
+} from './ElectronicAddress';
 
 /**
  * 
@@ -62,6 +68,12 @@ export interface CustomerOut {
      * @memberof CustomerOut
      */
     shippingAddress?: PostalAddress | null;
+    /**
+     * 
+     * @type {ElectronicAddress}
+     * @memberof CustomerOut
+     */
+    electronicAddress?: ElectronicAddress | null;
     /**
      * 
      * @type {{ [key: string]: any; }}
@@ -115,6 +127,7 @@ export function CustomerOutFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'taxId': json['tax_id'] == null ? undefined : json['tax_id'],
         'billingAddress': json['billing_address'] == null ? undefined : PostalAddressFromJSON(json['billing_address']),
         'shippingAddress': json['shipping_address'] == null ? undefined : PostalAddressFromJSON(json['shipping_address']),
+        'electronicAddress': json['electronic_address'] == null ? undefined : ElectronicAddressFromJSON(json['electronic_address']),
         'metadata': json['metadata'] == null ? undefined : json['metadata'],
         'id': json['id'],
         'createdAt': json['created_at'],
@@ -134,6 +147,7 @@ export function CustomerOutToJSON(value?: CustomerOut | null): any {
         'tax_id': value['taxId'],
         'billing_address': PostalAddressToJSON(value['billingAddress']),
         'shipping_address': PostalAddressToJSON(value['shippingAddress']),
+        'electronic_address': ElectronicAddressToJSON(value['electronicAddress']),
         'metadata': value['metadata'],
         'id': value['id'],
         'created_at': value['createdAt'],
