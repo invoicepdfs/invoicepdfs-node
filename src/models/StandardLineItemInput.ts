@@ -67,6 +67,12 @@ export interface StandardLineItemInput {
      * @type {string}
      * @memberof StandardLineItemInput
      */
+    unitCode?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof StandardLineItemInput
+     */
     sku?: string | null;
     /**
      * 
@@ -106,6 +112,7 @@ export function StandardLineItemInputFromJSONTyped(json: any, ignoreDiscriminato
         'quantity': json['quantity'],
         'unitPrice': json['unit_price'] == null ? undefined : json['unit_price'],
         'unit': json['unit'] == null ? undefined : json['unit'],
+        'unitCode': json['unit_code'] == null ? undefined : json['unit_code'],
         'sku': json['sku'] == null ? undefined : json['sku'],
         'discount': json['discount'] == null ? undefined : LineItemDiscountInputFromJSON(json['discount']),
         'taxes': json['taxes'] == null ? undefined : ((json['taxes'] as Array<any>).map(LineItemTaxInputFromJSON)),
@@ -123,6 +130,7 @@ export function StandardLineItemInputToJSON(value?: StandardLineItemInput | null
         'quantity': value['quantity'],
         'unit_price': value['unitPrice'],
         'unit': value['unit'],
+        'unit_code': value['unitCode'],
         'sku': value['sku'],
         'discount': LineItemDiscountInputToJSON(value['discount']),
         'taxes': value['taxes'] == null ? undefined : ((value['taxes'] as Array<any>).map(LineItemTaxInputToJSON)),

@@ -67,6 +67,12 @@ export interface DocumentLineItemInput {
      * @type {string}
      * @memberof DocumentLineItemInput
      */
+    unitCode?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentLineItemInput
+     */
     sku?: string | null;
     /**
      * 
@@ -107,6 +113,7 @@ export function DocumentLineItemInputFromJSONTyped(json: any, ignoreDiscriminato
         'quantity': json['quantity'],
         'unitPrice': json['unit_price'],
         'unit': json['unit'] == null ? undefined : json['unit'],
+        'unitCode': json['unit_code'] == null ? undefined : json['unit_code'],
         'sku': json['sku'] == null ? undefined : json['sku'],
         'discount': json['discount'] == null ? undefined : DocumentDiscountInputFromJSON(json['discount']),
         'taxes': json['taxes'] == null ? undefined : ((json['taxes'] as Array<any>).map(DocumentLineItemTaxInputFromJSON)),
@@ -124,6 +131,7 @@ export function DocumentLineItemInputToJSON(value?: DocumentLineItemInput | null
         'quantity': value['quantity'],
         'unit_price': value['unitPrice'],
         'unit': value['unit'],
+        'unit_code': value['unitCode'],
         'sku': value['sku'],
         'discount': DocumentDiscountInputToJSON(value['discount']),
         'taxes': value['taxes'] == null ? undefined : ((value['taxes'] as Array<any>).map(DocumentLineItemTaxInputToJSON)),
