@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { TaxCategory } from './TaxCategory';
+import {
+    TaxCategoryFromJSON,
+    TaxCategoryFromJSONTyped,
+    TaxCategoryToJSON,
+} from './TaxCategory';
+
 /**
  * 
  * @export
@@ -49,6 +56,12 @@ export interface TaxRateOut {
      * @memberof TaxRateOut
      */
     jurisdiction?: string | null;
+    /**
+     * 
+     * @type {TaxCategory}
+     * @memberof TaxRateOut
+     */
+    category?: TaxCategory | null;
     /**
      * 
      * @type {boolean}
@@ -98,6 +111,7 @@ export function TaxRateOutFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'rate': json['rate'],
         'inclusive': json['inclusive'],
         'jurisdiction': json['jurisdiction'] == null ? undefined : json['jurisdiction'],
+        'category': json['category'] == null ? undefined : TaxCategoryFromJSON(json['category']),
         'isActive': json['is_active'],
         'createdAt': json['created_at'],
         'updatedAt': json['updated_at'],
@@ -115,6 +129,7 @@ export function TaxRateOutToJSON(value?: TaxRateOut | null): any {
         'rate': value['rate'],
         'inclusive': value['inclusive'],
         'jurisdiction': value['jurisdiction'],
+        'category': TaxCategoryToJSON(value['category']),
         'is_active': value['isActive'],
         'created_at': value['createdAt'],
         'updated_at': value['updatedAt'],

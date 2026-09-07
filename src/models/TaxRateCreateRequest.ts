@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { TaxCategory } from './TaxCategory';
+import {
+    TaxCategoryFromJSON,
+    TaxCategoryFromJSONTyped,
+    TaxCategoryToJSON,
+} from './TaxCategory';
+
 /**
  * 
  * @export
@@ -43,6 +50,12 @@ export interface TaxRateCreateRequest {
      * @memberof TaxRateCreateRequest
      */
     jurisdiction?: string | null;
+    /**
+     * 
+     * @type {TaxCategory}
+     * @memberof TaxRateCreateRequest
+     */
+    category?: TaxCategory | null;
 }
 
 /**
@@ -68,6 +81,7 @@ export function TaxRateCreateRequestFromJSONTyped(json: any, ignoreDiscriminator
         'rate': json['rate'],
         'inclusive': json['inclusive'] == null ? undefined : json['inclusive'],
         'jurisdiction': json['jurisdiction'] == null ? undefined : json['jurisdiction'],
+        'category': json['category'] == null ? undefined : TaxCategoryFromJSON(json['category']),
     };
 }
 
@@ -81,6 +95,7 @@ export function TaxRateCreateRequestToJSON(value?: TaxRateCreateRequest | null):
         'rate': value['rate'],
         'inclusive': value['inclusive'],
         'jurisdiction': value['jurisdiction'],
+        'category': TaxCategoryToJSON(value['category']),
     };
 }
 
