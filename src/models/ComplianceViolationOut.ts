@@ -20,13 +20,13 @@ import { mapValues } from '../runtime';
  */
 export interface ComplianceViolationOut {
     /**
-     * The EN 16931 term or group.
+     * The identifier the standard uses — a business term from the mandatory-field check, a rule id from Schematron. A rule id is what a rejection notice from an access point quotes.
      * @type {string}
      * @memberof ComplianceViolationOut
      */
     rule: string;
     /**
-     * Where in the document.
+     * Where the problem is. The mandatory-field check names a field of the request; Schematron names the node in the generated XML.
      * @type {string}
      * @memberof ComplianceViolationOut
      */
@@ -37,6 +37,18 @@ export interface ComplianceViolationOut {
      * @memberof ComplianceViolationOut
      */
     message: string;
+    /**
+     * `fatal` would get the document rejected. `warning` is a recommendation — both EN 16931 and Peppol grade a large share of their rules as advisory, and `valid` ignores those.
+     * @type {string}
+     * @memberof ComplianceViolationOut
+     */
+    severity?: string;
+    /**
+     * Which ruleset found it — matches an `id` in `rulesets`.
+     * @type {string}
+     * @memberof ComplianceViolationOut
+     */
+    ruleset?: string;
 }
 
 /**
@@ -62,6 +74,8 @@ export function ComplianceViolationOutFromJSONTyped(json: any, ignoreDiscriminat
         'rule': json['rule'],
         'path': json['path'],
         'message': json['message'],
+        'severity': json['severity'] == null ? undefined : json['severity'],
+        'ruleset': json['ruleset'] == null ? undefined : json['ruleset'],
     };
 }
 
@@ -74,6 +88,8 @@ export function ComplianceViolationOutToJSON(value?: ComplianceViolationOut | nu
         'rule': value['rule'],
         'path': value['path'],
         'message': value['message'],
+        'severity': value['severity'],
+        'ruleset': value['ruleset'],
     };
 }
 

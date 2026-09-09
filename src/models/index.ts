@@ -63,6 +63,7 @@ export * from './BusinessProfileResponse';
 export * from './BusinessProfilesListResponse';
 export * from './CalculationBreakdown';
 export * from './ComplianceCheckOut';
+export * from './ComplianceRulesetOut';
 export * from './ComplianceViolationOut';
 export * from './CountriesListResponse';
 export * from './CountryOut';

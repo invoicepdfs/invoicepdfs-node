@@ -94,6 +94,7 @@ src/models/BusinessProfileResponse.ts
 src/models/BusinessProfilesListResponse.ts
 src/models/CalculationBreakdown.ts
 src/models/ComplianceCheckOut.ts
+src/models/ComplianceRulesetOut.ts
 src/models/ComplianceViolationOut.ts
 src/models/CountriesListResponse.ts
 src/models/CountryOut.ts

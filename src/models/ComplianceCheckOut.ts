@@ -19,6 +19,12 @@ import {
     ComplianceViolationOutFromJSONTyped,
     ComplianceViolationOutToJSON,
 } from './ComplianceViolationOut';
+import type { ComplianceRulesetOut } from './ComplianceRulesetOut';
+import {
+    ComplianceRulesetOutFromJSON,
+    ComplianceRulesetOutFromJSONTyped,
+    ComplianceRulesetOutToJSON,
+} from './ComplianceRulesetOut';
 
 /**
  * 
@@ -33,19 +39,31 @@ export interface ComplianceCheckOut {
      */
     profile: string;
     /**
-     * The version these rules came from. Worth recording alongside any document you file — rulesets revise, and 'which rules did this pass?' is what an audit asks years later.
+     * The version these rules came from. Worth recording alongside any document you file — rulesets revise, and 'which rules did this pass?' is what an audit asks years later. `rulesets` breaks the same answer down per ruleset.
      * @type {string}
      * @memberof ComplianceCheckOut
      */
     rulesetVersion: string;
     /**
-     * 
+     * Nothing fatal was found. Read it with `fully_checked` — on its own it says what was checked came back clean, not that everything was checked.
      * @type {boolean}
      * @memberof ComplianceCheckOut
      */
     valid: boolean;
     /**
-     * Every violation found, not the first — fixing one field per round trip is the experience this avoids.
+     * Every ruleset that applies to this profile ran. False means at least one could not, and `rulesets` says which and why.
+     * @type {boolean}
+     * @memberof ComplianceCheckOut
+     */
+    fullyChecked?: boolean;
+    /**
+     * Every ruleset the document was held to, including the mandatory-field check, at the version that ran.
+     * @type {Array<ComplianceRulesetOut>}
+     * @memberof ComplianceCheckOut
+     */
+    rulesets?: Array<ComplianceRulesetOut>;
+    /**
+     * Every violation found, not the first — fixing one field per round trip is the experience this avoids. Ordered mandatory-field findings first, since those name a field you can go and change.
      * @type {Array<ComplianceViolationOut>}
      * @memberof ComplianceCheckOut
      */
@@ -75,6 +93,8 @@ export function ComplianceCheckOutFromJSONTyped(json: any, ignoreDiscriminator: 
         'profile': json['profile'],
         'rulesetVersion': json['ruleset_version'],
         'valid': json['valid'],
+        'fullyChecked': json['fully_checked'] == null ? undefined : json['fully_checked'],
+        'rulesets': json['rulesets'] == null ? undefined : ((json['rulesets'] as Array<any>).map(ComplianceRulesetOutFromJSON)),
         'violations': json['violations'] == null ? undefined : ((json['violations'] as Array<any>).map(ComplianceViolationOutFromJSON)),
     };
 }
@@ -88,6 +108,8 @@ export function ComplianceCheckOutToJSON(value?: ComplianceCheckOut | null): any
         'profile': value['profile'],
         'ruleset_version': value['rulesetVersion'],
         'valid': value['valid'],
+        'fully_checked': value['fullyChecked'],
+        'rulesets': value['rulesets'] == null ? undefined : ((value['rulesets'] as Array<any>).map(ComplianceRulesetOutToJSON)),
         'violations': value['violations'] == null ? undefined : ((value['violations'] as Array<any>).map(ComplianceViolationOutToJSON)),
     };
 }
