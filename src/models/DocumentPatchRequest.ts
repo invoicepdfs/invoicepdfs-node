@@ -148,6 +148,12 @@ export interface DocumentPatchRequest {
     buyerReference?: string | null;
     /**
      * 
+     * @type {Date}
+     * @memberof DocumentPatchRequest
+     */
+    deliveryDate?: Date | null;
+    /**
+     * 
      * @type {Array<StandardLineItemInput>}
      * @memberof DocumentPatchRequest
      */
@@ -242,6 +248,7 @@ export function DocumentPatchRequestFromJSONTyped(json: any, ignoreDiscriminator
         'reason': json['reason'] == null ? undefined : json['reason'],
         'shipTo': json['ship_to'] == null ? undefined : PostalAddressFromJSON(json['ship_to']),
         'buyerReference': json['buyer_reference'] == null ? undefined : json['buyer_reference'],
+        'deliveryDate': json['delivery_date'] == null ? undefined : (new Date(json['delivery_date'])),
         'lineItems': json['line_items'] == null ? undefined : ((json['line_items'] as Array<any>).map(StandardLineItemInputFromJSON)),
         'discounts': json['discounts'] == null ? undefined : ((json['discounts'] as Array<any>).map(LineItemDiscountInputFromJSON)),
         'shipping': json['shipping'] == null ? undefined : InvoiceShippingInputFromJSON(json['shipping']),
@@ -271,6 +278,7 @@ export function DocumentPatchRequestToJSON(value?: DocumentPatchRequest | null):
         'reason': value['reason'],
         'ship_to': PostalAddressToJSON(value['shipTo']),
         'buyer_reference': value['buyerReference'],
+        'delivery_date': value['deliveryDate'] == null ? undefined : ((value['deliveryDate'] as any).toISOString().substring(0,10)),
         'line_items': value['lineItems'] == null ? undefined : ((value['lineItems'] as Array<any>).map(StandardLineItemInputToJSON)),
         'discounts': value['discounts'] == null ? undefined : ((value['discounts'] as Array<any>).map(LineItemDiscountInputToJSON)),
         'shipping': InvoiceShippingInputToJSON(value['shipping']),

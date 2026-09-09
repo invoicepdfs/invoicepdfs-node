@@ -43,6 +43,12 @@ export interface CustomerPatch {
      * @type {string}
      * @memberof CustomerPatch
      */
+    contactName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomerPatch
+     */
     email?: string | null;
     /**
      * 
@@ -100,6 +106,7 @@ export function CustomerPatchFromJSONTyped(json: any, ignoreDiscriminator: boole
     return {
         
         'name': json['name'] == null ? undefined : json['name'],
+        'contactName': json['contact_name'] == null ? undefined : json['contact_name'],
         'email': json['email'] == null ? undefined : json['email'],
         'phone': json['phone'] == null ? undefined : json['phone'],
         'taxId': json['tax_id'] == null ? undefined : json['tax_id'],
@@ -117,6 +124,7 @@ export function CustomerPatchToJSON(value?: CustomerPatch | null): any {
     return {
         
         'name': value['name'],
+        'contact_name': value['contactName'],
         'email': value['email'],
         'phone': value['phone'],
         'tax_id': value['taxId'],

@@ -106,6 +106,12 @@ export interface DocumentInvoiceDataInput {
     shipTo?: DocumentPartyInput | null;
     /**
      * 
+     * @type {Date}
+     * @memberof DocumentInvoiceDataInput
+     */
+    deliveryDate?: Date | null;
+    /**
+     * 
      * @type {string}
      * @memberof DocumentInvoiceDataInput
      */
@@ -184,6 +190,7 @@ export function DocumentInvoiceDataInputFromJSONTyped(json: any, ignoreDiscrimin
         'seller': DocumentPartyInputFromJSON(json['seller']),
         'buyer': DocumentPartyInputFromJSON(json['buyer']),
         'shipTo': json['ship_to'] == null ? undefined : DocumentPartyInputFromJSON(json['ship_to']),
+        'deliveryDate': json['delivery_date'] == null ? undefined : (new Date(json['delivery_date'])),
         'buyerReference': json['buyer_reference'] == null ? undefined : json['buyer_reference'],
         'precedingInvoiceNumber': json['preceding_invoice_number'] == null ? undefined : json['preceding_invoice_number'],
         'lineItems': ((json['line_items'] as Array<any>).map(DocumentLineItemInputFromJSON)),
@@ -208,6 +215,7 @@ export function DocumentInvoiceDataInputToJSON(value?: DocumentInvoiceDataInput 
         'seller': DocumentPartyInputToJSON(value['seller']),
         'buyer': DocumentPartyInputToJSON(value['buyer']),
         'ship_to': DocumentPartyInputToJSON(value['shipTo']),
+        'delivery_date': value['deliveryDate'] == null ? undefined : ((value['deliveryDate'] as any).toISOString().substring(0,10)),
         'buyer_reference': value['buyerReference'],
         'preceding_invoice_number': value['precedingInvoiceNumber'],
         'line_items': ((value['lineItems'] as Array<any>).map(DocumentLineItemInputToJSON)),

@@ -55,6 +55,12 @@ export interface DocumentPartyInput {
      * @type {string}
      * @memberof DocumentPartyInput
      */
+    contactName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentPartyInput
+     */
     email?: string | null;
     /**
      * 
@@ -120,6 +126,7 @@ export function DocumentPartyInputFromJSONTyped(json: any, ignoreDiscriminator: 
         
         'name': json['name'],
         'legalName': json['legal_name'] == null ? undefined : json['legal_name'],
+        'contactName': json['contact_name'] == null ? undefined : json['contact_name'],
         'email': json['email'] == null ? undefined : json['email'],
         'phone': json['phone'] == null ? undefined : json['phone'],
         'website': json['website'] == null ? undefined : json['website'],
@@ -139,6 +146,7 @@ export function DocumentPartyInputToJSON(value?: DocumentPartyInput | null): any
         
         'name': value['name'],
         'legal_name': value['legalName'],
+        'contact_name': value['contactName'],
         'email': value['email'],
         'phone': value['phone'],
         'website': value['website'],

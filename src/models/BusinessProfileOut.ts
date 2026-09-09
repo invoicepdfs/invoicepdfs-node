@@ -25,6 +25,12 @@ import {
     ElectronicAddressFromJSONTyped,
     ElectronicAddressToJSON,
 } from './ElectronicAddress';
+import type { InvoiceBankAccountInput } from './InvoiceBankAccountInput';
+import {
+    InvoiceBankAccountInputFromJSON,
+    InvoiceBankAccountInputFromJSONTyped,
+    InvoiceBankAccountInputToJSON,
+} from './InvoiceBankAccountInput';
 
 /**
  * 
@@ -44,6 +50,12 @@ export interface BusinessProfileOut {
      * @memberof BusinessProfileOut
      */
     displayName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BusinessProfileOut
+     */
+    contactName?: string | null;
     /**
      * 
      * @type {string}
@@ -74,6 +86,12 @@ export interface BusinessProfileOut {
      * @memberof BusinessProfileOut
      */
     address?: PostalAddress | null;
+    /**
+     * 
+     * @type {InvoiceBankAccountInput}
+     * @memberof BusinessProfileOut
+     */
+    bankAccount?: InvoiceBankAccountInput | null;
     /**
      * 
      * @type {ElectronicAddress}
@@ -147,11 +165,13 @@ export function BusinessProfileOutFromJSONTyped(json: any, ignoreDiscriminator: 
         
         'legalName': json['legal_name'],
         'displayName': json['display_name'] == null ? undefined : json['display_name'],
+        'contactName': json['contact_name'] == null ? undefined : json['contact_name'],
         'email': json['email'] == null ? undefined : json['email'],
         'phone': json['phone'] == null ? undefined : json['phone'],
         'website': json['website'] == null ? undefined : json['website'],
         'taxId': json['tax_id'] == null ? undefined : json['tax_id'],
         'address': json['address'] == null ? undefined : PostalAddressFromJSON(json['address']),
+        'bankAccount': json['bank_account'] == null ? undefined : InvoiceBankAccountInputFromJSON(json['bank_account']),
         'electronicAddress': json['electronic_address'] == null ? undefined : ElectronicAddressFromJSON(json['electronic_address']),
         'defaultCurrency': json['default_currency'] == null ? undefined : json['default_currency'],
         'defaultLocale': json['default_locale'] == null ? undefined : json['default_locale'],
@@ -171,11 +191,13 @@ export function BusinessProfileOutToJSON(value?: BusinessProfileOut | null): any
         
         'legal_name': value['legalName'],
         'display_name': value['displayName'],
+        'contact_name': value['contactName'],
         'email': value['email'],
         'phone': value['phone'],
         'website': value['website'],
         'tax_id': value['taxId'],
         'address': PostalAddressToJSON(value['address']),
+        'bank_account': InvoiceBankAccountInputToJSON(value['bankAccount']),
         'electronic_address': ElectronicAddressToJSON(value['electronicAddress']),
         'default_currency': value['defaultCurrency'],
         'default_locale': value['defaultLocale'],

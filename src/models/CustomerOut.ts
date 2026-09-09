@@ -43,6 +43,12 @@ export interface CustomerOut {
      * @type {string}
      * @memberof CustomerOut
      */
+    contactName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomerOut
+     */
     email?: string | null;
     /**
      * 
@@ -122,6 +128,7 @@ export function CustomerOutFromJSONTyped(json: any, ignoreDiscriminator: boolean
     return {
         
         'name': json['name'],
+        'contactName': json['contact_name'] == null ? undefined : json['contact_name'],
         'email': json['email'] == null ? undefined : json['email'],
         'phone': json['phone'] == null ? undefined : json['phone'],
         'taxId': json['tax_id'] == null ? undefined : json['tax_id'],
@@ -142,6 +149,7 @@ export function CustomerOutToJSON(value?: CustomerOut | null): any {
     return {
         
         'name': value['name'],
+        'contact_name': value['contactName'],
         'email': value['email'],
         'phone': value['phone'],
         'tax_id': value['taxId'],
