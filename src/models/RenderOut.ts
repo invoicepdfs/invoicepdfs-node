@@ -91,6 +91,7 @@ export type RenderOutStatusEnum = typeof RenderOutStatusEnum[keyof typeof Render
 export const RenderOutDocumentTypeEnum = {
     Invoice: 'invoice',
     CreditNote: 'credit_note',
+    DebitNote: 'debit_note',
     Quote: 'quote',
     Receipt: 'receipt',
     Proforma: 'proforma',

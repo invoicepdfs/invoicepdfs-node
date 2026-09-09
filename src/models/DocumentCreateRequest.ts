@@ -209,6 +209,7 @@ export interface DocumentCreateRequest {
 export const DocumentCreateRequestDocumentTypeEnum = {
     Invoice: 'invoice',
     CreditNote: 'credit_note',
+    DebitNote: 'debit_note',
     Quote: 'quote',
     Receipt: 'receipt',
     Proforma: 'proforma',
