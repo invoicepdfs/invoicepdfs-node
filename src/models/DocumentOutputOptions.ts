@@ -44,7 +44,8 @@ export interface DocumentOutputOptions {
  * @export
  */
 export const DocumentOutputOptionsFormatEnum = {
-    Pdf: 'pdf'
+    Pdf: 'pdf',
+    FacturxPdf: 'facturx_pdf'
 } as const;
 export type DocumentOutputOptionsFormatEnum = typeof DocumentOutputOptionsFormatEnum[keyof typeof DocumentOutputOptionsFormatEnum];
 

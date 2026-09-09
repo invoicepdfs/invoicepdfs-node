@@ -43,7 +43,24 @@ export interface DocumentRenderOptions {
      * @memberof DocumentRenderOptions
      */
     expiresIn?: number;
+    /**
+     * `facturx_pdf` embeds the EN 16931 CII XML in a PDF/A-3, which is what a French or German counterparty means by Factur-X or ZUGFeRD.
+     * @type {string}
+     * @memberof DocumentRenderOptions
+     */
+    format?: DocumentRenderOptionsFormatEnum;
 }
+
+
+/**
+ * @export
+ */
+export const DocumentRenderOptionsFormatEnum = {
+    Pdf: 'pdf',
+    FacturxPdf: 'facturx_pdf'
+} as const;
+export type DocumentRenderOptionsFormatEnum = typeof DocumentRenderOptionsFormatEnum[keyof typeof DocumentRenderOptionsFormatEnum];
+
 
 /**
  * Check if a given object implements the DocumentRenderOptions interface.
@@ -65,6 +82,7 @@ export function DocumentRenderOptionsFromJSONTyped(json: any, ignoreDiscriminato
         'templateId': json['template_id'] == null ? undefined : json['template_id'],
         'pageSize': json['page_size'] == null ? undefined : json['page_size'],
         'expiresIn': json['expires_in'] == null ? undefined : json['expires_in'],
+        'format': json['format'] == null ? undefined : json['format'],
     };
 }
 
@@ -77,6 +95,7 @@ export function DocumentRenderOptionsToJSON(value?: DocumentRenderOptions | null
         'template_id': value['templateId'],
         'page_size': value['pageSize'],
         'expires_in': value['expiresIn'],
+        'format': value['format'],
     };
 }
 

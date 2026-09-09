@@ -96,6 +96,11 @@ export interface DeleteDocumentRequest {
     documentId: string;
 }
 
+export interface DownloadDocumentXmlRequest {
+    documentId: string;
+    profile: string;
+}
+
 export interface DuplicateDocumentRequest {
     documentId: string;
 }
@@ -136,6 +141,10 @@ export interface MarkUnpaidRequest {
 export interface RenderDocumentRequest {
     documentRenderRequest: DocumentRenderRequest;
     idempotencyKey?: string | null;
+}
+
+export interface RenderDocumentXmlRequest {
+    documentComplianceRequest: DocumentComplianceRequest;
 }
 
 export interface RestoreDocumentRequest {
@@ -395,6 +404,64 @@ export class DocumentsApi extends runtime.BaseAPI {
      */
     async deleteDocument(requestParameters: DeleteDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
         const response = await this.deleteDocumentRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * The e-invoicing XML for a document already stored here.  Reads `data_json` directly rather than going through the render path\'s reconstruction: the status, the logo and the source document\'s number are all attached there for the *PDF*, and none of them belong in the XML. The credit note\'s BG-3 reference is already in the stored payload, resolved when the document was written.
+     * Download Document Xml
+     */
+    async downloadDocumentXmlRaw(requestParameters: DownloadDocumentXmlRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
+        if (requestParameters['documentId'] == null) {
+            throw new runtime.RequiredError(
+                'documentId',
+                'Required parameter "documentId" was null or undefined when calling downloadDocumentXml().'
+            );
+        }
+
+        if (requestParameters['profile'] == null) {
+            throw new runtime.RequiredError(
+                'profile',
+                'Required parameter "profile" was null or undefined when calling downloadDocumentXml().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['profile'] != null) {
+            queryParameters['profile'] = requestParameters['profile'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/documents/{document_id}/xml`.replace(`{${"document_id"}}`, encodeURIComponent(String(requestParameters['documentId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<string>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
+    }
+
+    /**
+     * The e-invoicing XML for a document already stored here.  Reads `data_json` directly rather than going through the render path\'s reconstruction: the status, the logo and the source document\'s number are all attached there for the *PDF*, and none of them belong in the XML. The credit note\'s BG-3 reference is already in the stored payload, resolved when the document was written.
+     * Download Document Xml
+     */
+    async downloadDocumentXml(requestParameters: DownloadDocumentXmlRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string> {
+        const response = await this.downloadDocumentXmlRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -788,6 +855,56 @@ export class DocumentsApi extends runtime.BaseAPI {
      */
     async renderDocument(requestParameters: RenderDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RenderResponse> {
         const response = await this.renderDocumentRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * The e-invoicing XML for a document, without storing anything.  Takes the same body as `/validate-compliance`, and the pairing is the point: check first, then take the XML once it passes. Nothing here validates against the ruleset — a document missing mandatory fields serialises to XML missing those elements, which is a more useful artefact to look at than a refusal, and `/validate-compliance` is where the refusal belongs.  The syntax is not a parameter. It follows from the profile, because a profile already is a syntax plus a ruleset, and asking a caller for both is asking them to know that Peppol means UBL.
+     * Render Document Xml
+     */
+    async renderDocumentXmlRaw(requestParameters: RenderDocumentXmlRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
+        if (requestParameters['documentComplianceRequest'] == null) {
+            throw new runtime.RequiredError(
+                'documentComplianceRequest',
+                'Required parameter "documentComplianceRequest" was null or undefined when calling renderDocumentXml().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/documents/xml`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: DocumentComplianceRequestToJSON(requestParameters['documentComplianceRequest']),
+        }, initOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<string>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
+    }
+
+    /**
+     * The e-invoicing XML for a document, without storing anything.  Takes the same body as `/validate-compliance`, and the pairing is the point: check first, then take the XML once it passes. Nothing here validates against the ruleset — a document missing mandatory fields serialises to XML missing those elements, which is a more useful artefact to look at than a refusal, and `/validate-compliance` is where the refusal belongs.  The syntax is not a parameter. It follows from the profile, because a profile already is a syntax plus a ruleset, and asking a caller for both is asking them to know that Peppol means UBL.
+     * Render Document Xml
+     */
+    async renderDocumentXml(requestParameters: RenderDocumentXmlRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string> {
+        const response = await this.renderDocumentXmlRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
