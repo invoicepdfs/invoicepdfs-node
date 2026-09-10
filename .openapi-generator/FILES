@@ -209,6 +209,7 @@ src/models/TaxRateOut.ts
 src/models/TaxRatePatchRequest.ts
 src/models/TaxRateResponse.ts
 src/models/TaxRatesListResponse.ts
+src/models/TemplateConfig.ts
 src/models/TemplateCreateRequest.ts
 src/models/TemplateDetail.ts
 src/models/TemplateDetailResponse.ts

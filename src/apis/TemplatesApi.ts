@@ -78,6 +78,7 @@ export interface ListCustomTemplatesRequest {
 export interface PreviewTemplateRequest {
     templateId: string;
     documentRenderRequest: DocumentRenderRequest;
+    version?: number | null;
     idempotencyKey?: string | null;
 }
 
@@ -438,6 +439,10 @@ export class TemplatesApi extends runtime.BaseAPI {
         }
 
         const queryParameters: any = {};
+
+        if (requestParameters['version'] != null) {
+            queryParameters['version'] = requestParameters['version'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 

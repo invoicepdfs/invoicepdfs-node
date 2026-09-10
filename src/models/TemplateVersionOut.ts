@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { TemplateConfig } from './TemplateConfig';
+import {
+    TemplateConfigFromJSON,
+    TemplateConfigFromJSONTyped,
+    TemplateConfigToJSON,
+} from './TemplateConfig';
+
 /**
  * 
  * @export
@@ -51,10 +58,10 @@ export interface TemplateVersionOut {
     changelog?: string | null;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {TemplateConfig}
      * @memberof TemplateVersionOut
      */
-    config: { [key: string]: any; };
+    config: TemplateConfig;
     /**
      * 
      * @type {string}
@@ -90,7 +97,7 @@ export function TemplateVersionOutFromJSONTyped(json: any, ignoreDiscriminator: 
         'version': json['version'],
         'label': json['label'] == null ? undefined : json['label'],
         'changelog': json['changelog'] == null ? undefined : json['changelog'],
-        'config': json['config'],
+        'config': TemplateConfigFromJSON(json['config']),
         'createdAt': json['created_at'],
     };
 }
@@ -106,7 +113,7 @@ export function TemplateVersionOutToJSON(value?: TemplateVersionOut | null): any
         'version': value['version'],
         'label': value['label'],
         'changelog': value['changelog'],
-        'config': value['config'],
+        'config': TemplateConfigToJSON(value['config']),
         'created_at': value['createdAt'],
     };
 }

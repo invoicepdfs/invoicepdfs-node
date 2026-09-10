@@ -25,6 +25,12 @@ export interface DocumentTemplateRef {
      * @memberof DocumentTemplateRef
      */
     id: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof DocumentTemplateRef
+     */
+    version?: number | null;
 }
 
 /**
@@ -46,6 +52,7 @@ export function DocumentTemplateRefFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'id': json['id'],
+        'version': json['version'] == null ? undefined : json['version'],
     };
 }
 
@@ -56,6 +63,7 @@ export function DocumentTemplateRefToJSON(value?: DocumentTemplateRef | null): a
     return {
         
         'id': value['id'],
+        'version': value['version'],
     };
 }
 

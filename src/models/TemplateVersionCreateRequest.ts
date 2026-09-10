@@ -31,12 +31,6 @@ export interface TemplateVersionCreateRequest {
      * @memberof TemplateVersionCreateRequest
      */
     changelog?: string | null;
-    /**
-     * 
-     * @type {{ [key: string]: any; }}
-     * @memberof TemplateVersionCreateRequest
-     */
-    config?: { [key: string]: any; };
 }
 
 /**
@@ -58,7 +52,6 @@ export function TemplateVersionCreateRequestFromJSONTyped(json: any, ignoreDiscr
         
         'label': json['label'] == null ? undefined : json['label'],
         'changelog': json['changelog'] == null ? undefined : json['changelog'],
-        'config': json['config'] == null ? undefined : json['config'],
     };
 }
 
@@ -70,7 +63,6 @@ export function TemplateVersionCreateRequestToJSON(value?: TemplateVersionCreate
         
         'label': value['label'],
         'changelog': value['changelog'],
-        'config': value['config'],
     };
 }
 

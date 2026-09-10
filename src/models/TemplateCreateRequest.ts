@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { TemplateConfig } from './TemplateConfig';
+import {
+    TemplateConfigFromJSON,
+    TemplateConfigFromJSONTyped,
+    TemplateConfigToJSON,
+} from './TemplateConfig';
+
 /**
  * 
  * @export
@@ -39,10 +46,10 @@ export interface TemplateCreateRequest {
     baseTemplateId?: string;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {TemplateConfig}
      * @memberof TemplateCreateRequest
      */
-    config?: { [key: string]: any; };
+    config?: TemplateConfig;
 }
 
 /**
@@ -66,7 +73,7 @@ export function TemplateCreateRequestFromJSONTyped(json: any, ignoreDiscriminato
         'name': json['name'],
         'description': json['description'] == null ? undefined : json['description'],
         'baseTemplateId': json['base_template_id'] == null ? undefined : json['base_template_id'],
-        'config': json['config'] == null ? undefined : json['config'],
+        'config': json['config'] == null ? undefined : TemplateConfigFromJSON(json['config']),
     };
 }
 
@@ -79,7 +86,7 @@ export function TemplateCreateRequestToJSON(value?: TemplateCreateRequest | null
         'name': value['name'],
         'description': value['description'],
         'base_template_id': value['baseTemplateId'],
-        'config': value['config'],
+        'config': TemplateConfigToJSON(value['config']),
     };
 }
 

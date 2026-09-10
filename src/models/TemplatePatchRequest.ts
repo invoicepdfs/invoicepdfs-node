@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { TemplateConfig } from './TemplateConfig';
+import {
+    TemplateConfigFromJSON,
+    TemplateConfigFromJSONTyped,
+    TemplateConfigToJSON,
+} from './TemplateConfig';
+
 /**
  * 
  * @export
@@ -33,10 +40,10 @@ export interface TemplatePatchRequest {
     description?: string | null;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {TemplateConfig}
      * @memberof TemplatePatchRequest
      */
-    config?: { [key: string]: any; };
+    config?: TemplateConfig;
 }
 
 /**
@@ -58,7 +65,7 @@ export function TemplatePatchRequestFromJSONTyped(json: any, ignoreDiscriminator
         
         'name': json['name'] == null ? undefined : json['name'],
         'description': json['description'] == null ? undefined : json['description'],
-        'config': json['config'] == null ? undefined : json['config'],
+        'config': json['config'] == null ? undefined : TemplateConfigFromJSON(json['config']),
     };
 }
 
@@ -70,7 +77,7 @@ export function TemplatePatchRequestToJSON(value?: TemplatePatchRequest | null):
         
         'name': value['name'],
         'description': value['description'],
-        'config': value['config'],
+        'config': TemplateConfigToJSON(value['config']),
     };
 }
 

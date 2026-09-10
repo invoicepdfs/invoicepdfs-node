@@ -33,6 +33,12 @@ export interface DocumentRenderOptions {
     templateId?: string;
     /**
      * 
+     * @type {number}
+     * @memberof DocumentRenderOptions
+     */
+    templateVersion?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof DocumentRenderOptions
      */
@@ -80,6 +86,7 @@ export function DocumentRenderOptionsFromJSONTyped(json: any, ignoreDiscriminato
     return {
         
         'templateId': json['template_id'] == null ? undefined : json['template_id'],
+        'templateVersion': json['template_version'] == null ? undefined : json['template_version'],
         'pageSize': json['page_size'] == null ? undefined : json['page_size'],
         'expiresIn': json['expires_in'] == null ? undefined : json['expires_in'],
         'format': json['format'] == null ? undefined : json['format'],
@@ -93,6 +100,7 @@ export function DocumentRenderOptionsToJSON(value?: DocumentRenderOptions | null
     return {
         
         'template_id': value['templateId'],
+        'template_version': value['templateVersion'],
         'page_size': value['pageSize'],
         'expires_in': value['expiresIn'],
         'format': value['format'],

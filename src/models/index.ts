@@ -178,6 +178,7 @@ export * from './TaxRateOut';
 export * from './TaxRatePatchRequest';
 export * from './TaxRateResponse';
 export * from './TaxRatesListResponse';
+export * from './TemplateConfig';
 export * from './TemplateCreateRequest';
 export * from './TemplateDetail';
 export * from './TemplateDetailResponse';

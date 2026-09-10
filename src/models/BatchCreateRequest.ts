@@ -52,6 +52,12 @@ export interface BatchCreateRequest {
     templateId?: string;
     /**
      * 
+     * @type {number}
+     * @memberof BatchCreateRequest
+     */
+    templateVersion?: number | null;
+    /**
+     * 
      * @type {BatchOutputOptions}
      * @memberof BatchCreateRequest
      */
@@ -89,6 +95,7 @@ export function BatchCreateRequestFromJSONTyped(json: any, ignoreDiscriminator: 
         'operation': json['operation'] == null ? undefined : json['operation'],
         'items': ((json['items'] as Array<any>).map(BatchItemInputFromJSON)),
         'templateId': json['template_id'] == null ? undefined : json['template_id'],
+        'templateVersion': json['template_version'] == null ? undefined : json['template_version'],
         'output': json['output'] == null ? undefined : BatchOutputOptionsFromJSON(json['output']),
     };
 }
@@ -102,6 +109,7 @@ export function BatchCreateRequestToJSON(value?: BatchCreateRequest | null): any
         'operation': value['operation'],
         'items': ((value['items'] as Array<any>).map(BatchItemInputToJSON)),
         'template_id': value['templateId'],
+        'template_version': value['templateVersion'],
         'output': BatchOutputOptionsToJSON(value['output']),
     };
 }

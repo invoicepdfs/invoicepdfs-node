@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { TemplateConfig } from './TemplateConfig';
+import {
+    TemplateConfigFromJSON,
+    TemplateConfigFromJSONTyped,
+    TemplateConfigToJSON,
+} from './TemplateConfig';
+
 /**
  * 
  * @export
@@ -45,10 +52,10 @@ export interface CustomTemplateOut {
     baseTemplateId: string;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {TemplateConfig}
      * @memberof CustomTemplateOut
      */
-    config?: { [key: string]: any; };
+    config?: TemplateConfig;
     /**
      * 
      * @type {string}
@@ -108,7 +115,7 @@ export function CustomTemplateOutFromJSONTyped(json: any, ignoreDiscriminator: b
         'name': json['name'],
         'description': json['description'] == null ? undefined : json['description'],
         'baseTemplateId': json['base_template_id'],
-        'config': json['config'] == null ? undefined : json['config'],
+        'config': json['config'] == null ? undefined : TemplateConfigFromJSON(json['config']),
         'status': json['status'],
         'isDefault': json['is_default'] == null ? undefined : json['is_default'],
         'createdAt': json['created_at'],
@@ -127,7 +134,7 @@ export function CustomTemplateOutToJSON(value?: CustomTemplateOut | null): any {
         'name': value['name'],
         'description': value['description'],
         'base_template_id': value['baseTemplateId'],
-        'config': value['config'],
+        'config': TemplateConfigToJSON(value['config']),
         'status': value['status'],
         'is_default': value['isDefault'],
         'created_at': value['createdAt'],

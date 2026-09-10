@@ -49,6 +49,18 @@ export interface RenderOut {
      * @type {string}
      * @memberof RenderOut
      */
+    templateId: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof RenderOut
+     */
+    templateVersion?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof RenderOut
+     */
     format: RenderOutFormatEnum;
     /**
      * 
@@ -116,6 +128,7 @@ export function instanceOfRenderOut(value: object): value is RenderOut {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('status' in value) || value['status'] === undefined) return false;
     if (!('documentType' in value) || value['documentType'] === undefined) return false;
+    if (!('templateId' in value) || value['templateId'] === undefined) return false;
     if (!('format' in value) || value['format'] === undefined) return false;
     if (!('downloadUrl' in value) || value['downloadUrl'] === undefined) return false;
     if (!('expiresAt' in value) || value['expiresAt'] === undefined) return false;
@@ -137,6 +150,8 @@ export function RenderOutFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'id': json['id'],
         'status': json['status'],
         'documentType': json['document_type'],
+        'templateId': json['template_id'],
+        'templateVersion': json['template_version'] == null ? undefined : json['template_version'],
         'format': json['format'],
         'downloadUrl': json['download_url'],
         'expiresAt': json['expires_at'],
@@ -154,6 +169,8 @@ export function RenderOutToJSON(value?: RenderOut | null): any {
         'id': value['id'],
         'status': value['status'],
         'document_type': value['documentType'],
+        'template_id': value['templateId'],
+        'template_version': value['templateVersion'],
         'format': value['format'],
         'download_url': value['downloadUrl'],
         'expires_at': value['expiresAt'],

@@ -45,6 +45,11 @@ export interface ListTemplateVersionsRequest {
     templateId: string;
 }
 
+export interface RestoreTemplateVersionRequest {
+    templateId: string;
+    version: number;
+}
+
 /**
  * 
  */
@@ -187,6 +192,56 @@ export class TemplateVersionsApi extends runtime.BaseAPI {
      */
     async listTemplateVersions(requestParameters: ListTemplateVersionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateVersionsListResponse> {
         const response = await this.listTemplateVersionsRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Put a template back to the config a version recorded.  The template moves; the version does not. Restoring v1 over v3\'s config does not delete v3 or renumber anything — the next snapshot is v4, and the history stays a record of what happened rather than a record of the last decision. Take a version first if the config being replaced is worth keeping.
+     * Restore Template Version
+     */
+    async restoreTemplateVersionRaw(requestParameters: RestoreTemplateVersionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateVersionResponse>> {
+        if (requestParameters['templateId'] == null) {
+            throw new runtime.RequiredError(
+                'templateId',
+                'Required parameter "templateId" was null or undefined when calling restoreTemplateVersion().'
+            );
+        }
+
+        if (requestParameters['version'] == null) {
+            throw new runtime.RequiredError(
+                'version',
+                'Required parameter "version" was null or undefined when calling restoreTemplateVersion().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/templates/{template_id}/versions/{version}/restore`.replace(`{${"template_id"}}`, encodeURIComponent(String(requestParameters['templateId']))).replace(`{${"version"}}`, encodeURIComponent(String(requestParameters['version']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TemplateVersionResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Put a template back to the config a version recorded.  The template moves; the version does not. Restoring v1 over v3\'s config does not delete v3 or renumber anything — the next snapshot is v4, and the history stays a record of what happened rather than a record of the last decision. Take a version first if the config being replaced is worth keeping.
+     * Restore Template Version
+     */
+    async restoreTemplateVersion(requestParameters: RestoreTemplateVersionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateVersionResponse> {
+        const response = await this.restoreTemplateVersionRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

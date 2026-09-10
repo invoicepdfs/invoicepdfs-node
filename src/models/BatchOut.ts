@@ -48,6 +48,12 @@ export interface BatchOut {
      * @type {number}
      * @memberof BatchOut
      */
+    templateVersion?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof BatchOut
+     */
     totalItems: number;
     /**
      * 
@@ -125,6 +131,7 @@ export function BatchOutFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'status': json['status'],
         'operation': json['operation'],
         'templateId': json['template_id'],
+        'templateVersion': json['template_version'] == null ? undefined : json['template_version'],
         'totalItems': json['total_items'],
         'completedItems': json['completed_items'],
         'failedItems': json['failed_items'],
@@ -144,6 +151,7 @@ export function BatchOutToJSON(value?: BatchOut | null): any {
         'status': value['status'],
         'operation': value['operation'],
         'template_id': value['templateId'],
+        'template_version': value['templateVersion'],
         'total_items': value['totalItems'],
         'completed_items': value['completedItems'],
         'failed_items': value['failedItems'],
