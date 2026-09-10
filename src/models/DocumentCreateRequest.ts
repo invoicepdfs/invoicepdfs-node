@@ -148,6 +148,12 @@ export interface DocumentCreateRequest {
     buyerReference?: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof DocumentCreateRequest
+     */
+    taxScheme?: string | null;
+    /**
+     * 
      * @type {Date}
      * @memberof DocumentCreateRequest
      */
@@ -260,6 +266,7 @@ export function DocumentCreateRequestFromJSONTyped(json: any, ignoreDiscriminato
         'reason': json['reason'] == null ? undefined : json['reason'],
         'shipTo': json['ship_to'] == null ? undefined : PostalAddressFromJSON(json['ship_to']),
         'buyerReference': json['buyer_reference'] == null ? undefined : json['buyer_reference'],
+        'taxScheme': json['tax_scheme'] == null ? undefined : json['tax_scheme'],
         'deliveryDate': json['delivery_date'] == null ? undefined : (new Date(json['delivery_date'])),
         'lineItems': ((json['line_items'] as Array<any>).map(StandardLineItemInputFromJSON)),
         'discounts': json['discounts'] == null ? undefined : ((json['discounts'] as Array<any>).map(LineItemDiscountInputFromJSON)),
@@ -291,6 +298,7 @@ export function DocumentCreateRequestToJSON(value?: DocumentCreateRequest | null
         'reason': value['reason'],
         'ship_to': PostalAddressToJSON(value['shipTo']),
         'buyer_reference': value['buyerReference'],
+        'tax_scheme': value['taxScheme'],
         'delivery_date': value['deliveryDate'] == null ? undefined : ((value['deliveryDate'] as any).toISOString().substring(0,10)),
         'line_items': ((value['lineItems'] as Array<any>).map(StandardLineItemInputToJSON)),
         'discounts': value['discounts'] == null ? undefined : ((value['discounts'] as Array<any>).map(LineItemDiscountInputToJSON)),

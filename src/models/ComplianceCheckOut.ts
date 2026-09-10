@@ -51,6 +51,12 @@ export interface ComplianceCheckOut {
      */
     valid: boolean;
     /**
+     * Whether any of these rulesets is likely to apply to this document at all. False when neither party is in a country that uses one — these are European e-invoicing rulesets, and for a wholly domestic US invoice, say, `valid` is answering a question nobody asked. Advisory: it never changes the verdict or withholds the check, because an open network means a US seller invoicing a Dutch buyer genuinely needs it.
+     * @type {boolean}
+     * @memberof ComplianceCheckOut
+     */
+    inScope?: boolean;
+    /**
      * Every ruleset that applies to this profile ran. False means at least one could not, and `rulesets` says which and why.
      * @type {boolean}
      * @memberof ComplianceCheckOut
@@ -93,6 +99,7 @@ export function ComplianceCheckOutFromJSONTyped(json: any, ignoreDiscriminator: 
         'profile': json['profile'],
         'rulesetVersion': json['ruleset_version'],
         'valid': json['valid'],
+        'inScope': json['in_scope'] == null ? undefined : json['in_scope'],
         'fullyChecked': json['fully_checked'] == null ? undefined : json['fully_checked'],
         'rulesets': json['rulesets'] == null ? undefined : ((json['rulesets'] as Array<any>).map(ComplianceRulesetOutFromJSON)),
         'violations': json['violations'] == null ? undefined : ((json['violations'] as Array<any>).map(ComplianceViolationOutFromJSON)),
@@ -108,6 +115,7 @@ export function ComplianceCheckOutToJSON(value?: ComplianceCheckOut | null): any
         'profile': value['profile'],
         'ruleset_version': value['rulesetVersion'],
         'valid': value['valid'],
+        'in_scope': value['inScope'],
         'fully_checked': value['fullyChecked'],
         'rulesets': value['rulesets'] == null ? undefined : ((value['rulesets'] as Array<any>).map(ComplianceRulesetOutToJSON)),
         'violations': value['violations'] == null ? undefined : ((value['violations'] as Array<any>).map(ComplianceViolationOutToJSON)),
