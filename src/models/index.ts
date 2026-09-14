@@ -62,6 +62,8 @@ export * from './BusinessProfilePatch';
 export * from './BusinessProfileResponse';
 export * from './BusinessProfilesListResponse';
 export * from './CalculationBreakdown';
+export * from './CodeListResponse';
+export * from './CodeOut';
 export * from './ComplianceCheckOut';
 export * from './ComplianceRulesetOut';
 export * from './ComplianceViolationOut';

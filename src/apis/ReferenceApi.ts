@@ -15,6 +15,7 @@
 
 import * as runtime from '../runtime';
 import type {
+  CodeListResponse,
   CountriesListResponse,
   CurrenciesListResponse,
   DocumentTypesListResponse,
@@ -23,6 +24,8 @@ import type {
   TimezonesListResponse,
 } from '../models/index';
 import {
+    CodeListResponseFromJSON,
+    CodeListResponseToJSON,
     CountriesListResponseFromJSON,
     CountriesListResponseToJSON,
     CurrenciesListResponseFromJSON,
@@ -175,6 +178,62 @@ export class ReferenceApi extends runtime.BaseAPI {
     }
 
     /**
+     * UNCL5305, in full — the VAT treatment of a line, which its rate does not say.  Two lines at 0% may be zero-rated, exempt, reverse-charge or outside scope, and EN 16931 puts them in separate VAT breakdown groups with different mandatory fields. Exhaustive: a category outside this list is wrong.
+     * List Tax Categories
+     */
+    async listTaxCategoriesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CodeListResponse>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/v1/reference/tax-categories`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CodeListResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * UNCL5305, in full — the VAT treatment of a line, which its rate does not say.  Two lines at 0% may be zero-rated, exempt, reverse-charge or outside scope, and EN 16931 puts them in separate VAT breakdown groups with different mandatory fields. Exhaustive: a category outside this list is wrong.
+     * List Tax Categories
+     */
+    async listTaxCategories(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CodeListResponse> {
+        const response = await this.listTaxCategoriesRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * UNCL5153 — which tax regime a document is issued under, one per document.  `VAT` is the only member an e-invoice can carry; the others exist so a caller can state that their tax is *not* VAT and be told so, rather than have VAT assumed on their behalf. There is no default: a PDF does not need a scheme, and guessing one puts a claim in a document a tax authority reads that the caller never made.
+     * List Tax Schemes
+     */
+    async listTaxSchemesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CodeListResponse>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/v1/reference/tax-schemes`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CodeListResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * UNCL5153 — which tax regime a document is issued under, one per document.  `VAT` is the only member an e-invoice can carry; the others exist so a caller can state that their tax is *not* VAT and be told so, rather than have VAT assumed on their behalf. There is no default: a PDF does not need a scheme, and guessing one puts a claim in a document a tax authority reads that the caller never made.
+     * List Tax Schemes
+     */
+    async listTaxSchemes(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CodeListResponse> {
+        const response = await this.listTaxSchemesRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
      * List Timezones
      */
     async listTimezonesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TimezonesListResponse>> {
@@ -197,6 +256,34 @@ export class ReferenceApi extends runtime.BaseAPI {
      */
     async listTimezones(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TimezonesListResponse> {
         const response = await this.listTimezonesRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * UN/ECE Recommendation 20 — the unit a line item is measured in.  A **shortlist**: twenty-one of hundreds, ordered by how often an invoice needs them. `exhaustive` is false, and it means it — `unit_code` accepts any value, nothing validates against this list, and an uncommon code is still correct. Offered because the field takes a code rather than the printed label: mapping \"hrs\" to HUR is an inference that is right until it silently is not, and the audience for the result is a tax authority.
+     * List Unit Codes
+     */
+    async listUnitCodesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CodeListResponse>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/v1/reference/unit-codes`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CodeListResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * UN/ECE Recommendation 20 — the unit a line item is measured in.  A **shortlist**: twenty-one of hundreds, ordered by how often an invoice needs them. `exhaustive` is false, and it means it — `unit_code` accepts any value, nothing validates against this list, and an uncommon code is still correct. Offered because the field takes a code rather than the printed label: mapping \"hrs\" to HUR is an inference that is right until it silently is not, and the audience for the result is a tax authority.
+     * List Unit Codes
+     */
+    async listUnitCodes(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CodeListResponse> {
+        const response = await this.listUnitCodesRaw(initOverrides);
         return await response.value();
     }
 

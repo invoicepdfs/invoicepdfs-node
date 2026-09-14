@@ -32,7 +32,7 @@ export interface DocumentOutputOptions {
      */
     delivery?: DocumentOutputOptionsDeliveryEnum;
     /**
-     * 
+     * How long the render stays downloadable, in seconds (1 minute to 7 days). It is also the lifetime of the signature in `download_url`, which is why it is bounded: an unbounded value meant an unbounded grant. A value below the floor used to be accepted and produced a render that had already expired.
      * @type {number}
      * @memberof DocumentOutputOptions
      */

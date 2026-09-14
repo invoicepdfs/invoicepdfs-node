@@ -27,6 +27,7 @@ import {
 
 export interface DownloadRenderRequest {
     renderId: string;
+    token?: string | null;
 }
 
 export interface GetRenderRequest {
@@ -39,6 +40,7 @@ export interface GetRenderRequest {
 export class RendersApi extends runtime.BaseAPI {
 
     /**
+     * Fetch the PDF, by signature or by API key.  Two ways in, and the signature is checked *first* — before the row is looked up — so a forged token cannot be used to tell a real render id from an invented one. It also means the token path costs no auth work at all, which matters because this is the one endpoint a browser hits directly.
      * Download Render
      */
     async downloadRenderRaw(requestParameters: DownloadRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
@@ -50,6 +52,10 @@ export class RendersApi extends runtime.BaseAPI {
         }
 
         const queryParameters: any = {};
+
+        if (requestParameters['token'] != null) {
+            queryParameters['token'] = requestParameters['token'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -72,6 +78,7 @@ export class RendersApi extends runtime.BaseAPI {
     }
 
     /**
+     * Fetch the PDF, by signature or by API key.  Two ways in, and the signature is checked *first* — before the row is looked up — so a forged token cannot be used to tell a real render id from an invented one. It also means the token path costs no auth work at all, which matters because this is the one endpoint a browser hits directly.
      * Download Render
      */
     async downloadRender(requestParameters: DownloadRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
