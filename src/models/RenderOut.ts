@@ -13,6 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
+import type { RenderComplianceOut } from './RenderComplianceOut';
+import {
+    RenderComplianceOutFromJSON,
+    RenderComplianceOutFromJSONTyped,
+    RenderComplianceOutToJSON,
+} from './RenderComplianceOut';
 import type { CalculationBreakdown } from './CalculationBreakdown';
 import {
     CalculationBreakdownFromJSON,
@@ -86,6 +92,12 @@ export interface RenderOut {
      * @memberof RenderOut
      */
     createdAt: string;
+    /**
+     * 
+     * @type {RenderComplianceOut}
+     * @memberof RenderOut
+     */
+    compliance?: RenderComplianceOut | null;
 }
 
 
@@ -157,6 +169,7 @@ export function RenderOutFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'expiresAt': json['expires_at'],
         'calculation': CalculationBreakdownFromJSON(json['calculation']),
         'createdAt': json['created_at'],
+        'compliance': json['compliance'] == null ? undefined : RenderComplianceOutFromJSON(json['compliance']),
     };
 }
 
@@ -176,6 +189,7 @@ export function RenderOutToJSON(value?: RenderOut | null): any {
         'expires_at': value['expiresAt'],
         'calculation': CalculationBreakdownToJSON(value['calculation']),
         'created_at': value['createdAt'],
+        'compliance': RenderComplianceOutToJSON(value['compliance']),
     };
 }
 

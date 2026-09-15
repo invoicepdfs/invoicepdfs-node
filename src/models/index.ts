@@ -166,6 +166,7 @@ export * from './RecurringInvoiceOut';
 export * from './RecurringInvoicePatchRequest';
 export * from './RecurringInvoiceResponse';
 export * from './RecurringInvoicesListResponse';
+export * from './RenderComplianceOut';
 export * from './RenderOut';
 export * from './RenderResponse';
 export * from './SimpleBoolResponse';
