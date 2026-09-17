@@ -8,6 +8,7 @@ src/apis/BatchesApi.ts
 src/apis/BillingApi.ts
 src/apis/BrandingProfilesApi.ts
 src/apis/BusinessProfilesApi.ts
+src/apis/ComplianceApi.ts
 src/apis/CustomersApi.ts
 src/apis/DeliveriesApi.ts
 src/apis/DocumentAttachmentsApi.ts

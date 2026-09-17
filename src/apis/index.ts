@@ -7,6 +7,7 @@ export * from './BatchesApi';
 export * from './BillingApi';
 export * from './BrandingProfilesApi';
 export * from './BusinessProfilesApi';
+export * from './ComplianceApi';
 export * from './CustomersApi';
 export * from './DeliveriesApi';
 export * from './DocumentAttachmentsApi';
