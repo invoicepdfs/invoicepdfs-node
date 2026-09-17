@@ -138,6 +138,7 @@ export * from './InvoicesListResponse';
 export * from './JobOut';
 export * from './JobProgressOut';
 export * from './JobResponse';
+export * from './JobsListResponse';
 export * from './LineItemDiscountInput';
 export * from './LineItemTaxInput';
 export * from './LocaleOut';

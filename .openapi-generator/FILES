@@ -170,6 +170,7 @@ src/models/InvoicesListResponse.ts
 src/models/JobOut.ts
 src/models/JobProgressOut.ts
 src/models/JobResponse.ts
+src/models/JobsListResponse.ts
 src/models/LineItemDiscountInput.ts
 src/models/LineItemTaxInput.ts
 src/models/LocaleOut.ts

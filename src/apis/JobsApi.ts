@@ -17,12 +17,15 @@ import * as runtime from '../runtime';
 import type {
   ApiErrorResponse,
   JobResponse,
+  JobsListResponse,
 } from '../models/index';
 import {
     ApiErrorResponseFromJSON,
     ApiErrorResponseToJSON,
     JobResponseFromJSON,
     JobResponseToJSON,
+    JobsListResponseFromJSON,
+    JobsListResponseToJSON,
 } from '../models/index';
 
 export interface CancelJobRequest {
@@ -31,6 +34,11 @@ export interface CancelJobRequest {
 
 export interface GetJobRequest {
     jobId: string;
+}
+
+export interface ListJobsRequest {
+    limit?: number;
+    cursor?: string | null;
 }
 
 export interface RetryJobRequest {
@@ -121,6 +129,50 @@ export class JobsApi extends runtime.BaseAPI {
      */
     async getJob(requestParameters: GetJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<JobResponse> {
         const response = await this.getJobRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * This account\'s jobs, newest first.  Without it the other three routes here were unreachable: a job id was never returned by anything, so there was no way to arrive at one.
+     * List Jobs
+     */
+    async listJobsRaw(requestParameters: ListJobsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobsListResponse>> {
+        const queryParameters: any = {};
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        if (requestParameters['cursor'] != null) {
+            queryParameters['cursor'] = requestParameters['cursor'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("HTTPBearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/v1/jobs`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => JobsListResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * This account\'s jobs, newest first.  Without it the other three routes here were unreachable: a job id was never returned by anything, so there was no way to arrive at one.
+     * List Jobs
+     */
+    async listJobs(requestParameters: ListJobsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<JobsListResponse> {
+        const response = await this.listJobsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
