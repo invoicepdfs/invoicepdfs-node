@@ -80,6 +80,7 @@ export class DeliveriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Queue a fresh delivery copying a failed one.  Returns 202 with the new delivery in `queued`. Transient failures are already retried automatically; this is for after those are exhausted.
      * Retry Delivery
      */
     async retryDeliveryRaw(requestParameters: RetryDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeliveryResponse>> {
@@ -113,6 +114,7 @@ export class DeliveriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Queue a fresh delivery copying a failed one.  Returns 202 with the new delivery in `queued`. Transient failures are already retried automatically; this is for after those are exhausted.
      * Retry Delivery
      */
     async retryDelivery(requestParameters: RetryDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeliveryResponse> {

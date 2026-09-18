@@ -823,6 +823,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Queue the document to be emailed.  Returns 202 with the delivery in `queued`. The mail is sent in the background and retried on transient failure; poll `GET /deliveries/{id}` for the outcome.
      * Send Document
      */
     async sendDocumentRaw(requestParameters: SendDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeliveryResponse>> {
@@ -866,6 +867,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Queue the document to be emailed.  Returns 202 with the delivery in `queued`. The mail is sent in the background and retried on transient failure; poll `GET /deliveries/{id}` for the outcome.
      * Send Document
      */
     async sendDocument(requestParameters: SendDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeliveryResponse> {
