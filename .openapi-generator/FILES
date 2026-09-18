@@ -200,6 +200,7 @@ src/models/RecurringInvoicePatchRequest.ts
 src/models/RecurringInvoiceResponse.ts
 src/models/RecurringInvoicesListResponse.ts
 src/models/RenderComplianceOut.ts
+src/models/RenderFailureOut.ts
 src/models/RenderOut.ts
 src/models/RenderResponse.ts
 src/models/SimpleBoolResponse.ts

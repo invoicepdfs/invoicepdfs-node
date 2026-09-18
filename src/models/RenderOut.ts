@@ -19,6 +19,12 @@ import {
     RenderComplianceOutFromJSONTyped,
     RenderComplianceOutToJSON,
 } from './RenderComplianceOut';
+import type { RenderFailureOut } from './RenderFailureOut';
+import {
+    RenderFailureOutFromJSON,
+    RenderFailureOutFromJSONTyped,
+    RenderFailureOutToJSON,
+} from './RenderFailureOut';
 import type { CalculationBreakdown } from './CalculationBreakdown';
 import {
     CalculationBreakdownFromJSON,
@@ -73,13 +79,13 @@ export interface RenderOut {
      * @type {string}
      * @memberof RenderOut
      */
-    downloadUrl: string;
+    downloadUrl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof RenderOut
      */
-    expiresAt: string;
+    expiresAt?: string | null;
     /**
      * 
      * @type {CalculationBreakdown}
@@ -98,6 +104,12 @@ export interface RenderOut {
      * @memberof RenderOut
      */
     compliance?: RenderComplianceOut | null;
+    /**
+     * 
+     * @type {RenderFailureOut}
+     * @memberof RenderOut
+     */
+    failure?: RenderFailureOut | null;
 }
 
 
@@ -105,7 +117,10 @@ export interface RenderOut {
  * @export
  */
 export const RenderOutStatusEnum = {
-    Completed: 'completed'
+    Queued: 'queued',
+    Processing: 'processing',
+    Completed: 'completed',
+    Failed: 'failed'
 } as const;
 export type RenderOutStatusEnum = typeof RenderOutStatusEnum[keyof typeof RenderOutStatusEnum];
 
@@ -142,8 +157,6 @@ export function instanceOfRenderOut(value: object): value is RenderOut {
     if (!('documentType' in value) || value['documentType'] === undefined) return false;
     if (!('templateId' in value) || value['templateId'] === undefined) return false;
     if (!('format' in value) || value['format'] === undefined) return false;
-    if (!('downloadUrl' in value) || value['downloadUrl'] === undefined) return false;
-    if (!('expiresAt' in value) || value['expiresAt'] === undefined) return false;
     if (!('calculation' in value) || value['calculation'] === undefined) return false;
     if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
     return true;
@@ -165,11 +178,12 @@ export function RenderOutFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         'templateId': json['template_id'],
         'templateVersion': json['template_version'] == null ? undefined : json['template_version'],
         'format': json['format'],
-        'downloadUrl': json['download_url'],
-        'expiresAt': json['expires_at'],
+        'downloadUrl': json['download_url'] == null ? undefined : json['download_url'],
+        'expiresAt': json['expires_at'] == null ? undefined : json['expires_at'],
         'calculation': CalculationBreakdownFromJSON(json['calculation']),
         'createdAt': json['created_at'],
         'compliance': json['compliance'] == null ? undefined : RenderComplianceOutFromJSON(json['compliance']),
+        'failure': json['failure'] == null ? undefined : RenderFailureOutFromJSON(json['failure']),
     };
 }
 
@@ -190,6 +204,7 @@ export function RenderOutToJSON(value?: RenderOut | null): any {
         'calculation': CalculationBreakdownToJSON(value['calculation']),
         'created_at': value['createdAt'],
         'compliance': RenderComplianceOutToJSON(value['compliance']),
+        'failure': RenderFailureOutToJSON(value['failure']),
     };
 }
 

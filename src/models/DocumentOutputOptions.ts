@@ -32,6 +32,12 @@ export interface DocumentOutputOptions {
      */
     delivery?: DocumentOutputOptionsDeliveryEnum;
     /**
+     * `sync` renders inside the request and answers with the finished document. `async` returns `202` with a `queued` render a worker picks up; follow it with `GET /renders/{id}`. Use it for bursts — rendering is CPU-bound, so a hundred at once queue behind each other whichever mode you ask for, and only one of the two holds a connection open while they do.
+     * @type {string}
+     * @memberof DocumentOutputOptions
+     */
+    mode?: DocumentOutputOptionsModeEnum;
+    /**
      * How long the render stays downloadable, in seconds (1 minute to 7 days). It is also the lifetime of the signature in `download_url`, which is why it is bounded: an unbounded value meant an unbounded grant. A value below the floor used to be accepted and produced a render that had already expired.
      * @type {number}
      * @memberof DocumentOutputOptions
@@ -58,6 +64,15 @@ export const DocumentOutputOptionsDeliveryEnum = {
 } as const;
 export type DocumentOutputOptionsDeliveryEnum = typeof DocumentOutputOptionsDeliveryEnum[keyof typeof DocumentOutputOptionsDeliveryEnum];
 
+/**
+ * @export
+ */
+export const DocumentOutputOptionsModeEnum = {
+    Sync: 'sync',
+    Async: 'async'
+} as const;
+export type DocumentOutputOptionsModeEnum = typeof DocumentOutputOptionsModeEnum[keyof typeof DocumentOutputOptionsModeEnum];
+
 
 /**
  * Check if a given object implements the DocumentOutputOptions interface.
@@ -78,6 +93,7 @@ export function DocumentOutputOptionsFromJSONTyped(json: any, ignoreDiscriminato
         
         'format': json['format'] == null ? undefined : json['format'],
         'delivery': json['delivery'] == null ? undefined : json['delivery'],
+        'mode': json['mode'] == null ? undefined : json['mode'],
         'expiresIn': json['expires_in'] == null ? undefined : json['expires_in'],
     };
 }
@@ -90,6 +106,7 @@ export function DocumentOutputOptionsToJSON(value?: DocumentOutputOptions | null
         
         'format': value['format'],
         'delivery': value['delivery'],
+        'mode': value['mode'],
         'expires_in': value['expiresIn'],
     };
 }
