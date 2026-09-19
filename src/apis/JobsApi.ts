@@ -51,6 +51,7 @@ export interface RetryJobRequest {
 export class JobsApi extends runtime.BaseAPI {
 
     /**
+     * Stop a job that has not finished.
      * Cancel Job
      */
     async cancelJobRaw(requestParameters: CancelJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobResponse>> {
@@ -84,6 +85,7 @@ export class JobsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Stop a job that has not finished.
      * Cancel Job
      */
     async cancelJob(requestParameters: CancelJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<JobResponse> {
@@ -92,6 +94,7 @@ export class JobsApi extends runtime.BaseAPI {
     }
 
     /**
+     * One job\'s status and progress.
      * Get Job
      */
     async getJobRaw(requestParameters: GetJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobResponse>> {
@@ -125,6 +128,7 @@ export class JobsApi extends runtime.BaseAPI {
     }
 
     /**
+     * One job\'s status and progress.
      * Get Job
      */
     async getJob(requestParameters: GetJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<JobResponse> {
@@ -177,6 +181,7 @@ export class JobsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Return a `failed` or `cancelled` job to `queued`, clearing its progress and error.  `409` from any other status.
      * Retry Job
      */
     async retryJobRaw(requestParameters: RetryJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<JobResponse>> {
@@ -210,6 +215,7 @@ export class JobsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Return a `failed` or `cancelled` job to `queued`, clearing its progress and error.  `409` from any other status.
      * Retry Job
      */
     async retryJob(requestParameters: RetryJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<JobResponse> {

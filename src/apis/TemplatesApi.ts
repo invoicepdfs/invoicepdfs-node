@@ -97,6 +97,7 @@ export interface UpdateTemplateRequest {
 export class TemplatesApi extends runtime.BaseAPI {
 
     /**
+     * Design a template of your own, starting as a `draft`.  A custom template is a built-in plus your own configuration — it does not replace the layout, it adjusts it. Drafts can be rendered while you iterate; publish it when you want a version pinned.
      * Create Template
      */
     async createTemplateRaw(requestParameters: CreateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
@@ -133,6 +134,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Design a template of your own, starting as a `draft`.  A custom template is a built-in plus your own configuration — it does not replace the layout, it adjusts it. Drafts can be rendered while you iterate; publish it when you want a version pinned.
      * Create Template
      */
     async createTemplate(requestParameters: CreateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
@@ -141,6 +143,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a custom template.  `409` if a document or a recurring schedule still names it.
      * Delete Template
      */
     async deleteTemplateRaw(requestParameters: DeleteTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
@@ -174,6 +177,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a custom template.  `409` if a document or a recurring schedule still names it.
      * Delete Template
      */
     async deleteTemplate(requestParameters: DeleteTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
@@ -181,6 +185,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Copy a custom template into a new `draft`, to change without affecting the original.
      * Duplicate Template
      */
     async duplicateTemplateRaw(requestParameters: DuplicateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
@@ -214,6 +219,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Copy a custom template into a new `draft`, to change without affecting the original.
      * Duplicate Template
      */
     async duplicateTemplate(requestParameters: DuplicateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
@@ -222,6 +228,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One built-in template: its id, name and the options it accepts.
      * Get Builtin Template
      */
     async getBuiltinTemplateRaw(requestParameters: GetBuiltinTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateDetailResponse>> {
@@ -255,6 +262,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One built-in template: its id, name and the options it accepts.
      * Get Builtin Template
      */
     async getBuiltinTemplate(requestParameters: GetBuiltinTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateDetailResponse> {
@@ -263,6 +271,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One of this account\'s templates.
      * Get Custom Template
      */
     async getCustomTemplateRaw(requestParameters: GetCustomTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
@@ -296,6 +305,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One of this account\'s templates.
      * Get Custom Template
      */
     async getCustomTemplate(requestParameters: GetCustomTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
@@ -304,6 +314,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One built-in template: its id, name and the options it accepts.
      * Get Template
      */
     async getTemplateRaw(requestParameters: GetTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateDetailResponse>> {
@@ -337,6 +348,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One built-in template: its id, name and the options it accepts.
      * Get Template
      */
     async getTemplate(requestParameters: GetTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateDetailResponse> {
@@ -345,6 +357,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Templates this account has designed, newest first. Cursor-paginated.
      * List Custom Templates
      */
     async listCustomTemplatesRaw(requestParameters: ListCustomTemplatesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplatesListResponse>> {
@@ -379,6 +392,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Templates this account has designed, newest first. Cursor-paginated.
      * List Custom Templates
      */
     async listCustomTemplates(requestParameters: ListCustomTemplatesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplatesListResponse> {
@@ -387,6 +401,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * The built-in templates every account can render with.  Your own designs are listed separately by `list_custom_templates`.
      * List Templates
      */
     async listTemplatesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplatesListResponse>> {
@@ -413,6 +428,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * The built-in templates every account can render with.  Your own designs are listed separately by `list_custom_templates`.
      * List Templates
      */
     async listTemplates(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplatesListResponse> {
@@ -421,6 +437,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Render a template against sample data to see how it looks.  **This is a real render**: it counts against the monthly quota and is metered like any other, because it does the same work. Use it to check a design, not as a way to render documents.
      * Preview Template
      */
     async previewTemplateRaw(requestParameters: PreviewTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RenderResponse>> {
@@ -472,6 +489,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Render a template against sample data to see how it looks.  **This is a real render**: it counts against the monthly quota and is metered like any other, because it does the same work. Use it to check a design, not as a way to render documents.
      * Preview Template
      */
     async previewTemplate(requestParameters: PreviewTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RenderResponse> {
@@ -480,6 +498,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Mark a custom template `published`.  `409` if it is published already. Publishing is what makes a version pinnable, so a document rendered months from now can still be reproduced.
      * Publish Template
      */
     async publishTemplateRaw(requestParameters: PublishTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
@@ -513,6 +532,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Mark a custom template `published`.  `409` if it is published already. Publishing is what makes a version pinnable, so a document rendered months from now can still be reproduced.
      * Publish Template
      */
     async publishTemplate(requestParameters: PublishTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {
@@ -521,6 +541,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a custom template. Only the fields you send are changed.
      * Update Template
      */
     async updateTemplateRaw(requestParameters: UpdateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomTemplateResponse>> {
@@ -564,6 +585,7 @@ export class TemplatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a custom template. Only the fields you send are changed.
      * Update Template
      */
     async updateTemplate(requestParameters: UpdateTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomTemplateResponse> {

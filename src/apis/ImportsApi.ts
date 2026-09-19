@@ -50,6 +50,7 @@ export interface GetImportRequest {
 export class ImportsApi extends runtime.BaseAPI {
 
     /**
+     * Discard an import without creating anything. Only while it is `pending` or `processing`.
      * Cancel Import
      */
     async cancelImportRaw(requestParameters: CancelImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportResponse>> {
@@ -83,6 +84,7 @@ export class ImportsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Discard an import without creating anything. Only while it is `pending` or `processing`.
      * Cancel Import
      */
     async cancelImport(requestParameters: CancelImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportResponse> {
@@ -91,6 +93,7 @@ export class ImportsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Commit a reviewed import, creating its documents.  Only from `pending` — an import already confirmed or cancelled returns `409`.
      * Confirm Import
      */
     async confirmImportRaw(requestParameters: ConfirmImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportResponse>> {
@@ -124,6 +127,7 @@ export class ImportsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Commit a reviewed import, creating its documents.  Only from `pending` — an import already confirmed or cancelled returns `409`.
      * Confirm Import
      */
     async confirmImport(requestParameters: ConfirmImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportResponse> {
@@ -132,6 +136,7 @@ export class ImportsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Upload rows to be turned into documents, for review first.  Nothing is created yet: the rows are parsed and held so you can check them. `confirm_import` commits them, `cancel_import` discards them.
      * Create Import
      */
     async createImportRaw(requestParameters: CreateImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportResponse>> {
@@ -168,6 +173,7 @@ export class ImportsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Upload rows to be turned into documents, for review first.  Nothing is created yet: the rows are parsed and held so you can check them. `confirm_import` commits them, `cancel_import` discards them.
      * Create Import
      */
     async createImport(requestParameters: CreateImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportResponse> {
@@ -176,6 +182,7 @@ export class ImportsApi extends runtime.BaseAPI {
     }
 
     /**
+     * An import\'s status and how many rows it holds.
      * Get Import
      */
     async getImportRaw(requestParameters: GetImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ImportResponse>> {
@@ -209,6 +216,7 @@ export class ImportsApi extends runtime.BaseAPI {
     }
 
     /**
+     * An import\'s status and how many rows it holds.
      * Get Import
      */
     async getImport(requestParameters: GetImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ImportResponse> {

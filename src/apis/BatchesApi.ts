@@ -67,6 +67,7 @@ export interface ListBatchesRequest {
 export class BatchesApi extends runtime.BaseAPI {
 
     /**
+     * Stop a batch that has not finished.  Items not yet started are cancelled. An item already rendering completes — the work is done and cancelling it would waste it.
      * Cancel Batch
      */
     async cancelBatchRaw(requestParameters: CancelBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchResponse>> {
@@ -100,6 +101,7 @@ export class BatchesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Stop a batch that has not finished.  Items not yet started are cancelled. An item already rendering completes — the work is done and cancelling it would waste it.
      * Cancel Batch
      */
     async cancelBatch(requestParameters: CancelBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchResponse> {
@@ -108,6 +110,7 @@ export class BatchesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Queue many documents to be rendered at once.  Returns `202` — the batch is recorded and a worker renders it; nothing is rendered inside this request. Poll `get_batch` for progress, then `download_batch` for the results.  The whole batch is refused if it would exceed the monthly quota, rather than rendering part of it.
      * Create Batch
      */
     async createBatchRaw(requestParameters: CreateBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchResponse>> {
@@ -144,6 +147,7 @@ export class BatchesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Queue many documents to be rendered at once.  Returns `202` — the batch is recorded and a worker renders it; nothing is rendered inside this request. Poll `get_batch` for progress, then `download_batch` for the results.  The whole batch is refused if it would exceed the monthly quota, rather than rendering part of it.
      * Create Batch
      */
     async createBatch(requestParameters: CreateBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchResponse> {
@@ -152,6 +156,7 @@ export class BatchesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every completed render in the batch, as a ZIP.  `409` until the batch is `completed`. Items that failed are simply absent, so check `failed_items` rather than counting files.
      * Download Batch
      */
     async downloadBatchRaw(requestParameters: DownloadBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
@@ -185,6 +190,7 @@ export class BatchesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every completed render in the batch, as a ZIP.  `409` until the batch is `completed`. Items that failed are simply absent, so check `failed_items` rather than counting files.
      * Download Batch
      */
     async downloadBatch(requestParameters: DownloadBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
@@ -193,6 +199,7 @@ export class BatchesApi extends runtime.BaseAPI {
     }
 
     /**
+     * A batch\'s status and its per-item counts.  The poll surface: `total_items`, `completed_items` and `failed_items` say how far it has got without listing every item.
      * Get Batch
      */
     async getBatchRaw(requestParameters: GetBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchResponse>> {
@@ -226,6 +233,7 @@ export class BatchesApi extends runtime.BaseAPI {
     }
 
     /**
+     * A batch\'s status and its per-item counts.  The poll surface: `total_items`, `completed_items` and `failed_items` say how far it has got without listing every item.
      * Get Batch
      */
     async getBatch(requestParameters: GetBatchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchResponse> {
@@ -234,6 +242,7 @@ export class BatchesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every item in a batch with its own status, newest first.  Where to look when `failed_items` is not zero: each row carries its error and, once rendered, its `render_id`.
      * List Batch Items
      */
     async listBatchItemsRaw(requestParameters: ListBatchItemsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchItemsListResponse>> {
@@ -275,6 +284,7 @@ export class BatchesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every item in a batch with its own status, newest first.  Where to look when `failed_items` is not zero: each row carries its error and, once rendered, its `render_id`.
      * List Batch Items
      */
     async listBatchItems(requestParameters: ListBatchItemsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchItemsListResponse> {
@@ -283,6 +293,7 @@ export class BatchesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Batch jobs on this account, newest first.
      * List Batches
      */
     async listBatchesRaw(requestParameters: ListBatchesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BatchesListResponse>> {
@@ -317,6 +328,7 @@ export class BatchesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Batch jobs on this account, newest first.
      * List Batches
      */
     async listBatches(requestParameters: ListBatchesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BatchesListResponse> {

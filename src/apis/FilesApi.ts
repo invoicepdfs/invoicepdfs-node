@@ -47,6 +47,7 @@ export interface UploadFileRequest {
 export class FilesApi extends runtime.BaseAPI {
 
     /**
+     * Remove a stored file.  `409` if a branding profile or a document attachment still references it.
      * Delete File
      */
     async deleteFileRaw(requestParameters: DeleteFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
@@ -80,6 +81,7 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a stored file.  `409` if a branding profile or a document attachment still references it.
      * Delete File
      */
     async deleteFile(requestParameters: DeleteFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
@@ -88,6 +90,7 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * A stored file\'s metadata — name, type and size.
      * Get File
      */
     async getFileRaw(requestParameters: GetFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileResponse>> {
@@ -121,6 +124,7 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * A stored file\'s metadata — name, type and size.
      * Get File
      */
     async getFile(requestParameters: GetFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileResponse> {
@@ -129,6 +133,7 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Store a file and get an id for it.  Where logos and document attachments come from: upload once, then reference the returned `file_id` from a branding profile or an attachment.
      * Upload File
      */
     async uploadFileRaw(requestParameters: UploadFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileResponse>> {
@@ -187,6 +192,7 @@ export class FilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Store a file and get an id for it.  Where logos and document attachments come from: upload once, then reference the returned `file_id` from a branding profile or an attachment.
      * Upload File
      */
     async uploadFile(requestParameters: UploadFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileResponse> {

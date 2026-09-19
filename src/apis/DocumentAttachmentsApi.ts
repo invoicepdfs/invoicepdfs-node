@@ -54,6 +54,7 @@ export interface ListDocumentAttachmentsRequest {
 export class DocumentAttachmentsApi extends runtime.BaseAPI {
 
     /**
+     * Attach an already-uploaded file to a document.  Takes the `file_id` from `upload_file` rather than the bytes, so one upload can be attached to several documents.
      * Create Document Attachment
      */
     async createDocumentAttachmentRaw(requestParameters: CreateDocumentAttachmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InvoiceAttachmentResponse>> {
@@ -97,6 +98,7 @@ export class DocumentAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Attach an already-uploaded file to a document.  Takes the `file_id` from `upload_file` rather than the bytes, so one upload can be attached to several documents.
      * Create Document Attachment
      */
     async createDocumentAttachment(requestParameters: CreateDocumentAttachmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InvoiceAttachmentResponse> {
@@ -105,6 +107,7 @@ export class DocumentAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Detach a file from this document. The file itself is kept.
      * Delete Document Attachment
      */
     async deleteDocumentAttachmentRaw(requestParameters: DeleteDocumentAttachmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
@@ -145,6 +148,7 @@ export class DocumentAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Detach a file from this document. The file itself is kept.
      * Delete Document Attachment
      */
     async deleteDocumentAttachment(requestParameters: DeleteDocumentAttachmentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
@@ -153,6 +157,7 @@ export class DocumentAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Files attached to this document.
      * List Document Attachments
      */
     async listDocumentAttachmentsRaw(requestParameters: ListDocumentAttachmentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InvoiceAttachmentsListResponse>> {
@@ -186,6 +191,7 @@ export class DocumentAttachmentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Files attached to this document.
      * List Document Attachments
      */
     async listDocumentAttachments(requestParameters: ListDocumentAttachmentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InvoiceAttachmentsListResponse> {

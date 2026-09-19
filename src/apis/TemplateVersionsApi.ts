@@ -56,6 +56,7 @@ export interface RestoreTemplateVersionRequest {
 export class TemplateVersionsApi extends runtime.BaseAPI {
 
     /**
+     * Snapshot a template\'s current configuration as a new version.  A document can pin a version, so a render months later reproduces the design that was live when it was issued rather than today\'s.
      * Create Template Version
      */
     async createTemplateVersionRaw(requestParameters: CreateTemplateVersionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateVersionResponse>> {
@@ -99,6 +100,7 @@ export class TemplateVersionsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Snapshot a template\'s current configuration as a new version.  A document can pin a version, so a render months later reproduces the design that was live when it was issued rather than today\'s.
      * Create Template Version
      */
     async createTemplateVersion(requestParameters: CreateTemplateVersionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateVersionResponse> {
@@ -107,6 +109,7 @@ export class TemplateVersionsApi extends runtime.BaseAPI {
     }
 
     /**
+     * One version\'s stored configuration.
      * Get Template Version
      */
     async getTemplateVersionRaw(requestParameters: GetTemplateVersionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateVersionResponse>> {
@@ -147,6 +150,7 @@ export class TemplateVersionsApi extends runtime.BaseAPI {
     }
 
     /**
+     * One version\'s stored configuration.
      * Get Template Version
      */
     async getTemplateVersion(requestParameters: GetTemplateVersionRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateVersionResponse> {
@@ -155,6 +159,7 @@ export class TemplateVersionsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every published version of a custom template, newest first.
      * List Template Versions
      */
     async listTemplateVersionsRaw(requestParameters: ListTemplateVersionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TemplateVersionsListResponse>> {
@@ -188,6 +193,7 @@ export class TemplateVersionsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every published version of a custom template, newest first.
      * List Template Versions
      */
     async listTemplateVersions(requestParameters: ListTemplateVersionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TemplateVersionsListResponse> {
