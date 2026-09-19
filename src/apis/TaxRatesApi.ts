@@ -65,6 +65,7 @@ export interface UpdateTaxRateRequest {
 export class TaxRatesApi extends runtime.BaseAPI {
 
     /**
+     * Store a reusable tax rate.  `inclusive` decides whether the rate is already inside the unit price or added to it — the difference is the total, so it is worth being sure. The tax `category` travels with the rate into e-invoicing XML.
      * Create Tax Rate
      */
     async createTaxRateRaw(requestParameters: CreateTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TaxRateResponse>> {
@@ -101,6 +102,7 @@ export class TaxRatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Store a reusable tax rate.  `inclusive` decides whether the rate is already inside the unit price or added to it — the difference is the total, so it is worth being sure. The tax `category` travels with the rate into e-invoicing XML.
      * Create Tax Rate
      */
     async createTaxRate(requestParameters: CreateTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TaxRateResponse> {
@@ -109,6 +111,7 @@ export class TaxRatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a stored tax rate. Documents already issued are unaffected.
      * Delete Tax Rate
      */
     async deleteTaxRateRaw(requestParameters: DeleteTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
@@ -142,6 +145,7 @@ export class TaxRatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a stored tax rate. Documents already issued are unaffected.
      * Delete Tax Rate
      */
     async deleteTaxRate(requestParameters: DeleteTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
@@ -150,6 +154,7 @@ export class TaxRatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One stored tax rate.
      * Get Tax Rate
      */
     async getTaxRateRaw(requestParameters: GetTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TaxRateResponse>> {
@@ -183,6 +188,7 @@ export class TaxRatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One stored tax rate.
      * Get Tax Rate
      */
     async getTaxRate(requestParameters: GetTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TaxRateResponse> {
@@ -191,6 +197,7 @@ export class TaxRatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Named tax rates you can apply by reference, newest first.  A convenience, not a requirement: a line item can state its rate inline instead. Storing one means a rate change is made in a single place.
      * List Tax Rates
      */
     async listTaxRatesRaw(requestParameters: ListTaxRatesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TaxRatesListResponse>> {
@@ -225,6 +232,7 @@ export class TaxRatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Named tax rates you can apply by reference, newest first.  A convenience, not a requirement: a line item can state its rate inline instead. Storing one means a rate change is made in a single place.
      * List Tax Rates
      */
     async listTaxRates(requestParameters: ListTaxRatesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TaxRatesListResponse> {
@@ -233,6 +241,7 @@ export class TaxRatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a stored tax rate.  Documents already issued keep the rate they were calculated with. This affects future documents only.
      * Update Tax Rate
      */
     async updateTaxRateRaw(requestParameters: UpdateTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TaxRateResponse>> {
@@ -276,6 +285,7 @@ export class TaxRatesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a stored tax rate.  Documents already issued keep the rate they were calculated with. This affects future documents only.
      * Update Tax Rate
      */
     async updateTaxRate(requestParameters: UpdateTaxRateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TaxRateResponse> {

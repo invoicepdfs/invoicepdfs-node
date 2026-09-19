@@ -67,6 +67,7 @@ export interface UpdateBusinessProfileRequest {
 export class BusinessProfilesApi extends runtime.BaseAPI {
 
     /**
+     * Create an identity to issue documents as: the seller side.  `legal_name`, `tax_id`, address and bank details are what appears as the issuer, and what an e-invoicing ruleset checks. Distinct from a branding profile, which sets colours and a logo and says nothing about who you are.
      * Create Business Profile
      */
     async createBusinessProfileRaw(requestParameters: CreateBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfileResponse>> {
@@ -107,6 +108,7 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Create an identity to issue documents as: the seller side.  `legal_name`, `tax_id`, address and bank details are what appears as the issuer, and what an e-invoicing ruleset checks. Distinct from a branding profile, which sets colours and a logo and says nothing about who you are.
      * Create Business Profile
      */
     async createBusinessProfile(requestParameters: CreateBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfileResponse> {
@@ -115,6 +117,7 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a business profile.  `409` if any document was issued under it, naming what still points at it.
      * Delete Business Profile
      */
     async deleteBusinessProfileRaw(requestParameters: DeleteBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
@@ -148,6 +151,7 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a business profile.  `409` if any document was issued under it, naming what still points at it.
      * Delete Business Profile
      */
     async deleteBusinessProfile(requestParameters: DeleteBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
@@ -156,6 +160,7 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One business profile.
      * Get Business Profile
      */
     async getBusinessProfileRaw(requestParameters: GetBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfileResponse>> {
@@ -189,6 +194,7 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One business profile.
      * Get Business Profile
      */
     async getBusinessProfile(requestParameters: GetBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfileResponse> {
@@ -197,6 +203,7 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * The identities you issue documents *as*, newest first.  One per entity you bill from — a business with two trading names or two tax registrations needs two. For how documents *look* rather than who issues them, see the branding profiles.
      * List Business Profiles
      */
     async listBusinessProfilesRaw(requestParameters: ListBusinessProfilesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfilesListResponse>> {
@@ -231,6 +238,7 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * The identities you issue documents *as*, newest first.  One per entity you bill from — a business with two trading names or two tax registrations needs two. For how documents *look* rather than who issues them, see the branding profiles.
      * List Business Profiles
      */
     async listBusinessProfiles(requestParameters: ListBusinessProfilesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfilesListResponse> {
@@ -239,6 +247,7 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a business profile.  Only the fields you send are changed. Documents already issued keep the issuer details they carried at the time.
      * Update Business Profile
      */
     async updateBusinessProfileRaw(requestParameters: UpdateBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BusinessProfileResponse>> {
@@ -286,6 +295,7 @@ export class BusinessProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a business profile.  Only the fields you send are changed. Documents already issued keep the issuer details they carried at the time.
      * Update Business Profile
      */
     async updateBusinessProfile(requestParameters: UpdateBusinessProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BusinessProfileResponse> {

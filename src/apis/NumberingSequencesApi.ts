@@ -122,6 +122,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Define how a document type\'s numbers are built.  A prefix, an optional date pattern, and a zero-padded counter — `INV-2026-0001`. `reset` decides whether the counter returns to one each year.
      * Create Sequence
      */
     async createSequenceRaw(requestParameters: CreateSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
@@ -158,6 +159,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Define how a document type\'s numbers are built.  A prefix, an optional date pattern, and a zero-padded counter — `INV-2026-0001`. `reset` decides whether the counter returns to one each year.
      * Create Sequence
      */
     async createSequence(requestParameters: CreateSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {
@@ -166,6 +168,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a numbering scheme.  Documents of that type then need their number supplied explicitly.
      * Delete Sequence
      */
     async deleteSequenceRaw(requestParameters: DeleteSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
@@ -199,6 +202,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a numbering scheme.  Documents of that type then need their number supplied explicitly.
      * Delete Sequence
      */
     async deleteSequence(requestParameters: DeleteSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
@@ -207,6 +211,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One numbering sequence, including the number it will issue next.
      * Get Sequence
      */
     async getSequenceRaw(requestParameters: GetSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
@@ -240,6 +245,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One numbering sequence, including the number it will issue next.
      * Get Sequence
      */
     async getSequence(requestParameters: GetSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {
@@ -248,6 +254,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     }
 
     /**
+     * The numbering schemes that produce document numbers, newest first.  Each names the document type it numbers, so invoices and credit notes can run on separate counters.
      * List Sequences
      */
     async listSequencesRaw(requestParameters: ListSequencesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequencesListResponse>> {
@@ -282,6 +289,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     }
 
     /**
+     * The numbering schemes that produce document numbers, newest first.  Each names the document type it numbers, so invoices and credit notes can run on separate counters.
      * List Sequences
      */
     async listSequences(requestParameters: ListSequencesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequencesListResponse> {
@@ -290,6 +298,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Show the next number **without consuming it**.  Nothing is claimed, so calling this twice returns the same number and the number stays available. Use `consume_sequence_number` to take it.
      * Preview Sequence
      */
     async previewSequenceRaw(requestParameters: PreviewSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequencePreviewResponse>> {
@@ -323,6 +332,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Show the next number **without consuming it**.  Nothing is claimed, so calling this twice returns the same number and the number stays available. Use `consume_sequence_number` to take it.
      * Preview Sequence
      */
     async previewSequence(requestParameters: PreviewSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequencePreviewResponse> {
@@ -331,6 +341,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a numbering scheme.  Numbers already issued are not rewritten, so a change takes effect from the next document. Moving the counter backwards can collide with a number already used.
      * Update Sequence
      */
     async updateSequenceRaw(requestParameters: UpdateSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<NumberingSequenceResponse>> {
@@ -374,6 +385,7 @@ export class NumberingSequencesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a numbering scheme.  Numbers already issued are not rewritten, so a change takes effect from the next document. Moving the counter backwards can collide with a number already used.
      * Update Sequence
      */
     async updateSequence(requestParameters: UpdateSequenceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<NumberingSequenceResponse> {

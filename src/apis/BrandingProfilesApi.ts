@@ -73,6 +73,7 @@ export interface UploadBrandingLogoRequest {
 export class BrandingProfilesApi extends runtime.BaseAPI {
 
     /**
+     * Create a look: colours, logo, fonts and footer.  Applies on top of whichever template a render names, so one template can serve several brands. Mark one as the default and documents that name no profile will use it.
      * Create Branding Profile
      */
     async createBrandingProfileRaw(requestParameters: CreateBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
@@ -109,6 +110,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Create a look: colours, logo, fonts and footer.  Applies on top of whichever template a render names, so one template can serve several brands. Mark one as the default and documents that name no profile will use it.
      * Create Branding Profile
      */
     async createBrandingProfile(requestParameters: CreateBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
@@ -117,6 +119,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove this profile\'s logo, leaving its colours and text intact.
      * Delete Branding Logo
      */
     async deleteBrandingLogoRaw(requestParameters: DeleteBrandingLogoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
@@ -150,6 +153,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove this profile\'s logo, leaving its colours and text intact.
      * Delete Branding Logo
      */
     async deleteBrandingLogo(requestParameters: DeleteBrandingLogoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
@@ -158,6 +162,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a branding profile.  Deleting the default is allowed: the oldest remaining profile becomes the default in its place, so documents that name no profile keep rendering.
      * Delete Branding Profile
      */
     async deleteBrandingProfileRaw(requestParameters: DeleteBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
@@ -191,6 +196,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a branding profile.  Deleting the default is allowed: the oldest remaining profile becomes the default in its place, so documents that name no profile keep rendering.
      * Delete Branding Profile
      */
     async deleteBrandingProfile(requestParameters: DeleteBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
@@ -199,6 +205,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One branding profile.
      * Get Branding Profile
      */
     async getBrandingProfileRaw(requestParameters: GetBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
@@ -232,6 +239,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One branding profile.
      * Get Branding Profile
      */
     async getBrandingProfile(requestParameters: GetBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
@@ -240,6 +248,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * The looks a document can be rendered in, newest first.  Colours, logo, fonts and footer text — how a document appears. Who it is issued by is a business profile, which is a different thing.
      * List Branding Profiles
      */
     async listBrandingProfilesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfilesListResponse>> {
@@ -266,6 +275,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * The looks a document can be rendered in, newest first.  Colours, logo, fonts and footer text — how a document appears. Who it is issued by is a business profile, which is a different thing.
      * List Branding Profiles
      */
     async listBrandingProfiles(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfilesListResponse> {
@@ -274,6 +284,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Make this the profile used when a document names none.  Exactly one profile is the default; setting a new one clears the previous.
      * Set Default Branding Profile
      */
     async setDefaultBrandingProfileRaw(requestParameters: SetDefaultBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
@@ -307,6 +318,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Make this the profile used when a document names none.  Exactly one profile is the default; setting a new one clears the previous.
      * Set Default Branding Profile
      */
     async setDefaultBrandingProfile(requestParameters: SetDefaultBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
@@ -315,6 +327,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a branding profile.  Only the fields you send are changed. `hide_invoicepdfs_branding` is stored on any plan but only honoured on a plan that includes it — it is applied when a document renders, not validated here, so setting it on a plan without it is accepted and has no effect.
      * Update Branding Profile
      */
     async updateBrandingProfileRaw(requestParameters: UpdateBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
@@ -358,6 +371,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a branding profile.  Only the fields you send are changed. `hide_invoicepdfs_branding` is stored on any plan but only honoured on a plan that includes it — it is applied when a document renders, not validated here, so setting it on a plan without it is accepted and has no effect.
      * Update Branding Profile
      */
     async updateBrandingProfile(requestParameters: UpdateBrandingProfileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {
@@ -366,6 +380,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Attach a logo image to this branding profile.  Replaces whatever logo the profile carried. The image is embedded when a document renders, so a later change applies to future renders and leaves PDFs already produced as they were.
      * Upload Branding Logo
      */
     async uploadBrandingLogoRaw(requestParameters: UploadBrandingLogoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BrandingProfileResponse>> {
@@ -427,6 +442,7 @@ export class BrandingProfilesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Attach a logo image to this branding profile.  Replaces whatever logo the profile carried. The image is embedded when a document renders, so a later change applies to future renders and leaves PDFs already produced as they were.
      * Upload Branding Logo
      */
     async uploadBrandingLogo(requestParameters: UploadBrandingLogoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BrandingProfileResponse> {

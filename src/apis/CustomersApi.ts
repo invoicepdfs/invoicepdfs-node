@@ -67,6 +67,7 @@ export interface UpdateCustomerRequest {
 export class CustomersApi extends runtime.BaseAPI {
 
     /**
+     * Store a customer you can bill repeatedly.  `tax_id` and `electronic_address` are what e-invoicing needs: a buyer VAT number and the Peppol identifier a receiver is addressed by. Neither is required for a plain PDF.
      * Create Customer
      */
     async createCustomerRaw(requestParameters: CreateCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomerResponse>> {
@@ -107,6 +108,7 @@ export class CustomersApi extends runtime.BaseAPI {
     }
 
     /**
+     * Store a customer you can bill repeatedly.  `tax_id` and `electronic_address` are what e-invoicing needs: a buyer VAT number and the Peppol identifier a receiver is addressed by. Neither is required for a plain PDF.
      * Create Customer
      */
     async createCustomer(requestParameters: CreateCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomerResponse> {
@@ -115,6 +117,7 @@ export class CustomersApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a customer.  `409` if any document still references them, naming what does. History is kept rather than rewritten.
      * Delete Customer
      */
     async deleteCustomerRaw(requestParameters: DeleteCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
@@ -148,6 +151,7 @@ export class CustomersApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a customer.  `409` if any document still references them, naming what does. History is kept rather than rewritten.
      * Delete Customer
      */
     async deleteCustomer(requestParameters: DeleteCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
@@ -156,6 +160,7 @@ export class CustomersApi extends runtime.BaseAPI {
     }
 
     /**
+     * One stored customer.
      * Get Customer
      */
     async getCustomerRaw(requestParameters: GetCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomerResponse>> {
@@ -189,6 +194,7 @@ export class CustomersApi extends runtime.BaseAPI {
     }
 
     /**
+     * One stored customer.
      * Get Customer
      */
     async getCustomer(requestParameters: GetCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomerResponse> {
@@ -197,6 +203,7 @@ export class CustomersApi extends runtime.BaseAPI {
     }
 
     /**
+     * The people and companies you bill, newest first.  Cursor-paginated. A customer is optional — the stateless render endpoints take a buyer inline — but storing one lets a document reference it by id.
      * List Customers
      */
     async listCustomersRaw(requestParameters: ListCustomersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomersListResponse>> {
@@ -231,6 +238,7 @@ export class CustomersApi extends runtime.BaseAPI {
     }
 
     /**
+     * The people and companies you bill, newest first.  Cursor-paginated. A customer is optional — the stateless render endpoints take a buyer inline — but storing one lets a document reference it by id.
      * List Customers
      */
     async listCustomers(requestParameters: ListCustomersRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomersListResponse> {
@@ -239,6 +247,7 @@ export class CustomersApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a stored customer.  Only the fields you send are changed — omit one to leave it alone, send `null` to clear it. Documents already issued keep the details they were issued with; this does not rewrite them.
      * Update Customer
      */
     async updateCustomerRaw(requestParameters: UpdateCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomerResponse>> {
@@ -286,6 +295,7 @@ export class CustomersApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a stored customer.  Only the fields you send are changed — omit one to leave it alone, send `null` to clear it. Documents already issued keep the details they were issued with; this does not rewrite them.
      * Update Customer
      */
     async updateCustomer(requestParameters: UpdateCustomerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomerResponse> {
