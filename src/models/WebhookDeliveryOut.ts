@@ -87,6 +87,7 @@ export interface WebhookDeliveryOut {
  */
 export const WebhookDeliveryOutStatusEnum = {
     Pending: 'pending',
+    Retrying: 'retrying',
     Delivered: 'delivered',
     Failed: 'failed'
 } as const;

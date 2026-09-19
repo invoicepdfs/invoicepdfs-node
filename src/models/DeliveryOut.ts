@@ -94,8 +94,6 @@ export interface DeliveryOut {
 export const DeliveryOutStatusEnum = {
     Queued: 'queued',
     Sent: 'sent',
-    Delivered: 'delivered',
-    Bounced: 'bounced',
     Failed: 'failed'
 } as const;
 export type DeliveryOutStatusEnum = typeof DeliveryOutStatusEnum[keyof typeof DeliveryOutStatusEnum];
