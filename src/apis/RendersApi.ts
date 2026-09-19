@@ -87,6 +87,7 @@ export class RendersApi extends runtime.BaseAPI {
     }
 
     /**
+     * One render: its status, its totals, and how to download it.  `download_url` and `expires_at` are `null` until the render is `completed`, and a `failed` render carries a `failure` explaining why. Poll this after an asynchronous render.
      * Get Render
      */
     async getRenderRaw(requestParameters: GetRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RenderResponse>> {
@@ -120,6 +121,7 @@ export class RendersApi extends runtime.BaseAPI {
     }
 
     /**
+     * One render: its status, its totals, and how to download it.  `download_url` and `expires_at` are `null` until the render is `completed`, and a `failed` render carries a `failure` explaining why. Poll this after an asynchronous render.
      * Get Render
      */
     async getRender(requestParameters: GetRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RenderResponse> {

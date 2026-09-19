@@ -123,6 +123,7 @@ export class AuthApi extends runtime.BaseAPI {
     }
 
     /**
+     * The account behind the current credential, and the plan it is on.  Works with either an API key or a Firebase token, so it is the cheapest way to confirm a credential is live and see what it can reach.
      * Get Current User
      */
     async getCurrentUserRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMeResponse>> {
@@ -149,6 +150,7 @@ export class AuthApi extends runtime.BaseAPI {
     }
 
     /**
+     * The account behind the current credential, and the plan it is on.  Works with either an API key or a Firebase token, so it is the cheapest way to confirm a credential is live and see what it can reach.
      * Get Current User
      */
     async getCurrentUser(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuthMeResponse> {

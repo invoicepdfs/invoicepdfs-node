@@ -160,6 +160,7 @@ export interface VoidDocumentRequest {
 export class DocumentsApi extends runtime.BaseAPI {
 
     /**
+     * Move a document out of the active list.  Archiving hides a document from the default listing without destroying it; `restore_document` brings it back. Drafts are deleted rather than archived.
      * Archive Document
      */
     async archiveDocumentRaw(requestParameters: ArchiveDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
@@ -193,6 +194,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Move a document out of the active list.  Archiving hides a document from the default listing without destroying it; `restore_document` brings it back. Drafts are deleted rather than archived.
      * Archive Document
      */
     async archiveDocument(requestParameters: ArchiveDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
@@ -201,6 +203,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Compute the totals for a document without storing or rendering it.  Returns the same breakdown — subtotal, discounts, tax, shipping, total — that a render would print, so a checkout page can show a figure before committing to one.
      * Calculate Document
      */
     async calculateDocumentRaw(requestParameters: CalculateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentCalculateResponse>> {
@@ -237,6 +240,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Compute the totals for a document without storing or rendering it.  Returns the same breakdown — subtotal, discounts, tax, shipping, total — that a render would print, so a checkout page can show a figure before committing to one.
      * Calculate Document
      */
     async calculateDocument(requestParameters: CalculateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentCalculateResponse> {
@@ -245,6 +249,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Create a document in `draft`.  Totals are computed and stored at creation, so the figures you read back are the ones that were issued rather than a recalculation. Nothing is rendered — use `create_document_render` once the document is final.
      * Create Document
      */
     async createDocumentRaw(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
@@ -285,6 +290,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Create a document in `draft`.  Totals are computed and stored at creation, so the figures you read back are the ones that were issued rather than a recalculation. Nothing is rendered — use `create_document_render` once the document is final.
      * Create Document
      */
     async createDocument(requestParameters: CreateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
@@ -293,6 +299,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Render a stored document to a PDF.  Use this when the document lives here. To render one you hold yourself, without storing it, use `render_document`.  The response carries a signed `download_url` that needs no API key, valid until `expires_at`.
      * Create Document Render
      */
     async createDocumentRenderRaw(requestParameters: CreateDocumentRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RenderResponse>> {
@@ -340,6 +347,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Render a stored document to a PDF.  Use this when the document lives here. To render one you hold yourself, without storing it, use `render_document`.  The response carries a signed `download_url` that needs no API key, valid until `expires_at`.
      * Create Document Render
      */
     async createDocumentRender(requestParameters: CreateDocumentRenderRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RenderResponse> {
@@ -348,6 +356,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Permanently remove a `draft`.  `409` if anything still points at it — a render, a delivery or a payment — naming what does. Finalized documents are voided or archived, not deleted.
      * Delete Document
      */
     async deleteDocumentRaw(requestParameters: DeleteDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
@@ -381,6 +390,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Permanently remove a `draft`.  `409` if anything still points at it — a render, a delivery or a payment — naming what does. Finalized documents are voided or archived, not deleted.
      * Delete Document
      */
     async deleteDocument(requestParameters: DeleteDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
@@ -389,6 +399,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Copy a document into a new `draft`.  The copy gets the next available number rather than the original\'s, so it can be finalized without colliding with the document it came from.
      * Duplicate Document
      */
     async duplicateDocumentRaw(requestParameters: DuplicateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
@@ -422,6 +433,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Copy a document into a new `draft`.  The copy gets the next available number rather than the original\'s, so it can be finalized without colliding with the document it came from.
      * Duplicate Document
      */
     async duplicateDocument(requestParameters: DuplicateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
@@ -430,6 +442,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Issue a `draft`: fix its number and totals.  From here the document is a record. It can be sent, marked paid, voided or archived, but not edited — `update_document` returns `409` afterwards.
      * Finalize Document
      */
     async finalizeDocumentRaw(requestParameters: FinalizeDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
@@ -463,6 +476,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Issue a `draft`: fix its number and totals.  From here the document is a record. It can be sent, marked paid, voided or archived, but not edited — `update_document` returns `409` afterwards.
      * Finalize Document
      */
     async finalizeDocument(requestParameters: FinalizeDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
@@ -471,6 +485,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * One document, with the totals stored when it was created.
      * Get Document
      */
     async getDocumentRaw(requestParameters: GetDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
@@ -504,6 +519,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * One document, with the totals stored when it was created.
      * Get Document
      */
     async getDocument(requestParameters: GetDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
@@ -512,6 +528,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every email delivery attempted for this document.  One row per attempt, newest first, including the ones that failed — which is where to look when a customer says the invoice never arrived.
      * List Document Deliveries
      */
     async listDocumentDeliveriesRaw(requestParameters: ListDocumentDeliveriesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeliveriesListResponse>> {
@@ -553,6 +570,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every email delivery attempted for this document.  One row per attempt, newest first, including the ones that failed — which is where to look when a customer says the invoice never arrived.
      * List Document Deliveries
      */
     async listDocumentDeliveries(requestParameters: ListDocumentDeliveriesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeliveriesListResponse> {
@@ -561,6 +579,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every document on the account, newest first.  Cursor-paginated: pass the `next_cursor` from a response to fetch the page after it. Filter by `document_type` or `status` to narrow the list.
      * List Documents
      */
     async listDocumentsRaw(requestParameters: ListDocumentsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentsListResponse>> {
@@ -603,6 +622,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every document on the account, newest first.  Cursor-paginated: pass the `next_cursor` from a response to fetch the page after it. Filter by `document_type` or `status` to narrow the list.
      * List Documents
      */
     async listDocuments(requestParameters: ListDocumentsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentsListResponse> {
@@ -611,6 +631,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Record that the document was paid in full.
      * Mark Paid
      */
     async markPaidRaw(requestParameters: MarkPaidRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
@@ -644,6 +665,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Record that the document was paid in full.
      * Mark Paid
      */
     async markPaid(requestParameters: MarkPaidRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
@@ -652,6 +674,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Record that the document reached the customer.  **This does not send anything** — it only moves the status, for when the document was delivered by some means of your own. Use `send_document` to have us email it.
      * Mark Sent
      */
     async markSentRaw(requestParameters: MarkSentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
@@ -685,6 +708,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Record that the document reached the customer.  **This does not send anything** — it only moves the status, for when the document was delivered by some means of your own. Use `send_document` to have us email it.
      * Mark Sent
      */
     async markSent(requestParameters: MarkSentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
@@ -693,6 +717,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Undo `mark_paid`, returning the document to `sent`.  For a payment that was recorded in error or later reversed.
      * Mark Unpaid
      */
     async markUnpaidRaw(requestParameters: MarkUnpaidRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
@@ -726,6 +751,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Undo `mark_paid`, returning the document to `sent`.  For a payment that was recorded in error or later reversed.
      * Mark Unpaid
      */
     async markUnpaid(requestParameters: MarkUnpaidRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
@@ -734,6 +760,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Render a document supplied inline, storing nothing but the PDF.  The stateless path: pass the whole document in the body and get a PDF back, with no customer, business profile or stored document required. To render a document that already lives here, use `create_document_render`.  Returns JSON with a signed `download_url` by default. Ask for the bytes directly with `output.delivery: \"binary\"` or `Accept: application/pdf`.
      * Render Document
      */
     async renderDocumentRaw(requestParameters: RenderDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RenderResponse>> {
@@ -774,6 +801,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Render a document supplied inline, storing nothing but the PDF.  The stateless path: pass the whole document in the body and get a PDF back, with no customer, business profile or stored document required. To render a document that already lives here, use `create_document_render`.  Returns JSON with a signed `download_url` by default. Ask for the bytes directly with `output.delivery: \"binary\"` or `Accept: application/pdf`.
      * Render Document
      */
     async renderDocument(requestParameters: RenderDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RenderResponse> {
@@ -782,6 +810,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Bring an archived document back to `finalized`.
      * Restore Document
      */
     async restoreDocumentRaw(requestParameters: RestoreDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
@@ -815,6 +844,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Bring an archived document back to `finalized`.
      * Restore Document
      */
     async restoreDocument(requestParameters: RestoreDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
@@ -876,6 +906,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a document that is still a `draft`.  A finalized document is a record of what was issued and cannot be edited; `409` if it has moved past `draft`. Only the fields you send are changed — omit one to leave it alone, and send `null` to clear it.
      * Update Document
      */
     async updateDocumentRaw(requestParameters: UpdateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
@@ -919,6 +950,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a document that is still a `draft`.  A finalized document is a record of what was issued and cannot be edited; `409` if it has moved past `draft`. Only the fields you send are changed — omit one to leave it alone, and send `null` to clear it.
      * Update Document
      */
     async updateDocument(requestParameters: UpdateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
@@ -927,6 +959,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Check that a document body is well-formed, without pricing it.  The cheapest of the three stateless operations: no totals are computed and no PDF is produced. Use `calculate_document` for the money and `render_document` for the document.
      * Validate Document
      */
     async validateDocumentRaw(requestParameters: ValidateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentValidateResponse>> {
@@ -963,6 +996,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Check that a document body is well-formed, without pricing it.  The cheapest of the three stateless operations: no totals are computed and no PDF is produced. Use `calculate_document` for the money and `render_document` for the document.
      * Validate Document
      */
     async validateDocument(requestParameters: ValidateDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentValidateResponse> {
@@ -971,6 +1005,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Cancel a document that was issued.  Voiding is how a finalized document is withdrawn, since it cannot be deleted. The PDF renders with a `VOID` mark from then on, so a copy already sent is distinguishable from the live one.
      * Void Document
      */
     async voidDocumentRaw(requestParameters: VoidDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DocumentResponse>> {
@@ -1004,6 +1039,7 @@ export class DocumentsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Cancel a document that was issued.  Voiding is how a finalized document is withdrawn, since it cannot be deleted. The PDF renders with a `VOID` mark from then on, so a copy already sent is distinguishable from the live one.
      * Void Document
      */
     async voidDocument(requestParameters: VoidDocumentRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DocumentResponse> {
