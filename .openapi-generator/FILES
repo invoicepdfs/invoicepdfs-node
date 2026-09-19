@@ -66,10 +66,12 @@ src/models/AuthTokenResponse.ts
 src/models/BatchCreateRequest.ts
 src/models/BatchItemInput.ts
 src/models/BatchItemOut.ts
+src/models/BatchItemStatus.ts
 src/models/BatchItemsListResponse.ts
 src/models/BatchOut.ts
 src/models/BatchOutputOptions.ts
 src/models/BatchResponse.ts
+src/models/BatchStatus.ts
 src/models/BatchesListResponse.ts
 src/models/BillingCheckoutData.ts
 src/models/BillingCheckoutRequest.ts
@@ -116,6 +118,7 @@ src/models/DeliveriesListResponse.ts
 src/models/DeliveryOut.ts
 src/models/DeliveryResponse.ts
 src/models/DeliverySendRequest.ts
+src/models/DeliveryStatus.ts
 src/models/DocumentBrandingInput.ts
 src/models/DocumentCalculateRequest.ts
 src/models/DocumentCalculateResponse.ts
@@ -136,6 +139,7 @@ src/models/DocumentRenderOptions.ts
 src/models/DocumentRenderRequest.ts
 src/models/DocumentResponse.ts
 src/models/DocumentShippingInput.ts
+src/models/DocumentStatus.ts
 src/models/DocumentTemplateRef.ts
 src/models/DocumentTypeOut.ts
 src/models/DocumentTypesListResponse.ts
@@ -149,6 +153,7 @@ src/models/HealthResponse.ts
 src/models/ImportCreateRequest.ts
 src/models/ImportOut.ts
 src/models/ImportResponse.ts
+src/models/ImportStatus.ts
 src/models/InvoiceAttachmentCreateRequest.ts
 src/models/InvoiceAttachmentOut.ts
 src/models/InvoiceAttachmentResponse.ts
@@ -170,6 +175,7 @@ src/models/InvoicesListResponse.ts
 src/models/JobOut.ts
 src/models/JobProgressOut.ts
 src/models/JobResponse.ts
+src/models/JobStatus.ts
 src/models/JobsListResponse.ts
 src/models/LineItemDiscountInput.ts
 src/models/LineItemTaxInput.ts
@@ -198,11 +204,13 @@ src/models/RecurringInvoiceCreateRequest.ts
 src/models/RecurringInvoiceOut.ts
 src/models/RecurringInvoicePatchRequest.ts
 src/models/RecurringInvoiceResponse.ts
+src/models/RecurringInvoiceStatus.ts
 src/models/RecurringInvoicesListResponse.ts
 src/models/RenderComplianceOut.ts
 src/models/RenderFailureOut.ts
 src/models/RenderOut.ts
 src/models/RenderResponse.ts
+src/models/RenderStatus.ts
 src/models/SimpleBoolResponse.ts
 src/models/StandardLineItemInput.ts
 src/models/StatsCounts.ts
@@ -243,6 +251,7 @@ src/models/VersionResponse.ts
 src/models/WebhookDeliveriesListResponse.ts
 src/models/WebhookDeliveryOut.ts
 src/models/WebhookDeliveryResponse.ts
+src/models/WebhookDeliveryStatus.ts
 src/models/WebhookEndpointCreateRequest.ts
 src/models/WebhookEndpointOut.ts
 src/models/WebhookEndpointPatchRequest.ts

@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { WebhookDeliveryStatus } from './WebhookDeliveryStatus';
+import {
+    WebhookDeliveryStatusFromJSON,
+    WebhookDeliveryStatusFromJSONTyped,
+    WebhookDeliveryStatusToJSON,
+} from './WebhookDeliveryStatus';
+
 /**
  * 
  * @export
@@ -45,10 +52,10 @@ export interface WebhookDeliveryOut {
     eventType: string;
     /**
      * 
-     * @type {string}
+     * @type {WebhookDeliveryStatus}
      * @memberof WebhookDeliveryOut
      */
-    status: WebhookDeliveryOutStatusEnum;
+    status: WebhookDeliveryStatus;
     /**
      * 
      * @type {number}
@@ -81,19 +88,6 @@ export interface WebhookDeliveryOut {
     deliveredAt?: string | null;
 }
 
-
-/**
- * @export
- */
-export const WebhookDeliveryOutStatusEnum = {
-    Pending: 'pending',
-    Retrying: 'retrying',
-    Delivered: 'delivered',
-    Failed: 'failed'
-} as const;
-export type WebhookDeliveryOutStatusEnum = typeof WebhookDeliveryOutStatusEnum[keyof typeof WebhookDeliveryOutStatusEnum];
-
-
 /**
  * Check if a given object implements the WebhookDeliveryOut interface.
  */
@@ -122,7 +116,7 @@ export function WebhookDeliveryOutFromJSONTyped(json: any, ignoreDiscriminator: 
         'endpointId': json['endpoint_id'],
         'eventId': json['event_id'],
         'eventType': json['event_type'],
-        'status': json['status'],
+        'status': WebhookDeliveryStatusFromJSON(json['status']),
         'httpStatus': json['http_status'] == null ? undefined : json['http_status'],
         'attempts': json['attempts'],
         'errorMessage': json['error_message'] == null ? undefined : json['error_message'],
@@ -141,7 +135,7 @@ export function WebhookDeliveryOutToJSON(value?: WebhookDeliveryOut | null): any
         'endpoint_id': value['endpointId'],
         'event_id': value['eventId'],
         'event_type': value['eventType'],
-        'status': value['status'],
+        'status': WebhookDeliveryStatusToJSON(value['status']),
         'http_status': value['httpStatus'],
         'attempts': value['attempts'],
         'error_message': value['errorMessage'],

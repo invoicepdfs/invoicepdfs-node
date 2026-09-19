@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { DeliveryStatus } from './DeliveryStatus';
+import {
+    DeliveryStatusFromJSON,
+    DeliveryStatusFromJSONTyped,
+    DeliveryStatusToJSON,
+} from './DeliveryStatus';
+
 /**
  * 
  * @export
@@ -69,10 +76,10 @@ export interface DeliveryOut {
     attachPdf: boolean;
     /**
      * 
-     * @type {string}
+     * @type {DeliveryStatus}
      * @memberof DeliveryOut
      */
-    status: DeliveryOutStatusEnum;
+    status: DeliveryStatus;
     /**
      * 
      * @type {string}
@@ -86,18 +93,6 @@ export interface DeliveryOut {
      */
     sentAt?: string | null;
 }
-
-
-/**
- * @export
- */
-export const DeliveryOutStatusEnum = {
-    Queued: 'queued',
-    Sent: 'sent',
-    Failed: 'failed'
-} as const;
-export type DeliveryOutStatusEnum = typeof DeliveryOutStatusEnum[keyof typeof DeliveryOutStatusEnum];
-
 
 /**
  * Check if a given object implements the DeliveryOut interface.
@@ -133,7 +128,7 @@ export function DeliveryOutFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'subject': json['subject'],
         'message': json['message'] == null ? undefined : json['message'],
         'attachPdf': json['attach_pdf'],
-        'status': json['status'],
+        'status': DeliveryStatusFromJSON(json['status']),
         'createdAt': json['created_at'],
         'sentAt': json['sent_at'] == null ? undefined : json['sent_at'],
     };
@@ -153,7 +148,7 @@ export function DeliveryOutToJSON(value?: DeliveryOut | null): any {
         'subject': value['subject'],
         'message': value['message'],
         'attach_pdf': value['attachPdf'],
-        'status': value['status'],
+        'status': DeliveryStatusToJSON(value['status']),
         'created_at': value['createdAt'],
         'sent_at': value['sentAt'],
     };

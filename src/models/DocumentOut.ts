@@ -13,6 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
+import type { DocumentStatus } from './DocumentStatus';
+import {
+    DocumentStatusFromJSON,
+    DocumentStatusFromJSONTyped,
+    DocumentStatusToJSON,
+} from './DocumentStatus';
 import type { InvoiceTotalsOut } from './InvoiceTotalsOut';
 import {
     InvoiceTotalsOutFromJSON,
@@ -46,10 +52,10 @@ export interface DocumentOut {
     number: string;
     /**
      * 
-     * @type {string}
+     * @type {DocumentStatus}
      * @memberof DocumentOut
      */
-    status: string;
+    status: DocumentStatus;
     /**
      * 
      * @type {Date}
@@ -179,7 +185,7 @@ export function DocumentOutFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'id': json['id'],
         'documentType': json['document_type'],
         'number': json['number'],
-        'status': json['status'],
+        'status': DocumentStatusFromJSON(json['status']),
         'issueDate': (new Date(json['issue_date'])),
         'dueDate': json['due_date'] == null ? undefined : (new Date(json['due_date'])),
         'currency': json['currency'],
@@ -205,7 +211,7 @@ export function DocumentOutToJSON(value?: DocumentOut | null): any {
         'id': value['id'],
         'document_type': value['documentType'],
         'number': value['number'],
-        'status': value['status'],
+        'status': DocumentStatusToJSON(value['status']),
         'issue_date': ((value['issueDate']).toISOString().substring(0,10)),
         'due_date': value['dueDate'] == null ? undefined : ((value['dueDate'] as any).toISOString().substring(0,10)),
         'currency': value['currency'],

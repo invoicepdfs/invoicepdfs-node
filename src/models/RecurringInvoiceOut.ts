@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { RecurringInvoiceStatus } from './RecurringInvoiceStatus';
+import {
+    RecurringInvoiceStatusFromJSON,
+    RecurringInvoiceStatusFromJSONTyped,
+    RecurringInvoiceStatusToJSON,
+} from './RecurringInvoiceStatus';
+
 /**
  * 
  * @export
@@ -27,10 +34,10 @@ export interface RecurringInvoiceOut {
     id: string;
     /**
      * 
-     * @type {string}
+     * @type {RecurringInvoiceStatus}
      * @memberof RecurringInvoiceOut
      */
-    status: string;
+    status: RecurringInvoiceStatus;
     /**
      * 
      * @type {string}
@@ -137,7 +144,7 @@ export function RecurringInvoiceOutFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'id': json['id'],
-        'status': json['status'],
+        'status': RecurringInvoiceStatusFromJSON(json['status']),
         'businessProfileId': json['business_profile_id'],
         'customerId': json['customer_id'],
         'frequency': json['frequency'],
@@ -160,7 +167,7 @@ export function RecurringInvoiceOutToJSON(value?: RecurringInvoiceOut | null): a
     return {
         
         'id': value['id'],
-        'status': value['status'],
+        'status': RecurringInvoiceStatusToJSON(value['status']),
         'business_profile_id': value['businessProfileId'],
         'customer_id': value['customerId'],
         'frequency': value['frequency'],

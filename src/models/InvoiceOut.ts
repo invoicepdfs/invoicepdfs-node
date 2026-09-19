@@ -13,6 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
+import type { DocumentStatus } from './DocumentStatus';
+import {
+    DocumentStatusFromJSON,
+    DocumentStatusFromJSONTyped,
+    DocumentStatusToJSON,
+} from './DocumentStatus';
 import type { InvoiceTotalsOut } from './InvoiceTotalsOut';
 import {
     InvoiceTotalsOutFromJSON,
@@ -34,10 +40,10 @@ export interface InvoiceOut {
     id: string;
     /**
      * 
-     * @type {string}
+     * @type {DocumentStatus}
      * @memberof InvoiceOut
      */
-    status: InvoiceOutStatusEnum;
+    status: DocumentStatus;
     /**
      * 
      * @type {string}
@@ -122,19 +128,6 @@ export interface InvoiceOut {
 /**
  * @export
  */
-export const InvoiceOutStatusEnum = {
-    Draft: 'draft',
-    Finalized: 'finalized',
-    Sent: 'sent',
-    Paid: 'paid',
-    Void: 'void',
-    Archived: 'archived'
-} as const;
-export type InvoiceOutStatusEnum = typeof InvoiceOutStatusEnum[keyof typeof InvoiceOutStatusEnum];
-
-/**
- * @export
- */
 export const InvoiceOutDocumentTypeEnum = {
     Invoice: 'invoice',
     CreditNote: 'credit_note',
@@ -178,7 +171,7 @@ export function InvoiceOutFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     return {
         
         'id': json['id'],
-        'status': json['status'],
+        'status': DocumentStatusFromJSON(json['status']),
         'invoiceNumber': json['invoice_number'],
         'documentType': json['document_type'],
         'issueDate': (new Date(json['issue_date'])),
@@ -202,7 +195,7 @@ export function InvoiceOutToJSON(value?: InvoiceOut | null): any {
     return {
         
         'id': value['id'],
-        'status': value['status'],
+        'status': DocumentStatusToJSON(value['status']),
         'invoice_number': value['invoiceNumber'],
         'document_type': value['documentType'],
         'issue_date': ((value['issueDate']).toISOString().substring(0,10)),

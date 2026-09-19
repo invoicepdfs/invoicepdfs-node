@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { BatchItemStatus } from './BatchItemStatus';
+import {
+    BatchItemStatusFromJSON,
+    BatchItemStatusFromJSONTyped,
+    BatchItemStatusToJSON,
+} from './BatchItemStatus';
+
 /**
  * 
  * @export
@@ -39,10 +46,10 @@ export interface BatchItemOut {
     documentType: string;
     /**
      * 
-     * @type {string}
+     * @type {BatchItemStatus}
      * @memberof BatchItemOut
      */
-    status: BatchItemOutStatusEnum;
+    status: BatchItemStatus;
     /**
      * 
      * @type {string}
@@ -62,18 +69,6 @@ export interface BatchItemOut {
      */
     createdAt: string;
 }
-
-
-/**
- * @export
- */
-export const BatchItemOutStatusEnum = {
-    Pending: 'pending',
-    Completed: 'completed',
-    Failed: 'failed'
-} as const;
-export type BatchItemOutStatusEnum = typeof BatchItemOutStatusEnum[keyof typeof BatchItemOutStatusEnum];
-
 
 /**
  * Check if a given object implements the BatchItemOut interface.
@@ -99,7 +94,7 @@ export function BatchItemOutFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'id': json['id'],
         'externalId': json['external_id'] == null ? undefined : json['external_id'],
         'documentType': json['document_type'],
-        'status': json['status'],
+        'status': BatchItemStatusFromJSON(json['status']),
         'renderId': json['render_id'] == null ? undefined : json['render_id'],
         'errorMessage': json['error_message'] == null ? undefined : json['error_message'],
         'createdAt': json['created_at'],
@@ -115,7 +110,7 @@ export function BatchItemOutToJSON(value?: BatchItemOut | null): any {
         'id': value['id'],
         'external_id': value['externalId'],
         'document_type': value['documentType'],
-        'status': value['status'],
+        'status': BatchItemStatusToJSON(value['status']),
         'render_id': value['renderId'],
         'error_message': value['errorMessage'],
         'created_at': value['createdAt'],

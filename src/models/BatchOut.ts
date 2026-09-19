@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { BatchStatus } from './BatchStatus';
+import {
+    BatchStatusFromJSON,
+    BatchStatusFromJSONTyped,
+    BatchStatusToJSON,
+} from './BatchStatus';
+
 /**
  * 
  * @export
@@ -27,10 +34,10 @@ export interface BatchOut {
     id: string;
     /**
      * 
-     * @type {string}
+     * @type {BatchStatus}
      * @memberof BatchOut
      */
-    status: BatchOutStatusEnum;
+    status: BatchStatus;
     /**
      * 
      * @type {string}
@@ -87,20 +94,6 @@ export interface BatchOut {
     completedAt?: string | null;
 }
 
-
-/**
- * @export
- */
-export const BatchOutStatusEnum = {
-    Queued: 'queued',
-    Processing: 'processing',
-    Completed: 'completed',
-    Failed: 'failed',
-    Cancelled: 'cancelled'
-} as const;
-export type BatchOutStatusEnum = typeof BatchOutStatusEnum[keyof typeof BatchOutStatusEnum];
-
-
 /**
  * Check if a given object implements the BatchOut interface.
  */
@@ -128,7 +121,7 @@ export function BatchOutFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     return {
         
         'id': json['id'],
-        'status': json['status'],
+        'status': BatchStatusFromJSON(json['status']),
         'operation': json['operation'],
         'templateId': json['template_id'],
         'templateVersion': json['template_version'] == null ? undefined : json['template_version'],
@@ -148,7 +141,7 @@ export function BatchOutToJSON(value?: BatchOut | null): any {
     return {
         
         'id': value['id'],
-        'status': value['status'],
+        'status': BatchStatusToJSON(value['status']),
         'operation': value['operation'],
         'template_id': value['templateId'],
         'template_version': value['templateVersion'],

@@ -19,6 +19,12 @@ import {
     RenderComplianceOutFromJSONTyped,
     RenderComplianceOutToJSON,
 } from './RenderComplianceOut';
+import type { RenderStatus } from './RenderStatus';
+import {
+    RenderStatusFromJSON,
+    RenderStatusFromJSONTyped,
+    RenderStatusToJSON,
+} from './RenderStatus';
 import type { RenderFailureOut } from './RenderFailureOut';
 import {
     RenderFailureOutFromJSON,
@@ -46,10 +52,10 @@ export interface RenderOut {
     id: string;
     /**
      * 
-     * @type {string}
+     * @type {RenderStatus}
      * @memberof RenderOut
      */
-    status: RenderOutStatusEnum;
+    status: RenderStatus;
     /**
      * 
      * @type {string}
@@ -116,17 +122,6 @@ export interface RenderOut {
 /**
  * @export
  */
-export const RenderOutStatusEnum = {
-    Queued: 'queued',
-    Processing: 'processing',
-    Completed: 'completed',
-    Failed: 'failed'
-} as const;
-export type RenderOutStatusEnum = typeof RenderOutStatusEnum[keyof typeof RenderOutStatusEnum];
-
-/**
- * @export
- */
 export const RenderOutDocumentTypeEnum = {
     Invoice: 'invoice',
     CreditNote: 'credit_note',
@@ -173,7 +168,7 @@ export function RenderOutFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     return {
         
         'id': json['id'],
-        'status': json['status'],
+        'status': RenderStatusFromJSON(json['status']),
         'documentType': json['document_type'],
         'templateId': json['template_id'],
         'templateVersion': json['template_version'] == null ? undefined : json['template_version'],
@@ -194,7 +189,7 @@ export function RenderOutToJSON(value?: RenderOut | null): any {
     return {
         
         'id': value['id'],
-        'status': value['status'],
+        'status': RenderStatusToJSON(value['status']),
         'document_type': value['documentType'],
         'template_id': value['templateId'],
         'template_version': value['templateVersion'],

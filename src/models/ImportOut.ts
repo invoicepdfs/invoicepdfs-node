@@ -13,6 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
+import type { ImportStatus } from './ImportStatus';
+import {
+    ImportStatusFromJSON,
+    ImportStatusFromJSONTyped,
+    ImportStatusToJSON,
+} from './ImportStatus';
+
 /**
  * 
  * @export
@@ -33,10 +40,10 @@ export interface ImportOut {
     sourceFormat: string;
     /**
      * 
-     * @type {string}
+     * @type {ImportStatus}
      * @memberof ImportOut
      */
-    status: ImportOutStatusEnum;
+    status: ImportStatus;
     /**
      * 
      * @type {number}
@@ -81,20 +88,6 @@ export interface ImportOut {
     completedAt?: string | null;
 }
 
-
-/**
- * @export
- */
-export const ImportOutStatusEnum = {
-    Pending: 'pending',
-    Processing: 'processing',
-    Completed: 'completed',
-    Failed: 'failed',
-    Cancelled: 'cancelled'
-} as const;
-export type ImportOutStatusEnum = typeof ImportOutStatusEnum[keyof typeof ImportOutStatusEnum];
-
-
 /**
  * Check if a given object implements the ImportOut interface.
  */
@@ -122,7 +115,7 @@ export function ImportOutFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         
         'id': json['id'],
         'sourceFormat': json['source_format'],
-        'status': json['status'],
+        'status': ImportStatusFromJSON(json['status']),
         'totalRows': json['total_rows'],
         'importedRows': json['imported_rows'],
         'failedRows': json['failed_rows'],
@@ -141,7 +134,7 @@ export function ImportOutToJSON(value?: ImportOut | null): any {
         
         'id': value['id'],
         'source_format': value['sourceFormat'],
-        'status': value['status'],
+        'status': ImportStatusToJSON(value['status']),
         'total_rows': value['totalRows'],
         'imported_rows': value['importedRows'],
         'failed_rows': value['failedRows'],

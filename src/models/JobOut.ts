@@ -13,6 +13,12 @@
  */
 
 import { mapValues } from '../runtime';
+import type { JobStatus } from './JobStatus';
+import {
+    JobStatusFromJSON,
+    JobStatusFromJSONTyped,
+    JobStatusToJSON,
+} from './JobStatus';
 import type { JobProgressOut } from './JobProgressOut';
 import {
     JobProgressOutFromJSON,
@@ -40,10 +46,10 @@ export interface JobOut {
     type: string;
     /**
      * 
-     * @type {string}
+     * @type {JobStatus}
      * @memberof JobOut
      */
-    status: JobOutStatusEnum;
+    status: JobStatus;
     /**
      * 
      * @type {JobProgressOut}
@@ -82,20 +88,6 @@ export interface JobOut {
     completedAt?: string | null;
 }
 
-
-/**
- * @export
- */
-export const JobOutStatusEnum = {
-    Queued: 'queued',
-    Processing: 'processing',
-    Completed: 'completed',
-    Failed: 'failed',
-    Cancelled: 'cancelled'
-} as const;
-export type JobOutStatusEnum = typeof JobOutStatusEnum[keyof typeof JobOutStatusEnum];
-
-
 /**
  * Check if a given object implements the JobOut interface.
  */
@@ -120,7 +112,7 @@ export function JobOutFromJSONTyped(json: any, ignoreDiscriminator: boolean): Jo
         
         'id': json['id'],
         'type': json['type'],
-        'status': json['status'],
+        'status': JobStatusFromJSON(json['status']),
         'progress': JobProgressOutFromJSON(json['progress']),
         'result': json['result'] == null ? undefined : json['result'],
         'error': json['error'] == null ? undefined : json['error'],
@@ -138,7 +130,7 @@ export function JobOutToJSON(value?: JobOut | null): any {
         
         'id': value['id'],
         'type': value['type'],
-        'status': value['status'],
+        'status': JobStatusToJSON(value['status']),
         'progress': JobProgressOutToJSON(value['progress']),
         'result': value['result'],
         'error': value['error'],
