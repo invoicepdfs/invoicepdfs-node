@@ -14,13 +14,10 @@
 
 import { mapValues } from '../runtime';
 /**
- * Render options for an already-stored document (``POST /documents/{id}/renders``).
+ * Render options for a document that is already stored.
  * 
- * Distinct from ``app.schemas.v1.DocumentRenderRequest``, which carries a full inline
- * document for the stateless ``POST /documents/render``. Two classes sharing one name
- * made FastAPI fall back to module-qualified schema names in the spec
- * (``app__documents__schemas__DocumentRenderRequest``), which the SDK generators turned
- * into ``AppDocumentsSchemasDocumentRenderRequest``.
+ * For ``POST /documents/{id}/renders``. The stateless
+ * ``POST /documents/render`` takes the whole document inline instead.
  * @export
  * @interface DocumentRenderOptions
  */

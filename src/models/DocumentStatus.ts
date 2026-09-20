@@ -14,8 +14,7 @@
 
 
 /**
- * The document lifecycle. The transitions between these live in
- * app/documents/base.py, which is the only thing that moves a document.
+ * The document lifecycle.
  * @export
  */
 export const DocumentStatus = {
