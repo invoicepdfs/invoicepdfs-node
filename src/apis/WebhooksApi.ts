@@ -95,6 +95,7 @@ export interface UpdateWebhookEndpointRequest {
 export class WebhooksApi extends runtime.BaseAPI {
 
     /**
+     * Register a URL to receive events.  The endpoint starts active and begins receiving the events you list.  A signing secret is generated but is **not** returned here. Call `rotate_webhook_secret` to obtain one before you can verify signatures.
      * Create Webhook Endpoint
      */
     async createWebhookEndpointRaw(requestParameters: CreateWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointResponse>> {
@@ -131,6 +132,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Register a URL to receive events.  The endpoint starts active and begins receiving the events you list.  A signing secret is generated but is **not** returned here. Call `rotate_webhook_secret` to obtain one before you can verify signatures.
      * Create Webhook Endpoint
      */
     async createWebhookEndpoint(requestParameters: CreateWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointResponse> {
@@ -139,6 +141,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove an endpoint and its delivery history.  The endpoint\'s delivery records are deleted with it, including any still waiting to be retried. To stop deliveries without losing the history, set `is_active` to false instead.
      * Delete Webhook Endpoint
      */
     async deleteWebhookEndpointRaw(requestParameters: DeleteWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
@@ -172,6 +175,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove an endpoint and its delivery history.  The endpoint\'s delivery records are deleted with it, including any still waiting to be retried. To stop deliveries without losing the history, set `is_active` to false instead.
      * Delete Webhook Endpoint
      */
     async deleteWebhookEndpoint(requestParameters: DeleteWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
@@ -180,6 +184,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * One webhook delivery by id — an HTTP POST to one of your endpoints.  Not to be confused with `get_delivery`, which is an email sent to a customer.
      * Get Webhook Delivery
      */
     async getWebhookDeliveryRaw(requestParameters: GetWebhookDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveryResponse>> {
@@ -213,6 +218,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * One webhook delivery by id — an HTTP POST to one of your endpoints.  Not to be confused with `get_delivery`, which is an email sent to a customer.
      * Get Webhook Delivery
      */
     async getWebhookDelivery(requestParameters: GetWebhookDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveryResponse> {
@@ -221,6 +227,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * One webhook endpoint by id.
      * Get Webhook Endpoint
      */
     async getWebhookEndpointRaw(requestParameters: GetWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointResponse>> {
@@ -254,6 +261,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * One webhook endpoint by id.
      * Get Webhook Endpoint
      */
     async getWebhookEndpoint(requestParameters: GetWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointResponse> {
@@ -262,6 +270,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every webhook delivery attempt on the account, newest first.  One row per attempt to POST an event to one of your endpoints, with the HTTP status and attempt count. For emails sent to your customers, see `get_delivery`.
      * List Webhook Deliveries
      */
     async listWebhookDeliveriesRaw(requestParameters: ListWebhookDeliveriesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveriesListResponse>> {
@@ -296,6 +305,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every webhook delivery attempt on the account, newest first.  One row per attempt to POST an event to one of your endpoints, with the HTTP status and attempt count. For emails sent to your customers, see `get_delivery`.
      * List Webhook Deliveries
      */
     async listWebhookDeliveries(requestParameters: ListWebhookDeliveriesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveriesListResponse> {
@@ -304,6 +314,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every webhook endpoint registered on the account, newest first.
      * List Webhook Endpoints
      */
     async listWebhookEndpointsRaw(requestParameters: ListWebhookEndpointsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointsListResponse>> {
@@ -338,6 +349,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every webhook endpoint registered on the account, newest first.
      * List Webhook Endpoints
      */
     async listWebhookEndpoints(requestParameters: ListWebhookEndpointsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointsListResponse> {
@@ -346,6 +358,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Send a failed or pending webhook delivery again, immediately.  Resets the attempt counter on the same delivery and dispatches it without waiting for the retry schedule. Failed deliveries are already retried automatically with backoff, so this is for after those are exhausted — or to send a delivery created by `test_webhook_endpoint`.  Refused with 409 in any other status. To re-send an email, use `retry_delivery`.
      * Retry Webhook Delivery
      */
     async retryWebhookDeliveryRaw(requestParameters: RetryWebhookDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveryResponse>> {
@@ -379,6 +392,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Send a failed or pending webhook delivery again, immediately.  Resets the attempt counter on the same delivery and dispatches it without waiting for the retry schedule. Failed deliveries are already retried automatically with backoff, so this is for after those are exhausted — or to send a delivery created by `test_webhook_endpoint`.  Refused with 409 in any other status. To re-send an email, use `retry_delivery`.
      * Retry Webhook Delivery
      */
     async retryWebhookDelivery(requestParameters: RetryWebhookDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveryResponse> {
@@ -387,6 +401,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Issue a new signing secret and return it.  This is the only response that contains the secret, so it is also how you obtain the first one after creating an endpoint. The previous secret stops being accepted immediately: signatures computed with it will not verify.
      * Rotate Webhook Secret
      */
     async rotateWebhookSecretRaw(requestParameters: RotateWebhookSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookSecretResponse>> {
@@ -420,6 +435,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Issue a new signing secret and return it.  This is the only response that contains the secret, so it is also how you obtain the first one after creating an endpoint. The previous secret stops being accepted immediately: signatures computed with it will not verify.
      * Rotate Webhook Secret
      */
     async rotateWebhookSecret(requestParameters: RotateWebhookSecretRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookSecretResponse> {
@@ -428,6 +444,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Record a test event against this endpoint.  Creates a `test` event and a delivery in `pending`, which you can inspect with `get_webhook_delivery`.  This call does not send the delivery. Pass the returned delivery id to `retry_webhook_delivery` to have it dispatched.
      * Test Webhook Endpoint
      */
     async testWebhookEndpointRaw(requestParameters: TestWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveryResponse>> {
@@ -461,6 +478,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Record a test event against this endpoint.  Creates a `test` event and a delivery in `pending`, which you can inspect with `get_webhook_delivery`.  This call does not send the delivery. Pass the returned delivery id to `retry_webhook_delivery` to have it dispatched.
      * Test Webhook Endpoint
      */
     async testWebhookEndpoint(requestParameters: TestWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveryResponse> {
@@ -469,6 +487,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change an endpoint\'s URL, description, event list or active flag.  Only the fields you send are changed. Setting `is_active` to false stops new deliveries while keeping the endpoint and its history, which is the reversible alternative to deleting it.
      * Update Webhook Endpoint
      */
     async updateWebhookEndpointRaw(requestParameters: UpdateWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointResponse>> {
@@ -512,6 +531,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change an endpoint\'s URL, description, event list or active flag.  Only the fields you send are changed. Setting `is_active` to false stops new deliveries while keeping the endpoint and its history, which is the reversible alternative to deleting it.
      * Update Webhook Endpoint
      */
     async updateWebhookEndpoint(requestParameters: UpdateWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointResponse> {

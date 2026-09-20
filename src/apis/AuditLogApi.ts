@@ -46,6 +46,7 @@ export interface ListAuditEventsRequest {
 export class AuditLogApi extends runtime.BaseAPI {
 
     /**
+     * One audit event by id.
      * Get Audit Event
      */
     async getAuditEventRaw(requestParameters: GetAuditEventRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuditEventResponse>> {
@@ -79,6 +80,7 @@ export class AuditLogApi extends runtime.BaseAPI {
     }
 
     /**
+     * One audit event by id.
      * Get Audit Event
      */
     async getAuditEvent(requestParameters: GetAuditEventRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuditEventResponse> {
@@ -87,6 +89,7 @@ export class AuditLogApi extends runtime.BaseAPI {
     }
 
     /**
+     * Who changed what on this account, newest first.  Filter by `action`, `resource_type` and `resource_id` to follow a single object\'s history.
      * List Audit Events
      */
     async listAuditEventsRaw(requestParameters: ListAuditEventsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuditEventsListResponse>> {
@@ -133,6 +136,7 @@ export class AuditLogApi extends runtime.BaseAPI {
     }
 
     /**
+     * Who changed what on this account, newest first.  Filter by `action`, `resource_type` and `resource_id` to follow a single object\'s history.
      * List Audit Events
      */
     async listAuditEvents(requestParameters: ListAuditEventsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AuditEventsListResponse> {

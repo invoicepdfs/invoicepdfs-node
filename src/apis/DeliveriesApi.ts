@@ -39,6 +39,7 @@ export interface RetryDeliveryRequest {
 export class DeliveriesApi extends runtime.BaseAPI {
 
     /**
+     * One email delivery by id — an email sent to a customer.  Not to be confused with `get_webhook_delivery`, which is an HTTP POST to one of your webhook endpoints.
      * Get Delivery
      */
     async getDeliveryRaw(requestParameters: GetDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<DeliveryResponse>> {
@@ -72,6 +73,7 @@ export class DeliveriesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One email delivery by id — an email sent to a customer.  Not to be confused with `get_webhook_delivery`, which is an HTTP POST to one of your webhook endpoints.
      * Get Delivery
      */
     async getDelivery(requestParameters: GetDeliveryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<DeliveryResponse> {

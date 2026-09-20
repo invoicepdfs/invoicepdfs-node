@@ -42,6 +42,7 @@ export interface ListUsageEventsRequest {
 export class UsageApi extends runtime.BaseAPI {
 
     /**
+     * Renders used this calendar month, against the plan\'s quota.  The period starts at midnight UTC on the first of the month.  For rate limits, log retention and overage, use `get_usage_limits`; for the individual renders behind the count, `list_usage_events`.
      * Get Usage
      */
     async getUsageRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UsageResponse>> {
@@ -68,6 +69,7 @@ export class UsageApi extends runtime.BaseAPI {
     }
 
     /**
+     * Renders used this calendar month, against the plan\'s quota.  The period starts at midnight UTC on the first of the month.  For rate limits, log retention and overage, use `get_usage_limits`; for the individual renders behind the count, `list_usage_events`.
      * Get Usage
      */
     async getUsage(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UsageResponse> {
@@ -76,6 +78,7 @@ export class UsageApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every ceiling on the account, and how close you are to each.  A superset of `get_usage`: the render quota and what is left of it, plus requests per second, how long API logs are kept, and overage — whether it is enabled and available on the plan, how many renders have gone over, and what they have cost so far.  The cost estimate is rounded up, so it is never lower than the invoice.
      * Get Usage Limits
      */
     async getUsageLimitsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UsageLimitsResponse>> {
@@ -102,6 +105,7 @@ export class UsageApi extends runtime.BaseAPI {
     }
 
     /**
+     * Every ceiling on the account, and how close you are to each.  A superset of `get_usage`: the render quota and what is left of it, plus requests per second, how long API logs are kept, and overage — whether it is enabled and available on the plan, how many renders have gone over, and what they have cost so far.  The cost estimate is rounded up, so it is never lower than the invoice.
      * Get Usage Limits
      */
     async getUsageLimits(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UsageLimitsResponse> {
@@ -110,6 +114,7 @@ export class UsageApi extends runtime.BaseAPI {
     }
 
     /**
+     * One row per metered render, newest first.  The detail behind the count `get_usage` returns, each row naming the render that produced it.
      * List Usage Events
      */
     async listUsageEventsRaw(requestParameters: ListUsageEventsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UsageEventsListResponse>> {
@@ -144,6 +149,7 @@ export class UsageApi extends runtime.BaseAPI {
     }
 
     /**
+     * One row per metered render, newest first.  The detail behind the count `get_usage` returns, each row naming the render that produced it.
      * List Usage Events
      */
     async listUsageEvents(requestParameters: ListUsageEventsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UsageEventsListResponse> {

@@ -28,6 +28,7 @@ import {
 export class StatsApi extends runtime.BaseAPI {
 
     /**
+     * Counts and recent activity for the account, in one call.  Totals for documents, customers and business profiles, a breakdown of documents by status, and the ten most recent documents — cheaper than paging each collection to build a dashboard.  The `invoice`-prefixed fields cover every document type, not only invoices.
      * Get Stats
      */
     async getStatsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StatsResponse>> {
@@ -54,6 +55,7 @@ export class StatsApi extends runtime.BaseAPI {
     }
 
     /**
+     * Counts and recent activity for the account, in one call.  Totals for documents, customers and business profiles, a breakdown of documents by status, and the ten most recent documents — cheaper than paging each collection to build a dashboard.  The `invoice`-prefixed fields cover every document type, not only invoices.
      * Get Stats
      */
     async getStats(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StatsResponse> {
