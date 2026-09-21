@@ -20,6 +20,7 @@ import type {
   WebhookDeliveriesListResponse,
   WebhookDeliveryResponse,
   WebhookEndpointCreateRequest,
+  WebhookEndpointCreatedResponse,
   WebhookEndpointPatchRequest,
   WebhookEndpointResponse,
   WebhookEndpointsListResponse,
@@ -36,6 +37,8 @@ import {
     WebhookDeliveryResponseToJSON,
     WebhookEndpointCreateRequestFromJSON,
     WebhookEndpointCreateRequestToJSON,
+    WebhookEndpointCreatedResponseFromJSON,
+    WebhookEndpointCreatedResponseToJSON,
     WebhookEndpointPatchRequestFromJSON,
     WebhookEndpointPatchRequestToJSON,
     WebhookEndpointResponseFromJSON,
@@ -95,10 +98,10 @@ export interface UpdateWebhookEndpointRequest {
 export class WebhooksApi extends runtime.BaseAPI {
 
     /**
-     * Register a URL to receive events.  The endpoint starts active and begins receiving the events you list.  A signing secret is generated but is **not** returned here. Call `rotate_webhook_secret` to obtain one before you can verify signatures.
+     * Register a URL to receive events.  The endpoint starts active and begins receiving the events you list.  The response carries the signing secret, and is the only one that ever will — store it now. Reading or listing endpoints never returns it, and the only way to get another is `rotate_webhook_secret`, which stops this one working.
      * Create Webhook Endpoint
      */
-    async createWebhookEndpointRaw(requestParameters: CreateWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointResponse>> {
+    async createWebhookEndpointRaw(requestParameters: CreateWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookEndpointCreatedResponse>> {
         if (requestParameters['webhookEndpointCreateRequest'] == null) {
             throw new runtime.RequiredError(
                 'webhookEndpointCreateRequest',
@@ -128,14 +131,14 @@ export class WebhooksApi extends runtime.BaseAPI {
             body: WebhookEndpointCreateRequestToJSON(requestParameters['webhookEndpointCreateRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => WebhookEndpointResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => WebhookEndpointCreatedResponseFromJSON(jsonValue));
     }
 
     /**
-     * Register a URL to receive events.  The endpoint starts active and begins receiving the events you list.  A signing secret is generated but is **not** returned here. Call `rotate_webhook_secret` to obtain one before you can verify signatures.
+     * Register a URL to receive events.  The endpoint starts active and begins receiving the events you list.  The response carries the signing secret, and is the only one that ever will — store it now. Reading or listing endpoints never returns it, and the only way to get another is `rotate_webhook_secret`, which stops this one working.
      * Create Webhook Endpoint
      */
-    async createWebhookEndpoint(requestParameters: CreateWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointResponse> {
+    async createWebhookEndpoint(requestParameters: CreateWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookEndpointCreatedResponse> {
         const response = await this.createWebhookEndpointRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -444,7 +447,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
-     * Record a test event against this endpoint.  Creates a `test` event and a delivery in `pending`, which you can inspect with `get_webhook_delivery`.  This call does not send the delivery. Pass the returned delivery id to `retry_webhook_delivery` to have it dispatched.
+     * Send a test event to this endpoint.  Delivers a `test` event immediately, so you can confirm the URL is reachable and your signature check works before real events depend on it.  Returns straight away with the delivery in `pending`; follow it with `get_webhook_delivery` to see whether it arrived.
      * Test Webhook Endpoint
      */
     async testWebhookEndpointRaw(requestParameters: TestWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WebhookDeliveryResponse>> {
@@ -478,7 +481,7 @@ export class WebhooksApi extends runtime.BaseAPI {
     }
 
     /**
-     * Record a test event against this endpoint.  Creates a `test` event and a delivery in `pending`, which you can inspect with `get_webhook_delivery`.  This call does not send the delivery. Pass the returned delivery id to `retry_webhook_delivery` to have it dispatched.
+     * Send a test event to this endpoint.  Delivers a `test` event immediately, so you can confirm the URL is reachable and your signature check works before real events depend on it.  Returns straight away with the delivery in `pending`; follow it with `get_webhook_delivery` to see whether it arrived.
      * Test Webhook Endpoint
      */
     async testWebhookEndpoint(requestParameters: TestWebhookEndpointRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WebhookDeliveryResponse> {

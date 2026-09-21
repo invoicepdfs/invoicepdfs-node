@@ -221,6 +221,8 @@ export * from './WebhookDeliveryOut';
 export * from './WebhookDeliveryResponse';
 export * from './WebhookDeliveryStatus';
 export * from './WebhookEndpointCreateRequest';
+export * from './WebhookEndpointCreatedOut';
+export * from './WebhookEndpointCreatedResponse';
 export * from './WebhookEndpointOut';
 export * from './WebhookEndpointPatchRequest';
 export * from './WebhookEndpointResponse';

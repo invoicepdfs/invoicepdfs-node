@@ -253,6 +253,8 @@ src/models/WebhookDeliveryOut.ts
 src/models/WebhookDeliveryResponse.ts
 src/models/WebhookDeliveryStatus.ts
 src/models/WebhookEndpointCreateRequest.ts
+src/models/WebhookEndpointCreatedOut.ts
+src/models/WebhookEndpointCreatedResponse.ts
 src/models/WebhookEndpointOut.ts
 src/models/WebhookEndpointPatchRequest.ts
 src/models/WebhookEndpointResponse.ts
