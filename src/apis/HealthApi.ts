@@ -34,6 +34,7 @@ import {
 export class HealthApi extends runtime.BaseAPI {
 
     /**
+     * Is the API process alive.  Answers as long as the process can serve a request; it checks nothing behind it. For whether the service can actually do work, use `get_readiness`.
      * Get Health
      */
     async getHealthRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<HealthResponse>> {
@@ -52,6 +53,7 @@ export class HealthApi extends runtime.BaseAPI {
     }
 
     /**
+     * Is the API process alive.  Answers as long as the process can serve a request; it checks nothing behind it. For whether the service can actually do work, use `get_readiness`.
      * Get Health
      */
     async getHealth(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<HealthResponse> {
@@ -60,6 +62,7 @@ export class HealthApi extends runtime.BaseAPI {
     }
 
     /**
+     * Can the API serve real traffic — dependencies included.  Checks the database, storage, and the separate render service, and reports each one. `status` is `ready` only when all three are `ok`, so this is the check to point a load balancer at. `get_health` answers sooner but proves less.
      * Get Readiness
      */
     async getReadinessRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ReadyResponse>> {
@@ -78,6 +81,7 @@ export class HealthApi extends runtime.BaseAPI {
     }
 
     /**
+     * Can the API serve real traffic — dependencies included.  Checks the database, storage, and the separate render service, and reports each one. `status` is `ready` only when all three are `ok`, so this is the check to point a load balancer at. `get_health` answers sooner but proves less.
      * Get Readiness
      */
     async getReadiness(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ReadyResponse> {
@@ -86,6 +90,7 @@ export class HealthApi extends runtime.BaseAPI {
     }
 
     /**
+     * Which build is deployed.
      * Get Version
      */
     async getVersionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<VersionResponse>> {
@@ -104,6 +109,7 @@ export class HealthApi extends runtime.BaseAPI {
     }
 
     /**
+     * Which build is deployed.
      * Get Version
      */
     async getVersion(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<VersionResponse> {

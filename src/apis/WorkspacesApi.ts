@@ -100,6 +100,7 @@ export interface UpdateWorkspaceMemberRequest {
 export class WorkspacesApi extends runtime.BaseAPI {
 
     /**
+     * Add someone to a workspace by email address.  Refused with 409 if that email is already a member. The address does not have to belong to an existing account.
      * Add Workspace Member
      */
     async addWorkspaceMemberRaw(requestParameters: AddWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceMembersListResponse>> {
@@ -147,6 +148,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Add someone to a workspace by email address.  Refused with 409 if that email is already a member. The address does not have to belong to an existing account.
      * Add Workspace Member
      */
     async addWorkspaceMember(requestParameters: AddWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceMembersListResponse> {
@@ -155,6 +157,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Create a workspace, owned by this account.  The creating account is added as its first member with the `owner` role.  Send an `Idempotency-Key` header to make retrying safe: a repeat with the same key and body returns the original workspace instead of a second one.
      * Create Workspace
      */
     async createWorkspaceRaw(requestParameters: CreateWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceResponse>> {
@@ -195,6 +198,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Create a workspace, owned by this account.  The creating account is added as its first member with the `owner` role.  Send an `Idempotency-Key` header to make retrying safe: a repeat with the same key and body returns the original workspace instead of a second one.
      * Create Workspace
      */
     async createWorkspace(requestParameters: CreateWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceResponse> {
@@ -203,6 +207,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Delete a workspace and its membership list.  Every member record goes with it. This cannot be undone, and documents are unaffected — they belong to the account, not the workspace.
      * Delete Workspace
      */
     async deleteWorkspaceRaw(requestParameters: DeleteWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
@@ -236,6 +241,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Delete a workspace and its membership list.  Every member record goes with it. This cannot be undone, and documents are unaffected — they belong to the account, not the workspace.
      * Delete Workspace
      */
     async deleteWorkspace(requestParameters: DeleteWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
@@ -244,6 +250,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One workspace by id.
      * Get Workspace
      */
     async getWorkspaceRaw(requestParameters: GetWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceResponse>> {
@@ -277,6 +284,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One workspace by id.
      * Get Workspace
      */
     async getWorkspace(requestParameters: GetWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceResponse> {
@@ -285,6 +293,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Everyone on a workspace, with their role.
      * List Workspace Members
      */
     async listWorkspaceMembersRaw(requestParameters: ListWorkspaceMembersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceMembersListResponse>> {
@@ -318,6 +327,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Everyone on a workspace, with their role.
      * List Workspace Members
      */
     async listWorkspaceMembers(requestParameters: ListWorkspaceMembersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceMembersListResponse> {
@@ -326,6 +336,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Workspaces this account owns, newest first.
      * List Workspaces
      */
     async listWorkspacesRaw(requestParameters: ListWorkspacesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspacesListResponse>> {
@@ -360,6 +371,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Workspaces this account owns, newest first.
      * List Workspaces
      */
     async listWorkspaces(requestParameters: ListWorkspacesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspacesListResponse> {
@@ -368,6 +380,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove someone from a workspace.  Removes the membership only; nothing they created is affected.
      * Remove Workspace Member
      */
     async removeWorkspaceMemberRaw(requestParameters: RemoveWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleBoolResponse>> {
@@ -408,6 +421,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove someone from a workspace.  Removes the membership only; nothing they created is affected.
      * Remove Workspace Member
      */
     async removeWorkspaceMember(requestParameters: RemoveWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleBoolResponse> {
@@ -416,6 +430,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Rename a workspace.  Only the fields you send are changed.
      * Update Workspace
      */
     async updateWorkspaceRaw(requestParameters: UpdateWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceResponse>> {
@@ -463,6 +478,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Rename a workspace.  Only the fields you send are changed.
      * Update Workspace
      */
     async updateWorkspace(requestParameters: UpdateWorkspaceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceResponse> {
@@ -471,6 +487,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a member\'s role.
      * Update Workspace Member
      */
     async updateWorkspaceMemberRaw(requestParameters: UpdateWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WorkspaceMemberOut>> {
@@ -521,6 +538,7 @@ export class WorkspacesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a member\'s role.
      * Update Workspace Member
      */
     async updateWorkspaceMember(requestParameters: UpdateWorkspaceMemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WorkspaceMemberOut> {

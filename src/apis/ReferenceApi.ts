@@ -46,6 +46,7 @@ import {
 export class ReferenceApi extends runtime.BaseAPI {
 
     /**
+     * The country codes accepted anywhere an address is given.  ISO 3166-1 alpha-2.
      * List Countries
      */
     async listCountriesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CountriesListResponse>> {
@@ -64,6 +65,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     }
 
     /**
+     * The country codes accepted anywhere an address is given.  ISO 3166-1 alpha-2.
      * List Countries
      */
     async listCountries(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CountriesListResponse> {
@@ -72,6 +74,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     }
 
     /**
+     * The currency codes a document may be issued in.  ISO 4217, with the minor-unit count each one uses — the amounts in this API are integers in the currency\'s smallest unit, so that figure is what says where the decimal point goes.
      * List Currencies
      */
     async listCurrenciesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CurrenciesListResponse>> {
@@ -90,6 +93,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     }
 
     /**
+     * The currency codes a document may be issued in.  ISO 4217, with the minor-unit count each one uses — the amounts in this API are integers in the currency\'s smallest unit, so that figure is what says where the decimal point goes.
      * List Currencies
      */
     async listCurrencies(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CurrenciesListResponse> {
@@ -126,6 +130,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     }
 
     /**
+     * The locale codes accepted on a document or business profile.  The value is stored and returned as given; it is not currently applied to anything a render produces.
      * List Locales
      */
     async listLocalesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LocalesListResponse>> {
@@ -144,6 +149,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     }
 
     /**
+     * The locale codes accepted on a document or business profile.  The value is stored and returned as given; it is not currently applied to anything a render produces.
      * List Locales
      */
     async listLocales(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LocalesListResponse> {
@@ -152,6 +158,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     }
 
     /**
+     * The page sizes a render can use.
      * List Page Sizes
      */
     async listPageSizesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PageSizesListResponse>> {
@@ -170,6 +177,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     }
 
     /**
+     * The page sizes a render can use.
      * List Page Sizes
      */
     async listPageSizes(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PageSizesListResponse> {
@@ -234,6 +242,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     }
 
     /**
+     * The time zone names accepted on a business profile.  IANA names. Stored and returned as given: recurring schedules are evaluated in UTC and do not consult it.
      * List Timezones
      */
     async listTimezonesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TimezonesListResponse>> {
@@ -252,6 +261,7 @@ export class ReferenceApi extends runtime.BaseAPI {
     }
 
     /**
+     * The time zone names accepted on a business profile.  IANA names. Stored and returned as given: recurring schedules are evaluated in UTC and do not consult it.
      * List Timezones
      */
     async listTimezones(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TimezonesListResponse> {

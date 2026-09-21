@@ -80,6 +80,7 @@ export interface UpdateRecurringInvoiceRequest {
 export class RecurringInvoicesApi extends runtime.BaseAPI {
 
     /**
+     * End a schedule permanently.  Terminal: it cannot be resumed or edited afterwards, and cancelling twice is refused with 409. To stop issuing temporarily, use `pause_recurring_invoice` instead.  Invoices already issued are left alone.
      * Cancel Recurring Invoice
      */
     async cancelRecurringInvoiceRaw(requestParameters: CancelRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
@@ -113,6 +114,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * End a schedule permanently.  Terminal: it cannot be resumed or edited afterwards, and cancelling twice is refused with 409. To stop issuing temporarily, use `pause_recurring_invoice` instead.  Invoices already issued are left alone.
      * Cancel Recurring Invoice
      */
     async cancelRecurringInvoice(requestParameters: CancelRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
@@ -121,6 +123,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Set up a schedule that issues invoices on its own.  Starts `active`, so the first invoice is issued when the schedule next falls due. The invoices it produces are ordinary documents — read them with `list_generated_invoices`.
      * Create Recurring Invoice
      */
     async createRecurringInvoiceRaw(requestParameters: CreateRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
@@ -157,6 +160,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Set up a schedule that issues invoices on its own.  Starts `active`, so the first invoice is issued when the schedule next falls due. The invoices it produces are ordinary documents — read them with `list_generated_invoices`.
      * Create Recurring Invoice
      */
     async createRecurringInvoice(requestParameters: CreateRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
@@ -165,6 +169,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One recurring schedule by id.
      * Get Recurring Invoice
      */
     async getRecurringInvoiceRaw(requestParameters: GetRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
@@ -198,6 +203,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * One recurring schedule by id.
      * Get Recurring Invoice
      */
     async getRecurringInvoice(requestParameters: GetRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
@@ -206,6 +212,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * The invoices one schedule has actually issued, newest first.  The documents produced by this schedule, as opposed to `list_recurring_invoices`, which lists the schedules themselves.
      * List Generated Invoices
      */
     async listGeneratedInvoicesRaw(requestParameters: ListGeneratedInvoicesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InvoicesListResponse>> {
@@ -247,6 +254,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * The invoices one schedule has actually issued, newest first.  The documents produced by this schedule, as opposed to `list_recurring_invoices`, which lists the schedules themselves.
      * List Generated Invoices
      */
     async listGeneratedInvoices(requestParameters: ListGeneratedInvoicesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InvoicesListResponse> {
@@ -255,6 +263,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * The schedules on this account, newest first.  These are the recurring definitions, not the invoices they produce; for those, use `list_generated_invoices`. Narrow with `status`.
      * List Recurring Invoices
      */
     async listRecurringInvoicesRaw(requestParameters: ListRecurringInvoicesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoicesListResponse>> {
@@ -293,6 +302,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * The schedules on this account, newest first.  These are the recurring definitions, not the invoices they produce; for those, use `list_generated_invoices`. Narrow with `status`.
      * List Recurring Invoices
      */
     async listRecurringInvoices(requestParameters: ListRecurringInvoicesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoicesListResponse> {
@@ -301,6 +311,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Stop a schedule issuing invoices, for now.  Only an `active` schedule can be paused; anything else is refused with 409. Nothing already issued changes. Restart it with `resume_recurring_invoice`.
      * Pause Recurring Invoice
      */
     async pauseRecurringInvoiceRaw(requestParameters: PauseRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
@@ -334,6 +345,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Stop a schedule issuing invoices, for now.  Only an `active` schedule can be paused; anything else is refused with 409. Nothing already issued changes. Restart it with `resume_recurring_invoice`.
      * Pause Recurring Invoice
      */
     async pauseRecurringInvoice(requestParameters: PauseRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
@@ -342,6 +354,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Start a paused schedule issuing again.  Only a `paused` schedule can be resumed; anything else is refused with 409. A cancelled schedule cannot be brought back — create a new one.
      * Resume Recurring Invoice
      */
     async resumeRecurringInvoiceRaw(requestParameters: ResumeRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
@@ -375,6 +388,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Start a paused schedule issuing again.  Only a `paused` schedule can be resumed; anything else is refused with 409. A cancelled schedule cannot be brought back — create a new one.
      * Resume Recurring Invoice
      */
     async resumeRecurringInvoice(requestParameters: ResumeRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
@@ -383,6 +397,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a recurring schedule.  Only the fields you send are changed. Refused with 409 once the schedule is cancelled, which is terminal. Invoices already issued are not revisited.
      * Update Recurring Invoice
      */
     async updateRecurringInvoiceRaw(requestParameters: UpdateRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RecurringInvoiceResponse>> {
@@ -426,6 +441,7 @@ export class RecurringInvoicesApi extends runtime.BaseAPI {
     }
 
     /**
+     * Change a recurring schedule.  Only the fields you send are changed. Refused with 409 once the schedule is cancelled, which is terminal. Invoices already issued are not revisited.
      * Update Recurring Invoice
      */
     async updateRecurringInvoice(requestParameters: UpdateRecurringInvoiceRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RecurringInvoiceResponse> {
