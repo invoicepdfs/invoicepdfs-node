@@ -31,6 +31,18 @@ export interface ReadyResponse {
      * @memberof ReadyResponse
      */
     dependencies: { [key: string]: string; };
+    /**
+     * 
+     * @type {{ [key: string]: string; }}
+     * @memberof ReadyResponse
+     */
+    workers?: { [key: string]: string; };
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ReadyResponse
+     */
+    degraded?: Array<string> | null;
 }
 
 
@@ -74,6 +86,8 @@ export function ReadyResponseFromJSONTyped(json: any, ignoreDiscriminator: boole
         
         'status': json['status'],
         'dependencies': json['dependencies'],
+        'workers': json['workers'] == null ? undefined : json['workers'],
+        'degraded': json['degraded'] == null ? undefined : json['degraded'],
     };
 }
 
@@ -85,6 +99,8 @@ export function ReadyResponseToJSON(value?: ReadyResponse | null): any {
         
         'status': value['status'],
         'dependencies': value['dependencies'],
+        'workers': value['workers'],
+        'degraded': value['degraded'],
     };
 }
 
